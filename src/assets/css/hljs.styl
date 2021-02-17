@@ -1,0 +1,69 @@
+
+
+.markdown-body pre
+  font-size: 16px;
+  padding: 22px 25px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 20px;
+  margin-top: 15px
+  margin-bottom: 15px
+  padding-top: 55px
+  background #282A36
+  position relative
+  //max-width 100vw
+  //overflow: visible;
+  &:before
+    content: "";
+    position: absolute;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDU0IDE0Ij48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEgMSkiPjxjaXJjbGUgY3g9IjYiIGN5PSI2IiByPSI2IiBmaWxsPSIjRkY1RjU2IiBzdHJva2U9IiNFMDQ0M0UiIHN0cm9rZS13aWR0aD0iLjUiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjI2IiBjeT0iNiIgcj0iNiIgZmlsbD0iI0ZGQkQyRSIgc3Ryb2tlPSIjREVBMTIzIiBzdHJva2Utd2lkdGg9Ii41Ij48L2NpcmNsZT48Y2lyY2xlIGN4PSI0NiIgY3k9IjYiIHI9IjYiIGZpbGw9IiMyN0M5M0YiIHN0cm9rZT0iIzFBQUIyOSIgc3Ryb2tlLXdpZHRoPSIuNSI+PC9jaXJjbGU+PC9nPjwvc3ZnPg==") no-repeat;
+    background-position-y: center;
+    top: 22px;
+    left: 20px;
+    height: 14px;
+    width: 54px;
+    margin-left: 5px;
+    display: block;
+
+
+//重置一个值，默认是0
+pre
+  counter-reset: number;
+.markdown-body pre code
+  background transparent
+  color #F8F8F2
+  .line
+    position relative
+    padding-left 20px
+    &:before
+      counter-increment number
+      content counter(number)
+      color #999999
+      position absolute
+      left -15px
+      text-align right
+
+// 行数
+.hljs ul {
+  list-style: decimal;
+  background-color: #fff;
+  margin: 0px 0px 0 40px !important;
+  padding: 0px;
+}
+.hljs ul li {
+  list-style: decimal-leading-zero;
+  border-left: 1px solid #ddd !important;
+  background: #fff;
+  padding: 5px!important;
+  margin: 0 !important;
+  line-height: 14px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.hljs ul li:nth-of-type(even) {
+  background-color: #fcfcfc;
+  color: inherit;
+}
+
+@media (max-width: 768px)
+  //.markdown-body pre
+  //  border-radius 0

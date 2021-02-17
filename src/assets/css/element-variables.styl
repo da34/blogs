@@ -1,0 +1,52 @@
+// 全局改变element-ui组件的样式
+@import "./theme.styl"
+
+.el-tabs__item
+  line-height 50px
+.el-tabs__item.is-active
+  color $active-color
+.el-tabs__active-bar
+  background-color  $active-color
+.el-tabs__item:hover
+  color $active-color
+//.el-tabs__content
+//  padding 0 15px 15px
+
+.el-button:hover
+  color $active-color
+
+// 分页
+.el-pagination
+  display inline-block
+  margin 0 auto
+  .el-pager
+    .active
+      background-color $active-color !important
+
+// 进度条
+.el-progress-bar__outer
+  background-color transparent
+
+// message
+.el-message
+  z-index 9999!important
+
+// 标签
+.el-tag
+  color #fff
+  border 0
+  border-radius 0
+
+// nprogress样式
+#nprogress .bar
+  background $color-lightPink
+
+// markdown样式
+.v-note-wrapper
+  margin-top 50px
+  min-height 0!important
+  .v-note-panel
+    border none !important
+    .v-show-content
+      padding 8px 15px 15px !important
+      background-color $background-color !important

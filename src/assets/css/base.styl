@@ -1,0 +1,31 @@
+@import "theme.styl"
+// 文本超出省咯号
+text-omit($row)
+  overflow hidden
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-line-clamp $row
+  -webkit-box-orient vertical
+  word-break break-all
+
+// 清除浮动
+.clearfix:after
+  content ''
+  height 0
+  display block
+  clear both
+
+// 分割线
+.parting-line
+  height 4px
+  border 0
+  background-color #ddd
+  margin 20px 0
+  background-image repeating-linear-gradient(-45deg,#fff,#fff 4px,transparent 0,transparent 8px)
+
+// 触摸变色
+.hover-active
+  cursor pointer
+  transition all .3s ease-in-out
+  &:hover
+    color $active-color
