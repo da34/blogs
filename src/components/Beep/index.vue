@@ -1,21 +1,21 @@
 <template>
   <client-only>
     <div class="beep">
-      <el-input
+      <Input
         v-model="textarea"
         type="textarea"
         placeholder="请输入内容..."
-        maxlength="400"
+        :maxlength="400"
         resize="none"
-        rows="5"
-        show-word-limit
+        :rows="5"
+        :show-word-limit="true"
       />
       <div class="comment-bottom clearfix">
         <Phiz v-if="false" />
         <p class="submit">
-          <el-button type="primary" size="medium" @click="submitForm()">
+          <Button type="info" @click="submitForm()">
             提交评论
-          </el-button>
+          </Button >
         </p>
       </div>
     </div>
@@ -73,11 +73,11 @@ export default {
         if (this.userID) {
           this.postComment()
         } else {
-          this.$message.warning('请您先登录!')
+          this.$Message.warning('请您先登录!')
         }
         return
       }
-      this.$message.warning('你就没什么想说的吗(╥╯^╰╥)')
+      this.$Message.warning('你就没什么想说的吗(╥╯^╰╥)')
     },
     async postComment () {
       let comment = {
@@ -98,7 +98,7 @@ export default {
         await this.$axios.post('comments', comment)
       }
       this.textarea = ''
-      this.$message.success('发表成功！')
+      this.$Message.success('发表成功！')
       this.done()
     },
     done () {

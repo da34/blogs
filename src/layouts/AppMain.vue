@@ -67,6 +67,7 @@ export default {
     padding 10px
     margin-top 0
   .fl
+    font-size: 16px;
     padding-bottom 50px
     width calc( 100% - 300px )
     .fade-transform-leave-active, .fade-transform-enter-active

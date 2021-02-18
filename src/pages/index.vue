@@ -1,34 +1,36 @@
 <template>
-  <div>
-    <div class="article-wrapper">
-      <article v-for="(item, i) in list" :key="item.id" class="article-con">
-        <Blur :bg-img="item.imageUrl" />
-        <div :class="['article-pic', i % 2 && 'right']">
-          <div v-lazy:background-image="item.imageUrl" class="item-pic" />
-        </div>
-        <div class="article-content">
-          <div class="info">
-            <span><svg-icon iconClass="time" style="color: #6CA4E6; font-size: 18px" /> {{item.createdAt | splitDate}}</span>
-            <span style="margin-left: auto;"><svg-icon iconClass="hot" style="color: #ED5564; font-size: 18px" />{{item.views}}</span>
-            <span v-if="item.tags.length"><svg-icon iconClass="tag" style="color: #1E9969; font-size: 18px" />
-              <template v-if="item.tags.length > 1">
-                <span v-for="(tag, i) in item.tags" :key="tag.id">{{ i > 0 ? '，' : '' }}{{ tag.name }}</span>
-              </template>
-              <template v-else>
-                <span v-for="tag in item.tags" :key="tag.id">{{ tag.name }}</span>
-              </template>
-            </span>
-          </div>
-          <nuxt-link class="title" :to="`/article/${item.id}`" tag="h2">
-            {{ item.title }}
-          </nuxt-link>
-          <span class="desc">
-            {{item.contentShort}}
-          </span>
-        </div>
-      </article>
-      <Pagination :total="total" @currentChange="currentChange" />
-    </div>
+  <div class="article-wrapper">
+    <article v-for="item in list" :key="item.id">
+      <div v-if="item.imageUrl" v-lazy:background-image="item.imageUrl" class="item-pic" />
+      <div class="article-content">
+        <ul class="info">
+          <li>
+            <SvgIcon icon-class="time" />
+            <span>{{ item.createdAt | convertDateFilter }}</span>
+          </li>
+          <li>
+            <SvgIcon icon-class="views" />
+            <span>{{ item.views }}</span>
+          </li>
+          <li v-if="item.tags.length !== 0">
+            <SvgIcon icon-class="tag" />
+            <template v-if="item.tags.length > 1">
+              <span v-for="(tag, i) in item.tags" :key="tag.id">{{ i > 0 ? '，' : '' }}{{ tag.name }}</span>
+            </template>
+            <template v-else>
+              <span v-for="tag in item.tags" :key="tag.id">{{ tag.name }}</span>
+            </template>
+          </li>
+        </ul>
+        <NuxtLink class="title" :to="`/article/${item.id}`" tag="h2">
+          {{ item.title }}
+        </NuxtLink>
+        <span class="desc">
+          {{ item.contentShort }}
+        </span>
+      </div>
+    </article>
+    <Pagination :total="total" @currentChange="currentChange" />
   </div>
 </template>
 
@@ -40,11 +42,10 @@ import { formDate } from '@/utils'
 
 export default {
   name: 'Index',
-  layout: 'blog',
   components: { Pagination },
+  layout: 'blog',
   data () {
-    return {
-    }
+    return {}
   },
   // filters: {
   //   commentsLen (comment) {
@@ -62,7 +63,11 @@ export default {
     return {
       title: '首页-玉捷博客',
       meta: [
-        { hid: 'home', name: 'description', content: '玉捷-个人博客' }
+        {
+          hid: 'home',
+          name: 'description',
+          content: '玉捷-个人博客'
+        }
       ]
     }
   },
@@ -87,61 +92,39 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
 @import "~assets/css/base"
 .article-wrapper
   font-size $font-size-small
   color $font-color
-  .article-con
-    position relative
-    background-color $background-color
-    overflow hidden
-    box-sizing border-box
-    display flex
-    margin-bottom 15px
-    height 200px
-    transition all .3s
-    border-radius 4px
-    &:hover
-      transform translateY(-5px)
-    .article-pic
-      width 40%
-      z-index: 1;
-      order 0
-      clip-path: polygon(0 0, 100% 0%, 94% 100%, 0% 100%);
-      &.right
-        clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
-        order 2
-      .item-pic
-        height 100%
-        width 100%
-        background-size cover
-        background-position center
+
+  article
+    margin-bottom 20px
+    background #fff
+
     .article-content
-      flex 1
-      order 1
-      z-index 1
-      display flex
-      //align-items center
-      flex-direction column
-      justify-content: center;
-      padding 0 15px
-      line-height 1.5
-      color #fff
+      padding 20px
       .title
-        font-size 22px
-        color #fff
-        letter-spacing 1px
-        font-weight 700
-        text-omit(1)
-        margin-top 3px
-        margin-bottom 5px
+        color #17233d
+        margin: 15px 0 20px;
         cursor pointer
       .desc
-        font-size 16px
-        text-omit(2)
+        color #515a6e
+        text-omit(3)
       .info
         display flex
-        > span
-          margin-left 10px
+        li
+          margin-right 20px
+          display flex
+          align-items center
+          span
+            font-size 18px
+            color #808695
+        svg
+          font-size 24px
+          margin-right 5px
+
+  .item-pic
+    height 200px
+    background-position: center;
+    background-size: cover;
 </style>

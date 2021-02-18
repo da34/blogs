@@ -1,10 +1,10 @@
 <template>
   <Card class="box-card">
-    <div slot="title" >
+    <div slot="title">
       <span>最新评论</span>
     </div>
     <div v-for="item in newCommentList" :key="item.id" class="comment">
-      <el-avatar :src=" item.user.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" />
+      <Avatar :src=" item.user.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" />
       <div class="comment-content">
         <div class="top">
           <span>{{ item.fromName }}</span>
@@ -26,6 +26,9 @@ export default {
     return {
     }
   },
+  async fetch () {
+    await this.$store.dispatch('comment/getCommentList')
+  },
   computed: {
     newCommentList () {
       return this.$store.state.comment.newList
@@ -45,10 +48,8 @@ export default {
 
 <style lang="stylus" scoped>
 @import "~assets/css/base"
->>> .el-card__header
-  padding 10px 15px
 .box-card
-  margin-top 10px
+  margin 10px 0
 .comment
   display flex
   margin-bottom 5px

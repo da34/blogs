@@ -1,13 +1,9 @@
 <template>
   <div class="pagination">
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :page-size="pageSize"
+    <Page
       :total="total"
-      :current-page="currentPage"
-      @current-change="currentChange"
-    />
+      @on-change="currentChange"
+      :page-size="pageSize" />
   </div>
 </template>
 
@@ -20,10 +16,6 @@ export default {
     total: {
       type: Number,
       default: 0
-    },
-    hide: {
-      type: Boolean,
-      default: true
     },
     pageSize: {
       type: Number,

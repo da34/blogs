@@ -34,10 +34,10 @@ import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
 
 export default {
-  name: 'Article',
-  layout: 'blog',
-  scrollToTop: true, // 滚动到顶端
+  name: 'Article', // 滚动到顶端
   components: { Marked, Comments },
+  layout: 'blog',
+  scrollToTop: true,
   head () {
     return {
       title: `${this.data.title}-玉捷博客`,
@@ -95,6 +95,7 @@ export default {
   background $background-color
   .blog-post
     //padding 10px 30px
+    font-size: 16px;
     .entry-thumbnail
       margin-bottom 20px
       .img

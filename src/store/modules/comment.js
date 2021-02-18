@@ -1,6 +1,7 @@
 const state = () => ({
   expression: {},
-  newList: []
+  newList: [],
+  count: 0
 })
 
 const mutations = {
@@ -9,6 +10,9 @@ const mutations = {
   },
   setNewList (state, data) {
     state.newList = data
+  },
+  setCount (state, data) {
+    state.count = data
   }
 }
 
@@ -23,6 +27,12 @@ const actions = {
     const { data } = await this.$axios.$get('comments/new')
     // console.log(data)
     commit('setNewList', data)
+  },
+  // 获取评论总数
+  async getCommentCount ({ commit }) {
+    const { data } = await this.$axios.$get('comments/count')
+    // console.log(data)
+    commit('setCount', data)
   }
 }
 

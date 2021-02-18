@@ -1,7 +1,7 @@
 <template>
-  <el-card class="box-card" :body-style="{ padding: '15px' }">
-    <div slot="header" class="box-header">
-      <span>随便看看</span>
+  <Card class="box-card">
+    <div slot="title" class="box-header">
+      随便看看
     </div>
     <div
       v-for="article in list"
@@ -13,12 +13,11 @@
         <nuxt-link style="margin-bottom: 3px;" :to="`/article/${article.id}`" tag="h3">
           {{ article.title }}
         </nuxt-link>
-<!--        <h3 style="margin-bottom: 3px;">{{ article.title }}</h3>-->
         <svg-icon iconClass="time" style="font-size: 14px" />
         <span>  {{ article.createdAt | splitDate }}</span>
       </div>
     </div>
-  </el-card>
+  </Card>
 </template>
 
 <script>
@@ -38,6 +37,9 @@ export default {
     return {
       // tagList: []
     }
+  },
+  async fetch () {
+    await this.$store.dispatch('article/getRandomList')
   },
   computed: {
     list () {
@@ -70,7 +72,7 @@ export default {
 .box-card
   position: sticky!important;
   top: 70px;
-  margin-top 10px
+  //margin-top 10px
 .article
   position relative
   margin-bottom 10px

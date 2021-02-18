@@ -1,4 +1,4 @@
-<template>
+<template xmlns:>
   <div class="comments-wrapper">
     <div class="comment-header">
       <span class="title">Comments</span> |
@@ -19,11 +19,11 @@
             <div class="comment-info">
               <div v-if="comment.fromName" class="author">
                 <span>{{ comment.fromName }}</span>
-                <el-tag v-if="comment.user.auth === 'super_admin'" type="danger" size="mini">
+                <Tag v-if="comment.user.auth === 'super_admin'">
                   博主
-                </el-tag>
-                <svg-icon :icon-class="comment.agent | formToAgent " style="font-size: 16px;margin-left: 5px;" />
-                <svg-icon :icon-class="comment.system | formToSystem " style="font-size: 16px;margin-left: 5px;" />
+                </Tag>
+                <SvgIcon :icon-class="comment.agent | formToAgent " style="font-size: 16px;margin-left: 5px;" />
+                <SvgIcon :icon-class="comment.system | formToSystem " style="font-size: 16px;margin-left: 5px;" />
               </div>
             </div>
             <Markdown :value="comment.text" class="mark-text" :style-obj="styleObj" />
@@ -35,9 +35,8 @@
                     v-if="userID / 1 !== comment.fromId / 1"
                     class="reply"
                     @click="handleReply(index1, { pid: comment.id, toName: comment.fromName }, 0)"
-                  ><svg-icon
-                    :icon-class="`comment`"
-                  /> 回复</span>
+                  >
+                    <SvgIcon icon-class="comment" /> 回复</span>
                 </client-only>
               </div>
             </div>
@@ -58,19 +57,23 @@
                     <div class="comment-info">
                       <div v-if="reply.fromName" class="author">
                         <span>{{ reply.fromName }}</span>
-                        <el-tag
+                        <Tag
                           v-if="comment.user.auth === 'super_admin'"
-                          type="danger"
-                          size="mini"
                         >
                           博主
-                        </el-tag>
-                        <svg-icon :icon-class="comment.agent | formToAgent " style="font-size: 16px;margin-left: 5px;" />
-                        <svg-icon :icon-class="comment.system | formToSystem " style="font-size: 16px;margin-left: 5px;" />
+                        </Tag>
+                        <SvgIcon
+                          :icon-class="comment.agent | formToAgent "
+                          style="font-size: 16px;margin-left: 5px;"
+                        />
+                        <SvgIcon
+                          :icon-class="comment.system | formToSystem "
+                          style="font-size: 16px;margin-left: 5px;"
+                        />
                       </div>
                     </div>
                     <Markdown
-                      :value="`回复<sapn style='color: #53a8ff;font-size: 12px'>@${reply.toName}: </sapn>${reply.text}`"
+                      :value="`回复<span style=color: #53a8ff;font-size: 12px>@${reply.toName}: </span>${reply.text}`"
                       :style-obj="styleObj"
                       class="mark-text"
                     />
@@ -82,7 +85,7 @@
                             v-if="userID / 1 !== reply.fromId / 1"
                             class="reply"
                             @click="handleReply(comment.id, { pid: comment.id, toName: reply.fromName }, 1)"
-                          ><svg-icon :icon-clss="`comment`" />
+                          ><SvgIcon icon-clss="comment" />
                             回复</span>
                         </client-only>
                       </div>
@@ -114,30 +117,48 @@
 </template>
 
 <script>
-import Login from '../Login/index'
 import Markdown from '@/components/Markdown'
 import Beep from '@/components/Beep'
-import { formDate } from '@/utils'
+import { convertDate } from '@/utils'
+import Login from '../Login/index'
 
 export default {
   name: 'Comments',
-  components: { Login, Markdown, Beep },
+  components: {
+    Login,
+    Markdown,
+    Beep
+  },
   filters: {
     formToDate (v) {
-      return formDate(v)
+      return convertDate(v)
     },
     formToSystem (system) {
-      if (system.toLowerCase().includes('android')) { return 'Android' }
-      if (system.toLowerCase().includes('ios')) { return 'ios' }
-      if (system.toLowerCase().includes('windows')) { return 'Android' }
+      if (system.toLowerCase().includes('android')) {
+        return 'Android'
+      }
+      if (system.toLowerCase().includes('ios')) {
+        return 'ios'
+      }
+      if (system.toLowerCase().includes('windows')) {
+        return 'Windows'
+      }
       // if (system.toLowerCase().indexOf('safari')) { return 'Safari' }
     },
     formToAgent (browser) {
       // console.log(browser.toLowerCase())
-      if (browser.toLowerCase().includes('chrome')) { return 'Chrome' }
-      if (browser.toLowerCase().includes('opera')) { return 'Opera' }
-      if (browser.toLowerCase().includes('ie')) { return 'IE' }
-      if (browser.toLowerCase().includes('safari')) { return 'Safari' }
+      if (browser.toLowerCase().includes('chrome')) {
+        return 'Chrome'
+      }
+      if (browser.toLowerCase().includes('opera')) {
+        return 'Opera'
+      }
+      if (browser.toLowerCase().includes('ie')) {
+        return 'IE'
+      }
+      if (browser.toLowerCase().includes('safari')) {
+        return 'Safari'
+      }
     }
   },
   props: {
@@ -217,7 +238,7 @@ export default {
   },
   methods: {
     handleReply (i, v, type) {
-      console.log(i, v, type)
+      // console.log(i, v, type)
       !type ? this.visibleComment = i : this.visibleReply = i
       this.toUser = v
       // this.cancelReply()
@@ -236,155 +257,154 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-    @import "~assets/css/theme"
-    .comments-wrapper
-        position relative
+.comments-wrapper
+  position relative
 
-        #more-load
-            font-size 14px
-            text-align center
-            background #7DB9DE
-            width 100%
-            color #fff
-            padding 10px 15px
-            box-sizing border-box
-            margin 15px 0 0
+  #more-load
+    font-size 14px
+    text-align center
+    background #7DB9DE
+    width 100%
+    color #fff
+    padding 10px 15px
+    box-sizing border-box
+    margin 15px 0 0
 
-            &:hover
-                opacity 0.9
-                cursor pointer
+    &:hover
+      opacity 0.9
+      cursor pointer
 
-        .comment-header
-            font-size $font-size-small
-            padding 30px 0 20px
+  .comment-header
+    font-size $font-size-small
+    padding 30px 0 20px
 
-            .title
-                color #7D7D7D
+    .title
+      color #7D7D7D
 
-            .count
-                font-size 13px
-                color $font-color-minor
+    .count
+      font-size 13px
+      color $font-color-minor
 
-            .login
-                position absolute
-                right 0
-                line-height 69px
-                transform translateY(-70%)
+    .login
+      position absolute
+      right 0
+      line-height 69px
+      transform translateY(-70%)
 
-        .comment-list
-            padding-top 20px
+  .comment-list
+    padding-top 20px
 
-            .cancel
-                position relative
-                top -5px
-                float right
-                font-size $font-size-small
-                color $active-color
-                cursor pointer
+    .cancel
+      position relative
+      top -5px
+      float right
+      font-size $font-size-small
+      color $active-color
+      cursor pointer
 
-                &:hover
-                    opacity .9
+      &:hover
+        opacity .9
 
-            .comment
-                overflow hidden
-                margin-bottom 15px
+    .comment
+      overflow hidden
+      margin-bottom 15px
 
-                &:last-child
-                    .content
-                        border 0
+      &:last-child
+        .content
+          border 0
 
-                .sub-comment-list
-                    margin 10px 0
-                    padding 10px 10px 0
-                    background #FBFBFB
+      .sub-comment-list
+        margin 10px 0
+        padding 10px 10px 0
+        background #FBFBFB
 
-                    .items
-                        margin-bottom 10px
+        .items
+          margin-bottom 10px
 
-                        &:last-child
-                            margin-bottom 0
-
-                            .content
-                                border 0
-
-                    .item
-                        margin-bottom 10px
-                        display flex
-
-                        .reply-content
-                            flex 1 1 auto
-
-            .parent
-                display flex
-
-                .profile
-                    height 40px
-
-                    img
-                        height @height
-                        border-radius 50%
-                        transition all .6s
-
-                        &:hover
-                            transform rotateZ(360deg)
-
-                .comment-info
-                    .author
-                        display inline-block
-                        font-size 12px
-                        color #1abc9c
-                        line-height 2em
-
-                    .info
-                        position relative
-                        display inline-block
-                        margin-left 10px
-                        color $font-color-minor
-                        font-size $font-size-mini
-
-                        .useragent-info
-                            padding 5px
-                            background #EDEDED
-                            border-radius 5px
-                            color #b3b1b1
+          &:last-child
+            margin-bottom 0
 
             .content
-                flex 1 1 auto
-                margin-left 8px
-                font-size $font-size-small
-                border-bottom 1px solid #EEEEEE
-                padding-bottom 8px
+              border 0
 
-                .v-note-wrapper
-                    margin-top 0 !important
+        .item
+          margin-bottom 10px
+          display flex
 
-                .reply-stat
-                    margin 8px 0
-                    color #8a9aa9
-                    font-size 12px
-                    display flex
+          .reply-content
+            flex 1 1 auto
 
-                    .action-box
-                        display inline-block
-                        margin-left auto
-                        cursor pointer
+    .parent
+      display flex
 
-                        .reply
-                            padding-left 20px
-                            cursor pointer
+      .profile
+        height 40px
 
-    @media (max-width: 768px)
-        .comments-wrapper
-            .info-mark
-                display none
+        img
+          height @height
+          border-radius 50%
+          transition all .6s
 
-            .el-textarea
-                width 80% !important
-                float: right !important
+          &:hover
+            transform rotateZ(360deg)
 
-            .comment-bottom
-                width 100% !important
+      .comment-info
+        .author
+          display flex
+          font-size 12px
+          color #1abc9c
+          line-height 2em
+          align-items: center;
+        .info
+          position relative
+          display inline-block
+          margin-left 10px
+          color $font-color-minor
+          font-size $font-size-mini
 
-            .comment-list
-                padding-top 10px !important
+          .useragent-info
+            padding 5px
+            background #EDEDED
+            border-radius 5px
+            color #b3b1b1
+
+    .content
+      flex 1 1 auto
+      margin-left 8px
+      font-size $font-size-small
+      border-bottom 1px solid #EEEEEE
+      padding-bottom 8px
+
+      .v-note-wrapper
+        margin-top 0 !important
+
+      .reply-stat
+        margin 8px 0
+        color #8a9aa9
+        font-size 12px
+        display flex
+
+        .action-box
+          display inline-block
+          margin-left auto
+          cursor pointer
+
+          .reply
+            padding-left 20px
+            cursor pointer
+
+@media (max-width: 768px)
+  .comments-wrapper
+    .info-mark
+      display none
+
+    .el-textarea
+      width 80% !important
+      float: right !important
+
+    .comment-bottom
+      width 100% !important
+
+    .comment-list
+      padding-top 10px !important
 </style>

@@ -1,14 +1,34 @@
 <template>
   <aside class="sidebar">
-    <Card class="box-card" padding="0">
+    <Card class="box-card" :padding="0">
       <div class="avatar-bg" />
       <NuxtLink tag="div" to="/" class="user">
         <span class="text-name hover-active">
           玉捷
         </span>
         <img src="https://img.cdn.lsyblog.com/site-avatar.jpg" alt="玉捷" class="avatar">
-        <p class="text-desc">不做后悔事，做了不后悔。</p>
+        <p class="text-desc">
+          不做后悔事，做了不后悔。
+        </p>
       </NuxtLink>
+      <ul class="info-num">
+        <li>
+          <SvgIcon icon-class="article" :style="{ fontSize: '22px' }" />
+          <p>{{ articleCount }}</p>
+        </li>
+        <li style="border-left: 1px solid #e8eaec;border-right:1px solid #e8eaec; ">
+          <SvgIcon icon-class="comment" :style="{ fontSize: '22px' }" />
+          <p>{{ commentCount }}</p>
+        </li>
+        <li>
+          <SvgIcon icon-class="tag" :style="{ fontSize: '22px' }" />
+          <p>{{ tagCount }}</p>
+        </li>
+      </ul>
+      <div class="contact-way">
+        <SvgIcon icon-class="GitHub" :style="{ fontSize: '25px', marginRight: '8px' }" />
+        <SvgIcon icon-class="qq" :style="{ fontSize: '25px' }" />
+      </div>
     </Card>
     <newComment />
     <Tag />
@@ -16,12 +36,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import newComment from './newComment'
 import Tag from './Tag'
 
 export default {
   name: 'SideInfo',
-  components: { newComment, Tag }
+  components: { newComment, Tag },
+  computed: {
+    ...mapGetters([
+      'tagCount',
+      'commentCount',
+      'articleCount'
+    ])
+  },
+  // eslint-disable-next-line vue/order-in-components
+  async fetch () {
+    await this.$store.dispatch('comment/getCommentCount')
+    await this.$store.dispatch('tag/getCount')
+  }
 }
 </script>
 
@@ -36,6 +69,20 @@ export default {
     display none
   .box-card
     position relative
+    .info-num
+      display flex
+      padding 10px 20px
+      text-align center
+      li
+        flex 1
+      p
+        text-align center
+        color #212529
+        margin-top 2px
+        font-size 16px
+    .contact-way
+      margin 20px 0
+      text-align center
     .avatar-bg
       background-image url("https://w.wallhaven.cc/full/76/wallhaven-76opry.png")
       background-size cover
@@ -66,4 +113,5 @@ export default {
         font-size $font-size-small
         line-height 1.5em
         text-align center
+
 </style>

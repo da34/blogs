@@ -2,23 +2,23 @@
   <div class="wrap">
     <div class="content">
       <VHeader />
-            <AppMain />
+      <AppMain />
     </div>
-    <!--    <BackTop />-->
-        <VFooter />
+    <BackTop />
+    <VFooter />
   </div>
 </template>
 
 <script>
+import BackTop from '@/components/BackTop'
 import VHeader from './VHeader/index'
 import VFooter from './VFooter'
 import AppMain from './AppMain'
-// import BackTop from '@/components/BackTop'
 // import ProgressBar from '@/components/ProgressBar'
 
 export default {
   name: 'Layout',
-  components: { VHeader, VFooter, AppMain }
+  components: { VHeader, VFooter, AppMain, BackTop }
 }
 /* eslint-disable */
 console.log("%c version 2.0", "font-size:20pt;color:#FFA7A6")

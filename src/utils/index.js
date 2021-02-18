@@ -89,7 +89,7 @@ const dateToMs = date => {
  * 大于 1 年，返回“xx 年前”
  * */
 
-export const formDate = date => {
+export const convertDate = date => {
   // const ONE_SECOND = 1000   // 秒
   const ONE_MINUTE = 60000 // 分
   const ONE_HOUR = 3600000 // 时
