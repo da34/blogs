@@ -42,7 +42,7 @@ export default {
 <style scoped lang="stylus">
 .app-wrapper
   position relative
-  margin 30px auto 0
+  margin 20px auto 0
   @media (min-width: 768px) {
     width: 100%;
   }
@@ -61,7 +61,6 @@ export default {
   position relative
   display flex
   width 100%
-  margin-top 20px
   @media (max-width: 768px)
     box-sizing border-box
     padding 10px

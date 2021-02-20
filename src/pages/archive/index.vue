@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="list.length">
     <Timeline :data="list" :total="count" />
   </div>
 </template>
@@ -9,8 +9,16 @@ import Timeline from '@/components/Timeline'
 
 export default {
   name: 'Pigeonhole',
-  layout: 'blog',
   components: { Timeline },
+  layout: 'blog',
+  async asyncData ({ $axios, store }) {
+    const { data } = await $axios.$get(`article/archive?page=${store.getters.archivePage}&limit=10`)
+    // this.list = data.data
+    return {
+      list: data.data,
+      count: data.count
+    }
+  },
   head () {
     return {
       title: '归档-玉捷博客',
@@ -21,21 +29,11 @@ export default {
   },
   data () {
     return {
-      list: [],
-      count: 0
     }
   },
   computed: {
     currentPage () {
       return this.$store.getters.archivePage
-    }
-  },
-  async asyncData ({ $axios, store }) {
-    const { data } = await $axios.$get(`article/archive?page=${store.getters.archivePage}&limit=10`)
-    // console.log(data.data)
-    return {
-      list: data.data,
-      count: data.count
     }
   },
   created () {

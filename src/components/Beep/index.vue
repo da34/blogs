@@ -4,7 +4,7 @@
       <Input
         v-model="textarea"
         type="textarea"
-        placeholder="请输入内容..."
+        placeholder="发条友善的评论..."
         :maxlength="400"
         resize="none"
         :rows="5"

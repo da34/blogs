@@ -14,55 +14,70 @@
       <!--        </el-dropdown-menu>-->
       <!--      </el-dropdown>-->
       <ul class="menu">
-        <NuxtLink
-          v-for="item in navList"
-          :key="item.title"
-          :to="item.path"
-          tag="li"
-          class="menu-item"
-          exact
-        >
-          <SvgIcon :iconClass="item.icon" :style=" { fontSize: '24px', marginRight: '10px' } " />
-          {{ item.title }}
-          <ul v-if="item.children" class="sub-menu">
-            <li v-for="subItem in item.children" :key="subItem.title" @click="handleOpen">
-              {{ subItem.title }}
-            </li>
-          </ul>
-        </NuxtLink>
+        <div v-for="item in menus" :key="item.name" style="height: 100%;">
+          <NuxtLink
+            :to="item.url"
+            tag="li"
+            class="menu-item"
+            exact
+          >
+            <SvgIcon :icon-class="item.icon" :style=" { fontSize: '24px', marginRight: '10px' } " />
+            {{ item.name }}
+            <ul v-if="item.children" class="sub-menu">
+              <li v-for="subItem in item.children" :key="subItem.title" @click="handleOpen">
+                {{ subItem.name }}
+              </li>
+            </ul>
+          </NuxtLink>
+        </div>
       </ul>
     </nav>
   </div>
 </template>
 
 <script>
+
+// eslint-disable-next-line no-unused-vars
+const NAV_LIST = [
+  {
+    name: '首页',
+    icon: 'home',
+    url: '/',
+    outer: 0,
+    children: [
+      {
+        name: '归档',
+        icon: 'folder',
+        url: '/archive',
+        outer: 0
+      }
+    ]
+  },
+  {
+    name: '归档',
+    icon: 'folder',
+    url: '/archive',
+    outer: 0
+  },
+  {
+    name: '朋友',
+    icon: 'friend',
+    url: '/link',
+    outer: 0
+  }
+]
 export default {
   name: 'Navbar',
   data () {
     return {
-      curNav: '首页',
-      navList: [
-        {
-          title: '首页',
-          icon: 'home',
-          path: '/'
-        },
-        {
-          title: '归档',
-          icon: 'folder',
-          path: '/archive'
-        },
-        {
-          title: '朋友',
-          icon: 'friend',
-          path: '/link'
-        },
-        {
-          title: '关于',
-          icon: 'about',
-          path: '/about'
-        }
-      ]
+      curNav: '首页'
+    }
+  },
+  computed: {
+    menus () {
+      let menu = this.$store.getters.menu
+      menu = NAV_LIST.concat(menu)
+      return menu
     }
   },
   methods: {

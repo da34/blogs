@@ -128,7 +128,8 @@ export default {
   color #000
   transition all .3s
   box-shadow 0 .125rem .25rem rgba(0, 0, 0, .075);
-  background #fff
+  background-color rgba(255,255,255,0.7)
+  backdrop-filter blur(20px)
   @media (max-width 768px)
     height 50px
     padding 0 20px

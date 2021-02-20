@@ -23,8 +23,8 @@ const actions = {
     commit('setList', expression)
   },
   // 获取最新评论
-  async getCommentList ({ commit }) {
-    const { data } = await this.$axios.$get('comments/new')
+  async getCommentList ({ commit }, { limit = 4 }) {
+    const { data } = await this.$axios.$get(`comments/new?limit=${limit}`)
     // console.log(data)
     commit('setNewList', data)
   },

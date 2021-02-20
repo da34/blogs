@@ -18,8 +18,8 @@
           <div class="content">
             <div class="comment-info">
               <div v-if="comment.fromName" class="author">
-                <span>{{ comment.fromName }}</span>
-                <Tag v-if="comment.user.auth === 'super_admin'">
+                <span style="margin-right: 5px">{{ comment.fromName }}</span>
+                <Tag color="#A6A6A6" v-if="comment.user.auth === 'super_admin'">
                   博主
                 </Tag>
                 <SvgIcon :icon-class="comment.agent | formToAgent " style="font-size: 16px;margin-left: 5px;" />
@@ -28,7 +28,7 @@
             </div>
             <Markdown :value="comment.text" class="mark-text" :style-obj="styleObj" />
             <div class="reply-stat">
-              <span class="time">{{ comment.createdAt | formToDate }}</span>
+              <span class="time">{{ comment.createdAt | convertDate }}</span>
               <div class="action-box">
                 <client-only>
                   <span
@@ -56,10 +56,8 @@
                   <div class="content">
                     <div class="comment-info">
                       <div v-if="reply.fromName" class="author">
-                        <span>{{ reply.fromName }}</span>
-                        <Tag
-                          v-if="comment.user.auth === 'super_admin'"
-                        >
+                        <span style="margin-right: 5px">{{ reply.fromName }}</span>
+                        <Tag color="#A6A6A6" v-if="comment.user.auth === 'super_admin'">
                           博主
                         </Tag>
                         <SvgIcon
@@ -78,7 +76,7 @@
                       class="mark-text"
                     />
                     <div class="reply-stat">
-                      <span class="time">{{ reply.createdAt | formToDate }}</span>
+                      <span class="time">{{ reply.createdAt | convertDate }}</span>
                       <div class="action-box">
                         <client-only>
                           <span
@@ -119,7 +117,6 @@
 <script>
 import Markdown from '@/components/Markdown'
 import Beep from '@/components/Beep'
-import { convertDate } from '@/utils'
 import Login from '../Login/index'
 
 export default {
@@ -130,9 +127,6 @@ export default {
     Beep
   },
   filters: {
-    formToDate (v) {
-      return convertDate(v)
-    },
     formToSystem (system) {
       if (system.toLowerCase().includes('android')) {
         return 'Android'

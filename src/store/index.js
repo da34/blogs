@@ -2,6 +2,7 @@ import article from './modules/article'
 import tag from './modules/tag'
 import comment from './modules/comment'
 import user from './modules/user'
+import front from './modules/front'
 import getters from './getters'
 
 const store = {
@@ -9,12 +10,14 @@ const store = {
     article,
     tag,
     comment,
-    user
+    user,
+    front
   },
   getters,
   actions: {
     async nuxtServerInit ({ dispatch }, { req }) {
       await dispatch('article/getList', { page: 1 })
+      await dispatch('front/getMenu')
       if (req.headers.cookie && req.headers.cookie.includes('Yujie-Token')) {
         await dispatch('user/getInfo')
       }

@@ -29,8 +29,9 @@ export default {
         border-radius 5px
         width 100%
         height 100%
+        z-index -1
         .bg
-            filter blur(30px) brightness(.75)
+            filter blur(1px) brightness(.85)
             width calc(100% + 50px)
             height calc(100% + 50px)
             background-attachment scroll

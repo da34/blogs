@@ -1,6 +1,6 @@
 import { Message } from 'iview'
 import { getToken, getDiy } from '@/utils/auth'
-const debug = process.env.NODE_ENV !== 'production'
+// const debug = process.env.NODE_ENV !== 'production'
 
 function csrfSafeMethod (method) {
   // these HTTP methods do not require CSRF protection
@@ -13,14 +13,14 @@ export default function ({ $axios, redirect }) {
   $axios.onRequest(config => {
     const token = getToken()
     const csrfToken = getDiy('csrfToken')
-
+    // console.log('测试111')
     if (process.client && !csrfSafeMethod(config.method)) {
       // 带上token
       config.headers.Authorization = `Bearer ${token}`
       // 带上csrfToken
       config.headers['x-csrf-token'] = csrfToken
     }
-    // console.log(config)
+    // console.log(11, config)
   })
 
   // 错误的回调

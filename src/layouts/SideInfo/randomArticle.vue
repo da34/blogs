@@ -8,13 +8,12 @@
       :key="article.id"
       class="article"
     >
-      <div class="bg-pic" :style="{ backgroundImage: `url(${article.imageUrl || 'https://w.wallhaven.cc/full/n6/wallhaven-n628ox.jpg)'}  ` }"></div>
+      <div class="bg-pic" :style="{ backgroundImage: `url(${article.imageUrl || 'https://th.wallhaven.cc/lg/j3/j3339m.jpg)'}  ` }" />
       <div>
-        <nuxt-link style="margin-bottom: 3px;" :to="`/article/${article.id}`" tag="h3">
+        <NuxtLink class="article-title" :to="`/article/${article.id}`" tag="h3">
           {{ article.title }}
-        </nuxt-link>
-        <svg-icon iconClass="time" style="font-size: 14px" />
-        <span>  {{ article.createdAt | splitDate }}</span>
+        </NuxtLink>
+        <span>  {{ article.createdAt | formatDate('YYYY年MM月DD日') }}</span>
       </div>
     </div>
   </Card>
@@ -26,13 +25,7 @@
 // import { errno } from '@/config'
 // const phoneWidth = 768
 export default {
-  name: 'Tag',
-  components: { },
-  filters: {
-    splitDate (date) {
-      return date.split(' ')[0]
-    }
-  },
+  name: 'RandomArticle',
   data () {
     return {
       // tagList: []
@@ -66,12 +59,9 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  @import "~assets/css/theme"
->>> .el-card__header
-      padding 10px 15px
-.box-card
-  position: sticky!important;
-  top: 70px;
+//.box-card
+  //position: sticky!important;
+  //top: 70px;
   //margin-top 10px
 .article
   position relative
@@ -99,9 +89,12 @@ export default {
     box-sizing border-box
     background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(0,0,0));
     z-index 2
-  h3
+  .article-title
     font-size 14px
     font-weight 500
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
   span
     font-size 12px
 </style>

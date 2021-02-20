@@ -7,7 +7,8 @@ const getters = {
   article: state => state.article.article,
   tagCount: state => state.tag.count,
   articleCount: state => state.article.total,
-  commentCount: state => state.comment.count
+  commentCount: state => state.comment.count,
+  menu: state => state.front.menu
 }
 
 export default getters
