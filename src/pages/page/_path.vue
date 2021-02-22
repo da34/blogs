@@ -1,43 +1,14 @@
 <template>
   <section>
-    <div class="entry-thumbnail">
-      <div
-        class="article-bg"
-        :style="{ backgroundImage: `url(${data.imageUrl || 'https://w.wallhaven.cc/full/k7/wallhaven-k77l97.jpg'})` }"
-      />
-      <div class="article-header">
-        <h1 class="title">
-          <p>{{ data.title }}</p>
-          <p style="font-size: 15px;font-weight: normal;color: rgba(255,255,255,.9);margin-top: 5px;">
-            {{ data.createdAt | formatDate('YYYY年MM月DD日') }}
-            <Divider type="vertical"/>
-            阅读：{{ data.views }}
-          </p>
-        </h1>
-      </div>
-    </div>
     <div class="article-content">
       <div class="blog-post">
         <article>
           <div class="post-content">
-            <Marked v-if="data" :value="data.content"/>
+            <Marked v-if="data" :value="data.content" />
           </div>
         </article>
-        <div class="copyright">
-          本作品采用
-          <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
-          进行许可
-        </div>
       </div>
-      <div class="show-foot">
-        <div class="tags">
-          <Tag v-for="tag in data.tags" :key="tag.name" size="medium">
-            {{ tag.name }}
-          </Tag>
-        </div>
-        <p>最后编辑于:{{ data.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
-      </div>
-      <Comments :comments="comments" :count="count" :article-id="$route.params.id" @submitComplete="handleComment"/>
+      <Comments :comments="comments" :count="count" :article-id="articleId" @submitComplete="handleComment" />
     </div>
   </section>
 </template>
@@ -56,16 +27,17 @@ export default {
   layout: 'blog',
   scrollToTop: true,
   async asyncData ({
-    params,
+    query,
     $axios
   }) {
     // 获取评论
-    const result = await $axios.$get(`comments?articleId=${params.id}`)
+    const result = await $axios.$get(`comments?articleId=${query.q}`)
     const comments = result.data.list
     const { count } = result.data
     return {
       comments,
-      count
+      count,
+      articleId: query.q
     }
   },
   data () {
@@ -73,9 +45,9 @@ export default {
   },
   async fetch ({
     store,
-    params
+    query
   }) {
-    await store.dispatch('article/getDetail', { id: params.id })
+    await store.dispatch('article/getDetail', { id: query.q, status: 3 })
   },
   head () {
     return {
@@ -110,7 +82,7 @@ export default {
   },
   methods: {
     async handleComment () {
-      const { data } = await this.$axios.$get(`comments?articleId=${this.$route.params.id}`)
+      const { data } = await this.$axios.$get(`comments?articleId=${this.$route.query.id}`)
       const comments = data.list
       const { count } = data
       this.comments = comments
@@ -147,28 +119,23 @@ export default {
     height: 100%;
     flex-direction: column;
     justify-content: flex-end;
-
     .article-info
       display flex
       justify-content flex-end
       padding 10px
       text-shadow: 0 0 5px rgb(35 35 35 / 50%), 0 0 5px rgb(35 35 35 / 50%);
       background: linear-gradient(0deg, transparent, rgba(0, 0, 0, .6));
-
       div
         margin-right 10px
-
         svg
           margin-right 7px
           font-size 20px
-
     .title
       width: 100%;
       text-shadow: 0 0 5px rgb(35 35 35 / 50%), 0 0 5px rgb(35 35 35 / 50%);
       font-size: 32px;
       background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .6));
       padding: 25px 30px;
-
       p:first-child
         text-omit(3)
 

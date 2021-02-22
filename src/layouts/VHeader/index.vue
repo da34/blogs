@@ -124,7 +124,7 @@ export default {
   right 0
   z-index 300
   height 60px
-  overflow hidden
+  //overflow hidden
   color #000
   transition all .3s
   box-shadow 0 .125rem .25rem rgba(0, 0, 0, .075);
@@ -149,7 +149,7 @@ export default {
     /*justify-content space-between*/
 
     .logo
-      flex 0 0 200px
+      flex 0 0 180px
       /*padding-left 10px*/
       cursor pointer
       display flex
@@ -165,6 +165,6 @@ export default {
     @media (min-width 992px)
       width 970px
     @media (min-width 1200px)
-      width 1135px
+      width 1200px
 
 </style>

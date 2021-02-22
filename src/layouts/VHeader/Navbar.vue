@@ -13,61 +13,56 @@
       <!--          </el-dropdown-item>-->
       <!--        </el-dropdown-menu>-->
       <!--      </el-dropdown>-->
-      <ul class="menu">
-        <div v-for="item in menus" :key="item.name" style="height: 100%;">
+      <div class="menu">
+        <div v-for="menu in menus" :key="menu.name" class="menu-one">
           <NuxtLink
-            :to="item.url"
-            tag="li"
+            :to="menu.url | externalUrl(menu.articleId)"
             class="menu-item"
+            :target="isExternal(menu.url) ? '_blank' : '_self' "
             exact
           >
-            <SvgIcon :icon-class="item.icon" :style=" { fontSize: '24px', marginRight: '10px' } " />
-            {{ item.name }}
-            <ul v-if="item.children" class="sub-menu">
-              <li v-for="subItem in item.children" :key="subItem.title" @click="handleOpen">
-                {{ subItem.name }}
-              </li>
-            </ul>
+            <SvgIcon :icon-class="menu.icon" :style=" { fontSize: '24px', marginRight: '10px' } " />
+            {{ menu.name }}
+            <SvgIcon
+              v-if="menu.sub_menus.length"
+              class="down"
+              icon-class="down"
+              :style=" { fontSize: '18px', marginLeft: '5px' } "
+            />
           </NuxtLink>
+          <div class="sub-menu">
+            <NuxtLink
+              v-for="subItem in menu.sub_menus"
+              :key="subItem.name"
+              :to="subItem.url | externalUrl(subItem.articleId)"
+              :target="isExternal(subItem.url) ? '_blank' : '_self' "
+            >
+              {{ subItem.name }}
+            </NuxtLink>
+          </div>
         </div>
-      </ul>
+      </div>
     </nav>
   </div>
 </template>
 
 <script>
+import { isExternal } from '@/utils/validate'
 
-// eslint-disable-next-line no-unused-vars
-const NAV_LIST = [
-  {
-    name: '首页',
-    icon: 'home',
-    url: '/',
-    outer: 0,
-    children: [
-      {
-        name: '归档',
-        icon: 'folder',
-        url: '/archive',
-        outer: 0
-      }
-    ]
-  },
-  {
-    name: '归档',
-    icon: 'folder',
-    url: '/archive',
-    outer: 0
-  },
-  {
-    name: '朋友',
-    icon: 'friend',
-    url: '/link',
-    outer: 0
-  }
-]
 export default {
   name: 'Navbar',
+  filters: {
+    externalUrl (url, q) {
+      if (isExternal(url)) {
+        return '/' + url
+      }
+      if (q) { url += `?q=${q}` }
+      return url
+    },
+    isQuery (url) {
+
+    }
+  },
   data () {
     return {
       curNav: '首页'
@@ -75,14 +70,15 @@ export default {
   },
   computed: {
     menus () {
-      let menu = this.$store.getters.menu
-      menu = NAV_LIST.concat(menu)
-      return menu
+      return this.$store.getters.menu
     }
   },
   methods: {
     handleOpen () {
       // console.log(1111)
+    },
+    isExternal (path) {
+      return isExternal(path)
     },
     handleClick (v) {
       this.curNav = v
@@ -97,7 +93,7 @@ export default {
 @import '~assets/css/animation'
 .site-nav
   position relative
-  width 55%
+  width 60%
   height 100%
 
   .mobile-fit-control
@@ -129,38 +125,29 @@ export default {
           margin 0 !important
           padding 0 !important
 
+      .menu-one
+        height 100%
+        position relative
+
+        &:hover
+          .sub-menu
+            display flex
+            opacity 1
+
       .menu-item
-        //color $font-color
+        padding 0 10px
         text-align center
         position relative
         cursor pointer
-        padding 0 10px
         margin 0 5px
         font-weight 700
         height 100%
         display flex
         align-items center
         font-size 19px
-        font-weight 700
 
-        .sub-menu
-          width 80px
-          position absolute
-          top 50px
-          right 50%
-          color $font-color
-          display none
-          background-color $background-color
-          text-align center
-          transform translate(50%)
-          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
-          border-radius 2px
-          transition all .4s
-          opacity 0
-
-          li
-            &:hover
-              color $active-color
+        .down
+          transition all .3s
 
         &:before
           content ''
@@ -180,9 +167,33 @@ export default {
         &:hover
           color $active-color
 
-          .sub-menu
-            opacity 1
-            display block
+          .down
+            transform rotate(180deg)
+
+      .sub-menu
+        width 100%
+        position absolute
+        top 60px
+        color $font-color
+        display none
+        background-color $background-color
+        text-align center
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+        border-radius 2px
+        transition all .4s
+        opacity 0
+        flex-direction column
+        a
+          font-size 16px
+          padding 5px 0
+          font-weight: 600;
+          transition all .3s
+          &:hover
+            color $active-color
+            background #f3f3f3
+
+          &.active-nav
+            color $active-color
 
 @media (max-width: 768px)
   .site-nav

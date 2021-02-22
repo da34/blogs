@@ -52,7 +52,7 @@ export default {
   }
 
   @media (min-width: 1200px) {
-    width: 1170px;
+    width: 1200px;
   }
 
   @media (max-width 768px)

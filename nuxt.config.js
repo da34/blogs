@@ -117,7 +117,8 @@ export default {
         y: 0
       }
     },
-    linkActiveClass: 'active-nav'
+    linkActiveClass: 'active-nav',
+    middleware: 'menu'
   },
   loading: { color: '#FFA7A6' },
   // Build Configuration: https://go.nuxtjs.dev/config-build
