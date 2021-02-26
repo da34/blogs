@@ -39,20 +39,19 @@
         </Tooltip>
       </div>
     </Card>
-    <newComment/>
-    <randomArticle/>
+<!--    <newComment/>-->
+    <randomArticle style="margin-top: 10px" />
   </aside>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import newComment from './newComment'
+// import newComment from './newComment'
 import randomArticle from './randomArticle'
 
 export default {
   name: 'SideInfo',
   components: {
-    newComment,
     randomArticle
   },
   computed: {

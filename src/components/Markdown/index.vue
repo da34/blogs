@@ -1,7 +1,7 @@
 <template>
   <div id="editor">
     <!--    eslint-disable-->
-    <div class="markdown-body" v-html="content" :style="styleObj" />
+    <div class="markdown-body" v-html="content" :style="styleObj"/>
   </div>
 </template>
 <script>
@@ -25,6 +25,7 @@ export default {
   computed: {
     content: {
       get () {
+        // console.log(marked(this.value))
         return marked(this.value)
       },
       set (v) {
@@ -52,14 +53,13 @@ export default {
           codeStr = codeStr.map((str, i) => `<div class="line">${str}</div>`).join('')
           return codeStr
         },
-        pedantic: false,
-        gfm: true,
-        tables: true,
-        breaks: false,
-        sanitize: false,
+        gfm: true, // 默认为true。 允许 Git Hub标准的markdown.
+        tables: true, // 默认为true。 允许支持表格语法。该选项要求 gfm 为true。
+        breaks: false, // 默认为false。 允许回车换行。该选项要求 gfm 为true。
+        pedantic: false, // 默认为false。 尽可能地兼容 markdown.pl的晦涩部分。不纠正原始模型任何的不良行为和错误。
+        sanitize: false, // 对输出进行过滤（清理）
         smartLists: true,
-        smartypants: false,
-        xhtml: false
+        smartypants: false// 使用更为时髦的标点，比如在引用语法中加入破折号。
       })
     },
     renderImg () {
@@ -81,9 +81,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .markdown-body
-    box-sizing border-box
-    padding: 15px
-    @media (max-width 786px)
-      padding 0
+.markdown-body
+  box-sizing border-box
+  padding: 15px
+  @media (max-width 786px)
+    padding 0
 </style>

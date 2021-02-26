@@ -8,11 +8,11 @@
       <div class="article-header">
         <h1 class="title">
           <p>{{ data.title }}</p>
-          <p style="font-size: 15px;font-weight: normal;color: rgba(255,255,255,.9);margin-top: 5px;">
+          <div style="font-size: 15px;font-weight: normal;color: rgba(255,255,255,.9);margin-top: 5px;">
             {{ data.createdAt | formatDate('YYYY年MM月DD日') }}
             <Divider type="vertical"/>
             阅读：{{ data.views }}
-          </p>
+          </div>
         </h1>
       </div>
     </div>
@@ -35,7 +35,7 @@
             {{ tag.name }}
           </Tag>
         </div>
-        <p>最后编辑于:{{ data.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
+        <p>最后编辑于：{{ data.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
       </div>
       <Comments :comments="comments" :count="count" :article-id="$route.params.id" @submitComplete="handleComment"/>
     </div>

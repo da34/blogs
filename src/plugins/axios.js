@@ -1,4 +1,4 @@
-import { Message } from 'iview'
+import { Message } from 'view-design'
 import { getToken, getDiy } from '@/utils/auth'
 // const debug = process.env.NODE_ENV !== 'production'
 

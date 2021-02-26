@@ -60,7 +60,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'iview/dist/styles/iview.css',
+    // 'iview/dist/styles/iview.css',
+    // 'view-design/dist/styles/iview.css',
     '@/assets/css/index.styl'
   ],
 

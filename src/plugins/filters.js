@@ -2,6 +2,7 @@ import Vue from 'vue'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
+import UAParser from 'ua-parser-js'
 // import { convertDate } from '@/utils/index'
 
 dayjs
@@ -16,6 +17,17 @@ const convertDate = date => {
   return dayjs(date).fromNow()
 }
 
-[convertDate, formatDate].forEach(fn => {
+const parseBrowser = ua => {
+  const parser = new UAParser(ua)
+  const result = parser.getBrowser()
+  return result.name + ' ' + result.version
+}
+const parseOS = ua => {
+  const parser = new UAParser(ua)
+  const result = parser.getOS()
+  return result.name + ' ' + result.version
+}
+
+[convertDate, formatDate, parseBrowser, parseOS].forEach(fn => {
   Vue.filter(fn.name, fn)
 })

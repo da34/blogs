@@ -1,13 +1,13 @@
 <template>
   <section>
     <div class="article-content">
-      <div class="blog-post">
-        <article>
-          <div class="post-content">
-            <Marked v-if="data" :value="data.content" />
-          </div>
-        </article>
-      </div>
+      <Marked
+        v-if="data"
+        :value="data.content"
+        :style="{
+          padding: '3px 0 !important'
+        }"
+      />
       <Comments :comments="comments" :count="count" :article-id="articleId" @submitComplete="handleComment" />
     </div>
   </section>
@@ -47,7 +47,7 @@ export default {
     store,
     query
   }) {
-    await store.dispatch('article/getDetail', { id: query.q, status: 3 })
+    await store.dispatch('article/getDetail', { id: query.q, type: 1 })
   },
   head () {
     return {
@@ -96,73 +96,11 @@ export default {
 @import "~assets/css/theme"
 @import "~assets/css/base"
 
-.entry-thumbnail
-  width: 100%;
-  height: 300px
-  position relative
-
-  .article-bg
-    position absolute
-    top 0
-    left 0
-    width 100%
-    height 100%
-    background-position center
-    background-size cover
-    filter brightness(.85)
-
-  .article-header
-    position relative
-    color #fff
-    z-index 200
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
-    .article-info
-      display flex
-      justify-content flex-end
-      padding 10px
-      text-shadow: 0 0 5px rgb(35 35 35 / 50%), 0 0 5px rgb(35 35 35 / 50%);
-      background: linear-gradient(0deg, transparent, rgba(0, 0, 0, .6));
-      div
-        margin-right 10px
-        svg
-          margin-right 7px
-          font-size 20px
-    .title
-      width: 100%;
-      text-shadow: 0 0 5px rgb(35 35 35 / 50%), 0 0 5px rgb(35 35 35 / 50%);
-      font-size: 32px;
-      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .6));
-      padding: 25px 30px;
-      p:first-child
-        text-omit(3)
-
 .article-content
   width 100%
-  padding 0 20px
   box-sizing border-box
+  padding 0 15px
   background $background-color
-
-  .blog-post
-    font-size: 16px;
-
-    .copyright
-      background-color rgba(220, 220, 220, .7)
-      margin 25px 0 0
-      padding 15px 30px
-      text-align center
-      font-size $font-size-medium
-      color $font-color-minor
-
-      a
-        font-size $font-size-small
-        color $font-color-minor
-        transition color .3s
-
-        &:hover
-          color $active-color
 
   .show-foot
     padding 30px 5px

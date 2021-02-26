@@ -54,8 +54,8 @@ const actions = {
     commit('setData', { key: 'randomList' , value: data })
   },
   // 获取文章详情
-  async getDetail ({ commit }, { id, status = 0 }) {
-    const { data } = await this.$axios.$get(`articles/${id}?status=${status}`)
+  async getDetail ({ commit }, { id, type = 0 }) {
+    const { data } = await this.$axios.$get(`articles/${id}?type=${type}`)
     // console.log(data)
     commit('setData', { key: 'article' , value: data })
   }

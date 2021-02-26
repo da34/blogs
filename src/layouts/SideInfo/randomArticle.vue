@@ -83,12 +83,12 @@ export default {
     background-position center center
     border-radius 5px
   div
-    height 55%
-    padding 0 10px
-    padding-top 15px
-    box-sizing border-box
-    background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(0,0,0));
-    z-index 2
+    height: 40%;
+    padding: 0 10px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8));
+    z-index: 2;
   .article-title
     font-size 14px
     font-weight 500

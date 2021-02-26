@@ -117,3 +117,25 @@ export const convertDate = date => {
     return ~~(time / ONE_YEAR) + ONE_YEAR_STR
   }
 }
+
+// export const parseAgent = (ua, isAgent) => {
+//   const AGENT_REG = {
+//     ie: /msie (\d+\.\d+)/i,
+//     chrome: /chrome[^\s]+/i,
+//     firefox: /firefox\/(\d+\.\d+)/i,
+//     safari: /safari[^"]+/i,
+//     QQBrowser: /QQBrowser[^)]+/i,
+//     UBrowser: /UBrowser[^\s]+/i
+//   }
+//   const SYSTEM_REG = {
+//     android: /msie (\d+\.\d+)/i,
+//     chrome: /chrome[^\s]+/i,
+//     firefox: /firefox\/(\d+\.\d+)/i,
+//     safari: /safari[^"]+/i,
+//     QQBrowser: /QQBrowser[^)]+/i,
+//     UBrowser: /UBrowser[^\s]+/i
+//   }
+//   let result
+//   // IE
+//   return result.length ? result[0] : ''
+// }

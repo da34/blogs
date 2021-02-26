@@ -4,7 +4,7 @@
       <span>最新评论</span>
     </div>
     <div v-for="item in newCommentList" :key="item.id" class="comment">
-      <Avatar size="large" :src="item.user.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" />
+      <Avatar size="large" :src="item.user && item.user.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" />
       <div class="comment-content">
         <p>{{ item.fromName }}</p>
         <div class="text">
