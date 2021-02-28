@@ -7,15 +7,17 @@ function csrfSafeMethod (method) {
   return (/^(GET|HEAD|OPTIONS|TRACE)$/i.test(method))
 }
 
-export default function ({ $axios, redirect }) {
+export default function ({
+  $axios,
+  redirect
+}) {
   // 基本配置
   $axios.defaults.timeout = 10000
   $axios.onRequest(config => {
-    const token = getToken()
     const csrfToken = getDiy('csrfToken')
     // console.log('测试111')
     if (process.client && !csrfSafeMethod(config.method)) {
-      // 带上token
+      const token = getToken()
       config.headers.Authorization = `Bearer ${token}`
       // 带上csrfToken
       config.headers['x-csrf-token'] = csrfToken

@@ -7,12 +7,12 @@
           <div class="logo">
             <NuxtLink to="/">
               <h2>玉捷のcode</h2>
-<!--              <img src="~/assets/images/logo.png">-->
+              <!--              <img src="~/assets/images/logo.png">-->
             </NuxtLink>
           </div>
+          <!--          <Search/>-->
           <Navbar/>
-          <Search/>
-          <!--        <User />-->
+          <User />
         </header>
       </div>
     </transition>
@@ -21,13 +21,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Search from './Search'
+// import Search from './Search'
 import Navbar from './Navbar'
+import User from './User'
 
 export default {
   name: 'VHeader',
   components: {
-    Search,
+    User,
+    // Search,
     Navbar
   },
   data () {
@@ -128,7 +130,7 @@ export default {
   color #000
   transition all .3s
   box-shadow 0 .125rem .25rem rgba(0, 0, 0, .075);
-  background-color rgba(255,255,255,0.7)
+  background-color rgba(255, 255, 255, 0.7)
   backdrop-filter blur(20px)
   @media (max-width 768px)
     height 50px
@@ -157,6 +159,7 @@ export default {
       color #000
       @media (max-width 768px)
         width 200px
+
       h2
         font-weight 700
         font-size 25px

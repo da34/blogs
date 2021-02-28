@@ -1,8 +1,8 @@
 <template>
   <footer class="footer">
-    <p>博客已萌萌哒运行 {{ activeTime }}<span class="move">(ﾟωﾟ)ﾉ☆</span></p>
+    <p>博客已运行 {{ activeTime }}<SvgIcon iconClass="heart" class="move" /> </p>
     <p>托管于阿里云(学生机) | 使用七牛云 镜像存储</p>
-    <p>COPYRIGHT 2019 玉捷个人博客. <a style="color: #666;" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备17013163号</a></p>
+    <p>COPYRIGHT {{ date }} 玉捷个人博客. <a style="color: #9fa0a7;" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备17013163号</a></p>
   </footer>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   data () {
     return {
       startTime: '2019-05-01 08:00:00',
-      activeTime: '正在加载...'
+      activeTime: '正在加载...',
+      date: new Date().getFullYear()
     }
   },
   created () {
@@ -41,25 +42,22 @@ export default {
 
 <style scoped lang="stylus">
 //@import "~assets/css/theme"
-$background-color = #232323
 .footer
-  background-color $background-color
   height 85px
   box-sizing border-box
   padding 15px 10px
   text-align center
-  font-size $font-size-mini
+  font-size 14px
   line-height 1.5em
+  background-color: #23262E;
+  color: #9fa0a7;
   .move
-    display inline-block
-    animation pulse 1s infinite
+    margin-left 5px
+    font-size 20px
+    animation pulse .8s infinite
 @keyframes pulse
-  0%
-    transform translateY(0) rotate(0)
-  50%
-    transform translateY(3px) rotate(-3deg)
-  70%
-    transform translateY(0) rotate(-3deg)
-  100%
-    transform translateY(0) rotate(0)
+  to
+    transform translateY(0) scale(.8)
+  from
+    transform translateY(3px) rotate(1)
 </style>

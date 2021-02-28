@@ -122,6 +122,9 @@ export default {
     middleware: 'menu'
   },
   loading: { color: '#FFA7A6' },
+  env: {
+    githubClientId: process.env.NODE_ENV === 'production' ? '6293ac70e392ef1074ad' : '33c8761380f2b72d865f'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend (config, ctx) {

@@ -8,10 +8,8 @@
     <ul class="comment-list">
       <li v-for="comment in commentList" :key="comment.id" class="comment">
         <div class="parent">
-          <a :href="comment.site" target="_blank">
-            <img v-lazy="'http://img.cdn.lsyblog.com/default-avatar.png'" class="avatar">
-          </a>
-          <div class="content">
+          <img v-lazy="comment.avatar" class="avatar">
+          <div :id="`comment-${comment.id}`" class="content">
             <div class="comment-info">
               <div class="author">
                 <span style="margin-right: 5px">{{ comment.fromName }}</span>
@@ -33,9 +31,9 @@
               @closeBeep="handleShut" />
             <div class="reply-content" v-for="reply in comment.replies" :key="reply.id">
               <a :href="reply.site" target="_blank">
-                <img v-lazy="'http://img.cdn.lsyblog.com/default-avatar.png'" class="avatar">
+                <img v-lazy="reply.avatar" class="avatar">
               </a>
-              <div class="content">
+              <div :id="`reply-${reply.id}`" class="content">
                 <div class="comment-info">
                   <div class="author">
                     <span style="margin-right: 5px">{{ reply.fromName }}</span>
@@ -125,7 +123,7 @@ export default {
     },
     total () {
       let num = this.commentList.length
-      console.log(this.commentList)
+      // console.log(this.commentList)
       this.commentList.forEach(v => {
         if (v.children) {
           num += v.children.length

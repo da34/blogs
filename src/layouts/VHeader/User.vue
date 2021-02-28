@@ -2,7 +2,7 @@
   <client-only>
     <div class="site-user">
       <div class="not-login">
-<!--        <Login />-->
+        <Login />
       </div>
     </div>
   </client-only>
@@ -10,10 +10,10 @@
 
 <script>
 // import { mapMutations } from 'vuex'
-// import Login from '../../components/Login/index'
+import Login from '@/components/Login/index'
 export default {
   name: 'User',
-  // components: { Login },
+  components: { Login },
   methods: {
   }
 }

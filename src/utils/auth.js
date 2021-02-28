@@ -1,17 +1,17 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Yujie-Token'
+const TOKEN_KEY = 'Yujie-Token'
 
 export function getToken () {
-  return Cookies.get(TokenKey)
+  return Cookies.get(TOKEN_KEY)
 }
 
 export function setToken (token) {
-  return Cookies.set(TokenKey, token)
+  return Cookies.set(TOKEN_KEY, token)
 }
 
 export function removeToken () {
-  return Cookies.remove(TokenKey)
+  return Cookies.remove(TOKEN_KEY)
 }
 
 export function getDiy (name) {
