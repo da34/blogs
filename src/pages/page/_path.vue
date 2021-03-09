@@ -8,7 +8,7 @@
           padding: '3px 0 !important'
         }"
       />
-      <Comments :comments="comments" :count="count" :article-id="articleId" @submitComplete="handleComment" />
+      <Comments :comments="rows" :count="count" :replies-count="repliesCount" :article-id="articleId" @submitComplete="handleComment" />
     </div>
   </section>
 </template>
@@ -31,12 +31,12 @@ export default {
     $axios
   }) {
     // 获取评论
-    const result = await $axios.$get(`comments?articleId=${query.q}`)
-    const comments = result.data.list
-    const { count } = result.data
+    const { data } = await $axios.$get(`comments?articleId=${query.q}`)
+    const { count, rows, repliesCount } = data
     return {
-      comments,
+      rows,
       count,
+      repliesCount,
       articleId: query.q
     }
   },
@@ -82,11 +82,11 @@ export default {
   },
   methods: {
     async handleComment () {
-      const { data } = await this.$axios.$get(`comments?articleId=${this.$route.query.id}`)
-      const comments = data.list
-      const { count } = data
-      this.comments = comments
+      const { data } = await this.$axios.$get(`comments?articleId=${this.$route.query.q}`)
+      const { count, rows, repliesCount } = data
+      this.rows = rows
       this.count = count
+      this.repliesCount = repliesCount
     }
   }
 }

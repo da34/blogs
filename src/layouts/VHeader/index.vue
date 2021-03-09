@@ -1,18 +1,18 @@
 <template>
   <div style="position: relative">
     <transition name="fade">
-      <div class="header-wrapper" :style="headerStyle">
+      <div v-show="visible" class="header-wrapper">
         <!--      <Blur />-->
         <header class="header">
           <div class="logo">
             <NuxtLink to="/">
-              <h2>玉捷のcode</h2>
-              <!--              <img src="~/assets/images/logo.png">-->
+              <!--              <h2>玉捷のcode</h2>-->
+              <img src="~/assets/images/logo.png">
             </NuxtLink>
           </div>
           <!--          <Search/>-->
-          <Navbar/>
-          <User />
+          <Navbar />
+          <User class="user" />
         </header>
       </div>
     </transition>
@@ -22,6 +22,7 @@
 <script>
 import { mapGetters } from 'vuex'
 // import Search from './Search'
+import { scrollMixin } from '@/minxi/handleScroll'
 import Navbar from './Navbar'
 import User from './User'
 
@@ -32,43 +33,15 @@ export default {
     // Search,
     Navbar
   },
+  mixins: [scrollMixin],
   data () {
     return {
-      headerStyle: {},
-      bgStyle: { backgroundImage: 'url(https://w.wallhaven.cc/full/72/wallhaven-72ggwe.png)' }
     }
   },
   computed: {
     ...mapGetters([
       'article'
     ])
-  },
-  watch: {
-    // '$route.path' (newVal) {
-    //   if (newVal.match(/\//g).length === 1) {
-    //     this.bgStyle.backgroundImage = 'url(https://w.wallhaven.cc/full/72/wallhaven-72ggwe.png)'
-    //   } else {
-    //     this.bgStyle.backgroundImage = `url(${this.article.imageUrl})`
-    //   }
-    // }
-  },
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll () {
-      const offsetTop = window.pageYOffset || document.documentElement.scrollTop
-      // console.log(offsetTop)
-      this.visible = offsetTop > 50
-      this.visible
-        ? this.headerStyle = {
-          height: '68px'
-        }
-        : this.headerStyle = {}
-    }
   }
 }
 </script>
@@ -125,23 +98,19 @@ export default {
   left 0
   right 0
   z-index 300
-  height 60px
+  height 65px
   //overflow hidden
   color #000
   transition all .3s
   box-shadow 0 .125rem .25rem rgba(0, 0, 0, .075);
   background-color rgba(255, 255, 255, 0.7)
   backdrop-filter blur(20px)
-  @media (max-width 768px)
-    height 50px
-    padding 0 20px
 
   &.fade-enter-active, &.fade-leave-active
-    transition all .2s
+    transition all .3s
 
   &.fade-enter, &.fade-leave-to
-    height 70px
-    background-color $background-color
+    height 0
 
   .header
     height 100%
@@ -157,17 +126,34 @@ export default {
       display flex
       align-items center
       color #000
-      @media (max-width 768px)
-        width 200px
 
       h2
         font-weight 700
         font-size 25px
-    @media (min-width 768px)
-      width 100%
-    @media (min-width 992px)
-      width 970px
-    @media (min-width 1200px)
-      width 1200px
 
+@media (max-width 768px)
+  .header-wrapper
+    height 50px
+    padding-right 10px
+    .header
+      justify-content: space-between;
+  .logo
+    transform scale(.9)
+    width 200px
+
+@media (max-width 1200px)
+  .user
+    display none
+
+@media (min-width 768px)
+  .header
+    width 100%
+
+@media (min-width 992px)
+  .header
+    width 970px
+
+@media (min-width 1200px)
+  .header
+    width 1200px
 </style>

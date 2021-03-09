@@ -16,10 +16,6 @@ const actions = {
   async getList ({ commit }) {
     const { data } = await this.$axios.$get('tagCount')
     commit('setTagList', data)
-  },
-  async getCount ({ commit }) {
-    const { data } = await this.$axios.$get('tags/count')
-    commit('setCount', data)
   }
 }
 

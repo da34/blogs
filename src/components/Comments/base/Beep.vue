@@ -1,40 +1,43 @@
 <template>
   <!--  <client-only>-->
-  <div class="beep">
-    <Form ref="formValidate" :model="comment" label-position="top" :rules="ruleValidate" style="padding: 10px">
-      <FormItem prop="text">
-        <Input
-          v-model="comment.text"
-          :border="false"
-          type="textarea"
-          placeholder="发条友善的评论..."
-          :maxlength="400"
-          resize="none"
-          :rows="5"
-          :show-word-limit="true"
-        />
-      </FormItem>
-      <FormItem style="margin-bottom: 10px">
-        <Row type="flex" justify="end" :gutter="10">
-          <Col/>
-          <a class="markdown" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
-            <SvgIcon icon-class="markdown" style="font-size: 16px"/>
-          </a>
-          </Col>
-          <Col style="flex-grow: 1"/>
-          <Col/>
-          <Checkbox v-model="comment.isPost">
-            接受邮件通知
-          </Checkbox>
-          </Col>
-          <Col/>
-          <Button type="info" @click="handleSubmit('formValidate')">
-            提交评论
-          </Button>
-          </Col>
-        </Row>
-      </FormItem>
-    </Form>
+  <div>
+    <div class="beep">
+      <Form label-position="top" style="padding: 10px">
+        <FormItem prop="text">
+          <Input
+            v-model="comment.text"
+            :border="false"
+            type="textarea"
+            placeholder="发条友善的评论..."
+            :maxlength="400"
+            resize="none"
+            :rows="5"
+            :show-word-limit="true"
+          />
+        </FormItem>
+        <FormItem style="margin-bottom: 10px">
+          <Row type="flex" justify="end" :gutter="10">
+            <Col/>
+            <a class="markdown" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
+              <SvgIcon icon-class="markdown" style="font-size: 16px"/>
+            </a>
+            </Col>
+            <Col style="flex-grow: 1"/>
+            <!--          <Col/>-->
+            <!--          <Checkbox v-model="comment.isPost">-->
+            <!--            接受邮件通知-->
+            <!--          </Checkbox>-->
+            <!--          </Col>-->
+            <Col/>
+            <Button type="info" :loading="buttonLoading" @click="handleSubmit">
+              <span v-if="!buttonLoading">提交评论</span>
+              <span v-else>提交评论中...</span>
+            </Button>
+            </Col>
+          </Row>
+        </FormItem>
+      </Form>
+    </div>
   </div>
   <!--  </client-only>-->
 </template>
@@ -65,15 +68,9 @@ export default {
     return {
       comment: {
         text: '',
-        isPost: true,
         articleId: this.articleId
       },
-      ruleValidate: {
-        text: [{
-          required: true,
-          message: '评论不能为空'
-        }]
-      }
+      buttonLoading: false
     }
   },
   computed: {
@@ -86,19 +83,23 @@ export default {
   mounted () {
   },
   methods: {
-    handleSubmit (name) {
-      this.$refs[name].validate(valid => {
-        if (valid) {
-          if (!this.$store.getters.name) {
-            this.$Message.warning({
-              background: true,
-              content: '请先登录'
-            })
-            return
-          }
-          this.postComment()
-        }
-      })
+    handleSubmit () {
+      let content = ''
+      if (!this.comment.text) {
+        content = '请输入评论内容'
+      }
+      if (!this.$store.getters.name) {
+        content = '请先登录'
+      }
+      if (content) {
+        this.$Message.warning({
+          background: true,
+          content
+        })
+        return
+      }
+      this.buttonLoading = true
+      this.postComment()
     },
     async postComment () {
       const data = Object.assign(this.comment, this.replyData)
@@ -116,6 +117,7 @@ export default {
       this.comment.text = ''
       this.$Message.success('发表成功！')
       this.done()
+      this.buttonLoading = false
     },
     createAnchor () {
       const path = this.$route.path

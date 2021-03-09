@@ -1,5 +1,5 @@
 <template>
-  <Card class="box-card">
+  <Card class="box-card" dis-hover>
     <div slot="title">
       <span>最新评论</span>
     </div>

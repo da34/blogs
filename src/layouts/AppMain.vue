@@ -1,7 +1,5 @@
 <template>
   <div class="app-wrapper">
-    <div v-show="$route.path === '/'" class="slide">
-    </div>
     <section class="app-main">
       <div class="fl">
         <transition name="fade-transform" mode="out-in">
@@ -56,7 +54,7 @@ export default {
   }
 
   @media (max-width 768px)
-    top -30px
+    top -20px
 .app-main
   position relative
   display flex

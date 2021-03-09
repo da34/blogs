@@ -5,9 +5,8 @@ const getters = {
   archivePage: state => state.article.archivePage,
   page: state => state.article.page,
   article: state => state.article.article,
-  tagCount: state => state.tag.count,
   articleCount: state => state.article.total,
-  commentCount: state => state.comment.count,
+  articleCollect: state => state.front.articleCollect,
   menu: state => state.front.menu
 }
 

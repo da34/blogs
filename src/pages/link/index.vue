@@ -6,9 +6,9 @@
           <a :href="getURL(link.URL)" target="_blank" :title="link.outline">
             <div class="link-text">
               <span class="siteName">{{ link.name }}</span>
-              <div class="explain" >{{ link.outline }}</div>
+              <div class="explain">{{ link.outline }}</div>
             </div>
-            <img class="avatar" :src="link.avatar" />
+            <img class="avatar" :src="link.avatar">
           </a>
         </li>
       </ul>
@@ -18,7 +18,7 @@
         欢迎各位大佬交换友链(´ω｀*)
       </h1>
     </div>
-    <Comments :comments="comments" article-id="-2" :count="count" @submitComplete="handleComment"/>
+    <Comments :comments="rows" :count="count" :replies-count="repliesCount" article-id="-2" @submitComplete="handleComment" />
   </div>
 </template>
 
@@ -33,26 +33,22 @@ export default {
   components: { Comments },
   layout: 'blog',
   async asyncData ({
-    $axios,
-    params
+    $axios
   }) {
     const { data } = await $axios.$get('linkList')
     // console.log(data)
     // 获取评论
-    const result = await $axios.$get('comments?articleId=-2')
-    const comments = result.data.list
-    const { count } = result.data
+    const comment = await $axios.$get('comments?articleId=-2')
+    const { count, rows, repliesCount } = comment.data
     return {
       list: data,
-      comments,
-      count
+      rows,
+      count,
+      repliesCount
     }
   },
   data () {
     return {
-      list: [],
-      comments: [],
-      count: 0
     }
   },
   head () {
@@ -79,8 +75,10 @@ export default {
     },
     async handleComment () {
       const { data } = await this.$axios.$get('comments?articleId=-2')
-      this.comments = data
-      this.count = data.length
+      const { rows, count, repliesCount } = data
+      this.rows = rows
+      this.count = count
+      this.repliesCount = repliesCount
     },
     onError (e) {
       console.log(e)

@@ -27,12 +27,6 @@ const actions = {
     const { data } = await this.$axios.$get(`comments/new?limit=${limit}`)
     // console.log(data)
     commit('setNewList', data)
-  },
-  // 获取评论总数
-  async getCommentCount ({ commit }) {
-    const { data } = await this.$axios.$get('comments/count')
-    // console.log(data)
-    commit('setCount', data)
   }
 }
 

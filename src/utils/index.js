@@ -3,7 +3,7 @@
  *   @param {function}  callback
  *   @param {Number}  delay
  * */
-export function throttle (callback, delay) {
+export function throttle (callback, delay = 1000) {
   let timeout
   return function () {
     const args = arguments
@@ -22,36 +22,44 @@ export function throttle (callback, delay) {
  *
  * */
 
-export function getTitle (content) {
-  let List = []
-  const reg = /(#+)\s\S+/g
-  const nav = []
-
+export function getToc (content) {
+  let list = []
+  let result = ''
+  const levelStack = []
+  const reg = /<h[1-3].*>.*?<\/h[1-3]>/gi
   // 把所有标题找到
-  List = content.match(reg)
-  const len = List.length
-
-  for (let i = 0; i < len; i++) {
-    nav[i] = {
-      level: List[i].match(/#+/)[0].length,
-      children: [],
-      title: List[i].match(/[^#+][^\s]\S*/)[0].replace(/\s/, '')
-    }
+  list = content.match(reg)
+  const addStartUL = () => {
+    result += '<ul class="catalog-list">'
   }
-
-  //
-  // nav.map((item, index) => {
-  //   console.log(item)
-  // })
-  for (let i = 0; i < len; i++) {
-    for (let j = i + 1; j < len; j++) {
-      if (nav[i].level > nav[j].level) {
-        nav[i].children.push(nav[j])
+  const addEndUL = () => {
+    result += '</ul>\n'
+  }
+  const addLI = (itemId, itemText) => {
+    result += `<li class="item" ><a href="#${itemId}">${itemText}</a></li>`
+  }
+  list && list.forEach((item, index) => {
+    const itemId = item.match(/id=[^.<>]+/g)[0].replace(/id="+/g, '') // 匹配h标签的ID
+    const itemText = item.replace(/<[^>]+>/g, '') // 匹配h标签的文字
+    const itemLabel = item.match(/h[1-3]/)[0] // 匹配h[1-3]标签
+    let levelIndex = levelStack.indexOf(itemLabel) // 判断数组里有无h标签
+    // 新增ul li
+    if (levelIndex === -1) {
+      levelStack.unshift(itemLabel)
+      addStartUL()
+      addLI(itemId, itemText)
+    } else if (levelIndex === 0) { // 对应的标签。添加li
+      addLI(itemId, itemText)
+    } else {
+      // eslint-disable-next-line no-const-assign
+      while (levelIndex--) {
+        levelStack.shift()
+        addEndUL()
       }
+      addLI(itemId, itemText)
     }
-  }
-  // console.log(nav)
-  return List
+  })
+  return result
 }
 
 /**

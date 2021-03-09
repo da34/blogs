@@ -5,6 +5,10 @@ import { resolve } from 'path'
 // }
 
 export default {
+  alias: {
+    images: resolve(__dirname, './assets/images'),
+    css: resolve(__dirname, './assets/css')
+  },
   srcDir: 'src/',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -53,7 +57,7 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: 'https://img.cdn.lsyblog.com/favicon.ico'
+        href: 'images/favicon.ico'
       }
     ]
   },

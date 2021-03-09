@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <p>博客已运行 {{ activeTime }}<SvgIcon iconClass="heart" class="move" /> </p>
-    <p>托管于阿里云(学生机) | 使用七牛云 镜像存储</p>
+<!--    <p>托管于阿里云(学生机) | 使用七牛云 镜像存储</p>-->
     <p>COPYRIGHT {{ date }} 玉捷个人博客. <a style="color: #9fa0a7;" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备17013163号</a></p>
   </footer>
 </template>
@@ -43,14 +43,14 @@ export default {
 <style scoped lang="stylus">
 //@import "~assets/css/theme"
 .footer
-  height 85px
+  //height 85px
   box-sizing border-box
   padding 15px 10px
   text-align center
   font-size 14px
   line-height 1.5em
-  background-color: #23262E;
-  color: #9fa0a7;
+  //background-color: #23262E;
+  color: #909090;
   .move
     margin-left 5px
     font-size 20px

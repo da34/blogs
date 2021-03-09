@@ -1,5 +1,5 @@
 <template>
-  <Card class="box-card">
+  <Card class="box-card" dis-hover>
     <div slot="title" class="box-header">
       随便看看
     </div>
@@ -70,7 +70,6 @@ export default {
   color #fff
   display flex
   flex-direction column-reverse
-  cursor pointer
   &:last-child
     margin-bottom 0
   .bg-pic
@@ -95,6 +94,7 @@ export default {
     overflow hidden
     text-overflow ellipsis
     white-space nowrap
+    cursor pointer
   span
     font-size 12px
 </style>

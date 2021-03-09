@@ -1,7 +1,7 @@
 <template>
   <div class="article-wrapper">
     <article v-for="item in list" :key="item.id">
-      <div v-if="item.imageUrl" v-lazy:background-image="item.imageUrl" class="item-pic" />
+      <div v-if="item.imageUrl" v-lazy:background-image="item.imageUrl" class="item-pic"/>
       <div class="article-content">
         <NuxtLink class="title" :to="`/article/${item.id}`" tag="h2">
           {{ item.title }}
@@ -11,14 +11,14 @@
         </span>
         <ul class="info">
           <li>
-            <SvgIcon icon-class="time" />
+            <SvgIcon icon-class="time"/>
             <span>{{ item.createdAt | convertDate }}</span>
           </li>
           <li>
-            <SvgIcon iconClass="comment"/>
-            <span>{{ item.comments.length }}</span>
+            <SvgIcon icon-class="comment"/>
+            <span>{{ item.comments.length + item.replies.length }}</span>
           </li>
-          <li v-if="item.tags.length !== 0">
+          <li v-if="item.tags.length">
             <SvgIcon icon-class="tag"/>
             <template v-if="item.tags.length > 1">
               <span v-for="(tag, i) in item.tags" :key="tag.id">{{ i > 0 ? '，' : '' }}{{ tag.name }}</span>
@@ -30,7 +30,7 @@
         </ul>
       </div>
     </article>
-    <Pagination :total="total" @currentChange="currentChange" />
+    <Pagination :total="total" @currentChange="currentChange"/>
   </div>
 </template>
 
@@ -47,18 +47,6 @@ export default {
   data () {
     return {}
   },
-  // filters: {
-  //   commentsLen (comment) {
-  //     const count = comment.length
-  //     console.log(comment)
-  //     // comment.forEach(item => {
-  //     //   if (item.children.length) {
-  //     //     count += item.children.length
-  //     //   }
-  //     // })
-  //     return count
-  //   }
-  // },
   head () {
     return {
       title: '首页-玉捷博客',
@@ -76,7 +64,7 @@ export default {
       return this.$store.state.article.list
     },
     total () {
-      return this.$store.state.article.total
+      return 0
     }
   },
   methods: {
@@ -103,24 +91,30 @@ export default {
 
     .article-content
       padding 20px
+
       .title
         color #17233d
         margin-bottom 15px
         cursor pointer
         text-omit(3)
+
       .desc
         color #515a6e
         text-omit(3)
+
       .info
         display flex
         margin-top 15px
+
         li
           margin-right 20px
           display flex
           align-items center
+
           span
             font-size 16px
             color #808695
+
         svg
           font-size 17px
           margin-right 5px
@@ -129,4 +123,10 @@ export default {
     height 200px
     background-position: center;
     background-size: cover;
+
+@media (max-width: 768px)
+
+  .article-wrapper
+    article
+      margin-bottom 10px
 </style>

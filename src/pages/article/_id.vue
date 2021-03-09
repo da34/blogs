@@ -37,7 +37,7 @@
         </div>
         <p>最后编辑于：{{ data.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
       </div>
-      <Comments :comments="comments" :count="count" :article-id="$route.params.id" @submitComplete="handleComment"/>
+      <Comments :comments="rows" :count="count" :repliesCount="repliesCount" :article-id="$route.params.id" @submitComplete="handleComment"/>
     </div>
   </section>
 </template>
@@ -60,12 +60,12 @@ export default {
     $axios
   }) {
     // 获取评论
-    const result = await $axios.$get(`comments?articleId=${params.id}`)
-    const comments = result.data.list
-    const { count } = result.data
+    const { data } = await $axios.$get(`comments?articleId=${params.id}`)
+    const { rows, count, repliesCount } = data
     return {
-      comments,
-      count
+      rows,
+      count,
+      repliesCount
     }
   },
   data () {
@@ -89,7 +89,7 @@ export default {
         {
           hid: 'classify',
           vmid: 'keywords',
-          content: this.category
+          content: '玉捷-YuJie'
         },
         {
           hid: 'content',
@@ -103,18 +103,15 @@ export default {
     data () {
       // console.log(this.$store.getters.article)
       return this.$store.getters.article
-    },
-    category () {
-      return this.data.category ? this.data.category.name : '玉捷-YuJie'
     }
   },
   methods: {
     async handleComment () {
       const { data } = await this.$axios.$get(`comments?articleId=${this.$route.params.id}`)
-      const comments = data.list
-      const { count } = data
-      this.comments = comments
+      const { count, rows, repliesCount } = data
+      this.rows = rows
       this.count = count
+      this.repliesCount = repliesCount
     }
   }
 }
@@ -203,7 +200,6 @@ export default {
     color $font-color-minor
     display: flex;
     justify-content: space-between;
-
 @media (max-width: 768px)
   //.article-wrapper
   //  padding 5px 0

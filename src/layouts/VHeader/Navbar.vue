@@ -111,9 +111,9 @@ export default {
 @import '~assets/css/animation'
 .site-nav
   position relative
-  width 60%
   height 100%
-
+  flex: 1;
+  margin-left: 50px;
   .menu
     width 100%
     height 100%
@@ -125,8 +125,7 @@ export default {
       position relative
       &:hover
         .sub-menu
-          display flex
-          opacity 1
+          height auto
 
 .menu-item
   padding 0 10px
@@ -164,17 +163,18 @@ export default {
   transition all .3s
 .sub-menu
   width 100%
+  height 0
   position absolute
   top 60px
   color $font-color
-  display none
+  display flex
   background-color $background-color
   text-align center
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
   border-radius 2px
-  transition all .4s
-  opacity 0
+  transition height .4s
   flex-direction column
+  overflow hidden
 
   a
     font-size 16px
@@ -190,17 +190,17 @@ export default {
       color $active-color
 
 .icon-svg
-  font-size 24px
+  font-size 20px
 .menu-icon
   margin-right 10px
 
 @media (max-width: 768px)
   .site-nav
-    width auto
-    margin-left auto
-    display flex
-    align-items center
-
+    display: flex;
+    align-items: center;
+    order: 100;
+    margin-left: 0;
+    flex: 0 0 30px;
     .menu
       margin 0
       display none

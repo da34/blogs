@@ -1,39 +1,40 @@
 <template xmlns:>
   <div class="comments-wrapper">
     <div class="comment-header">
-      <span class="title">Comments</span> |
-      <span class="count"> {{ count }} 条评论</span>
+      <div>
+        <span class="title">Comment</span> |
+        <span class="count"> {{ total }} 条评论</span>
+      </div>
+      <Login />
     </div>
     <Beep v-if="isBeepId === 0" :article-id="articleId" @completeCom="done" />
     <ul class="comment-list">
-      <li v-for="comment in commentList" :key="comment.id" class="comment">
+      <li v-for="comment in commentList" :key="comment.id" class="comment" :id="`comment-${comment.id}`">
         <div class="parent">
           <img v-lazy="comment.avatar" class="avatar">
-          <div :id="`comment-${comment.id}`" class="content">
+          <div class="content">
             <div class="comment-info">
-              <div class="author">
-                <span style="margin-right: 5px">{{ comment.fromName }}</span>
-                <span class="author-ua">{{ comment.ua | parseBrowser }}</span>
-                <span class="author-ua">{{ comment.ua | parseOS }}</span>
-              </div>
+              <span style="margin-right: 5px">{{ comment.fromName }}</span>
+              <span class="author-ua">{{ comment.ua | parseBrowser }}</span>
+              <span class="author-ua">{{ comment.ua | parseOS }}</span>
             </div>
+            <Markdown :value="comment.text" :type="1" class="mark-text" :style-obj="styleObj" />
             <div class="comment-time">
               <span>{{ comment.createdAt | convertDate }}</span>
               <span ref="refReplay" class="reply" @click="handleReply(comment.id, comment.fromName)">回复</span>
             </div>
-            <Markdown :value="comment.text" class="mark-text" :style-obj="styleObj" />
             <Beep
               v-if="isBeepId === comment.id"
               style="margin-top: 10px;"
               :article-id="articleId"
               :reply-data="replyData"
               @completeCom="done"
-              @closeBeep="handleShut" />
-            <div class="reply-content" v-for="reply in comment.replies" :key="reply.id">
+            />
+            <div v-for="reply in comment.replies" :key="reply.id" class="reply-content" :id="`reply-${reply.id}`">
               <a :href="reply.site" target="_blank">
                 <img v-lazy="reply.avatar" class="avatar">
               </a>
-              <div :id="`reply-${reply.id}`" class="content">
+              <div class="content">
                 <div class="comment-info">
                   <div class="author">
                     <span style="margin-right: 5px">{{ reply.fromName }}</span>
@@ -41,19 +42,23 @@
                     <span class="author-ua">{{ reply.ua | parseOS }}</span>
                   </div>
                 </div>
+                <span class="toName">@{{ reply.toName }}</span>
+                <Markdown style="display: inline-block" :type="1" :value="reply.text" class="mark-text" :style-obj="styleObj" />
                 <div class="comment-time">
                   <span>{{ reply.createdAt | convertDate }}</span>
-                  <span ref="refReplay" class="reply" @click="handleReply(reply.id, reply.fromName, comment.id)">回复</span>
+                  <span
+                    ref="refReplay"
+                    class="reply"
+                    @click="handleReply(reply.id, reply.fromName, comment.id)"
+                  >回复</span>
                 </div>
-                <span class="toName">@{{ reply.toName }}</span>
-                <Markdown style="display: inline-block" :value="reply.text" class="mark-text" :style-obj="styleObj" />
                 <Beep
                   v-if="isBeepId === reply.id"
                   style="margin-top: 10px;"
                   :article-id="articleId"
                   :reply-data="replyData"
                   @completeCom="done"
-                  @closeBeep="handleShut" />
+                />
               </div>
             </div>
           </div>
@@ -61,7 +66,7 @@
       </li>
     </ul>
     <!--    <Markdown/>-->
-    <div v-if="!total" style="text-align: center; padding: 40px 0;">
+    <div v-if="!count" style="text-align: center; padding: 40px 0;">
       暂时没有评论哦,快来抢沙发٩(๑❛ᴗ❛๑)۶
     </div>
     <!--    <div v-if="!(total >= count)" style="padding: 0 0 30px;">-->
@@ -69,16 +74,22 @@
     <!--        加载更多评论-->
     <!--      </p>-->
     <!--    </div>-->
+    <Spin v-if="loading" size="large" fix />
+    <Pagination v-if="count" :total="count" :page-size="10" @currentChange="handlePage" />
   </div>
 </template>
 
 <script>
 import Markdown from '@/components/Markdown'
+import Pagination from '../Pagination'
+import Login from '../Login'
 import Beep from './base/Beep'
 
 export default {
   name: 'Comments',
   components: {
+    Login,
+    Pagination,
     Markdown,
     Beep
   },
@@ -100,6 +111,10 @@ export default {
     count: {
       type: Number,
       default: 0
+    },
+    repliesCount: {
+      type: Number,
+      default: 0
     }
   },
   data () {
@@ -107,14 +122,13 @@ export default {
       textarea: '',
       styleObj: {
         fontSize: '13px',
-        padding: '3px 0 !important',
+        padding: '5px 0 8px',
         color: '#505050'
       },
-      // loading: false,
+      loading: false,
       isBeepId: 0,
       replyData: {},
-      commentList: this.comments,
-      page: 1 // 默认页数
+      commentList: this.comments
     }
   },
   computed: {
@@ -122,26 +136,12 @@ export default {
       return 'https://img.cdn.lsyblog.com/default-avatar.png'
     },
     total () {
-      let num = this.commentList.length
-      // console.log(this.commentList)
-      this.commentList.forEach(v => {
-        if (v.children) {
-          num += v.children.length
-        }
-      })
-      return num
+      return this.count + this.repliesCount
     }
   },
   watch: {
     comments (newVal) {
-      // console.log('我有新的值了')
       this.commentList = newVal
-    },
-    async page (newVal) {
-      this.loading = true
-      const { result } = await this.$axios.$get(`comments?articleId=${this.articleId}&page=${newVal}`)
-      this.commentList.push(...result)
-      this.loading = false
     }
   },
   methods: {
@@ -154,13 +154,14 @@ export default {
     },
     done () {
       this.isBeepId = 0
+      this.$emit('submitComplete')
     },
-    handleShut () {
-      console.log('关闭')
+    async handlePage (page) {
+      this.loading = true
+      const { data } = await this.$axios.$get(`comments?articleId=${this.articleId}&page=${page}`)
+      this.commentList = data.rows
+      this.loading = false
     }
-    // fight (obj) {
-    //   this.textarea += `![鸡你太美](${obj.icon} "${obj.text}")`
-    // }
   }
 }
 </script>
@@ -186,8 +187,10 @@ export default {
 
   .comment-header
     font-size $font-size-small
-    padding 30px 0 20px
-
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
     .title
       color #7D7D7D
 
@@ -201,9 +204,12 @@ export default {
     .comment
       overflow hidden
       margin-bottom 15px
-
+      &:target
+        padding-top 100px
+        margin-top -100px
     .parent
       display flex
+
       .avatar
         height 50px
         border-radius 50%
@@ -214,13 +220,11 @@ export default {
           transform rotateZ(360deg)
 
       .comment-info
-        .author
-          display flex
-          font-size 14px
-          color #333
-          margin-bottom 5px
-          align-items: center;
-          margin-right 20px
+        display flex
+        font-size 14px
+        color #333
+        align-items: center
+        margin-right 20px
 
         .author-ua
           color #b3b3b3
@@ -230,29 +234,37 @@ export default {
       .comment-time
         font-size 12px
         color #b3b3b3
-        margin-bottom 5px
         display flex
         justify-content space-between
+
         .reply
           color $active-color
           cursor pointer
+
     .content
       flex 1 1 auto
       margin-left 8px
       font-size $font-size-small
       border-bottom 1px solid #EEEEEE
       padding-bottom 8px
+
     .reply-content
       margin-top 25px
       display flex
+      &:target
+        padding-top 100px
+        margin-top -75px
       .avatar
         height 35px
+
       .toName
         color $active-color
         margin-right 5px
+
       &:last-child
         .content
           border none
+
 @media (max-width: 768px)
   .comments-wrapper
     .info-mark
@@ -263,4 +275,6 @@ export default {
 
     .comment-list
       padding-top 10px !important
+  .author-ua
+    display none
 </style>

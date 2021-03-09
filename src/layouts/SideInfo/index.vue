@@ -1,12 +1,12 @@
 <template>
   <aside class="sidebar">
-    <Card class="box-card" :padding="0">
+    <Card class="box-card" :padding="0" dis-hover>
       <div class="avatar-bg"/>
       <NuxtLink tag="div" to="/" class="user">
         <span class="text-name hover-active">
           玉捷
         </span>
-        <img src="https://img.cdn.lsyblog.com/site-avatar.jpg" alt="玉捷" class="avatar">
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=1255029618&spec=100" alt="玉捷" class="avatar">
         <p class="text-desc">
           不做后悔事，做了不后悔。
         </p>
@@ -14,15 +14,15 @@
       <ul class="info-num">
         <li>
           <SvgIcon icon-class="article" :style="{ fontSize: '22px' }"/>
-          <p>{{ articleCount }}</p>
+          <p>{{ articleCollect.articleCount }}</p>
         </li>
         <li style="border-left: 1px solid #e8eaec;border-right:1px solid #e8eaec; ">
           <SvgIcon icon-class="comment" :style="{ fontSize: '22px' }"/>
-          <p>{{ commentCount }}</p>
+          <p>{{ articleCollect.commentCount + articleCollect.replyCount }}</p>
         </li>
         <li>
           <SvgIcon icon-class="tag" :style="{ fontSize: '22px' }"/>
-          <p>{{ tagCount }}</p>
+          <p>{{ articleCollect.tagCount }}</p>
         </li>
       </ul>
       <div class="contact-way">
@@ -41,6 +41,7 @@
     </Card>
     <newComment/>
     <randomArticle style="margin-top: 10px" />
+    <articleToc v-if="$route.path.includes('article')" />
   </aside>
 </template>
 
@@ -48,24 +49,23 @@
 import { mapGetters } from 'vuex'
 import newComment from './newComment'
 import randomArticle from './randomArticle'
+import ArticleToc from './articleToc'
 
 export default {
   name: 'SideInfo',
   components: {
+    ArticleToc,
     randomArticle,
     newComment
   },
   computed: {
     ...mapGetters([
-      'tagCount',
-      'commentCount',
-      'articleCount'
+      'articleCollect'
     ])
   },
   // eslint-disable-next-line vue/order-in-components
   async fetch () {
-    await this.$store.dispatch('comment/getCommentCount')
-    await this.$store.dispatch('tag/getCount')
+    await this.$store.dispatch('front/getCollect')
   }
 }
 </script>
@@ -115,7 +115,7 @@ export default {
 
       .text-name
         display flex
-        font-size $font-size-big
+        font-size 21px
         font-weight 700
         padding-top 7px
         margin-left 130px
@@ -126,10 +126,10 @@ export default {
         left 20px
         width 90px
         height 90px
-        border rgba(255, 255, 255, .4) 4px solid
+        border rgba(255, 255, 255, .1) 4px solid
         box-sizing border-box
         border-radius 50%
-        transition all .5s
+        transition all .4s
 
         &:hover
           transform rotateZ(360deg) scale(1.15)

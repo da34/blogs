@@ -1,6 +1,6 @@
 <template>
   <div v-if="list.length">
-    <Timeline :data="list" :total="count" />
+    <Timeline :data="list" :total="$store.getters.articleCollect.articleCount" />
   </div>
 </template>
 

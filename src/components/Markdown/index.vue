@@ -25,7 +25,6 @@ export default {
   computed: {
     content: {
       get () {
-        // console.log(marked(this.value))
         return marked(this.value)
       },
       set (v) {
@@ -44,7 +43,7 @@ export default {
   methods: {
     initMarked () {
       marked.setOptions({
-        renderer: this.renderImg(),
+        // renderer: this.renderer(),
         highlight (code) {
           // 增加行数
           // <span class="line-number" >${i + 1}</span>
@@ -55,26 +54,27 @@ export default {
         },
         gfm: true, // 默认为true。 允许 Git Hub标准的markdown.
         tables: true, // 默认为true。 允许支持表格语法。该选项要求 gfm 为true。
-        breaks: false, // 默认为false。 允许回车换行。该选项要求 gfm 为true。
+        breaks: true, // 默认为false。 允许回车换行。该选项要求 gfm 为true。
         pedantic: false, // 默认为false。 尽可能地兼容 markdown.pl的晦涩部分。不纠正原始模型任何的不良行为和错误。
         sanitize: false, // 对输出进行过滤（清理）
         smartLists: true,
-        smartypants: false// 使用更为时髦的标点，比如在引用语法中加入破折号。
+        smartypants: false, // 使用更为时髦的标点，比如在引用语法中加入破折号。
+        langPrefix: ''
       })
+      marked.use({ renderer: this.renderer() })
     },
-    renderImg () {
-      const renderer = new marked.Renderer()
-      renderer.image = (url, title, alt) => {
-        return `
-          <img src="${url}" alt="${alt || '玉捷'}" title="${title || '玉捷'}"">
-        `
+    renderer () {
+      const renderer = {
+        heading (text, level, raw, slugger) {
+          const id = slugger.slug(text)
+          const className = level <= 3 ? 'toc-title' : ''
+          return `<h${level} class="${className}" id="${id}">${text}</h${level}>
+`
+        },
+        image (url, title, alt) {
+          return `<img src="${url}" alt="${alt || '玉捷'}" title="${title || '玉捷'}"">`
+        }
       }
-      // renderer.code = (code, info, escaped) => {
-      //   console.log(code, info, escaped)
-      //   return `
-      //     <code>${code}</code>
-      //   `
-      // }
       return renderer
     }
   }
