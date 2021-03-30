@@ -1,13 +1,17 @@
 import { resolve } from 'path'
-
-// const resolve = dir => {
-//   return path.join(__dirname, dir)
-// }
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 export default {
+  // 开启打包分析
+  analyze: true,
   alias: {
     images: resolve(__dirname, './assets/images'),
     css: resolve(__dirname, './assets/css')
+  },
+  server: { // 部署到线上nginx配置
+    host: '0.0.0.0',
+    port: 3000
   },
   srcDir: 'src/',
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -57,7 +61,7 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: 'images/favicon.ico'
+        href: 'https://resource.lsyboy.cn/blog/option/favicon.ico'
       }
     ]
   },
@@ -65,7 +69,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // 'iview/dist/styles/iview.css',
-    // 'view-design/dist/styles/iview.css',
+    'view-design/dist/styles/iview.css',
     '@/assets/css/index.styl'
   ],
 
@@ -73,8 +77,11 @@ export default {
   plugins: [
     '@/plugins/iview',
     '@/plugins/axios',
-    '@/plugins/filters',
     '@/plugins/components',
+    {
+      src: '@/plugins/filters',
+      ssr: true
+    },
     {
       src: '@/plugins/svg-icon',
       ssr: true
@@ -131,6 +138,42 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    publicPath: 'https://resource.lsyboy.cn/blog',
+    transpile: ['view-design'],
+    babel: {
+      plugins: [['import', {
+        libraryName: 'view-design',
+        libraryDirectory: 'src/components'
+      }]]
+
+    },
+    extractCSS: true, // 单独提取css为文件
+    minimizer: [new OptimizeCssAssetsPlugin()],
+    optimization: { // 拆分大文件
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'chunk-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial' // only package third parties that are initially dependent
+          },
+          elementUI: {
+            name: 'chunk-view-design', // split elementUI into a single package
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]_?view-design(.*)/ // in order to adapt to cnpm
+          },
+          commons: {
+            name: 'chunk-commons',
+            test: resolve('src/components'), // can customize your rules
+            minChunks: 3, //  minimum common number
+            priority: 5,
+            reuseExistingChunk: true
+          }
+        }
+      }
+    },
     extend (config, ctx) {
       // 排除 nuxt 原配置的影响,Nuxt 默认有vue-loader,会处理svg,img等
       // 找到匹配.svg的规则,然后将存放svg文件的目录排除
@@ -147,6 +190,20 @@ export default {
           options: { symbolId: 'icon-[name]' }
         }]
       })
+      // config.plugins = [
+      //   new CompressionWebpackPlugin({
+      //     asset: '[path].gz[query]',
+      //     algorithm: 'gzip',
+      //     // eslint-disable-next-line prefer-regex-literals
+      //     test: new RegExp('\\.(js|css)$'),
+      //     // 只处理大于xx字节 的文件，默认：0
+      //     threshold: 10240,
+      //     // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
+      //     minRatio: 0.8, // 默认: 0.8
+      //     // 是否删除源文件，默认: false
+      //     deleteOriginalAssets: false
+      //   })
+      // ]
     }
   }
 }

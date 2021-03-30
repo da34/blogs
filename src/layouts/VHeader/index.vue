@@ -126,7 +126,6 @@ export default {
       display flex
       align-items center
       color #000
-
       h2
         font-weight 700
         font-size 25px

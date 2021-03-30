@@ -81,6 +81,11 @@ export default {
 
 <style scoped lang="stylus">
 @import "~assets/css/base"
+.tag-cond
+  background $background-color
+  padding 10px
+  margin-bottom 10px
+  border none
 .article-wrapper
   font-size $font-size-small
   color $font-color

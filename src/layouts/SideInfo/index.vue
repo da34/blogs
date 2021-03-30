@@ -7,6 +7,7 @@
           玉捷
         </span>
         <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=1255029618&spec=100" alt="玉捷" class="avatar">
+<!--        <img src="https://q2.qlogo.cn/headimg_dl" alt="玉捷" class="avatar">-->
         <p class="text-desc">
           不做后悔事，做了不后悔。
         </p>
@@ -105,7 +106,7 @@ export default {
         cursor pointer
 
     .avatar-bg
-      background-image url("https://w.wallhaven.cc/full/76/wallhaven-76opry.png")
+      background-image url("https://resource.lsyboy.cn/blog/option/avatar-bg.png")
       background-size cover
       height 120px
       background-position: 25% 75%;

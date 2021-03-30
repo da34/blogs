@@ -8,7 +8,7 @@
       :key="article.id"
       class="article"
     >
-      <div class="bg-pic" :style="{ backgroundImage: `url(${article.imageUrl || 'https://th.wallhaven.cc/lg/j3/j3339m.jpg)'}  ` }" />
+      <div class="bg-pic" :style="{ backgroundImage: `url(${article.imageUrl || 'https://resource.lsyboy.cn/blog/option/article-default-bg.jpg' +'?imageView2/1/w/300/h/120)' }  ` }" />
       <div>
         <NuxtLink class="article-title" :to="`/article/${article.id}`" tag="h3">
           {{ article.title }}
@@ -81,12 +81,24 @@ export default {
     background-size cover
     background-position center center
     border-radius 5px
+    &:before
+      content: "";
+      //background: linear-gradient(top, transparent 0%, rgba(0,0,0,0.3) 100%);
+      background: linear-gradient(transparent, rgba(0,0,0,.3));
+      position: absolute;
+      display: block;
+      width: 100%;
+      bottom: 0;
+      top: 0;
+      left 0
+      opacity: 1;
+      z-index: 1;
   div
     height: 40%;
     padding: 0 10px;
     padding-top: 5px;
     box-sizing: border-box;
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8));
+    //background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8));
     z-index: 2;
   .article-title
     font-size 14px

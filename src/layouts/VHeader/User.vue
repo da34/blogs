@@ -25,9 +25,10 @@ export default {
     display flex
     height 100%
     color #fff
-    margin-right 10px
+    margin-right 15px
     .not-login
       margin auto
     @media (max-width 1200px)
       border 0
+      margin-left: auto;
 </style>

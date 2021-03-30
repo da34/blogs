@@ -28,6 +28,10 @@ const parseOS = ua => {
   return result.name + ' ' + result.version
 }
 
-[convertDate, formatDate, parseBrowser, parseOS].forEach(fn => {
-  Vue.filter(fn.name, fn)
-})
+// [convertDate, formatDate, parseBrowser, parseOS].forEach(fn => {
+//   Vue.filter(fn.name, fn)
+// })
+Vue.filter('formatDate', formatDate)
+Vue.filter('convertDate', convertDate)
+Vue.filter('parseBrowser', parseBrowser)
+Vue.filter('parseOS', parseOS)
