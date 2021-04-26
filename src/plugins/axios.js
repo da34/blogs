@@ -13,6 +13,7 @@ export default function ({
 }) {
   // 基本配置
   $axios.defaults.timeout = 10000
+  $axios.defaults.withCredentials = true
   $axios.onRequest(config => {
     const csrfToken = getDiy('csrfToken')
     // console.log('测试111')

@@ -47,12 +47,15 @@ export default {
   },
   methods: {
     handleClick (name) {
+      let url
       if (name === 'github') {
-        this.$store.dispatch('user/loginGithub')
+        url = `https://github.com/login/oauth/authorize?client_id=${process.env.githubClientId}&scope=user:email`
+        this.$store.dispatch('user/login', { url })
       } else if (name === 'qq') {
-        console.log('qq')
-      } else if (name === 'logout') {
-        // 登出
+        url = `https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=${process.env.qqClientId}
+        &redirect_uri=https://lsyboy.cn/api/auth/qq/callback`
+        this.$store.dispatch('user/login', { url })
+      } else { // 登出
         this.$store.dispatch('user/logout')
       }
     }

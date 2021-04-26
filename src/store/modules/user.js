@@ -4,8 +4,7 @@ const state = () => ({
   token: getToken() || '',
   name: '',
   avatar: '',
-  id: '',
-  isEmailNull: 1
+  id: ''
 })
 
 const mutations = {
@@ -20,37 +19,27 @@ const mutations = {
   },
   SET_TOKEN: (state, token) => {
     state.token = token
-  },
-  SET_IS_EMAIL_NULL: (state, num) => {
-    state.isEmailNull = num
   }
 }
 const actions = {
-  loginGithub ({
+  login ({
     commit,
     dispatch
-  }) {
+  }, query) {
     return new Promise((resolve, reject) => {
-      // 获得窗口的垂直位置
-      const iTop = (document.body.clientHeight - 30 - 500) / 2
-      // 获得窗口的水平位置
-      const iLeft = (document.body.clientWidth - 10 - 800) / 2
-      // const debug = process.env.NODE_ENV === 'production'
+      const { url } = query
       // 弹出 500 * 500 的窗口
-      const url = `https://github.com/login/oauth/authorize?client_id=${process.env.githubClientId}&scope=user:email`
-      window.open(url, '登录到Github',
-        `height=500, width=800, top=${iTop}, left=${iLeft}, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no`)
+      window.open(url, '登录', 'height=500, width=800, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
       // 监听页面返回的数据
       window.addEventListener('message', e => {
-        if (typeof e.data === 'string') {
-          const { token } = JSON.parse(e.data)
-          if (token) {
-            // 处理登录逻辑
-            commit('SET_TOKEN', token)
-            setToken(token)
-            dispatch('getInfo')
-            resolve()
-          }
+        const { data } = e
+        // console.log(data)
+        if (data) {
+          // 处理登录逻辑
+          commit('SET_TOKEN', data)
+          setToken(data)
+          dispatch('getInfo')
+          resolve()
         }
       })
     })
@@ -62,14 +51,12 @@ const actions = {
         const {
           username,
           avatar,
-          id,
-          isEmailNull
+          id
         } = response.data.data
         // console.log(response.data.data)
         commit('SET_NAME', username)
         commit('SET_AVATAR', avatar)
         commit('SET_ID', id)
-        commit('SET_IS_EMAIL_NULL', isEmailNull)
         resolve()
       }).catch(error => {
         reject(error)

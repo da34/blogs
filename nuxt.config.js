@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-// const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 export default {
   // 开启打包分析
@@ -134,7 +133,8 @@ export default {
   },
   loading: { color: '#FFA7A6' },
   env: {
-    githubClientId: process.env.NODE_ENV === 'production' ? '6293ac70e392ef1074ad' : '33c8761380f2b72d865f'
+    githubClientId: process.env.NODE_ENV === 'production' ? '6293ac70e392ef1074ad' : '33c8761380f2b72d865f',
+    qqClientId: '101938464'
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -190,20 +190,6 @@ export default {
           options: { symbolId: 'icon-[name]' }
         }]
       })
-      // config.plugins = [
-      //   new CompressionWebpackPlugin({
-      //     asset: '[path].gz[query]',
-      //     algorithm: 'gzip',
-      //     // eslint-disable-next-line prefer-regex-literals
-      //     test: new RegExp('\\.(js|css)$'),
-      //     // 只处理大于xx字节 的文件，默认：0
-      //     threshold: 10240,
-      //     // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
-      //     minRatio: 0.8, // 默认: 0.8
-      //     // 是否删除源文件，默认: false
-      //     deleteOriginalAssets: false
-      //   })
-      // ]
     }
   }
 }

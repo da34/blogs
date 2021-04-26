@@ -35,7 +35,7 @@ export default {
   async asyncData ({
     $axios
   }) {
-    const { data } = await $axios.$get('linkList')
+    const { data } = await $axios.$get('links')
     // console.log(data)
     // 获取评论
     const comment = await $axios.$get('comments?articleId=-2')

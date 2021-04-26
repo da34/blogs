@@ -19,7 +19,8 @@ import {
   MenuItem,
   Form,
   FormItem,
-  Message
+  Message,
+  Tag
 } from 'view-design'
 
 // import style
@@ -43,5 +44,6 @@ Vue.component('FormItem', FormItem)
 Vue.component('DropdownMenu', DropdownMenu)
 Vue.component('Avatar', Avatar)
 Vue.component('Submenu', Submenu)
+Vue.component('Tag', Tag)
 
 Vue.prototype.$Message = Message
