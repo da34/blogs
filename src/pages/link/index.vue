@@ -88,8 +88,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
-@import "~assets/css/base"
 .link-wrapper
   padding 30px
   background-color $background-color

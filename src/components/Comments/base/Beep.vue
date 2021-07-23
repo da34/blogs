@@ -143,7 +143,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import "~assets/css/theme"
 .beep
   position relative
   border: 1px solid #f0f0f0;

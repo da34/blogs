@@ -15,7 +15,7 @@ export default {
   srcDir: 'src/',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: process.env.npm_package_name || '',
+    title: '玉捷',
     meta: [
       { charset: 'utf-8' },
       {
@@ -25,11 +25,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      },
-      {
-        name: 'description',
-        content: '前端萌新 | 努力奋斗 | 开源| 玉捷'
+        content: '前端萌新 | 努力奋斗 | 开源 | 玉捷'
       },
       {
         name: 'keywords',
@@ -41,11 +37,11 @@ export default {
       },
       {
         property: 'og:title',
-        content: '前端萌新 | 努力奋斗 | 开源| 玉捷'
+        content: '前端萌新 | 努力奋斗 | 开源 | 玉捷'
       },
       {
         property: 'og:url',
-        content: 'http://lsyblog.com'
+        content: 'http://blog.lsyboy.cn'
       },
       {
         property: 'og:site_name',
@@ -53,7 +49,7 @@ export default {
       },
       {
         property: 'og:description',
-        content: '前端萌新 | 努力奋斗 | 开源| 玉捷'
+        content: '前端萌新 | 努力奋斗 | 开源 | 玉捷'
       }
     ],
     link: [
@@ -67,26 +63,18 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    // 'iview/dist/styles/iview.css',
-    'view-design/dist/styles/iview.css',
     '@/assets/css/index.styl'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/iview',
+    '@/plugins/ant-design-vue',
     '@/plugins/axios',
     '@/plugins/components',
+    '@/plugins/svg-icon',
+    '@/plugins/filters',
     {
-      src: '@/plugins/filters',
-      ssr: true
-    },
-    {
-      src: '@/plugins/svg-icon',
-      ssr: true
-    },
-    {
-      src: '@/plugins/vue-lazyload',
+      src: '@/plugins/vue-lazy-load',
       ssr: false
     }
   ],
@@ -97,9 +85,17 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources'
   ],
-
+  // 全局导入css 不用@import
+  styleResources: {
+    // your settings here
+    stylus: [
+      './assets/css/base.styl',
+      './assets/css/vars.styl'
+    ]
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -128,10 +124,10 @@ export default {
         y: 0
       }
     },
-    linkActiveClass: 'active-nav',
-    middleware: 'menu'
+    linkActiveClass: 'circle-mini'
+    // middleware: 'menu'
   },
-  loading: { color: '#FFA7A6' },
+  loading: { color: '#e94328' },
   env: {
     githubClientId: process.env.NODE_ENV === 'production' ? '6293ac70e392ef1074ad' : '33c8761380f2b72d865f',
     qqClientId: '101938464'
@@ -159,10 +155,10 @@ export default {
             priority: 10,
             chunks: 'initial' // only package third parties that are initially dependent
           },
-          elementUI: {
-            name: 'chunk-view-design', // split elementUI into a single package
+          viewUI: {
+            name: 'chunk-ant-design-vue', // split elementUI into a single package
             priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]_?view-design(.*)/ // in order to adapt to cnpm
+            test: /[\\/]node_modules[\\/]_?ant-design-vue(.*)/ // in order to adapt to cnpm
           },
           commons: {
             name: 'chunk-commons',

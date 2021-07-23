@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
+    "ant-design-vue": "^1.7.6",
     "core-js": "^3.8.3",
     "dayjs": "^1.10.4",
     "highlight.js": "^10.6.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/style-resources": "^1.2.0",
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",

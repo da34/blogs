@@ -1,4 +1,4 @@
-import article from './modules/article'
+import content from './modules/content'
 import tag from './modules/tag'
 import comment from './modules/comment'
 import user from './modules/user'
@@ -7,7 +7,7 @@ import getters from './getters'
 
 const store = {
   modules: {
-    article,
+    content,
     tag,
     comment,
     user,
@@ -16,11 +16,11 @@ const store = {
   getters,
   actions: {
     async nuxtServerInit ({ dispatch }, { req }) {
-      await dispatch('article/getList', { page: 1 })
-      await dispatch('front/getMenu')
-      if (req.headers.cookie && req.headers.cookie.includes('Yujie-Token')) {
-        await dispatch('user/getInfo')
-      }
+      // await dispatch('content/getList', { page: 1 })
+      // await dispatch('front/getMenu')
+      // if (req.headers.cookie && req.headers.cookie.includes('Yujie-Token')) {
+      //   await dispatch('user/getInfo')
+      // }
     },
     getToken () {
       return new Promise((resolve, reject) => {

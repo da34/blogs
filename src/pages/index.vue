@@ -1,51 +1,48 @@
 <template>
   <div class="article-wrapper">
-    <article v-for="item in list" :key="item.id">
-      <div v-if="item.imageUrl" v-lazy:background-image="item.imageUrl" class="item-pic"/>
+    <p class="verse">
+      每日一言：“ {{ verse }} ”
+    </p>
+    <article v-for="item in list" :key="item.id" class="article">
+      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />
       <div class="article-content">
-        <NuxtLink class="title" :to="`/article/${item.id}`" tag="h2">
+        <NuxtLink class="title" :to="`/content/${item.id}`" tag="h2">
           {{ item.title }}
         </NuxtLink>
-        <span class="desc">
-          {{ item.contentShort }}
-        </span>
-        <ul class="info">
-          <li>
-            <SvgIcon icon-class="time"/>
-            <span>{{ item.createdAt | convertDate }}</span>
-          </li>
-          <li>
-            <SvgIcon icon-class="comment"/>
-            <span>{{ item.comments.length + item.replies.length }}</span>
-          </li>
-          <li v-if="item.tags.length">
-            <SvgIcon icon-class="tag"/>
-            <template v-if="item.tags.length > 1">
-              <span v-for="(tag, i) in item.tags" :key="tag.id">{{ i > 0 ? '，' : '' }}{{ tag.name }}</span>
-            </template>
-            <template v-else>
-              <span v-for="tag in item.tags" :key="tag.id">{{ tag.name }}</span>
-            </template>
-          </li>
-        </ul>
+        <p class="desc">
+          {{ item.contentOutline }}
+        </p>
+        <div class="info">
+          <div class="info-item">
+            <SvgIcon icon-class="tag" />
+            <span v-for="(tag, i) in item.tags" :key="tag.id" class="tag">
+              <a-divider v-if="i!==0" type="vertical" />
+              {{ tag.name }}
+            </span>
+          </div>
+          <div class="info-item"> <SvgIcon icon-class="date" />{{ item.createdAt | convertDate }}</div>
+          <div class="info-item"> <SvgIcon icon-class="comment" />{{ item.comments.length }}</div>
+          <NuxtLink class="read-more" :to="`/content/${item.id}`" tag="span">
+            阅读全文
+          </NuxtLink>
+        </div>
       </div>
     </article>
-    <Pagination :total="total" @currentChange="currentChange"/>
+    <!--    <Pagination :total="total" @currentChange="currentChange" />-->
   </div>
 </template>
 
 <script>
-// import { getArticleList } from '@/api/article'
-// import { errno } from '@/config'
-import Pagination from '@/components/Pagination'
-import { convertDate } from '@/utils'
+import { mapState } from 'vuex'
+// import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Index',
-  components: { Pagination },
+  // components: { Pagination },
   layout: 'blog',
-  data () {
-    return {}
+  async fetch ({ store }) {
+    // await store.dispatch('modules/front/getVerse')
+    await store.dispatch('modules/content/getList')
   },
   head () {
     return {
@@ -60,78 +57,82 @@ export default {
     }
   },
   computed: {
-    list () {
-      return this.$store.state.article.list
-    },
-    total () {
-      return 0
-    }
+    ...mapState('modules/front', [
+      'verse'
+    ]),
+    ...mapState('modules/content', [
+      'list',
+      'total'
+    ])
   },
   methods: {
     currentChange (page) {
-      // this.$store.commit('article/setQuery', { page: index })
-      this.$store.dispatch('article/getList', { page })
-    },
-    formatToDate (v) {
-      return convertDate(v)
+      // this.$store.commit('content/setQuery', { page: index })
+      this.$store.dispatch('content/getList', { page })
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/base"
-.tag-cond
-  background $background-color
-  padding 10px
-  margin-bottom 10px
-  border none
 .article-wrapper
-  font-size $font-size-small
-  color $font-color
+  position: relative;
 
-  article
-    margin-bottom 20px
-    background #fff
-
-    .article-content
-      padding 20px
-
-      .title
-        color #17233d
-        margin-bottom 15px
-        cursor pointer
-        text-omit(3)
-
-      .desc
-        color #515a6e
-        text-omit(3)
-
-      .info
-        display flex
-        margin-top 15px
-
-        li
-          margin-right 20px
-          display flex
-          align-items center
-
-          span
-            font-size 16px
-            color #808695
-
-        svg
-          font-size 17px
-          margin-right 5px
-
-  .item-pic
-    height 200px
-    background-position: center;
+.verse
+  font-size $font-size-medium
+  color $color-subsidiary
+  line-height 1.5
+  font-weight bold
+  margin-bottom 20px
+.article
+  margin-bottom 20px
+  border 1px solid $color-line
+  shadow-2-down()
+  border-radius-5()
+  width 100%
+  position: relative;
+  display flex
+  height 180px
+  .img
+    width 30%
+    height 100%
     background-size: cover;
+.article-content
+  padding 20px 30px
+  flex 1
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  .title
+    font-size 24px
+    cursor pointer
+  .desc
+    font-size $font-size-small
+    color $color-content
+    line-height 1.5
+    font-weight 500
+    text-omit(2)
 
-@media (max-width: 768px)
+  .info
+    margin-top 10px
+    font-size $font-size-small
+    display flex
+    justify-content: center;
+    align-items: center;
+    .info-item
+      display flex
+      justify-content center
+      align-items center
+      height 100%
+      margin-right 20px
+      svg
+        margin-right 3px
+    .tag
+      position: relative;
+      height 100%
 
-  .article-wrapper
-    article
-      margin-bottom 10px
+    .read-more
+      color $color-focus
+      cursor pointer
+      margin-left auto
 </style>

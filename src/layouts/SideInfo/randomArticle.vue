@@ -32,7 +32,7 @@ export default {
     }
   },
   async fetch () {
-    await this.$store.dispatch('article/getRandomList')
+    // await this.$store.dispatch('content/getRandomList')
   },
   computed: {
     list () {

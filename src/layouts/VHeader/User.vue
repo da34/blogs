@@ -20,7 +20,6 @@ export default {
 </script>
 
 <style  scoped lang="stylus">
-@import "~assets/css/theme"
   .site-user
     display flex
     height 100%

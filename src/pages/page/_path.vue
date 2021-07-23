@@ -47,7 +47,7 @@ export default {
     store,
     query
   }) {
-    await store.dispatch('article/getDetail', { id: query.q, type: 1 })
+    await store.dispatch('content/getDetail', { id: query.q, type: 1 })
   },
   head () {
     return {
@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     data () {
-      // console.log(this.$store.getters.article)
+      // console.log(this.$store.getters.content)
       return this.$store.getters.article
     },
     category () {
@@ -93,9 +93,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
-@import "~assets/css/base"
-
 .article-content
   width 100%
   box-sizing border-box
@@ -110,7 +107,7 @@ export default {
     justify-content: space-between;
 
 @media (max-width: 768px)
-  //.article-wrapper
+  //.content-wrapper
   //  padding 5px 0
   .blog-post
     padding 10px 0 !important

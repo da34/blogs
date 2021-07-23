@@ -15,7 +15,7 @@
 </template>
 
 <script>
-// import { getSearchArticle } from '@/api/article'
+// import { getSearchArticle } from '@/api/content'
 // import { errno } from '@/config'
 export default {
   name: 'Search',
@@ -27,7 +27,7 @@ export default {
   methods: {
     async querySearchAsync (queryString, callback) {
       // if (queryString) {
-      //   const { data, code, message } = await this.$axios.$get(`article/search?title=${queryString}`)
+      //   const { data, code, message } = await this.$axios.$get(`content/search?title=${queryString}`)
       //   if (code === 0) {
       //     data.map(item => {
       //       item.value = item.title
@@ -48,7 +48,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
 $size = 26px
   .site-search
     width 15%

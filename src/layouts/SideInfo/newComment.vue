@@ -9,7 +9,14 @@
       :href="item.id | anchorFilter(item.anchor, item.replyType)"
       class="comment"
     >
-      <Avatar size="large" :src="item.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" />
+      <a-avatar
+        shape="square"
+        size="large"
+        :src="item.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'"
+        :style="{ backgroundColor: 'pink', verticalAlign: 'middle' }"
+      >
+        {{ 11111 }}
+      </a-avatar>
       <div class="comment-content">
         <p>{{ item.fromName }}</p>
         <div class="text">
@@ -25,41 +32,19 @@ export default {
   name: 'NewComment',
   components: {},
   filters: {
-    anchorFilter (id, anchor, type) {
-      if (type === undefined) {
-        return anchor + '#comment-' + id
-      }
-      return anchor + '#reply-' + id
-    }
   },
   data () {
     return {}
   },
   async fetch () {
-    await this.$store.dispatch('comment/getCommentList', { limit: 4 })
+    // await this.$store.dispatch('comment/getCommentList', { limit: 4 })
   },
   computed: {
-    newCommentList () {
-      return this.$store.state.comment.newList
-    }
-  },
-  created () {
-    // 不需要响应
-    this.num = 0
-  },
-  methods: {
-    handleClick (tab, event) {
-      // console.log(tab, event)
-    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-@import "~assets/css/base"
-.box-card
-  margin 10px 0
-
 .comment
   display flex
   margin-bottom 10px

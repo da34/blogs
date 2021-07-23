@@ -1,14 +1,25 @@
 <template>
-  <footer class="footer">
-    <p>博客已运行 {{ activeTime }}<SvgIcon iconClass="heart" class="move" /> </p>
-<!--    <p>托管于阿里云(学生机) | 使用七牛云 镜像存储</p>-->
-    <p>COPYRIGHT {{ date }} 玉捷个人博客. <a style="color: #9fa0a7;" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备2021002604号-1</a></p>
-  </footer>
+  <div class="footer-wrap">
+    <footer class="footer-content">
+      <div class="footer">
+        <div class="blog-info">
+          <p>© {{ date }} 玉捷个人博客</p>
+          <a href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备2021002604号-1</a>
+          <p>博客已运行 {{ activeTime }}
+            <SvgIcon iconClass="heart" class="move"/>
+          </p>
+        </div>
+        <div class="link-info">
+          <SvgIcon iconClass="git"/>
+          <SvgIcon iconClass="qq"/>
+        </div>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
 import { padLocation } from '@/utils'
-
 export default {
   name: 'VFooter',
   data () {
@@ -41,20 +52,42 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-//@import "~assets/css/theme"
-.footer
-  //height 85px
-  box-sizing border-box
+.footer-wrap
+  border-top 1px solid $color-line
+  height 120px
+.footer-content
+  width $width
+  margin 0 auto
+  height 100%
+  position relative
   padding 15px 10px
-  text-align center
-  font-size 14px
   line-height 1.5em
-  //background-color: #23262E;
-  color: #909090;
+  display: flex;
+  .footer
+    display: flex;
+    align-items: center;
+    width 100%
+  .blog-info
+    font-size $font-size-mini
+    color $color-subsidiary
+    display: flex
+    flex-direction: column
+    justify-content: center
+    width: 45%;
+  a
+    color $color-subsidiary
   .move
-    margin-left 5px
-    font-size 20px
+    margin-left 3px
+    font-size $font-size-medium
     animation pulse .8s infinite
+  .link-info
+    transition all .3s
+    width: 100%;
+    text-align: right;
+    svg
+      font-size 25px
+      margin-left 25px
+      cursor pointer
 @keyframes pulse
   to
     transform translateY(0) scale(.8)

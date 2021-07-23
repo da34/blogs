@@ -84,7 +84,6 @@ export default {
 </script>
 
 <style  lang="stylus" scoped>
-@import "~assets/css/theme"
 .triangle
   position relative
   top -15px

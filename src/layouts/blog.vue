@@ -54,7 +54,7 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
   margin-top 75px
 
   .content
-    min-height calc(100vh - 225px)
+    min-height calc(100vh - 195px)
     padding-bottom 50px
 
   #bg

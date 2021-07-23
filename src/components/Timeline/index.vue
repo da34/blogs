@@ -1,7 +1,7 @@
 <template>
   <div class="content-wrap">
     <div class="posts-collapse">
-      <!--      <div v-if="!title" class="article-total">-->
+      <!--      <div v-if="!title" class="content-total">-->
       <!--        目前一共<span class="emphasis">{{ total }}</span>篇文章,加油!-->
       <!--      </div>-->
       <div v-for="item in data" v-show="total" :key="item.year">
@@ -66,7 +66,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
 .content-wrap
   padding 0 0 60px 60px
   box-sizing border-box

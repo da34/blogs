@@ -64,7 +64,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
 .dropdown-link
   color #000
   cursor pointer

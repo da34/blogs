@@ -57,7 +57,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/css/theme"
 .back-wrapper
   cursor pointer
   position fixed

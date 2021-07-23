@@ -26,6 +26,14 @@ export default function ({
     // console.log(11, config)
   })
 
+  $axios.onResponse(res => {
+    const { data } = res
+    console.log('axios##########', data)
+    if (res.status === 200 && data.code === 0) {
+      return data
+    }
+  })
+
   // 错误的回调
   $axios.onError(error => {
     const code = parseInt(error.response && error.response.status)

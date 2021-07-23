@@ -1,13 +1,3 @@
-@import "theme.styl"
-// 文本超出省咯号
-text-omit($row)
-  overflow hidden
-  text-overflow ellipsis
-  display -webkit-box
-  -webkit-line-clamp $row
-  -webkit-box-orient vertical
-  word-break break-all
-
 // 清除浮动
 .clearfix:after
   content ''
@@ -29,3 +19,50 @@ text-omit($row)
   transition all .3s ease-in-out
   &:hover
     color $active-color
+
+body
+  .circle
+    position relative
+    &:after
+      position absolute
+      top -10px
+      right -12px
+      display block
+      width 24px
+      height 24px
+      content ' '
+      border 6px solid $color-focus
+      border-radius: 50%
+      background: none
+      z-index -1
+
+
+.circle-mini
+  position relative
+  &:after
+    position absolute
+    top -5px
+    right -10px
+    display block
+    width 18px
+    height 18px
+    content ' '
+    border 4px solid $color-focus
+    border-radius: 50%
+    background: none
+    z-index -1
+
+.circle-big
+  position relative
+  &:after
+    position absolute
+    top -9px
+    right -14px
+    display block
+    width 28px
+    height 28px
+    content ' '
+    border 7px solid $color-focus
+    border-radius: 50%
+    background: none
+    z-index -1
