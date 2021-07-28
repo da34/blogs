@@ -4,27 +4,29 @@
       {{ count }} 评论
     </div>
     <div v-for="comment in commentList" :id="`comment-${comment.id}`" :key="comment.id" class="comment">
-      <img v-lazy="'https://gravatar.loli.net/avatar/' + comment.avatar + '?s=50&d=retro'" class="avatar">
-      <div class="content">
-        <div class="comment-info">
-          <span class="author-name">{{ comment.nickName }}</span>
-          <span class="author-other" style="margin-left: 30px">{{ comment.ua | parseBrowser }}</span>
-          <span class="author-other">{{ comment.ua | parseOS }}</span>
+      <div class="comment-inner">
+        <img v-lazy="'https://gravatar.loli.net/avatar/' + comment.avatar + '?s=50&d=retro'" class="avatar">
+        <div class="content">
+          <div class="comment-info">
+            <span class="author-name">{{ comment.nickName }}</span>
+            <span class="author-other" style="margin-left: 30px">{{ comment.ua | parseBrowser }}</span>
+            <span class="author-other">{{ comment.ua | parseOS }}</span>
+          </div>
+          <Markdown :value="comment.text" class="mark-text" />
+          <div class="comment-tool">
+            <span class="author-other">{{ comment.createdAt | convertDate }}</span>
+            <span ref="refReplay" class="reply" @click="onReplay(comment.id)">回复</span>
+          </div>
+          <Edit
+            v-if="nowActiveId === comment.id"
+            :visible="visible"
+            :target-name="comment.nickName"
+            :tier-id="comment.id"
+            :pid="comment.id"
+            close
+            @onClose="onClose"
+          />
         </div>
-        <Markdown :value="comment.text" class="mark-text" />
-        <div class="comment-tool">
-          <span class="author-other">{{ comment.createdAt | convertDate }}</span>
-          <span ref="refReplay" class="reply" @click="onReplay(comment.id)">回复</span>
-        </div>
-<!--        <Edit-->
-<!--          v-if="nowActiveId === comment.id"-->
-<!--          :visible="visible"-->
-<!--          :target-name="comment.nickName"-->
-<!--          :tier-id="comment.id"-->
-<!--          :pid="comment.id"-->
-<!--          close-->
-<!--          @onClose="onClose"-->
-<!--        />-->
       </div>
     </div>
   </div>
@@ -32,11 +34,11 @@
 
 <script>
 import Markdown from '@/components/Markdown'
-// import Edit from './Edit'
+import Edit from './Edit'
 export default {
   name: 'CommentList',
   components: {
-    // Edit,
+    Edit,
     Markdown
   },
   props: {
@@ -49,47 +51,33 @@ export default {
     count: {
       type: Number,
       default: 0
-    },
-    avatar: {
-      type: String,
-      default: ''
-    },
-    nickName: {
-      type: String,
-      default: ''
-    },
-    ua: {
-      type: String,
-      default: ''
-    },
-    action: {
-      type: Array,
-      default () {
-        return []
-      }
     }
   },
   data () {
     return {
-      visible: false
-      // nowActiveId: 0
+      visible: false,
+      nowActiveId: 0
     }
   },
+  created () {
+    console.log('$props####', this.$props)
+    console.log('$slots####', this.$slots)
+  },
   watch: {
-    // nowActiveId (newVal) {
-    //   // if (newVal === 0)
-    //   this.$emit('editChange', !!newVal)
-    // }
+    nowActiveId (newVal) {
+      // if (newVal === 0)
+      this.$emit('editChange', !!newVal)
+    }
   },
   methods: {
-    // onReplay (id) {
-    //   this.nowActiveId = id
-    //   this.visible = true
-    // },
-    // onClose () {
-    //   this.nowActiveId = 0
-    //   this.visible = false
-    // }
+    onReplay (id) {
+      this.nowActiveId = id
+      this.visible = true
+    },
+    onClose () {
+      this.nowActiveId = 0
+      this.visible = false
+    }
   }
 }
 </script>
@@ -102,7 +90,7 @@ export default {
     font-weight 600
     color $color-title
     line-height 2
-  .comment
+  .comment-inner
     display flex
     width 100%
     border-bottom 1px solid #F7F9FB
