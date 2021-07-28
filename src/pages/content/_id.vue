@@ -20,21 +20,21 @@
     <div class="article-content">
       <div class="blog-post">
         <Marked v-if="article" :value="article.content" />
-        <div class="copyright" v-if="article.shareStatement">
+        <div v-if="article.shareStatement" class="copyright">
           本作品采用
           <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
           进行许可
         </div>
       </div>
       <div class="show-foot">
-        <div class="tags" v-if="article.tags.length">
+        <div v-if="article.tags.length" class="tags">
           <h2>tags：</h2>
           <span v-for="(tag, i) in article.tags" :key="tag.name"><a-divider v-if="i !== 0" type="vertical" />{{ tag.name }} </span>
         </div>
-        <div v-else></div>
+        <div v-else />
         <p>最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
       </div>
-      <Comments :comments="rows" :count="count" :replies-count="repliesCount" :article-id="$route.params.id" @submitComplete="handleComment" />
+      <Comments :content-id="$route.params.id" />
     </div>
   </section>
 </template>
@@ -49,8 +49,6 @@ export default {
     Marked,
     Comments
   },
-  layout: 'blog',
-  scrollToTop: true,
   // async asyncData ({
   //   params,
   //   $axios
@@ -64,9 +62,8 @@ export default {
   //     repliesCount
   //   }
   // },
-  data () {
-    return {}
-  },
+  layout: 'blog',
+  scrollToTop: true,
   async fetch ({
     store,
     params
@@ -89,22 +86,22 @@ export default {
     ...mapState('modules/content', [
       'article'
     ])
+  },
+  methods: {
+    // async handleComment () {
+    //   const { data } = await this.$axios.$get(`comments?articleId=${this.$route.params.id}`)
+    //   const { count, rows, repliesCount } = data
+    //   this.rows = rows
+    //   this.count = count
+    //   this.repliesCount = repliesCount
+    // }
   }
-  // methods: {
-  //   async handleComment () {
-  //     const { data } = await this.$axios.$get(`comments?articleId=${this.$route.params.id}`)
-  //     const { count, rows, repliesCount } = data
-  //     this.rows = rows
-  //     this.count = count
-  //     this.repliesCount = repliesCount
-  //   }
-  // }
 }
 </script>
 
 <style scoped lang="stylus">
 .content-wrap
-  border 1px solid $color-line
+  border 1px solid $color-line-1
   shadow-2-down()
   border-radius-5()
 .entry-thumbnail
@@ -136,8 +133,8 @@ export default {
 
 .article-content
   width 100%
-  padding 0 20px
   color $color-content
+  padding 0 30px
   .copyright
     background-color rgba(220, 220, 220, .7)
     margin-top 25px

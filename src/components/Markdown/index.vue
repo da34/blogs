@@ -81,9 +81,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.markdown-body
-  box-sizing border-box
-  padding: 15px
-  @media (max-width 786px)
-    padding 0
+//.markdown-body
+//  box-sizing border-box
+//  padding: 15px
+//  @media (max-width 786px)
+//    padding 0
 </style>

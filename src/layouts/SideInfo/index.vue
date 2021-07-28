@@ -29,6 +29,4 @@ export default {
 <style scoped lang="stylus">
 .sidebar
   margin-left 15px
-  >>>.ant-card-body
-    padding 0
 </style>

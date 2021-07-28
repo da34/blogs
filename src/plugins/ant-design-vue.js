@@ -22,7 +22,8 @@ import Vue from 'vue'
 // Vue.component('Submenu', Submenu)
 // Vue.component('Tag', Tag)
 
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
+import Antd, { message } from 'ant-design-vue'
 
+import 'ant-design-vue/dist/antd.css'
+Vue.prototype.$message = message
 Vue.use(Antd)

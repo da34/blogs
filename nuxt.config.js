@@ -92,7 +92,7 @@ export default {
   styleResources: {
     // your settings here
     stylus: [
-      './assets/css/base.styl',
+      './assets/css/components.styl',
       './assets/css/vars.styl'
     ]
   },
@@ -127,7 +127,7 @@ export default {
     linkActiveClass: 'circle-mini'
     // middleware: 'menu'
   },
-  loading: { color: '#e94328' },
+  loading: { color: 'pink' },
   env: {
     githubClientId: process.env.NODE_ENV === 'production' ? '6293ac70e392ef1074ad' : '33c8761380f2b72d865f',
     qqClientId: '101938464'

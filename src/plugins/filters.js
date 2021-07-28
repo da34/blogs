@@ -20,12 +20,18 @@ const convertDate = date => {
 const parseBrowser = ua => {
   const parser = new UAParser(ua)
   const result = parser.getBrowser()
-  return result.name + ' ' + result.version
+  if (result.name) {
+    return result.name + ' ' + result.version
+  }
+  return ''
 }
 const parseOS = ua => {
   const parser = new UAParser(ua)
   const result = parser.getOS()
-  return result.name + ' ' + result.version
+  if (result.name) {
+    return result.name + ' ' + result.version
+  }
+  return ''
 }
 
 // [convertDate, formatDate, parseBrowser, parseOS].forEach(fn => {

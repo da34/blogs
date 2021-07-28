@@ -2,7 +2,7 @@
   <section class="user-card">
     <div class="avatar-bg" />
     <div class="user">
-      <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=1255029618&spec=100" alt="玉捷" class="avatar">
+      <img src="https://gravatar.loli.net/avatar/dd0ace3c10b5fff1ea798bdb031bdd81?s=100" alt="玉捷" class="avatar">
       <span class="text-name hover-active">玉捷</span>
     </div>
     <ul class="info-num">
@@ -34,7 +34,7 @@ export default {
   shadow-2-down()
   position relative
   background-color #fff
-  border 1px solid $color-line
+  border 1px solid $color-line-1
 
 .avatar-bg
   position: relative;

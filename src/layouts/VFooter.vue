@@ -5,13 +5,14 @@
         <div class="blog-info">
           <p>© {{ date }} 玉捷个人博客</p>
           <a href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备2021002604号-1</a>
-          <p>博客已运行 {{ activeTime }}
-            <SvgIcon iconClass="heart" class="move"/>
+          <p>
+            博客已运行 {{ activeTime }}
+            <SvgIcon icon-class="heart" class="move" />
           </p>
         </div>
         <div class="link-info">
-          <SvgIcon iconClass="git"/>
-          <SvgIcon iconClass="qq"/>
+          <SvgIcon icon-class="git" />
+          <SvgIcon icon-class="qq" />
         </div>
       </div>
     </footer>
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import { padLocation } from '@/utils'
+// import { padLocation } from '@/utils'
 export default {
   name: 'VFooter',
   data () {
@@ -34,18 +35,22 @@ export default {
   },
   methods: {
     getRunTime () {
-      setInterval(() => {
-        const date = parseInt(new Date() - new Date(this.startTime))
-        // 天数
-        const day = Math.floor(date / 1000 / 60 / 60 / 24)
-        // 小时
-        const hour = Math.floor(date / 1000 / 60 / 60 % 24)
-        // 分钟
-        const minute = Math.floor(date / 1000 / 60 % 60)
-        // 秒
-        const second = Math.floor(date / 1000 % 60)
-        this.activeTime = `${day}天${padLocation(hour)}小时${padLocation(minute)}分${padLocation(second)}秒`
-      }, 1000)
+      const date = parseInt(new Date() - new Date(this.startTime))
+      const day = Math.floor(date / 1000 / 60 / 60 / 24)
+      this.activeTime = `${day}天`
+      // setInterval(() => {
+      //   const date = parseInt(new Date() - new Date(this.startTime))
+      //   // 天数
+      //   const day = Math.floor(date / 1000 / 60 / 60 / 24)
+      //   // // 小时
+      //   // const hour = Math.floor(date / 1000 / 60 / 60 % 24)
+      //   // // 分钟
+      //   // const minute = Math.floor(date / 1000 / 60 % 60)
+      //   // // 秒
+      //   // const second = Math.floor(date / 1000 % 60)
+      //   // this.activeTime = `${day}天${padLocation(hour)}小时${padLocation(minute)}分${padLocation(second)}秒`
+      //   this.activeTime = `${day}天`
+      // }, 1000)
     }
   }
 }
@@ -53,7 +58,7 @@ export default {
 
 <style scoped lang="stylus">
 .footer-wrap
-  border-top 1px solid $color-line
+  border-top 1px solid $color-line-1
   height 120px
 .footer-content
   width $width

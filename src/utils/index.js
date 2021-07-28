@@ -151,3 +151,18 @@ export const convertDate = date => {
 //   // IE
 //   return result.length ? result[0] : ''
 // }
+
+export const getLocalStore = key => {
+  let data = localStorage.getItem(key)
+  if (data) {
+    data = JSON.parse(data)
+  }
+  return data
+}
+
+export const setLocalStore = (key, data) => {
+  if (data) {
+    data = JSON.stringify(data)
+  }
+  localStorage.setItem(key, data)
+}
