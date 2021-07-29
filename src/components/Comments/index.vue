@@ -2,7 +2,40 @@
   <div class="comments-wrapper">
     <Edit :visible="visible" />
     <Tool />
-    <CommentList :comment-list="commentList" :count="count" @editChange="onEditChange" />
+    <div class="comment-list-header">
+      {{ count }} 评论
+    </div>
+    <CommentList
+      v-for="comment in commentList"
+      :key="comment.id"
+      :avatar="comment.avatar"
+      :content="comment.text"
+      :author="{ nickName: comment.nickName, os: parseOS(comment.ua), browser: parseBrowser(comment.ua) }"
+    >
+      <template #actions>
+        <span>{{ comment.createdAt | convertDate }}</span>
+      </template>
+<!--      子级回复开始-->
+      <template v-if="comment.commentChildCount > 0">
+        <CommentList
+          v-for="reply in comment.comments"
+          :key="reply.id"
+          :avatar="reply.avatar"
+          :author="{ nickName: reply.nickName, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
+        >
+          <template #content>
+            <div class="comment-r-wrapper">
+              <span class="comment-r">@{{ reply.targetName }}</span>
+              <Markdown :value="reply.text" />
+            </div>
+          </template>
+          <template #actions>
+            <span>{{ reply.createdAt | convertDate }}</span>
+          </template>
+        </CommentList>
+      </template>
+<!--      子级回复结束-->
+    </CommentList>
   </div>
 </template>
 
@@ -12,8 +45,10 @@
 // import Beep from './components/Beep'
 
 // import CommentHeader from './components/Header'
-
+// import { parseOs, parseBrowser } from '../../plugins/filters'
 import { mapActions, mapState } from 'vuex'
+import Markdown from '@/components/Markdown'
+import { parseOS, parseBrowser } from '../../utils'
 import Edit from './components/Edit'
 import Tool from './components/Tool'
 import CommentList from './components/CommentList'
@@ -23,7 +58,8 @@ export default {
   components: {
     CommentList,
     Tool,
-    Edit
+    Edit,
+    Markdown
   },
   provide () {
     return {
@@ -66,14 +102,15 @@ export default {
         anchor: this.$route.path
       }
       comment = Object.assign(data, comment)
-      const data1 = await this.postComment(comment)
+      await this.postComment(comment)
       await this.$fetch()
-      console.log('完善data1', data1)
     },
     // 评论列表的评论框是否存在
     onEditChange (flag) {
       this.visible = !flag
-    }
+    },
+    parseOS,
+    parseBrowser
     // async handlePage (page) {
     //   this.loading = true
     //   const { data } = await this.$axios.$get(`comments?articleId=${this.articleId}&page=${page}`)
@@ -85,4 +122,18 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+.comment-list-header
+  padding 5px
+  font-size 20px
+  font-weight 600
+  color $color-title
+  line-height 2
+.comment-r-wrapper
+  display flex
+  align-items center
+  padding-top 5px
+  .comment-r
+    color $color-focus
+    font-weight 600
+    margin-right 10px
 </style>

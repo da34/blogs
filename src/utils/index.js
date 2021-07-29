@@ -1,3 +1,5 @@
+import UAParser from 'ua-parser-js'
+
 /**
  *   函数节流
  *   @param {function}  callback
@@ -165,4 +167,21 @@ export const setLocalStore = (key, data) => {
     data = JSON.stringify(data)
   }
   localStorage.setItem(key, data)
+}
+
+export const parseBrowser = ua => {
+  const parser = new UAParser(ua)
+  const result = parser.getBrowser()
+  if (result.name) {
+    return result.name + ' ' + result.version
+  }
+  return ''
+}
+export const parseOS = ua => {
+  const parser = new UAParser(ua)
+  const result = parser.getOS()
+  if (result.name) {
+    return result.name + ' ' + result.version
+  }
+  return ''
 }
