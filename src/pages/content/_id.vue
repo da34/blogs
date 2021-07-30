@@ -19,16 +19,16 @@
     </div>
     <div class="article-content">
       <div class="blog-post">
-        <Marked v-if="article" :value="article.content" />
+        <Marked :value="article.content" />
         <div v-if="article.shareStatement" class="copyright">
           本作品采用
-          <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
+          <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
           进行许可
         </div>
       </div>
       <div class="show-foot">
         <div v-if="article.tags.length" class="tags">
-          <h2>tags：</h2>
+          <svg-icon icon-class="tag" />
           <span v-for="(tag, i) in article.tags" :key="tag.name"><a-divider v-if="i !== 0" type="vertical" />{{ tag.name }} </span>
         </div>
         <div v-else />
@@ -49,19 +49,6 @@ export default {
     Marked,
     Comments
   },
-  // async asyncData ({
-  //   params,
-  //   $axios
-  // }) {
-  //   // 获取评论
-  //   const { data } = await $axios.$get(`comments?articleId=${params.id}`)
-  //   const { rows, count, repliesCount } = data
-  //   return {
-  //     rows,
-  //     count,
-  //     repliesCount
-  //   }
-  // },
   layout: 'blog',
   scrollToTop: true,
   async fetch ({
@@ -86,15 +73,6 @@ export default {
     ...mapState('modules/content', [
       'article'
     ])
-  },
-  methods: {
-    // async handleComment () {
-    //   const { data } = await this.$axios.$get(`comments?articleId=${this.$route.params.id}`)
-    //   const { count, rows, repliesCount } = data
-    //   this.rows = rows
-    //   this.count = count
-    //   this.repliesCount = repliesCount
-    // }
   }
 }
 </script>
@@ -154,7 +132,11 @@ export default {
     justify-content space-between
     .tags
       display flex
-      h2
-        font-size $font-size-medium
+      justify-content center
+      align-items center
+      svg
+        margin-right 5px
+        color $color-content
         font-weight 600
+        font-size $font-size-medium
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" class="edit">
+  <div class="edit">
     <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
       <a-form-item class="inline-block" style="width: 40%;margin-bottom: 15px;">
         <a-input
@@ -45,10 +45,6 @@ export default {
     close: {
       type: Boolean,
       default: false
-    },
-    visible: {
-      type: Boolean,
-      default: true
     },
     targetName: {
       type: String,
@@ -107,6 +103,9 @@ export default {
           this.loading = true
           await this.submitComment(values)
           this.loading = false
+          this.form.setFieldsValue({
+            text: ''
+          })
           console.log('Received values of form: ', values)
         }
       })

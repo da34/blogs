@@ -1,7 +1,6 @@
 <template>
   <div id="editor">
-    <!--    eslint-disable-->
-    <div class="markdown-body" v-html="content" :style="styleObj"/>
+    <div class="markdown-body" :style="styleObj" v-html="content" />
   </div>
 </template>
 <script>

@@ -20,15 +20,19 @@
               {{ tag.name }}
             </span>
           </div>
-          <div class="info-item"> <SvgIcon icon-class="date" />{{ item.createdAt | convertDate }}</div>
-          <div class="info-item"> <SvgIcon icon-class="comment" />{{ item.comments.length }}</div>
+          <div class="info-item">
+            <SvgIcon icon-class="date" />{{ item.createdAt | convertDate }}
+          </div>
+          <div class="info-item">
+            <SvgIcon icon-class="comment" />{{ item.comments.length }}
+          </div>
           <NuxtLink class="read-more" :to="`/content/${item.id}`" tag="span">
             阅读全文
           </NuxtLink>
         </div>
       </div>
     </article>
-    <!--    <Pagination :total="total" @currentChange="currentChange" />-->
+    <Pagination :total="total" />
   </div>
 </template>
 
@@ -86,7 +90,7 @@ export default {
   margin-bottom 20px
 .article
   margin-bottom 20px
-  border 1px solid $color-line
+  border 1px solid $color-line-1
   shadow-2-down()
   border-radius-5()
   width 100%

@@ -1,5 +1,5 @@
 <template>
-  <section class="user-card">
+  <section class="box-card">
     <div class="avatar-bg" />
     <div class="user">
       <img src="https://gravatar.loli.net/avatar/dd0ace3c10b5fff1ea798bdb031bdd81?s=100" alt="玉捷" class="avatar">
@@ -29,13 +29,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.user-card
-  border-radius-5()
-  shadow-2-down()
-  position relative
-  background-color #fff
-  border 1px solid $color-line-1
-
 .avatar-bg
   position: relative;
   background-image url("https://resource.lsyboy.cn/blog/option/avatar-bg.png")

@@ -1,4 +1,4 @@
-import { Message } from 'view-design'
+import { message } from 'ant-design-vue'
 import { getToken, getDiy } from '@/utils/auth'
 // const debug = process.env.NODE_ENV !== 'production'
 
@@ -29,7 +29,7 @@ export default function ({
   $axios.onResponse(res => {
     const { data } = res
     console.log('axios##########', data)
-    if (res.status === 200 && data.code === 0) {
+    if (res.status === 200) {
       return data
     }
   })
@@ -38,7 +38,7 @@ export default function ({
   $axios.onError(error => {
     const code = parseInt(error.response && error.response.status)
     if (code === 400) {
-      Message.error(error.message)
+      message.error(error.message)
       redirect('/400')
     }
   })

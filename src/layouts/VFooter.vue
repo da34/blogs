@@ -20,7 +20,7 @@
 </template>
 
 <script>
-// import { padLocation } from '@/utils'
+import { padLocation } from '@/utils'
 export default {
   name: 'VFooter',
   data () {
@@ -31,26 +31,21 @@ export default {
     }
   },
   created () {
-    this.getRunTime()
+    setInterval(() => { this.getRunTime() }, 1000)
   },
   methods: {
     getRunTime () {
       const date = parseInt(new Date() - new Date(this.startTime))
+      // 天数
       const day = Math.floor(date / 1000 / 60 / 60 / 24)
-      this.activeTime = `${day}天`
-      // setInterval(() => {
-      //   const date = parseInt(new Date() - new Date(this.startTime))
-      //   // 天数
-      //   const day = Math.floor(date / 1000 / 60 / 60 / 24)
-      //   // // 小时
-      //   // const hour = Math.floor(date / 1000 / 60 / 60 % 24)
-      //   // // 分钟
-      //   // const minute = Math.floor(date / 1000 / 60 % 60)
-      //   // // 秒
-      //   // const second = Math.floor(date / 1000 % 60)
-      //   // this.activeTime = `${day}天${padLocation(hour)}小时${padLocation(minute)}分${padLocation(second)}秒`
-      //   this.activeTime = `${day}天`
-      // }, 1000)
+      // // 小时
+      const hour = Math.floor(date / 1000 / 60 / 60 % 24)
+      // // 分钟
+      const minute = Math.floor(date / 1000 / 60 % 60)
+      // // 秒
+      const second = Math.floor(date / 1000 % 60)
+      this.activeTime = `${day}天${padLocation(hour)}小时${padLocation(minute)}分${padLocation(second)}秒`
+      // this.activeTime = `${day}天${padLocation(hour)}小时`
     }
   }
 }

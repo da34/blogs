@@ -25,9 +25,8 @@ export default {
       activeName: '/',
       menus: [
         { name: '首页', path: '/' },
-        { name: '项目', path: '/project' },
-        { name: '友联', path: '/link' },
-        { name: '关于', path: '/about' }
+        { name: '归档', path: '/archive' },
+        { name: '友联', path: '/link' }
       ]
     }
   },

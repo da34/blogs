@@ -54,3 +54,24 @@ body
 
 .inline-block
   display inline-block
+
+.solid-circle
+  position relative
+  &:after
+    position: absolute;
+    top: 0
+    right: 5px
+    display: block;
+    width: 8px;
+    height: 8px;
+    content: ' ';
+    background: #e94328;
+    border-radius: 50%;
+    z-index: -1;
+
+.box-card
+  border-radius-5()
+  shadow-2-down()
+  position relative
+  background-color #fff
+  border 1px solid $color-line-1

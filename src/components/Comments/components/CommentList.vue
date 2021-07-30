@@ -81,7 +81,7 @@ export default {
     border none
   .comment-inner
     display flex
-    padding 20px 0
+    padding 15px 0
   .comment-nest
     margin-left 70px
     .comment-item
@@ -113,10 +113,10 @@ export default {
     font-size $font-size-mini
     margin-top 10px
   .reply
-    color $color-subsidiary
+    color rgba(0,0,0,.5)
     font-size $font-size-mini
     cursor pointer
-    margin-left 50px
+    margin-left 30px
     &:hover
       color $color-focus
   .comment-info
