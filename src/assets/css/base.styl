@@ -75,3 +75,21 @@ body
   position relative
   background-color #fff
   border 1px solid $color-line-1
+  color $color-content
+  .box-title
+    font-weight 600
+    position: relative;
+    padding-top 10px
+    &:before
+      position absolute
+      top 0
+      content ' '
+      display block
+      height 2px
+      width 30px
+      background $color-content
+  .box-content
+    position: relative;
+    padding-top 20px
+    display flex
+    flex-direction column

@@ -7,7 +7,9 @@
         </transition>
       </a-col>
       <a-col :xs="0" :md="0" :lg="7" :xl="6" :xxl="6">
+        <!--        <client-only>-->
         <SideInfo />
+        <!--        </client-only>-->
       </a-col>
     </a-row>
   </div>
