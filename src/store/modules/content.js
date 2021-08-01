@@ -3,7 +3,6 @@ const state = () => ({
   list: [],
   total: 0,
   article: {},
-
   archivePage: 1,
   randomList: [],
   tocArticle: '' // 需要生成目录的文章
@@ -17,7 +16,6 @@ const mutations = {
   },
   setData (state, payload) {
     state[payload.key] = payload.value
-    console.log(2222, state)
   },
   setTocArticle (state, data) {
     state.tocArticle = data
@@ -41,15 +39,10 @@ const actions = {
       data: rows,
       count
     })
-    // commit('setData', {
-    //   key: 'page',
-    //   value: page
-    // })
   },
   // 获取随机文章
   async getRandomList ({ commit }) {
-    const { data } = await this.$axios.$get('content/random?limit=5&status=0')
-    // console.log(data)
+    const data = await this.$axios.$get('content/random?limit=5')
     commit('setData', {
       key: 'randomList',
       value: data

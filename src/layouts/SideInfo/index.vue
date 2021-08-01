@@ -2,8 +2,10 @@
   <div class="sidebar">
     <user-card />
     <newComment />
+    <randomArticle />
+    <Tag />
   </div>
-<!--    <randomArticle style="margin-top: 10px"/>-->
+
 <!--    <articleToc v-if="$route.path.includes('content')"/>-->
 <!--  </aside>-->
 </template>
@@ -11,16 +13,18 @@
 <script>
 // import { mapGetters } from 'vuex'
 import newComment from './newComment'
-// import randomArticle from './randomArticle'
+import randomArticle from './randomArticle'
 // import ArticleToc from './articleToc'
 
 import UserCard from './userCard'
+import Tag from './tag'
 export default {
   name: 'SideInfo',
   components: {
+    Tag,
     UserCard,
     // ArticleToc,
-    // randomArticle,
+    randomArticle,
     newComment
   }
 }

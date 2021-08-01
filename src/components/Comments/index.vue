@@ -11,6 +11,7 @@
         :key="comment.id"
         :avatar="comment.avatar"
         :content="comment.text"
+        :id="'comment-' + comment.id"
         :author="{ nickName: comment.nickName, os: parseOS(comment.ua), browser: parseBrowser(comment.ua) }"
       >
         <template #actions>

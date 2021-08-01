@@ -65,7 +65,11 @@ export default {
   css: [
     '@/assets/css/index.styl'
   ],
-
+  script: [
+    {
+      src: 'https://hm.baidu.com/hm.js?3230f1b67bd3a390cf15e01ba7b348a1' // 百度统计js
+    }
+  ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/ant-design-vue',
@@ -73,6 +77,8 @@ export default {
     '@/plugins/components',
     '@/plugins/svg-icon',
     '@/plugins/filters',
+    '@/plugins/baidu', // 百度统计
+    // '@/plugins/baidu-push', // 百度自动推送
     {
       src: '@/plugins/vue-lazy-load',
       ssr: false
@@ -118,11 +124,33 @@ export default {
     }
   },
   router: {
+    extendRoutes (routes) {
+      // 捕获未知路由，然后统一跳转到根路由
+      routes.push({
+        path: '*',
+        redirect: '/'
+      })
+    },
     scrollBehavior: (to, from, savedPosition) => {
-      return {
-        x: 0,
-        y: 0
+      if (savedPosition) {
+        return savedPosition
       }
+      let position = {}
+      if (to.matched.length < 2) {
+        position = { x: 0, y: 0 }
+      } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
+        position = { x: 0, y: 0 }
+      }
+      if (to.hash) {
+        position = { selector: to.hash }
+        // 有hash异步返回
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(position)
+          }, 500)
+        })
+      }
+      return position
     },
     linkActiveClass: 'circle-mini'
     // middleware: 'menu'

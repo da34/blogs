@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper">
-    <a-row :gutter="16" type="flex" :offset="1">
+    <a-row :gutter="14" type="flex" :offset="1">
       <a-col :xs="24" :md="24" :lg="17" :xl="18" :xxl="18">
         <transition name="fade-transform" mode="out-in">
           <nuxt />

@@ -14,7 +14,7 @@ const mutations = {
 
 const actions = {
   async getList ({ commit }) {
-    const { data } = await this.$axios.$get('tagCount')
+    const { data } = await this.$axios.get('tags')
     commit('setTagList', data)
   }
 }

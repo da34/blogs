@@ -14,7 +14,7 @@ const mutations = {
 
 const actions = {
   async getVerse ({ commit }) {
-    const { data } = await this.$axios.get('external/verse')
+    const { data } = await this.$axios.get('outside/verse')
     // console.log(11111111, data)
     commit('setVerse', data.hitokoto)
   },

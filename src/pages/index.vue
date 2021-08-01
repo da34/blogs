@@ -45,7 +45,7 @@ export default {
   // components: { Pagination },
   layout: 'blog',
   async fetch ({ store }) {
-    // await store.dispatch('modules/front/getVerse')
+    await store.dispatch('modules/front/getVerse')
     await store.dispatch('modules/content/getList')
   },
   head () {

@@ -3,10 +3,10 @@
     <li class="pagination-item" title="上一页" @click="onAction(stateCurrent-1)">
       <svg-icon icon-class="arrow_left" />
     </li>
-    <li v-if="stateCurrent > 3" class="pagination-item" @click="onAction(1)" title="01">
+    <li v-if="stateCurrent > 3" class="pagination-item" title="01" @click="onAction(1)">
       01
     </li>
-    <li v-if="stateCurrent > 4" class="pagination-item pagination-jump-prev" @click="onAction(stateCurrent-5)" title="向前5页">
+    <li v-if="stateCurrent > 4" class="pagination-item pagination-jump-prev" title="向前5页" @click="onAction(stateCurrent-5)">
       <span>•••</span>
       <svg-icon icon-class="arrow-double-left" />
     </li>
@@ -20,11 +20,11 @@
     >
       {{ padLocation(page, 0, 2, 0) }}
     </li>
-    <li v-if="stateCurrent < maxPage - 3" class="pagination-item pagination-jump-next" @click="onAction(stateCurrent+5)" title="向后5页">
+    <li v-if="stateCurrent < maxPage - 3" class="pagination-item pagination-jump-next" title="向后5页" @click="onAction(stateCurrent+5)">
       <span>•••</span>
       <svg-icon icon-class="arrow-double-right" />
     </li>
-    <li v-if="stateCurrent < maxPage - 2" class="pagination-item" @click="onAction(maxPage)" :title="padLocation(maxPage, 0, 2, 0)">
+    <li v-if="stateCurrent < maxPage - 2" class="pagination-item" :title="padLocation(maxPage, 0, 2, 0)" @click="onAction(maxPage)">
       {{ padLocation(maxPage, 0, 2, 0) }}
     </li>
     <li class="pagination-item" @click="onAction(stateCurrent+1)">
@@ -88,8 +88,14 @@ export default {
     initPage (val = 1) {
       this.pageList = []
       const maxPage = this.maxPage - 2
+
       if (val < 3) {
-        this.pageList = [1, 2, 3, 4, 5]
+        let i = 1
+        while (i <= this.maxPage) {
+          this.pageList.push(i)
+          i++
+        }
+        // this.pageList = [1, 2, 3, 4, 5]
       } else if (val < maxPage) {
         this.pageList = [val - 2, val - 1, val, val + 1, val + 2]
       } else if (val >= maxPage) {

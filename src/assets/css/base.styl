@@ -76,20 +76,28 @@ body
   background-color #fff
   border 1px solid $color-line-1
   color $color-content
+  //&:hover
+  //  .box-title
+  //    span
+  //      &:before
+  //        width 100%
   .box-title
     font-weight 600
     position: relative;
     padding-top 10px
-    &:before
-      position absolute
-      top 0
-      content ' '
-      display block
-      height 2px
-      width 30px
-      background $color-content
+    span
+      position relative
+      &:before
+        position absolute
+        top -8px
+        content ' '
+        display block
+        height 2px
+        width 28px
+        background $color-content
+        transition width .3s ease-in-out
   .box-content
     position: relative;
-    padding-top 20px
+    padding-top 15px
     display flex
     flex-direction column

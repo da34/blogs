@@ -1,12 +1,12 @@
 <template>
   <div v-if="list.length" class="time-line-wrapper">
-    <div class="tag-all">
-      <h2 class="tag-title">标签</h2>
-      <nuxt-link :to="`/tag/${tag.name}`" v-for="tag in tagData" :key="tag.id">
-        <Tag size="large" style="margin-right: 10px;cursor: pointer;">{{ tag.name }}({{ tag.articles.length }})</Tag>
-      </nuxt-link>
-    </div>
-    <Timeline :data="list" :total="$store.getters.articleCollect.articleCount"/>
+<!--    <div class="tag-all">-->
+<!--      <h2 class="tag-title">标签</h2>-->
+<!--      <nuxt-link :to="`/tag/${tag.name}`" v-for="tag in tagData" :key="tag.id">-->
+<!--        <Tag size="large" style="margin-right: 10px;cursor: pointer;">{{ tag.name }}({{ tag.articles.length }})</Tag>-->
+<!--      </nuxt-link>-->
+<!--    </div>-->
+    <Timeline :data="list" :total="10"/>
   </div>
 </template>
 
@@ -21,12 +21,12 @@ export default {
     $axios,
     store
   }) {
-    const { data } = await $axios.$get(`article/archive?page=${store.getters.archivePage}&limit=10`)
-    const tagData = await $axios.$get('tags/tagAndArticle')
+    const { data } = await $axios.$get('contents/archive')
+    // const tagData = await $axios.$get('tags/tagAndArticle')
     return {
       list: data.data,
-      count: data.count,
-      tagData: tagData.data
+      count: data.count
+      // tagData: tagData.data
     }
   },
   head () {
