@@ -28,7 +28,7 @@ export default function ({
 
   $axios.onResponse(res => {
     const { data } = res
-    console.log('axios##########', data)
+    console.log('axios##########data', data)
     if (res.status === 200) {
       return data
     }

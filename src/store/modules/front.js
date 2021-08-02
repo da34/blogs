@@ -19,7 +19,7 @@ const actions = {
     commit('setVerse', data.hitokoto)
   },
   async getCollect ({ commit }) {
-    const { data } = await this.$axios.$get('content/info-count')
+    const { data } = await this.$axios.get('site/info')
     commit('setArticleCollect', data)
   }
 }

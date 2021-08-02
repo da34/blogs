@@ -1,33 +1,19 @@
 <template>
-  <div v-if="list.length" class="time-line-wrapper">
-<!--    <div class="tag-all">-->
-<!--      <h2 class="tag-title">标签</h2>-->
-<!--      <nuxt-link :to="`/tag/${tag.name}`" v-for="tag in tagData" :key="tag.id">-->
-<!--        <Tag size="large" style="margin-right: 10px;cursor: pointer;">{{ tag.name }}({{ tag.articles.length }})</Tag>-->
-<!--      </nuxt-link>-->
-<!--    </div>-->
-    <Timeline :data="list" :total="10"/>
+  <div class="time-line-wrapper">
+    <h2 v-if="$route.params.name" class="tag">"{{$route.params.name}}" 下的文章</h2>
+    <Timeline :data="archive.items" :total="archive.count" />
   </div>
 </template>
 
 <script>
 import Timeline from '@/components/Timeline'
-
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Pigeonhole',
   components: { Timeline },
   layout: 'blog',
-  async asyncData ({
-    $axios,
-    store
-  }) {
-    const { data } = await $axios.$get('contents/archive')
-    // const tagData = await $axios.$get('tags/tagAndArticle')
-    return {
-      list: data.data,
-      count: data.count
-      // tagData: tagData.data
-    }
+  async fetch ({ params, store }) {
+    await store.dispatch('modules/content/getArchiveList')
   },
   head () {
     return {
@@ -41,48 +27,26 @@ export default {
       ]
     }
   },
-  data () {
-    return {}
-  },
   computed: {
-    currentPage () {
-      return this.$store.getters.archivePage
-    }
+    ...mapState('modules/content', [
+      'archive'
+    ])
   },
-  created () {
-    // this.fetchArchive()
-  }
   // activated () {
   //   // setTimeout(_ => {
   //   //   this.$store.dispatch('bus/HTML_Height')
   //   // }, 1000)
   // },
-  // methods: {
-  //   async fetchArchive () {
-  //     // const { code, data } = await getArticleTime()
-  //     // if (code === errno) {
-  //     //   this.list = data
-  //     //   setTimeout(_ => {
-  //     //     this.$store.dispatch('bus/HTML_Height')
-  //     //   }, 1000)
-  //     // }
-  //     // data.forEach(item => {
-  //     //   this.count += item.list.length
-  //     // })
-  //   }
-  // }
+  methods: {
+    ...mapActions('modules/content', [
+      'getArchiveList'
+    ])
+  }
 }
 </script>
 
 <style scoped lang="stylus">
-.time-line-wrapper
-  background #fff
-
-.tag-all
-  padding 30px 60px 10px 60px
-
-.tag-title
-  font-weight 700
-  font-size 25px
-  margin-bottom 30px
+.tag
+  padding 30px
+  text-align center
 </style>

@@ -7,24 +7,44 @@
     </div>
     <ul class="info-num">
       <li>
-        <p>0</p>
-        <p class="info-desc">文章</p>
+        <p>{{ articleCollect.articleCount }}</p>
+        <p class="info-desc">
+          文章
+        </p>
       </li>
       <li>
-        <p>0</p>
-        <p class="info-desc">评论</p>
+        <p>{{ articleCollect.commentCount }}</p>
+        <p class="info-desc">
+          评论
+        </p>
       </li>
       <li>
-        <p>0</p>
-        <p class="info-desc">标签</p>
+        <p>{{ articleCollect.tagCount }}</p>
+        <p class="info-desc">
+          标签
+        </p>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'UserCard'
+  name: 'UserCard',
+  computed: {
+    ...mapState('modules/front', [
+      'articleCollect'
+    ])
+  },
+  async fetch () {
+    await this.getCollect()
+  },
+  methods: {
+    ...mapActions('modules/front', [
+      'getCollect'
+    ])
+  }
 }
 </script>
 

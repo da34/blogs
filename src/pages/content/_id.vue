@@ -51,10 +51,7 @@ export default {
   },
   layout: 'blog',
   scrollToTop: true,
-  async fetch ({
-    store,
-    params
-  }) {
+  async fetch ({ store, params }) {
     await store.dispatch('modules/content/getDetail', { id: params.id })
   },
   head () {

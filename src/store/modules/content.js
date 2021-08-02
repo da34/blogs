@@ -3,9 +3,8 @@ const state = () => ({
   list: [],
   total: 0,
   article: {},
-  archivePage: 1,
   randomList: [],
-  tocArticle: '' // 需要生成目录的文章
+  archive: {}
 })
 
 const mutations = {
@@ -17,8 +16,9 @@ const mutations = {
   setData (state, payload) {
     state[payload.key] = payload.value
   },
-  setTocArticle (state, data) {
-    state.tocArticle = data
+  setArchive (state, data) {
+    console.log(11111111, data)
+    state.archive = data
   },
   setArticles (state, {
     data,
@@ -57,6 +57,15 @@ const actions = {
     commit('setData', {
       key: 'article',
       value: data
+    })
+  },
+  // 获取文章归档
+  async getArchiveList ({ commit }) {
+    const { data } = await this.$axios.get('content/archive')
+    const { count, items } = data
+    commit('setArchive', {
+      items,
+      count
     })
   }
 }

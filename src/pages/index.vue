@@ -13,12 +13,12 @@
           {{ item.contentOutline }}
         </p>
         <div class="info">
-          <div class="info-item">
+          <div v-if="item.tags.length" class="info-item">
             <SvgIcon icon-class="tag" />
-            <span v-for="(tag, i) in item.tags" :key="tag.id" class="tag">
+            <nuxt-link v-for="(tag, i) in item.tags" :key="tag.id" class="tag" to="/sfasf">
               <a-divider v-if="i!==0" type="vertical" />
               {{ tag.name }}
-            </span>
+            </nuxt-link>
           </div>
           <div class="info-item">
             <SvgIcon icon-class="date" />{{ item.createdAt | convertDate }}
@@ -134,6 +134,7 @@ export default {
     .tag
       position: relative;
       height 100%
+      cursor pointer
 
     .read-more
       color $color-focus
