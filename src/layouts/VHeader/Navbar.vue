@@ -6,7 +6,7 @@
         :key="menu.path"
         :to="menu.path"
         class="menu-item"
-        exact
+        :exact="menu.exact"
       >
         {{menu.name}}
       </NuxtLink>
@@ -24,7 +24,7 @@ export default {
       isMobileNav: false,
       activeName: '/',
       menus: [
-        { name: '首页', path: '/' },
+        { name: '首页', path: '/', exact: true },
         { name: '归档', path: '/archive' },
         { name: '友联', path: '/link' }
       ]

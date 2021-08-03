@@ -60,8 +60,12 @@ const actions = {
     })
   },
   // 获取文章归档
-  async getArchiveList ({ commit }) {
-    const { data } = await this.$axios.get('content/archive')
+  async getArchiveList ({ commit }, { name }) {
+    let query = ''
+    if (name) {
+      query = '?name=' + encodeURI(name)
+    }
+    const { data } = await this.$axios.get('content/archive' + query)
     const { count, items } = data
     commit('setArchive', {
       items,

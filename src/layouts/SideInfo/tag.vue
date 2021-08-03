@@ -7,7 +7,7 @@
       <nuxt-link
         v-for="item in list"
         :key="item.id"
-        to="/"
+        :to="'/archive?name=' + item.name"
       >
         <a-tag :color="randColor()" style="cursor: pointer;">
           {{ item.name }}

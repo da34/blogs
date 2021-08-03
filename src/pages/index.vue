@@ -15,7 +15,7 @@
         <div class="info">
           <div v-if="item.tags.length" class="info-item">
             <SvgIcon icon-class="tag" />
-            <nuxt-link v-for="(tag, i) in item.tags" :key="tag.id" class="tag" to="/sfasf">
+            <nuxt-link v-for="(tag, i) in item.tags" :key="tag.id" class="tag" :to="'/archive?name=' + tag.name">
               <a-divider v-if="i!==0" type="vertical" />
               {{ tag.name }}
             </nuxt-link>

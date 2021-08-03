@@ -1,6 +1,6 @@
 <template>
   <div class="time-line-wrapper">
-    <h2 v-if="$route.params.name" class="tag">"{{$route.params.name}}" 下的文章</h2>
+    <h2 v-if="$route.query.name" class="tag">"{{$route.query.name}}" 下的文章</h2>
     <Timeline :data="archive.items" :total="archive.count" />
   </div>
 </template>
@@ -12,8 +12,8 @@ export default {
   name: 'Pigeonhole',
   components: { Timeline },
   layout: 'blog',
-  async fetch ({ params, store }) {
-    await store.dispatch('modules/content/getArchiveList')
+  async fetch ({ route, store }) {
+    await store.dispatch('modules/content/getArchiveList', { name: route.query.name })
   },
   head () {
     return {
