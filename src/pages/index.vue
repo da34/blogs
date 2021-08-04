@@ -90,11 +90,12 @@ export default {
   margin-bottom 20px
 .article
   margin-bottom 20px
-  border 1px solid $color-line-1
-  shadow-2-down()
   border-radius-5()
+  shadow-2-down()
+  position relative
+  background-color #fff
+  border 1px solid $color-line-1
   width 100%
-  position: relative;
   display flex
   height 180px
   .img

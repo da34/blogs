@@ -32,13 +32,13 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'UserCard',
+  async fetch () {
+    await this.getCollect()
+  },
   computed: {
     ...mapState('modules/front', [
       'articleCollect'
     ])
-  },
-  async fetch () {
-    await this.getCollect()
   },
   methods: {
     ...mapActions('modules/front', [

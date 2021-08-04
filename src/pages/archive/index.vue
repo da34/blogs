@@ -46,6 +46,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+.time-line-wrapper
+  border-radius-5()
+  shadow-2-down()
+  border 1px solid $color-line-1
 .tag
   padding 30px
   text-align center
