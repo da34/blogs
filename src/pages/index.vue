@@ -4,7 +4,10 @@
       每日一言：“ {{ verse }} ”
     </p>
     <article v-for="item in list" :key="item.id" class="article">
-      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />
+<!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
+      <div v-if="item.firstPicture" class="img-wrap" >
+        <img v-lazy="item.firstPicture" class="img" />
+      </div>
       <div class="article-content">
         <NuxtLink class="title" :to="`/content/${item.id}`" tag="h2">
           {{ item.title }}
@@ -32,7 +35,7 @@
         </div>
       </div>
     </article>
-    <Pagination :total="total" />
+    <Pagination :total="total" class="pagination-wrap" />
   </div>
 </template>
 
@@ -98,10 +101,14 @@ export default {
   width 100%
   display flex
   height 180px
-  .img
+  .img-wrap
     width 30%
+  .img
+    width 100%
     height 100%
-    background-size: cover;
+    object-fit cover
+    //background-size: cover;
+    //background-position: 50% 50%;
 .article-content
   padding 20px 30px
   flex 1
@@ -109,8 +116,9 @@ export default {
   flex-direction: column;
   justify-content: space-evenly;
   .title
-    font-size 24px
+    font-size $font-size-title
     cursor pointer
+    font-weight bold
   .desc
     font-size $font-size-small
     color $color-content
@@ -141,4 +149,41 @@ export default {
       color $color-focus
       cursor pointer
       margin-left auto
+
+@media (max-width: $mobile)
+  .verse
+    padding 10px 20px
+    margin-bottom 0
+    display none
+  .article-content
+    .title
+      text-omit(2)
+      font-weight normal
+      margin-bottom 10px
+    .info
+      justify-content start
+  .article
+    height 100%
+    margin-bottom 10px
+    flex-direction column
+    padding 20px
+    .img-wrap
+      width 100%
+      position relative
+      padding-top 40%
+      overflow hidden
+      border-radius-5()
+    .img
+      position absolute
+      top 0
+      width 100%
+      height 100%
+      //transform translate3d(-50%, -50%, 0)
+  .article-content
+    padding 0
+    margin-top 10px
+  .read-more
+    display none
+.pagination-wrap.pagination
+  padding 10px
 </style>

@@ -66,4 +66,9 @@ export default {
     .title
       text-omit(1)
       margin-left 10px
+
+@media (max-width: $mobile)
+    .posts-collapse
+      .time
+        width 42px
 </style>

@@ -93,4 +93,15 @@ export default {
     transform translateY(0) scale(.8)
   from
     transform translateY(3px) rotate(1)
+
+@media (max-width: $mobile)
+  .footer-wrap
+    height 86px
+  .footer-content
+    width 100%
+    padding 10px 20px
+    .footer
+      justify-content: space-between;
+    .link-info,.blog-info
+      width auto
 </style>

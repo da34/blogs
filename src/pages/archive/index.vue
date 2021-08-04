@@ -53,4 +53,11 @@ export default {
 .tag
   padding 30px
   text-align center
+
+@media (max-width: $mobile)
+  .time-line-wrapper
+    .posts-collapse
+      padding 20px
+      .time
+        width 42px!important
 </style>
