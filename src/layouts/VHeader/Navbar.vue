@@ -11,12 +11,19 @@
         {{menu.name}}
       </NuxtLink>
     </div>
+    <div class="menu-mini">
+      <svg-icon iconClass="menu" v-show="!isMobileNav" @click="isMobileNav = true" />
+      <svg-icon iconClass="close-2" v-show="isMobileNav" @click="isMobileNav = false" />
+    </div>
+    <MobileNav :menus="menus" :visible="isMobileNav" @close="onClose" />
   </div>
 </template>
 
 <script>
+import MobileNav from './MobileNav'
 export default {
   name: 'Navbar',
+  components: { MobileNav },
   filters: {
   },
   data () {
@@ -24,9 +31,9 @@ export default {
       isMobileNav: false,
       activeName: '/',
       menus: [
-        { name: '首页', path: '/', exact: true },
-        { name: '归档', path: '/archive' },
-        { name: '友联', path: '/link' }
+        { name: '首页', path: '/', exact: true, icon: 'article' },
+        { name: '归档', path: '/archive', icon: 'archive' },
+        { name: '友联', path: '/link', icon: 'link' }
       ]
     }
   },
@@ -34,18 +41,22 @@ export default {
     '$route' (to) {
       this.activeName = to.path
     }
+  },
+  methods: {
+    onClose () {
+      this.isMobileNav = false
+    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
 .site-nav
-  flex 1
-  height 100%
   color $color-subsidiary
   padding 0 50px
   border-radius 3px
   z-index 100
+  display flex
   .menu
     height 100%
     display flex
@@ -56,4 +67,17 @@ export default {
       line-height 1.6
       font-weight: 600;
       font-size: $font-size-medium
+  .menu-mini
+    display none
+@media (max-width: $mobile)
+  .site-nav
+    padding 0
+    margin-left auto
+    .menu
+      display none
+    .menu-mini
+      display block
+      padding-right 20px
+      svg
+        font-size $font-size-title
 </style>

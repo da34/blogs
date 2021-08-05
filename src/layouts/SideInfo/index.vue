@@ -1,20 +1,18 @@
 <template>
   <div class="sidebar">
     <user-card />
-    <newComment />
-    <randomArticle />
-    <Tag />
+    <newComment v-if="$route.name !== 'content-id'" />
+    <randomArticle v-if="$route.name !== 'content-id'" />
+    <Tag v-if="$route.name !== 'content-id'" />
+    <articleToc v-if="$route.name === 'content-id'"/>
   </div>
-
-<!--    <articleToc v-if="$route.path.includes('content')"/>-->
-<!--  </aside>-->
 </template>
 
 <script>
 // import { mapGetters } from 'vuex'
 import newComment from './newComment'
 import randomArticle from './randomArticle'
-// import ArticleToc from './articleToc'
+import ArticleToc from './articleToc'
 
 import UserCard from './userCard'
 import Tag from './tag'
@@ -23,7 +21,7 @@ export default {
   components: {
     Tag,
     UserCard,
-    // ArticleToc,
+    ArticleToc,
     randomArticle,
     newComment
   }

@@ -9,7 +9,7 @@
 
 <script>
 import { throttle } from '@/utils'
-
+import { appendBody } from '../../minxi/appendBody'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo
@@ -18,6 +18,7 @@ if (process.client) {
 const MAX_WIDTH = 1200
 export default {
   name: 'BackTop',
+  mixins: [appendBody],
   props: {
     visibilityHeight: {
       type: Number,

@@ -41,7 +41,7 @@ export function getToc (content) {
   const addLI = (itemId, itemText) => {
     result += `<li class="item" ><a href="#${itemId}">${itemText}</a></li>`
   }
-  list && list.forEach((item, index) => {
+  list.length && list.forEach((item, index) => {
     let itemId = item.match(/id=[^.<>]+/g) // 匹配h标签的ID
     if (itemId !== null) {
       itemId = itemId.length && itemId[0].replace(/id="+/g, '')

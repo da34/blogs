@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 // import Search from './Search'
 import { scrollMixin } from '@/minxi/handleScroll'
 import Logo from '@/components/Logo'
@@ -29,16 +28,7 @@ export default {
     // Search,
     Navbar
   },
-  mixins: [scrollMixin],
-  data () {
-    return {
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'content'
-    ])
-  }
+  mixins: [scrollMixin]
 }
 </script>
 
@@ -48,7 +38,7 @@ export default {
   top 0
   left 0
   right 0
-  z-index 300
+  z-index 99
   height 65px
   color $color-title
   transition all .3s
@@ -67,6 +57,14 @@ export default {
     margin 0 auto
     position relative
     display flex
-    justify-content center
+    //justify-content center
     align-items center
+
+@media (max-width: $mobile)
+  .header-wrapper
+    height 52px
+    .header
+      width 100%
+      .logo
+        padding-left 20px
 </style>

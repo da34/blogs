@@ -6,7 +6,9 @@
     <article v-for="item in list" :key="item.id" class="article">
 <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
       <div v-if="item.firstPicture" class="img-wrap" >
-        <img v-lazy="item.firstPicture" class="img" />
+        <NuxtLink class="title" :to="`/content/${item.id}`" tag="div">
+          <img v-lazy="item.firstPicture" class="img" />
+        </NuxtLink>
       </div>
       <div class="article-content">
         <NuxtLink class="title" :to="`/content/${item.id}`" tag="h2">

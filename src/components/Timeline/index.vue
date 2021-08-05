@@ -60,15 +60,19 @@ export default {
       transition color .3s
       display flex
       color $color-content
-      font-size $font-size-medium
+      font-size $font-size-small
       &:hover
         color $color-focus
+        .time
+          color $color-focus
+    .time
+      white-space nowrap
+      color $color-subsidiary
     .title
-      text-omit(1)
+      text-omit-one()
       margin-left 10px
-
-@media (max-width: $mobile)
-    .posts-collapse
-      .time
-        width 42px
+.collection-title
+  h2
+    display inline
+    background: linear-gradient(to bottom,transparent 56%, rgba(189, 202, 219, 0.3) 0%) no-repeat;
 </style>

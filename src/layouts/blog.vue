@@ -28,19 +28,6 @@ export default {
     VFooter,
     AppMain,
     BackTop
-  },
-  mounted () {
-    // window.addEventListener('popstate', function (event) {
-    //   const url = location.hash
-    //   // const scrollTop = document.documentElement.scrollTop
-    //   const id = url.slice(1)
-    //   if (id) {
-    //     const $comment = document.getElementById(id)
-    //     const { top } = $comment.getBoundingClientRect()
-    //     // console.log(scrollTop, top)
-    //     scrollTo(top)
-    //   }
-    // })
   }
 }
 /* eslint-disable */
