@@ -116,6 +116,7 @@ export default {
   .links
     margin 20px 0
     display flex
+    justify-content: space-between;
     a
       display flex
       align-items center
@@ -125,14 +126,11 @@ export default {
         flex-direction column
     li
       padding 15px
-      width 25%
-      margin-right 10px
+      width 24%
       border-radius-5()
       border 1px solid $color-line-2
       position relative
       transition all .3s
-      &:nth-child(4)
-        margin 0
       &:before
         content ''
         background-color rgba(233,67,40, .1)
@@ -152,6 +150,8 @@ export default {
         img
           transform rotateZ(360deg)
 
+      .siteName
+        text-omit(1)
       .explain
         font-size $font-size-mini
         color $color-subsidiary
@@ -178,4 +178,12 @@ export default {
   .require-text
     margin-left 30px
     line-height 2
+@media (max-width: $mobile)
+  .link-wrapper
+    padding 20px
+    .links
+      flex-wrap wrap
+      li
+        width 49%
+        margin-bottom 10px
 </style>

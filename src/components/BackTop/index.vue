@@ -80,14 +80,15 @@ export default {
   bottom 30px
   width 40px
   height 40px
-  background $background-color
+  background #fff
   border-radius 50%
-  box-shadow 0 0 5px rgba(0,0,0,.1)
+  shadow-3-down()
   text-align center
+  border 1px solid $color-line-1
   &:hover
     box-shadow 0 0 5px rgba(0,0,0,.3)
     .triangle
-      border-color transparent transparent $active-color
+      border-color transparent transparent $color-focus
   .triangle
     width 0
     height 0
@@ -95,7 +96,7 @@ export default {
     top -3px
     border-width 7px
     border-style solid
-    border-color transparent transparent $color transparent
+    border-color transparent transparent $color-title transparent
 @keyframes move
   0% {
     transform translateY(0)

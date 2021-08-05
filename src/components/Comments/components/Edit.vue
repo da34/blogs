@@ -1,13 +1,13 @@
 <template>
   <div class="edit">
     <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
-      <a-form-item class="inline-block" style="width: 40%;margin-bottom: 15px;">
+      <a-form-item class="inline-block input-width" style="width: 40%;margin-bottom: 15px;">
         <a-input
           v-decorator="['nickName', { rules: [{ required: true, message: '请输入昵称!' }] }]"
           placeholder="昵称"
         />
       </a-form-item>
-      <a-form-item class="inline-block" style="width: 40%;margin-bottom: 15px;">
+      <a-form-item class="inline-block input-width" style="width: 40%;margin-bottom: 15px;">
         <a-input
           v-decorator="['email', { rules: [{ type: 'email', message: '邮箱格式不正确!' }] }]"
           placeholder="邮箱"
@@ -20,12 +20,12 @@
           :placeholder="textPlaceholder"
         />
       </a-form-item>
-      <a-form-item :wrapper-col="{ span: 24}" class="inline-block" style="width: 49%;margin-bottom: 0;">
+      <a-form-item :wrapper-col="{ span: 24}" class="inline-block" style="width: 49.5%;margin-bottom: 0;">
         <a class="markdown" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
           <SvgIcon icon-class="markdown" style="font-size: 16px" />
         </a>
       </a-form-item>
-      <a-form-item :wrapper-col="{ span: 24, offset: 21}" class="inline-block" style="width: 50%;margin-bottom: 0;">
+      <a-form-item :wrapper-col="{ span: 24 }" class="inline-block submit" style="width: 50%;margin-bottom: 0;text-align: right;">
         <a-button type="primary" html-type="submit" :loading="loading">
           提交
         </a-button>
@@ -154,4 +154,10 @@ export default {
   transition color .3s
   &:hover
     color $color-focus
+
+@media (max-width: $tablet)
+  .input-width
+    width 49%!important
+  .submit
+    width 49.2%!important
 </style>
