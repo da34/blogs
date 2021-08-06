@@ -131,6 +131,7 @@ export default {
       border 1px solid $color-line-2
       position relative
       transition all .3s
+      overflow hidden
       &:before
         content ''
         background-color rgba(233,67,40, .1)

@@ -142,7 +142,7 @@ export default {
         position = { x: 0, y: 0 }
       }
       if (to.hash) {
-        position = { selector: to.hash }
+        position = { selector: decodeURIComponent(to.hash) }
         // 有hash异步返回
         return new Promise(resolve => {
           setTimeout(() => {

@@ -61,7 +61,7 @@
         加载更多评论
       </div>
     </div>
-    <a-empty v-else description="暂无评论" style="padding: 40px" />
+    <a-empty v-else description="快做第一个评论的人吧" style="padding: 40px" />
   </div>
 </template>
 
@@ -119,11 +119,11 @@ export default {
       'limit'
     ])
   },
-  watch: {
-    page (val) {
-      console.log('就这？', val)
-    }
-  },
+  // watch: {
+  //   page (val) {
+  //     console.log('就这？', val)
+  //   }
+  // },
   methods: {
     ...mapActions('modules/comment', [
       'postComment',

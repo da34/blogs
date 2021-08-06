@@ -39,7 +39,7 @@ const actions = {
   // 初始化用户信息
   initUser ({ commit }) {
     if (process.client) {
-      const data = getLocalStore(STORE_KEY)
+      const data = getLocalStore(STORE_KEY) || {}
       commit('setUserInfo', data)
     }
   },

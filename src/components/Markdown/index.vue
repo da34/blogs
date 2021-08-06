@@ -66,7 +66,7 @@ export default {
       const renderer = {
         heading (text, level, raw, slugger) {
           const id = slugger.slug(text)
-          const className = level <= 3 ? 'toc-title' : ''
+          const className = level <= 4 ? 'toc-title' : ''
           return `<h${level} class="${className}" id="${id}">${text}</h${level}>
 `
         },

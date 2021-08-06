@@ -25,38 +25,34 @@ export function throttle (callback, delay = 1000) {
  * */
 
 export function getToc (content) {
-  let list = []
-  let result = ''
+  const reg = /<h[1-4].*>.*?<\/h[1-4]>/gi
   const levelStack = []
-  const reg = /<h[1-3].*>.*?<\/h[1-3]>/gi
-  // 把所有标题找到
-  list = content.match(reg)
-  // console.log(1111, list)
+  const list = content.match(reg) // 把所有标题找到
+  let result = ''
   const addStartUL = () => {
-    result += '<ul class="catalog-list">'
+    result += '<ul class="toc-list">'
   }
   const addEndUL = () => {
-    result += '</ul>\n'
+    result += '</ul>'
   }
   const addLI = (itemId, itemText) => {
     result += `<li class="item" ><a href="#${itemId}">${itemText}</a></li>`
   }
-  list.length && list.forEach((item, index) => {
+  list.forEach(item => {
     let itemId = item.match(/id=[^.<>]+/g) // 匹配h标签的ID
     if (itemId !== null) {
       itemId = itemId.length && itemId[0].replace(/id="+/g, '')
       const itemText = item.replace(/<[^>]+>/g, '') // 匹配h标签的文字
-      const itemLabel = item.match(/h[1-3]/)[0] // 匹配h[1-3]标签
+      const itemLabel = item.match(/<\/h[1-4]>/)[0] // 匹配h1-4标签
       let levelIndex = levelStack.indexOf(itemLabel) // 判断数组里有无h标签
-      // 新增ul li
+      // 之前不存在的
       if (levelIndex === -1) {
-        levelStack.unshift(itemLabel)
+        levelStack.unshift(itemLabel) // [4,3,1,2]
         addStartUL()
         addLI(itemId, itemText)
-      } else if (levelIndex === 0) { // 对应的标签。添加li
+      } else if (levelIndex === 0) { // 已有标签。且在栈顶。添加li
         addLI(itemId, itemText)
       } else {
-        // eslint-disable-next-line no-const-assign
         while (levelIndex--) {
           levelStack.shift()
           addEndUL()
@@ -65,6 +61,10 @@ export function getToc (content) {
       }
     }
   })
+  while (levelStack.length) {
+    levelStack.shift()
+    addEndUL()
+  }
   return result
 }
 

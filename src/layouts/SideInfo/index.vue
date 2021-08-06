@@ -30,5 +30,6 @@ export default {
 
 <style scoped lang="stylus">
 .sidebar
-  margin-left 15px
+  //margin-left 15px
+  position relative
 </style>

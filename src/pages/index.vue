@@ -103,6 +103,7 @@ export default {
   width 100%
   display flex
   height 180px
+  overflow hidden
   .img-wrap
     width 30%
   .img
