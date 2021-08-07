@@ -1,5 +1,4 @@
 const state = () => ({
-  page: 1,
   list: [],
   total: 0,
   article: {},
@@ -8,22 +7,13 @@ const state = () => ({
 })
 
 const mutations = {
-  setQuery (state, query) {
-    for (const key in query) {
-      state.query[key] = query[key]
-    }
-  },
   setData (state, payload) {
     state[payload.key] = payload.value
   },
   setArchive (state, data) {
-    console.log(11111111, data)
     state.archive = data
   },
-  setArticles (state, {
-    data,
-    count
-  }) {
+  setArticles (state, { data, count }) {
     state.list = data
     state.total = count
   }
@@ -31,8 +21,7 @@ const mutations = {
 
 const actions = {
   // 获取文章列表
-  async getList ({ commit, state }) {
-    const page = state.page
+  async getList ({ commit }, { page = 1 }) {
     const params = `page=${page}&limit=7`
     const { rows, count } = await this.$axios.$get(`contents?${params}`)
     commit('setArticles', {
@@ -40,6 +29,18 @@ const actions = {
       count
     })
   },
+  // // 获取文章列表
+  // async getMoreList ({ commit, state }, { p }) {
+  //   commit('setPage', p)
+  //   const page = state.page
+  //
+  //   const params = `page=${page}&limit=2`
+  //   const { rows, count } = await this.$axios.get(`contents?${params}`)
+  //   commit('setArticles', {
+  //     data: rows,
+  //     count
+  //   })
+  // },
   // 获取随机文章
   async getRandomList ({ commit }) {
     const data = await this.$axios.$get('content/random?limit=5')
@@ -49,9 +50,7 @@ const actions = {
     })
   },
   // 获取文章详情
-  async getDetail ({ commit }, {
-    id
-  }) {
+  async getDetail ({ commit }, { id }) {
     const data = await this.$axios.$get(`contents/${id}`)
     // console.log(1111, data)
     commit('setData', {

@@ -94,6 +94,7 @@ export default {
     color $color-content
     padding 5px
     padding-left 0
+    border-radius 4px
     &:hover
       background rgba(235, 237, 239, .7)
       a

@@ -27,7 +27,7 @@ export function throttle (callback, delay = 1000) {
 export function getToc (content) {
   const reg = /<h[1-4].*>.*?<\/h[1-4]>/gi
   const levelStack = []
-  const list = content.match(reg) // 把所有标题找到
+  const list = content.match(reg) || [] // 把所有标题找到
   let result = ''
   const addStartUL = () => {
     result += '<ul class="toc-list">'

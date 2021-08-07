@@ -156,6 +156,9 @@ export default {
     color $color-focus
 
 @media (max-width: $tablet)
+  .comment-nest
+    .input-width
+      width 40%!important
   .input-width
     width 49%!important
   .submit

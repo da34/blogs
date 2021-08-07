@@ -30,7 +30,7 @@ const mutations = {
   setUserInfo (state, data) {
     state.userInfo = data
   },
-  setPage (state, p) {
+  setPage (state) {
     state.page++
   }
 }

@@ -34,7 +34,7 @@
         <div v-else />
         <p>最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
       </div>
-      <Comments :content-id="$route.params.id" />
+      <Comments v-if="article.commentDisabled" :content-id="$route.params.id" />
     </div>
   </section>
 </template>
@@ -113,13 +113,13 @@ export default {
   .copyright
     background-color rgba(220, 220, 220, .7)
     margin-top 25px
-    padding 15px 30px
+    padding 10px
     text-align center
-    font-size $font-size-medium
+    font-size $font-size-small
     color $color-subsidiary
     border-radius-5()
     a
-      font-size $font-size-small
+      font-size $font-size-mini
       color $color-subsidiary
   .show-foot
     padding 30px 5px

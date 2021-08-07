@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <h2 class="circle">玉捷博客</h2>
+    <nuxt-link class="circle" to="/" tag="h2" active-class="don't">玉捷博客</nuxt-link>
   </div>
 </template>
 

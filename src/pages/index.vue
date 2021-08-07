@@ -4,10 +4,10 @@
       每日一言：“ {{ verse }} ”
     </p>
     <article v-for="item in list" :key="item.id" class="article">
-<!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
-      <div v-if="item.firstPicture" class="img-wrap" >
+      <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
+      <div v-if="item.firstPicture" class="img-wrap">
         <NuxtLink class="title" :to="`/content/${item.id}`" tag="div">
-          <img v-lazy="item.firstPicture" class="img" />
+          <img v-lazy="item.firstPicture" class="img">
         </NuxtLink>
       </div>
       <div class="article-content">
@@ -37,21 +37,26 @@
         </div>
       </div>
     </article>
-    <Pagination :total="total" class="pagination-wrap" />
+    <Pagination v-model="currentPage" :total="total" :limit="7" class="pagination-wrap" />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 // import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Index',
   // components: { Pagination },
   layout: 'blog',
-  async fetch ({ store }) {
-    await store.dispatch('modules/front/getVerse')
-    await store.dispatch('modules/content/getList')
+  data () {
+    return {
+      currentPage: 1
+    }
+  },
+  async fetch () {
+    await this.getList({ page: 1 })
+    await this.getVerse()
   },
   head () {
     return {
@@ -74,11 +79,18 @@ export default {
       'total'
     ])
   },
-  methods: {
-    currentChange (page) {
-      // this.$store.commit('content/setQuery', { page: index })
-      this.$store.dispatch('content/getList', { page })
+  watch: {
+    async currentPage (page) {
+      await this.getList({ page })
     }
+  },
+  methods: {
+    ...mapActions('modules/content', [
+      'getList'
+    ]),
+    ...mapActions('modules/front', [
+      'getVerse'
+    ])
   }
 }
 </script>

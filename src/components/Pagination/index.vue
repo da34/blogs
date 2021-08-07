@@ -87,19 +87,21 @@ export default {
     padLocation,
     initPage (val = 1) {
       this.pageList = []
-      const maxPage = this.maxPage - 2
+      const maxPage = this.maxPage
+      const diffMaxPage = maxPage - 2
 
-      if (val < 3) {
+      if (val <= 3) {
         let i = 1
-        while (i <= this.maxPage) {
+        const maxLen = maxPage > 5 ? 5 : maxPage
+        while (i <= maxLen) {
           this.pageList.push(i)
           i++
         }
         // this.pageList = [1, 2, 3, 4, 5]
-      } else if (val < maxPage) {
+      } else if (val < diffMaxPage) {
         this.pageList = [val - 2, val - 1, val, val + 1, val + 2]
-      } else if (val >= maxPage) {
-        val = maxPage
+      } else if (val >= diffMaxPage) {
+        val = diffMaxPage
         this.pageList = [val - 2, val - 1, val, val + 1, val + 2]
       }
     },

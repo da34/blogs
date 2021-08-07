@@ -77,7 +77,10 @@ export default {
     '@/plugins/components',
     '@/plugins/svg-icon',
     '@/plugins/filters',
-    '@/plugins/baidu', // 百度统计
+    {
+      src: '@/plugins/baidu',
+      mode: 'client'
+    }, // 百度统计
     // '@/plugins/baidu-push', // 百度自动推送
     {
       src: '@/plugins/vue-lazy-load',
@@ -105,7 +108,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/component-cache'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
