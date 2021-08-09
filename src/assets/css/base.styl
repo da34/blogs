@@ -123,3 +123,25 @@ body
   opacity .2
   transform translate3d(-50px, 0, 0)
 }
+
+
+
+.text-popup
+  position absolute
+  z-index 99999
+  user-select none
+  white-space nowrap
+  font-weight bold
+  animation moveOut 1.5s forwards
+// 点击特效
+@keyframes moveOut
+  0%, 100% {
+    opacity 0
+  }
+  5% {
+    opacity 1
+  }
+  100%{
+    opacity: 0;
+    transform translate3d(0,-150px,0)
+  }
