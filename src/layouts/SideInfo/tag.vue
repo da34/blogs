@@ -21,6 +21,7 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Tag',
+  // serverCacheKey: () => 'StaticTag',
   components: {},
   async fetch () {
     await this.getList()

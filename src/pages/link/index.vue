@@ -1,45 +1,45 @@
 <template>
   <div class="link-wrapper">
-    <h2 class="title" style="padding: 20px 0">
-      友联(´ω｀*)
+    <div class="exchange">
+      <h2 class="title">
+        友联申请须知(´ω｀*)
+      </h2>
+      <div>
+        <h3 class="require">
+          网站要求
+        </h3>
+        <p class="require-text">
+          无色情内容，无政治敏感内容，网站要能长期正常访问
+        </p>
+        <p class="require-text">
+          十篇以上个人原创文章，半年内有新文章更新
+        </p>
+        <p class="require-text">
+          原创博客、技术博客优先
+        </p>
+        <p class="require-text">
+          需要交换友链，先把本站添加到你的网站中，然后根据下面的格式，在下面给我留言~
+        </p>
+        <h3 class="require">
+          申请格式
+        </h3>
+        <p class="require-text">
+          博客标题：玉捷博客
+        </p>
+        <p class="require-text">
+          博客简介：一个前端小站，交流、记录自己的前端学习
+        </p>
+        <p class="require-text">
+          博客地址：https://blog.lsyboy.cn
+        </p>
+        <p class="require-text">
+          图片地址：https://gravatar.loli.net/avatar/dd0ace3c10b5fff1ea798bdb031bdd81
+        </p>
+      </div>
+    </div>
+    <h2 class="title" style="padding: 20px 0;margin-top: 20px">
+      友联
     </h2>
-    <!--    <div class="exchange">-->
-    <!--      <h2 class="title">-->
-    <!--        友联申请须知(´ω｀*)-->
-    <!--      </h2>-->
-    <!--      <div>-->
-    <!--        <h3 class="require">-->
-    <!--          网站要求-->
-    <!--        </h3>-->
-    <!--        <p class="require-text">-->
-    <!--          无色情内容，无政治敏感内容，网站要能长期正常访问-->
-    <!--        </p>-->
-    <!--        <p class="require-text">-->
-    <!--          十篇以上个人原创文章，半年内有新文章更新-->
-    <!--        </p>-->
-    <!--        <p class="require-text">-->
-    <!--          原创博客、技术博客优先-->
-    <!--        </p>-->
-    <!--        <p class="require-text">-->
-    <!--          需要交换友链，先把本站添加到你的网站中，然后根据下面的格式，在下面给我留言~-->
-    <!--        </p>-->
-    <!--        <h3 class="require">-->
-    <!--          申请格式-->
-    <!--        </h3>-->
-    <!--        <p class="require-text">-->
-    <!--          博客标题：玉捷博客-->
-    <!--        </p>-->
-    <!--        <p class="require-text">-->
-    <!--          博客简介：一个前端小站-->
-    <!--        </p>-->
-    <!--        <p class="require-text">-->
-    <!--          博客地址：https://blog.lsyboy.cn-->
-    <!--        </p>-->
-    <!--        <p class="require-text">-->
-    <!--          图片地址：https://gravatar.loli.net/avatar/dd0ace3c10b5fff1ea798bdb031bdd81-->
-    <!--        </p>-->
-    <!--      </div>-->
-    <!--    </div>-->
     <!--    <h3 style="font-weight: 600;font-size: 16px;">以下排名不分先后顺序</h3>-->
     <ul class="links">
       <li v-for="link in list" :key="link.URL" :title="link.name">
@@ -62,18 +62,11 @@ export default {
   name: 'FriendLink',
   components: { Comments },
   layout: 'blog',
-  async asyncData ({
-    $axios
-  }) {
+  transition: 'slide-in',
+  async asyncData ({ $axios }) {
     const { data } = await $axios.get('links')
-    // console.log(data)
-    // 获取评论
-    const comment = await $axios.get('comments?contentId=-1')
-    const { count, rows } = comment.data
     return {
-      list: data,
-      rows,
-      count
+      list: data
     }
   },
   head () {
@@ -116,7 +109,6 @@ export default {
   .links
     margin 20px 0
     display flex
-    justify-content: space-between;
     a
       display flex
       align-items center
@@ -126,12 +118,17 @@ export default {
         flex-direction column
     li
       padding 15px
-      width 24%
+      width 23.5%
       border-radius-5()
       border 1px solid $color-line-2
       position relative
       transition all .3s
       overflow hidden
+      margin-left 2%
+      &:nth-child(4n)
+        margin-left 0
+      &:first-child
+        margin-left 0
       &:before
         content ''
         background-color rgba(233,67,40, .1)
@@ -169,7 +166,7 @@ export default {
         transition all .3s
 
   .exchange
-    padding-top 30px
+    padding-top 10px
 
   .title
     text-align center
@@ -187,4 +184,6 @@ export default {
       li
         width 49%
         margin-bottom 10px
+        &:nth-child(3n)
+          margin-left 0
 </style>

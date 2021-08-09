@@ -12,6 +12,7 @@ export default {
   name: 'Pigeonhole',
   components: { Timeline },
   layout: 'blog',
+  transition: 'slide-in',
   async fetch ({ route, store }) {
     await store.dispatch('modules/content/getArchiveList', { name: route.query.name })
   },

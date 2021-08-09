@@ -6,18 +6,17 @@
       @leave="leave"
     >
       <div v-if="visible" class="mobile-nav">
-        <NuxtLink
+        <PerfectLink
           v-for="menu in menus"
-          :key="menu.path"
-          :to="menu.path"
+          :key="menu.url"
+          :to="menu.url"
           class="menu-item"
           :exact="menu.exact"
-          active-class="don't"
+          :target="menu.target || '_self'"
           @click="onClose"
         >
-          <svg-icon :icon-class="menu.icon || 'others'" />
-          {{ menu.name }}
-        </NuxtLink>
+          <svg-icon :icon-class="menu.icon || 'others'" />{{ menu.name }}
+        </PerfectLink>
         <div ref="mobile-header-backdrop" class="mobile-header-backdrop" @click="onClose" />
       </div>
     </transition>
@@ -26,8 +25,10 @@
 
 <script>
 import { appendBody } from '@/minxi/appendBody'
+import PerfectLink from '../../components/PerfectLink'
 export default {
   name: 'MobileNav',
+  components: { PerfectLink },
   mixins: [appendBody],
   props: {
     menus: {

@@ -1,57 +1,29 @@
 <template>
-  <section>
-    <div class="article-content">
-      <Marked
-        v-if="data"
-        :value="data.content"
-        :style="{
-          padding: '3px 0 !important'
-        }"
-      />
-      <Comments :comments="rows" :count="count" :replies-count="repliesCount" :article-id="articleId" @submitComplete="handleComment" />
-    </div>
+  <section class="article-content">
+    <Marked :value="article.content" />
+    <Comments v-if="article.commentDisabled" :content-id="$route.params.path" />
   </section>
 </template>
 
 <script>
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
-// import Blur from '@/components/Blur'
+import { mapState } from 'vuex'
 export default {
-  name: 'Article', // 滚动到顶端
+  name: 'DiyPage', // 滚动到顶端
   components: {
-    // Blur,
     Marked,
     Comments
   },
   layout: 'blog',
   scrollToTop: true,
-  async asyncData ({
-    query,
-    $axios
-  }) {
-    // 获取评论
-    const { data } = await $axios.$get(`comments?articleId=${query.q}`)
-    const { count, rows, repliesCount } = data
-    return {
-      rows,
-      count,
-      repliesCount,
-      articleId: query.q
-    }
-  },
-  data () {
-    return {}
-  },
-  async fetch ({
-    store,
-    query
-  }) {
-    await store.dispatch('content/getDetail', { id: query.q, type: 1 })
+  transition: 'slide-in',
+  async fetch ({ store, params }) {
+    await store.dispatch('modules/content/getDetail', { id: params.path })
   },
   head () {
     return {
-      title: `${this.data.title}-玉捷博客`,
+      title: `${this.article.title}-玉捷博客`,
       meta: [
         {
           hid: 'article',
@@ -61,33 +33,20 @@ export default {
         {
           hid: 'classify',
           vmid: 'keywords',
-          content: this.category
+          content: '玉捷-YuJie'
         },
         {
           hid: 'content',
           vmid: 'description',
-          content: this.data.content.slice(0, 50)
+          content: this.article.content.slice(0, 50)
         }
       ]
     }
   },
   computed: {
-    data () {
-      // console.log(this.$store.getters.content)
-      return this.$store.getters.article
-    },
-    category () {
-      return this.data.category ? this.data.category.name : '玉捷-YuJie'
-    }
-  },
-  methods: {
-    async handleComment () {
-      const { data } = await this.$axios.$get(`comments?articleId=${this.$route.query.q}`)
-      const { count, rows, repliesCount } = data
-      this.rows = rows
-      this.count = count
-      this.repliesCount = repliesCount
-    }
+    ...mapState('modules/content', [
+      'article'
+    ])
   }
 }
 </script>
@@ -95,29 +54,8 @@ export default {
 <style scoped lang="stylus">
 .article-content
   width 100%
-  box-sizing border-box
-  padding 0 15px
-  background $background-color
-
-  .show-foot
-    padding 30px 5px
-    font-size $font-size-small
-    color $font-color-minor
-    display: flex;
-    justify-content: space-between;
-
-@media (max-width: 768px)
-  //.content-wrapper
-  //  padding 5px 0
-  .blog-post
-    padding 10px 0 !important
-
-  .show-foot
-    padding 30px 5px !important
-
-    .update
-      display none
-
-  .copyright
-    padding 15px 0 !important
+  padding 30px
+  border 1px solid $color-line-1
+  shadow-2-down()
+  border-radius-5()
 </style>

@@ -78,7 +78,7 @@ export default {
   cursor pointer
   position fixed
   right 30px
-  bottom 30px
+  bottom 90px
   width 40px
   height 40px
   background #fff

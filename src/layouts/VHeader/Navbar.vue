@@ -1,40 +1,49 @@
 <template>
   <div class="site-nav">
     <div class="menu">
-      <NuxtLink
-        v-for="menu in menus"
-        :key="menu.path"
-        :to="menu.path"
+      <PerfectLink
+        v-for="menu in addMenus"
+        :key="menu.url"
+        :to="menu.url"
         class="menu-item"
         :exact="menu.exact"
+        :target="menu.target || '_self'"
       >
-        {{menu.name}}
-      </NuxtLink>
+        {{ menu.name }}
+      </PerfectLink>
     </div>
     <div class="menu-mini">
-      <svg-icon iconClass="menu" v-show="!isMobileNav" @click="isMobileNav = true" />
-      <svg-icon iconClass="close-2" v-show="isMobileNav" @click="isMobileNav = false" />
+      <svg-icon v-show="!isMobileNav" icon-class="menu" @click="isMobileNav = true" />
+      <svg-icon v-show="isMobileNav" icon-class="close-2" @click="isMobileNav = false" />
     </div>
-    <MobileNav :menus="menus" :visible="isMobileNav" @close="onClose" />
+    <MobileNav :menus="addMenus" :visible="isMobileNav" @close="onClose" />
   </div>
 </template>
 
 <script>
+import PerfectLink from '@/components/PerfectLink'
+import { mapState } from 'vuex'
 import MobileNav from './MobileNav'
 export default {
   name: 'Navbar',
-  components: { MobileNav },
-  filters: {
-  },
+  components: { PerfectLink, MobileNav },
   data () {
     return {
       isMobileNav: false,
-      activeName: '/',
-      menus: [
-        { name: '首页', path: '/', exact: true, icon: 'article' },
-        { name: '归档', path: '/archive', icon: 'archive' },
-        { name: '友联', path: '/link', icon: 'link' }
+      activeName: '/'
+    }
+  },
+  computed: {
+    ...mapState('modules/front', [
+      'menus'
+    ]),
+    addMenus () {
+      const defaultMenus = [
+        { name: '首页', url: '/', exact: true, icon: 'article' },
+        { name: '归档', url: '/archive', icon: 'archive' },
+        { name: '友联', url: '/link', icon: 'link' }
       ]
+      return defaultMenus.concat(this.menus)
     }
   },
   watch: {

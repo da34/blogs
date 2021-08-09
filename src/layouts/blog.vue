@@ -1,11 +1,9 @@
 <template>
   <div class="wrap">
-    <div class="content">
-      <VHeader/>
-      <AppMain/>
-    </div>
-    <BackTop/>
-    <VFooter/>
+    <VHeader />
+    <AppMain class="content" />
+    <VFooter />
+    <BackTop />
   </div>
 </template>
 
@@ -38,10 +36,10 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
 <style scoped lang="stylus">
 .wrap
   width 100%
-  margin-top 75px
+  margin-top 80px
 
   .content
-    min-height calc(100vh - 195px)
+    min-height calc(100vh - 200px)
     padding-bottom 50px
 
   #bg
@@ -53,6 +51,12 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
     z-index -1
     background-attachment fixed
 
+
+@media (max-width: $mobile)
+  .wrap
+    margin-top 70px
+    .content
+      min-height calc(100vh - 190px)
 //background url("../assets/images/bg.jpg")
 /*background url("https://acg.toubiec.cn/random")*/
 </style>

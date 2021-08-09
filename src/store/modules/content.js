@@ -29,18 +29,6 @@ const actions = {
       count
     })
   },
-  // // 获取文章列表
-  // async getMoreList ({ commit, state }, { p }) {
-  //   commit('setPage', p)
-  //   const page = state.page
-  //
-  //   const params = `page=${page}&limit=2`
-  //   const { rows, count } = await this.$axios.get(`contents?${params}`)
-  //   commit('setArticles', {
-  //     data: rows,
-  //     count
-  //   })
-  // },
   // 获取随机文章
   async getRandomList ({ commit }) {
     const data = await this.$axios.$get('content/random?limit=5')
@@ -51,7 +39,7 @@ const actions = {
   },
   // 获取文章详情
   async getDetail ({ commit }, { id }) {
-    const data = await this.$axios.$get(`contents/${id}`)
+    const { data } = await this.$axios.get(`contents/${id}`)
     // console.log(1111, data)
     commit('setData', {
       key: 'article',

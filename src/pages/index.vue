@@ -6,7 +6,7 @@
     <article v-for="item in list" :key="item.id" class="article">
       <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
       <div v-if="item.firstPicture" class="img-wrap">
-        <NuxtLink class="title" :to="`/content/${item.id}`" tag="div">
+        <NuxtLink :to="`/content/${item.id}`" tag="div">
           <img v-lazy="item.firstPicture" class="img">
         </NuxtLink>
       </div>
@@ -47,15 +47,16 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Index',
-  // components: { Pagination },
   layout: 'blog',
+  transition: 'slide-in',
+  // components: { Pagination },
   data () {
     return {
       currentPage: 1
     }
   },
   async fetch () {
-    await this.getList({ page: 1 })
+    await this.getList({ page: this.currentPage })
     await this.getVerse()
   },
   head () {
@@ -80,9 +81,7 @@ export default {
     ])
   },
   watch: {
-    async currentPage (page) {
-      await this.getList({ page })
-    }
+    currentPage: '$fetch'
   },
   methods: {
     ...mapActions('modules/content', [
@@ -104,7 +103,7 @@ export default {
   color $color-subsidiary
   line-height 1.5
   font-weight bold
-  margin-bottom 20px
+  margin-bottom 10px
 .article
   margin-bottom 20px
   border-radius-5()
@@ -118,6 +117,9 @@ export default {
   overflow hidden
   .img-wrap
     width 30%
+    div
+      width 100%
+      height 100%
   .img
     width 100%
     height 100%
@@ -166,6 +168,8 @@ export default {
       margin-left auto
 
 @media (max-width: $mobile)
+  .article-wrapper
+    padding 0 10px
   .verse
     padding 10px 20px
     margin-bottom 0
@@ -179,14 +183,16 @@ export default {
       justify-content start
   .article
     height 100%
-    margin-bottom 10px
     flex-direction column
     padding 20px
+    margin-bottom 10px
+    overflow hidden
     .img-wrap
       width 100%
       position relative
       padding-top 40%
       overflow hidden
+      margin-bottom 10px
       border-radius-5()
     .img
       position absolute
@@ -196,7 +202,6 @@ export default {
       //transform translate3d(-50%, -50%, 0)
   .article-content
     padding 0
-    margin-top 10px
   .read-more
     display none
 .pagination-wrap.pagination

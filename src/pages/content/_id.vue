@@ -51,6 +51,7 @@ export default {
   },
   layout: 'blog',
   scrollToTop: true,
+  transition: 'slide-out',
   async fetch ({ store, params }) {
     await store.dispatch('modules/content/getDetail', { id: params.id })
   },
@@ -136,4 +137,11 @@ export default {
         color $color-content
         font-weight 600
         font-size $font-size-medium
+
+@media (max-width: $mobile)
+  .article-content
+    padding 0 20px
+  .entry-thumbnail
+    .article-header
+      padding 20px 20px 0
 </style>

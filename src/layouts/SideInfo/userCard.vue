@@ -32,6 +32,7 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'UserCard',
+  // serverCacheKey: () => 'UserCard',
   async fetch () {
     await this.getCollect()
   },
@@ -40,6 +41,9 @@ export default {
       'articleCollect'
     ])
   },
+  // created () {
+  //   console.log('初始化')
+  // },
   methods: {
     ...mapActions('modules/front', [
       'getCollect'

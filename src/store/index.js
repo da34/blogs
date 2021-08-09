@@ -17,7 +17,7 @@ const store = {
   actions: {
     async nuxtServerInit ({ dispatch }, { req }) {
       // await dispatch('content/getList', { page: 1 })
-      // await dispatch('front/getMenu')
+      await dispatch('modules/front/getMenus')
       // if (req.headers.cookie && req.headers.cookie.includes('Yujie-Token')) {
       //   await dispatch('user/getInfo')
       // }

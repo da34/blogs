@@ -12,15 +12,18 @@ export default {
     host: '0.0.0.0',
     port: 3000
   },
+  globals: {
+    id: '__YuJie_Blog__'
+  },
   srcDir: 'src/',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: '玉捷',
     meta: [
-      { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover'
+        content: 'width=device-width, initial-scale=1',
+        charset: 'utf-8'
       },
       {
         hid: 'description',
@@ -85,6 +88,10 @@ export default {
     {
       src: '@/plugins/vue-lazy-load',
       ssr: false
+    },
+    {
+      src: '@/plugins/click-effects',
+      ssr: false
     }
   ],
 
@@ -108,8 +115,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    '@nuxtjs/component-cache'
+    '@nuxtjs/axios'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

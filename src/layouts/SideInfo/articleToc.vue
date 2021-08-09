@@ -4,7 +4,8 @@
       <span>文章目录</span>
     </div>
     <div class="box-content">
-      <div class="catalog-wrapper" v-html="toc" />
+      <div class="catalog-wrapper" v-if="toc" v-html="toc" />
+      <h4 v-else style="text-align: center;padding: 30px;">此文章没有目录</h4>
     </div>
   </section>
 </template>

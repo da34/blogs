@@ -11,8 +11,12 @@
           </p>
         </div>
         <div class="link-info">
-          <SvgIcon icon-class="git" />
-          <SvgIcon icon-class="qq" />
+          <a href="https://github.com/da34" target="_blank" title="点我跳转到github">
+            <SvgIcon icon-class="git" />
+          </a>
+          <a href="http://wpa.qq.com/msgrd?v=3&uin=1255029618&site=qq&menu=yes" title="通过qq联系我" target="_blank">
+            <SvgIcon icon-class="qq" />
+          </a>
         </div>
       </div>
     </footer>
@@ -74,8 +78,8 @@ export default {
     flex-direction: column
     justify-content: center
     width: 45%;
-  a
-    color $color-subsidiary
+    a
+      color $color-subsidiary
   .move
     margin-left 3px
     font-size $font-size-medium
@@ -84,16 +88,20 @@ export default {
     transition all .3s
     width: 100%;
     text-align: right;
+    color $color-content
     svg
       font-size 25px
       margin-left 25px
-      cursor pointer
+      color $color-content
 @keyframes pulse
   to
     transform translateY(0) scale(.8)
   from
     transform translateY(3px) rotate(1)
 
+@media (max-width: $pc)
+  .footer-content
+    width 100%
 @media (max-width: $mobile)
   .footer-wrap
     height 86px

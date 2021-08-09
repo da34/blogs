@@ -96,4 +96,30 @@ body
     padding-top 15px
     display flex
     flex-direction column
+// 路由动画
+.slide-out-enter-active,
+.slide-out-leave-active,
+.slide-in-enter-active,
+.slide-in-leave-active {
+  transition all  .3s ease
+}
 
+.slide-out-enter {
+  opacity .2
+  transform: translate3d(-50px, 0, 0);
+}
+
+.slide-out-leave-active {
+  opacity .2
+  transform: translate3d(50px, 0, 0);
+}
+
+.slide-in-enter {
+  opacity .2
+  transform translate3d(50px, 0, 0)
+}
+
+.slide-in-leave-active {
+  opacity .2
+  transform translate3d(-50px, 0, 0)
+}
