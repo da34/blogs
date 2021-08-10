@@ -1,6 +1,6 @@
 <template>
   <n-layout position="absolute" has-sider>
-    <vna-sidebar />
+    <VnaSidebar />
     <n-layout>
       <n-layout-header bordered>Vue3-Naive-Admin</n-layout-header>
       <n-layout-content position="absolute" style="bottom: 64px;top: 60px" content-style="padding: 24px;">

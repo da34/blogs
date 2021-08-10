@@ -6,6 +6,6 @@ import './styles/common.scss'
 
 const app = createApp(App)
   .use(router)
+  .mount('#app')
 
 // installComponent(app)
-app.mount('#app')
