@@ -1,19 +1,27 @@
 <template>
-  <my-header />
-  <side-menu />
-  <content />
+  <n-layout position="absolute" has-sider>
+    <vna-sidebar />
+    <n-layout>
+      <n-layout-header bordered>Vue3-Naive-Admin</n-layout-header>
+      <n-layout-content position="absolute" style="bottom: 64px;top: 60px" content-style="padding: 24px;">
+        <router-view />
+      </n-layout-content>
+      <n-layout-footer bordered position="absolute">
+        copyright
+      </n-layout-footer>
+    </n-layout>
+  </n-layout>
 </template>
-
-<script>
-import MyHeader from "./header";
-import SideMenu from "./side-menu";
-import Content from "./content";
-export default {
-  name: "index",
-  components: {Content, SideMenu, MyHeader}
-}
+<script setup>
+import { NLayout, NLayoutHeader, NLayoutContent,  NLayoutFooter } from 'naive-ui'
+import VnaSidebar from './components/Sidebar/index.vue'
 </script>
+<style>
+.n-layout-header {
+  padding: 24px;
+}
 
-<style scoped>
-
+.n-layout-footer {
+  padding: 24px;
+}
 </style>

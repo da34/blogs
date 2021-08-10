@@ -1,20 +1,9 @@
-import {createRouter, createWebHashHistory} from 'vue-router'
-import DashBoard from '@/views/dash-board.vue'
-
-const routes = [
-  {
-    path: '/',
-    redirect: '/dashboard'
-  },
-  {
-    path: '/dashboard',
-    component: DashBoard
-  }
-]
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { constantRoutes } from './routers'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: constantRoutes
 })
 
 export default router

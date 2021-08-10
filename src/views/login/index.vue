@@ -1,10 +1,10 @@
 <template>
-  <div>我是侧边栏</div>
+  <div>登录</div>
 </template>
 
 <script>
 export default {
-  name: "sideMenu"
+  name: "index"
 }
 </script>
 

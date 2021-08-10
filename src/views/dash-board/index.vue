@@ -7,4 +7,7 @@
 
 </script>
 <style scoped  lang="scss">
+.dash-board-wrapper {
+  color: $primaryColor;
+}
 </style>
