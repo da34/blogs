@@ -3,13 +3,12 @@ const arr = ['❤富强❤', '❤民主❤', '❤文明❤', '❤和谐❤', '�
 document.documentElement.addEventListener('click', function (e) {
   const index = ~~(Math.random() * 12)
   const spanDom = document.createElement('span')
-  const x = e.pageX
-  const y = e.pageY
+  const { pageX, pageY } = e
   spanDom.textContent = arr[index]
   spanDom.className = 'text-popup'
   spanDom.style = `
-    top: ${y - 20}px;
-    left: ${x}px;
+    top: ${pageY - 20}px;
+    left: ${pageX}px;
     color: rgb(${~~(255 * Math.random())},${~~(255 * Math.random())},${~~(255 * Math.random())})
   `
   this.appendChild(spanDom)
