@@ -1,9 +1,13 @@
 <template>
-  <router-view />
+  <n-loading-bar-provider>
+    <n-message-provider>
+      <router-view/>
+    </n-message-provider>
+  </n-loading-bar-provider>
 </template>
 
-<script>
-export default {}
+<script setup>
+import {NLoadingBarProvider, NMessageProvider,} from 'naive-ui'
 </script>
 
 <style>

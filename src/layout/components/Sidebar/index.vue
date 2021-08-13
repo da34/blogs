@@ -5,8 +5,8 @@
       :collapsed="collapsed"
       :collapsed-width="64"
       :collapsed-icon-size="22"
-      :options="menuOptions"
-    ></n-menu>
+      :options="menus"
+    />
   </n-layout-sider>
 </template>
 
@@ -16,8 +16,26 @@ import { ref, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
 const collapsed = ref(false)
+const menus = ref([])
 const router = useRouter()
 const renderRouter = router.options.routes
+
+// console.log(menus);
+renderRouter.forEach(item => {
+  if (!item.hidden) {
+    item.children.forEach(r => {
+      const { icon, title } = r.meta
+      menus.value.push({
+        label: title
+      })
+    })
+  }
+})
+
+
+
+console.log(renderRouter)
+console.log(menus.value)
 </script>
 
 <style scoped lang="scss">
