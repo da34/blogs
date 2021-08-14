@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { constantRouters, asyncRoutes } from './routes'
+import { constantRouters } from './routes'
 import createRouterGuards from './router-guards'
 
 const router = createRouter({

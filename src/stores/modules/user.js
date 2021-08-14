@@ -1,14 +1,14 @@
 import {defineStore} from 'pinia';
-import {createStorage} from '@/utils/Storage';
+import {storage} from '@/utils/Storage';
 import {store} from '@/stores';
 import {ACCESS_TOKEN} from '@/stores/mutation-types';
 import {getUserInfo, login} from '@/api/system/user';
 import httpEnum from '@/utils/http/http-type'
 
-const Storage = createStorage({storage: localStorage});
+// const Storage = createStorage();
 export const useUserStore = defineStore('app-user', {
   state: () => ({
-    token: Storage.get(ACCESS_TOKEN, ''),
+    token: storage.get(ACCESS_TOKEN, ''),
     username: '',
     avatar: '',
     permissions: [],
@@ -50,7 +50,7 @@ export const useUserStore = defineStore('app-user', {
         const {result, code} = response;
         if (code === httpEnum.SUCCESS) {
           const ex = 7 * 24 * 60 * 60 * 1000;
-          Storage.set(ACCESS_TOKEN, result.token, ex);
+          storage.set(ACCESS_TOKEN, result.token, ex);
           this.setToken(result.token);
           this.setUserInfo(result);
         }
@@ -67,9 +67,8 @@ export const useUserStore = defineStore('app-user', {
         getUserInfo()
           .then((res) => {
             const result = res;
-            if (result.permissions && result.permissions.length) {
-              const permissionsList = result.permissions;
-              that.setPermissions(permissionsList);
+            if (result.permissions) {
+              that.setPermissions(result.permissions);
               that.setUserInfo(result);
             } else {
               reject(new Error('getInfo: permissionsList must be a non-null array !'));
@@ -87,13 +86,13 @@ export const useUserStore = defineStore('app-user', {
     async logout() {
       this.setPermissions([]);
       this.setUserInfo('');
-      Storage.remove(ACCESS_TOKEN);
+      storage.remove(ACCESS_TOKEN);
       return Promise.resolve('');
     },
   },
 });
 
 // Need to be used outside the setup
-// export function useUserStoreWidthOut() {
-//   return useUserStore(store);
-// }
+export function useUserStoreOut() {
+  return useUserStore(store);
+}

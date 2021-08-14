@@ -57,7 +57,6 @@ const constantRouters = [
     component: Layout,
     meta: {
       title: 'ErrorPage',
-      hideBreadcrumb: true,
     },
     children: [
       {
@@ -66,7 +65,6 @@ const constantRouters = [
         component: () => import('@/views/exception/404.vue'),
         meta: {
           title: 'ErrorPage',
-          hideBreadcrumb: true,
         },
       },
     ],
@@ -77,7 +75,6 @@ const constantRouters = [
     component: Layout,
     meta: {
       title: RedirectName,
-      hideBreadcrumb: true,
     },
     children: [
       {
@@ -86,7 +83,6 @@ const constantRouters = [
         component: () => import('@/views/redirect/index.vue'),
         meta: {
           title: RedirectName,
-          hideBreadcrumb: true,
         },
       },
     ],
@@ -94,6 +90,34 @@ const constantRouters = [
 ]
 
 const asyncRoutes = [
+  {
+    path: '/test',
+    name: 'Test',
+    component: Layout,
+    meta: {
+      title: 'Test',
+    },
+    children: [
+      {
+        path: '/redirect/1111111',
+        name: 'Test1',
+        component: () => import('@/views/redirect/index.vue'),
+        meta: {
+          title: 'super_admin 测试',
+          permissions: ['super_admin'],
+        },
+      },
+      {
+        path: '/redirect/22222222',
+        name: 'Test2',
+        component: () => import('@/views/redirect/index.vue'),
+        meta: {
+          title: 'admin 测试',
+          permissions: ['admin'],
+        },
+      },
+    ],
+  }
 ]
 
 export {

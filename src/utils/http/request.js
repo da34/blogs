@@ -80,7 +80,7 @@ const transform = {
     const token = userStore.getToken;
     if (token) {
       // jwt token
-      config.headers.token = token;
+      config.headers['yujie-token'] = token;
     }
     return config;
   },

@@ -18,7 +18,7 @@ export const createStorage = ({prefixKey = '', storage = localStorage} = {}) => 
       this.storageprefixKey = prefixKey;
 
       this.getKey = key => {
-        return `${this.prefixKey}${key}`.toUpperCase();
+        return `${this.storageprefixKey}${key}`.toUpperCase();
       }
     }
 

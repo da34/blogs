@@ -6,14 +6,14 @@
       <n-layout-content position="absolute" style="bottom: 64px;top: 60px" content-style="padding: 24px;">
         <router-view/>
       </n-layout-content>
-      <n-layout-footer bordered position="absolute">
-        copyright
-      </n-layout-footer>
+<!--      <n-layout-footer bordered position="absolute">-->
+<!--        copyright-->
+<!--      </n-layout-footer>-->
     </n-layout>
   </n-layout>
 </template>
 <script setup>
-import {NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter, useMessage} from 'naive-ui'
+import {NLayout, NLayoutHeader, NLayoutContent, useMessage} from 'naive-ui'
 import VnaSidebar from './components/Sidebar/index.vue'
 
 window.$message = useMessage()
