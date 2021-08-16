@@ -10,6 +10,7 @@ function filter(tree, func) {
       .filter((node) => {
         node['children'] = node['children'] && listFilter(node['children']);
         return func(node) || (node['children'] && node['children'].length);
+        // return func(node);
       });
   }
 
@@ -23,16 +24,22 @@ export const useAsyncRouteStore = defineStore('async-route', {
     menus: [],
     addRouters: [],
     keepAliveComponents: [],
+    dynamicAddedFlag: false
   }),
   getters: {
-    getMenus() {
-      return this.menus;
+    getMenus: (state) => {
+      return filter(state.menus, (menu) => {
+        return !menu.hidden
+      });
     },
   },
   actions: {
     // 设置动态路由
     setRouters(routers) {
       this.addRouters = routers;
+    },
+    setDynamicAddedFlag(bool) {
+      this.dynamicAddedFlag = bool;
     },
     setMenus(menus) {
       // 设置动态路由

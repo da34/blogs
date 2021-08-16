@@ -1,29 +1,50 @@
 <template>
-  <n-layout position="absolute" has-sider>
-    <VnaSidebar/>
-    <n-layout>
-      <n-layout-header bordered>Vue3-Naive-Admin</n-layout-header>
-      <n-layout-content position="absolute" style="bottom: 64px;top: 60px" content-style="padding: 24px;">
-        <router-view/>
-      </n-layout-content>
-<!--      <n-layout-footer bordered position="absolute">-->
-<!--        copyright-->
-<!--      </n-layout-footer>-->
-    </n-layout>
-  </n-layout>
+  <NLayout position="absolute" has-sider>
+    <NLayoutSider
+        inverted
+        :width="220"
+        collapse-mode="width"
+        :collapsed-width="68"
+        show-trigger
+        :collapsed="collapsed"
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+    >
+      <PageSidebar :collapsed="collapsed"/>
+    </NLayoutSider>
+    <NLayout>
+      <NLayoutHeader bordered>
+        <PageHeader v-model:collapsed="collapsed"/>
+      </NLayoutHeader>
+      <NLayoutContent position="absolute" content-style="margin: 0 10px;">
+        <PageMainView/>
+      </NLayoutContent>
+    </NLayout>
+  </NLayout>
 </template>
 <script setup>
-import {NLayout, NLayoutHeader, NLayoutContent, useMessage} from 'naive-ui'
-import VnaSidebar from './components/Sidebar/index.vue'
+import {NLayout, NLayoutHeader, NLayoutContent, NLayoutSider,useLoadingBar } from 'naive-ui'
+import PageSidebar from './components/Sidebar/index.vue'
+import PageMainView from "./components/MainView.vue";
+import PageHeader from "./components/Header/index.vue";
+import {ref,onMounted} from 'vue'
 
-window.$message = useMessage()
+const collapsed = ref(false)
+onMounted(() => {
+  //挂载在 window 方便与在js中使用
+  window['$loading'] = useLoadingBar();
+  window['$loading'].finish();
+});
+
 </script>
-<style>
+<style scoped lang="scss">
 .n-layout-header {
-  padding: 24px;
+  height: 64px;
 }
 
-.n-layout-footer {
-  padding: 24px;
+.n-layout-content {
+  background: #f5f7f9;
+  min-height: calc(100vh - 60px);
+  top: 60px;
 }
 </style>

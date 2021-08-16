@@ -1,48 +1,65 @@
 <template>
-  <n-layout-sider inverted width="220" :collapsed="collapsed">
-    <div class="logo">博客管理后台</div>
-    <n-menu
+  <div class="logo flex justify-center items-center py-3 overflow-hidden ">
+    <img src="@/assets/images/logo.png" class="w-auto">
+    <h2 v-show="!collapsed" class="">博客管理后台</h2>
+  </div>
+  <n-menu
+      inverted
       :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
       :options="menus"
-    />
-  </n-layout-sider>
+      :collapsed-width="68"
+      :collapsed-icon-size="20"
+      :indent="24"
+      :value="activeKey"
+      @update:value="handleUpdateValue"
+  />
 </template>
 
 <script setup>
-import { NLayoutSider, NMenu } from 'naive-ui'
-import { ref, defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
+import {NMenu} from 'naive-ui'
+import {ref, watch,defineProps} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
+import {useAsyncRouteStore} from "@/stores/modules/asyncRoute";
+import {generatorMenu} from "@/utils";
 
-const collapsed = ref(false)
-const menus = ref([])
 const router = useRouter()
-const renderRouter = router.options.routes
+const currentRoute = useRoute() // 当前路由
+const asyncRouter = useAsyncRouteStore()
 
-// console.log(menus);
-renderRouter.forEach(item => {
-  if (!item.hidden) {
-    item.children.forEach(r => {
-      const { icon, title } = r.meta
-      menus.value.push({
-        label: title
-      })
-    })
+defineProps({
+  collapsed: {
+    type: Boolean
   }
 })
 
+const menus = ref(generatorMenu(asyncRouter.getMenus))
+const activeKey = ref(currentRoute.name)
+
+// 页面路由变化，切换菜单选中状态
+watch(
+    () => currentRoute.fullPath,
+    () => {
+      if (activeKey.value !== currentRoute.name) {
+        activeKey.value = currentRoute.name
+      }
+    }
+);
+
+function handleUpdateValue(key) {
+  // 防止闪烁
+  activeKey.value = key
+  router.push({name: key});
+}
 
 
-console.log(renderRouter)
-console.log(menus.value)
+
 </script>
 
 <style scoped lang="scss">
-.logo {
-  font-weight: 600;
-  font-size: 18px;
-  text-align: center;
-  margin: 20px 0;
+.logo{
+  white-space: nowrap;
+  img {
+    height: 35px;
+  }
 }
 </style>

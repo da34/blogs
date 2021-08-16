@@ -5,15 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/exception/403.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/exception/404.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/exception/500.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/exception/developing.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/exception/load-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/exception/nodata.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Application/Application.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CountTo/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layout/components/MainView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/tailwind.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/TagArticle.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/router-guards.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/router-guards.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/modules/asyncRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/modules/asyncRoute.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/modules/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Storage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/exception/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/exception/404.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +47,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="SCSS File" />
         <option value="Vue Single File Component" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -41,7 +65,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1teTyLy72OlBEfyY0OMZta5yv1I" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,7 +76,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -61,9 +87,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\github\blog\blog-admin\src\assets\images" />
       <recent name="H:\github\blog\blog-admin\src\styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\github\blog\blog-admin\src\views\dashboard\console" />
       <recent name="H:\github\blog\blog-admin\src\utils\http" />
       <recent name="H:\github\blog\blog-admin\src\assets\scss" />
       <recent name="H:\github\blog\blog-admin\src\views\dash-board" />
@@ -81,7 +109,7 @@
       <workItem from="1624444342744" duration="22000" />
       <workItem from="1628521783351" duration="11165000" />
       <workItem from="1628837326089" duration="6165000" />
-      <workItem from="1628845853035" duration="16286000" />
+      <workItem from="1628845853035" duration="58502000" />
     </task>
     <servers />
   </component>

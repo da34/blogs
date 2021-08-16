@@ -16,19 +16,7 @@ export const useUserStore = defineStore('app-user', {
   getters: {
     getToken() {
       return this.token;
-    },
-    getAvatar() {
-      return this.avatar;
-    },
-    getNickname() {
-      return this.username;
-    },
-    getPermissions() {
-      return this.permissions;
-    },
-    getUserInfo() {
-      return this.info;
-    },
+    }
   },
   actions: {
     setToken(token) {
@@ -37,11 +25,11 @@ export const useUserStore = defineStore('app-user', {
     setAvatar(avatar) {
       this.avatar = avatar;
     },
+    setUsername(username) {
+      this.username = username;
+    },
     setPermissions(permissions) {
       this.permissions = permissions;
-    },
-    setUserInfo(info) {
-      this.info = info;
     },
     // 登录
     async login(userInfo) {
@@ -52,7 +40,6 @@ export const useUserStore = defineStore('app-user', {
           const ex = 7 * 24 * 60 * 60 * 1000;
           storage.set(ACCESS_TOKEN, result.token, ex);
           this.setToken(result.token);
-          this.setUserInfo(result);
         }
         return Promise.resolve(response);
       } catch (e) {
@@ -67,13 +54,15 @@ export const useUserStore = defineStore('app-user', {
         getUserInfo()
           .then((res) => {
             const result = res;
-            if (result.permissions) {
-              that.setPermissions(result.permissions);
-              that.setUserInfo(result);
+            const { permissions, avatar, username } = result
+            if (permissions) {
+              that.setPermissions(permissions);
             } else {
               reject(new Error('getInfo: permissionsList must be a non-null array !'));
             }
-            that.setAvatar(result.avatar);
+            // console.log(permissions, avatar, username)
+            that.setAvatar(avatar);
+            that.setUsername(username);
             resolve(res);
           })
           .catch((error) => {
@@ -85,7 +74,6 @@ export const useUserStore = defineStore('app-user', {
     // 登出
     async logout() {
       this.setPermissions([]);
-      this.setUserInfo('');
       storage.remove(ACCESS_TOKEN);
       return Promise.resolve('');
     },

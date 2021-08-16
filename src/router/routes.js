@@ -1,6 +1,7 @@
 import { renderIcon } from '@/utils'
-const routeName = 'Dashboard';
-const RedirectName = 'Redirect';
+import { SpaceDashboardRound, ReportGmailerrorredSharp, AdminPanelSettingsRound } from '@vicons/material'
+const routeName = 'dashboard';
+const RedirectName = 'redirect';
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -14,60 +15,10 @@ const RedirectName = 'Redirect';
 import Layout from '@/layout/index.vue'
 const constantRouters = [
   {
-    path: '/',
-    name: routeName,
-    component: Layout,
-    meta: {
-      title: 'Dashboard',
-      // icon: renderIcon(DashboardOutlined),
-      // permissions: ['super_admin', 'admin'],
-      sort: 0,
-    },
-    redirect: '/dashboard',
-    children: [
-      {
-        path: '/dashboard',
-        name: `${routeName}_dashboard`,
-        component: () => import('@/views/dashboard/console.vue'),
-        meta: { title: '控制台', keepAlive: true }
-      }
-    ]
-  },
-  {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     hidden: true,
     component: () => import('@/views/login/index.vue')
-  },
-  // {
-  //   path: '/404',
-  //   name: 'error',
-  //   hidden: true,
-  //   component: () => import('@/views/ErrPage/index')
-  // },
-  // {
-  //   path: '/refresh',
-  //   name: 'refresh',
-  //   hidden: true,
-  //   component: Refresh
-  // }
-  {
-    path: '/:path(.*)*',
-    name: 'ErrorPage',
-    component: Layout,
-    meta: {
-      title: 'ErrorPage',
-    },
-    children: [
-      {
-        path: '/:path(.*)*',
-        name: 'ErrorPageSon',
-        component: () => import('@/views/exception/404.vue'),
-        meta: {
-          title: 'ErrorPage',
-        },
-      },
-    ],
   },
   {
     path: '/redirect',
@@ -76,6 +27,7 @@ const constantRouters = [
     meta: {
       title: RedirectName,
     },
+    hidden: true,
     children: [
       {
         path: '/redirect/:path(.*)',
@@ -91,16 +43,39 @@ const constantRouters = [
 
 const asyncRoutes = [
   {
+    path: '/',
+    name: routeName,
+    component: Layout,
+    meta: {
+      title: 'Dashboard',
+      alwaysShow: true,
+      icon: renderIcon(SpaceDashboardRound),
+      // permissions: ['super_admin', 'admin'],
+      sort: 0,
+    },
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        name: `${routeName}_dashboard`,
+        // icon: renderIcon(SpaceDashboardRound),
+        component: () => import('@/views/dashboard/console/console.vue'),
+        meta: { title: '控制台', keepAlive: true }
+      }
+    ]
+  },
+  {
     path: '/test',
-    name: 'Test',
+    name: 'test',
     component: Layout,
     meta: {
       title: 'Test',
+      icon: renderIcon(AdminPanelSettingsRound),
     },
     children: [
       {
-        path: '/redirect/1111111',
-        name: 'Test1',
+        path: 'redirect/1111111',
+        name: 'test1',
         component: () => import('@/views/redirect/index.vue'),
         meta: {
           title: 'super_admin 测试',
@@ -108,16 +83,37 @@ const asyncRoutes = [
         },
       },
       {
-        path: '/redirect/22222222',
-        name: 'Test2',
+        path: 'redirect/22222222',
+        name: 'test2',
         component: () => import('@/views/redirect/index.vue'),
         meta: {
-          title: 'admin 测试',
-          permissions: ['admin'],
+          title: 'admin,super_admin 测试',
+          permissions: ['admin', 'super_admin'],
         },
       },
     ],
-  }
+  },
+  {
+    path: '/:path(.*)*',
+    name: 'errorPage',
+    component: Layout,
+    meta: {
+      title: '错误页',
+      sort: 1
+      // icon: renderIcon(ReportGmailerrorredSharp),
+    },
+    children: [
+      {
+        path: '/:path(.*)*',
+        name: 'errorPageSon',
+        icon: renderIcon(ReportGmailerrorredSharp),
+        component: () => import('@/views/exception/404.vue'),
+        meta: {
+          title: '404',
+        },
+      },
+    ],
+  },
 ]
 
 export {

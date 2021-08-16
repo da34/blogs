@@ -1,14 +1,12 @@
 <template>
-  <n-loading-bar-provider>
-    <n-message-provider>
+  <NConfigProvider>
+    <Application>
       <router-view/>
-    </n-message-provider>
-  </n-loading-bar-provider>
+    </Application>
+  </NConfigProvider>
 </template>
 
 <script setup>
-import {NLoadingBarProvider, NMessageProvider,} from 'naive-ui'
+import Application from "@/components/Application/Application.vue";
+import {NConfigProvider} from 'naive-ui'
 </script>
-
-<style>
-</style>
