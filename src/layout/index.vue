@@ -16,7 +16,7 @@
       <NLayoutHeader bordered>
         <PageHeader v-model:collapsed="collapsed"/>
       </NLayoutHeader>
-      <NLayoutContent position="absolute" content-style="margin: 0 10px;">
+      <NLayoutContent position="absolute" content-style="margin: 0 10px; margin-top: 15px;">
         <PageMainView/>
       </NLayoutContent>
     </NLayout>

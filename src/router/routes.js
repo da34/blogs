@@ -1,7 +1,8 @@
 import { renderIcon } from '@/utils'
-import { SpaceDashboardRound, ReportGmailerrorredSharp, AdminPanelSettingsRound } from '@vicons/material'
+import { SpaceDashboardRound, ReportGmailerrorredSharp, AdminPanelSettingsRound,FilterListTwotone } from '@vicons/material'
 const routeName = 'dashboard';
 const RedirectName = 'redirect';
+const ContentName = 'content';
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -65,27 +66,28 @@ const asyncRoutes = [
     ]
   },
   {
-    path: '/test',
-    name: 'test',
+    path: '/jurisdiction',
+    name: 'jurisdiction',
     component: Layout,
     meta: {
       title: 'Test',
       icon: renderIcon(AdminPanelSettingsRound),
+      sort: 99,
     },
     children: [
       {
-        path: 'redirect/1111111',
-        name: 'test1',
-        component: () => import('@/views/redirect/index.vue'),
+        path: 'super_admin',
+        name: 'super_admin',
+        component: () => import('@/views/jurisdiction/super_admin.vue'),
         meta: {
           title: 'super_admin 测试',
           permissions: ['super_admin'],
         },
       },
       {
-        path: 'redirect/22222222',
-        name: 'test2',
-        component: () => import('@/views/redirect/index.vue'),
+        path: 'admin',
+        name: 'admin',
+        component: () => import('@/views/jurisdiction/admin.vue'),
         meta: {
           title: 'admin,super_admin 测试',
           permissions: ['admin', 'super_admin'],
@@ -94,12 +96,39 @@ const asyncRoutes = [
     ],
   },
   {
+    path: '/content',
+    name: ContentName,
+    component: Layout,
+    meta: {
+      title: '文章管理',
+      icon: renderIcon(FilterListTwotone),
+      sort: 1,
+    },
+    redirect: '/content/list',
+    children: [
+      {
+        path: 'list',
+        name: `${ContentName}_list`,
+        // icon: renderIcon(SpaceDashboardRound),
+        component: () => import('@/views/content/article/list/index.vue'),
+        meta: { title: '文章列表', keepAlive: true }
+      },
+      {
+        path: 'tag/list',
+        name: `${ContentName}_tag_list`,
+        // icon: renderIcon(SpaceDashboardRound),
+        component: () => import('@/views/content/tag/index.vue'),
+        meta: { title: '标签列表', keepAlive: true }
+      }
+    ]
+  },
+  {
     path: '/:path(.*)*',
     name: 'errorPage',
     component: Layout,
     meta: {
       title: '错误页',
-      sort: 1
+      sort: 100
       // icon: renderIcon(ReportGmailerrorredSharp),
     },
     children: [

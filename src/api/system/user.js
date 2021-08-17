@@ -5,7 +5,7 @@ import http from '@/utils/http/request';
  */
 export function getUserInfo() {
   return http.request({
-    url: '/admin_info',
+    url: 'admin_info',
     method: 'get',
   });
 }
@@ -16,7 +16,7 @@ export function getUserInfo() {
 export function login(data) {
   return http.request(
     {
-      url: '/login',
+      url: 'login',
       method: 'POST',
       data,
     },
@@ -31,7 +31,7 @@ export function login(data) {
  */
 export function logout(params) {
   return http.request({
-    url: '/login/logout',
+    url: 'login/logout',
     method: 'POST',
     params,
   });
