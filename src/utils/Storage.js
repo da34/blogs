@@ -92,10 +92,15 @@ export const createStorage = ({prefixKey = '', storage = localStorage} = {}) => 
      * @param name
      */
     getCookie(name) {
+      // console.log(name)
       const cookieArr = document.cookie.split('; ');
+      // console.log(cookieArr)
       for (let i = 0, length = cookieArr.length; i < length; i++) {
         const kv = cookieArr[i].split('=');
-        if (kv[0] === this.getKey(name)) {
+        // if (kv[0] === this.getKey(name)) {
+        //   return kv[1];
+        // }
+        if (kv[0] === name) {
           return kv[1];
         }
       }

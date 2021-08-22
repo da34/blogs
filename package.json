@@ -21,14 +21,14 @@
     "naive-ui": "^2.16.2",
     "pinia": "^2.0.0-rc.4",
     "qiniu-js": "^3.3.1",
+    "vditor": "^3.8.6",
     "vue": "^3.2.1",
     "vue-router": "^4.0.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.2.7",
     "@vitejs/plugin-vue": "^1.2.3",
-    "@vitejs/plugin-vue-jsx": "^1.1.7",
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/compiler-sfc": "^3.2.4",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
     "sass": "^1.34.1",

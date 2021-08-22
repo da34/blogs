@@ -1,8 +1,19 @@
 import { renderIcon } from '@/utils'
-import { SpaceDashboardRound, ReportGmailerrorredSharp, AdminPanelSettingsRound,FilterListTwotone } from '@vicons/material'
+import {
+  SpaceDashboardRound,
+  ReportGmailerrorredSharp,
+  AdminPanelSettingsRound,
+  ContentPasteTwotone,
+  SettingsInputSvideoTwotone,
+} from '@vicons/material'
+import {
+  MessageTwotone,
+} from '@vicons/antd'
 const routeName = 'dashboard';
 const RedirectName = 'redirect';
 const ContentName = 'content';
+const MessageName = 'message';
+const SystemName = 'system';
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -100,28 +111,85 @@ const asyncRoutes = [
     name: ContentName,
     component: Layout,
     meta: {
-      title: '文章管理',
-      icon: renderIcon(FilterListTwotone),
-      sort: 1,
+      title: '内容管理',
+      icon: renderIcon(ContentPasteTwotone),
+      // sort: 1,
     },
     redirect: '/content/list',
     children: [
       {
         path: 'list',
         name: `${ContentName}_list`,
-        // icon: renderIcon(SpaceDashboardRound),
         component: () => import('@/views/content/article/list/index.vue'),
         meta: { title: '文章列表', keepAlive: true }
       },
       {
+        path: 'action',
+        name: `${ContentName}_action`,
+        component: () => import('@/views/content/article/action/index.vue'),
+        hidden: true,
+        meta: { title: '文章操作' }
+      },
+      {
         path: 'tag/list',
         name: `${ContentName}_tag_list`,
-        // icon: renderIcon(SpaceDashboardRound),
         component: () => import('@/views/content/tag/index.vue'),
         meta: { title: '标签列表', keepAlive: true }
+      },
+      {
+        path: 'link/list',
+        name: `${ContentName}_link_list`,
+        component: () => import('@/views/content/link/index.vue'),
+        meta: { title: '友联列表', keepAlive: true }
       }
     ]
   },
+  {
+    path: '/message',
+    name: MessageName,
+    component: Layout,
+    meta: {
+      alwaysShow: true,
+      title: '消息管理',
+      icon: renderIcon(MessageTwotone),
+      // sort: 2,
+    },
+    redirect: '/message/comment',
+    children: [
+      {
+        path: 'comment',
+        name: `${MessageName}_comment`,
+        component: () => import('@/views/message/comment/index.vue'),
+        meta: { title: '评论管理', keepAlive: true }
+      }
+    ]
+  },
+  // {
+  //   path: '/system',
+  //   name: SystemName,
+  //   component: Layout,
+  //   meta: {
+  //     alwaysShow: true,
+  //     title: '系统管理',
+  //     icon: renderIcon(SettingsInputSvideoTwotone),
+  //     // sort: 2,
+  //   },
+  //   // redirect: '/message/site',
+  //   children: [
+  //     {
+  //       path: 'site',
+  //       name: `${SystemName}_site`,
+  //       component: () => import('@/views/system/site/index.vue'),
+  //       meta: { title: '网站配置', keepAlive: true }
+  //     },
+  //     {
+  //       path: 'system_config',
+  //       name: `${SystemName}_system_config`,
+  //       component: () => import('@/views/system/config/index.vue'),
+  //       meta: { title: '系统配置', keepAlive: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/:path(.*)*',
     name: 'errorPage',

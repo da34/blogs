@@ -11,7 +11,7 @@
       <NBreadcrumb class="ml-8">
         <template v-for="breadcrumb in breadcrumbList" :key="breadcrumb.label">
           <NBreadcrumbItem v-if="breadcrumb.children.length > 1">
-            <NDropdown :options="breadcrumb.children" @on-select="breadcrumbSelect">{{ breadcrumb.label }}</NDropdown>
+            <NDropdown :options="breadcrumb.children" @select="handleSelect">{{ breadcrumb.label }}</NDropdown>
           </NBreadcrumbItem>
           <NBreadcrumbItem v-else>
             <span>{{ breadcrumb.label }}</span>
@@ -52,24 +52,26 @@ defineProps({
 
 // 面包屑
 const generator = (routeMap) => {
-  return routeMap.map(item => {
-    const currentMenu = {
-      ...item,
-      label: item.meta.title,
-      key: item.name
-    };
-    if (item.children?.length > 0) {
-      currentMenu.children = generator(item.children);
-    }
-    return currentMenu;
-  })
+  return routeMap
+      .filter(item => !item.hidden)
+      .map(item => {
+        const currentMenu = {
+          ...item,
+          label: item.meta.title,
+          key: item.name
+        };
+        if (item.children?.length > 0) {
+          currentMenu.children = generator(item.children);
+        }
+        return currentMenu;
+      })
 }
 
 const breadcrumbList = computed(() => {
   return generator(route.matched);
 });
 
-function breadcrumbSelect(key) {
+function handleSelect(key) {
   router.push({name: key})
 }
 
@@ -102,7 +104,8 @@ const doLogout = () => {
             })
             .finally(() => location.reload());
 
-      } catch (e) {}
+      } catch (e) {
+      }
     }
   });
 };

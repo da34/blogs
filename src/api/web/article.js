@@ -13,7 +13,7 @@ export function getArticleTop() {
  */
 export function getArticleNew() {
   return http.request({
-    url: 'content/articleNew',
+    url: 'contents/new',
     method: 'get',
   });
 }
@@ -26,5 +26,18 @@ export function getArticleList(params) {
     url: 'contents',
     method: 'get',
     params
+  });
+}
+
+/**
+ * @description: 更改文章各个状态
+ */
+export function changeArticleState(data) {
+  return http.request({
+    url: 'content/stateToggle',
+    method: 'put',
+    data
+  },{
+    isShowSuccessMessage: true
   });
 }

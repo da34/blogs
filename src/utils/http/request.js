@@ -3,7 +3,8 @@ import httpEnum from './http-type'
 import router from '@/router';
 import {useUserStore} from '@/stores/modules/user'
 import {storage} from '@/utils/Storage';
-import { NAxios } from './NAxios'
+import {NAxios} from './NAxios'
+import {checkStatus} from "./checkStatus";
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -13,7 +14,7 @@ const transform = {
    * @description: 处理响应数据
    */
   transformResponseData: (res, options) => {
-    const {$message: Message} = window;
+    const {$message} = window;
     const {
       isTransformResponse,
       isShowSuccessMessage
@@ -39,10 +40,10 @@ const transform = {
     if (isShowSuccessMessage) {
       if (hasSuccess) {
         // 是否显示自定义信息提示
-        Message.success(message || '操作成功！');
-      } else if (!hasSuccess) {
+        $message.success(message || '操作成功！');
+      } else {
         // 是否显示自定义信息提示
-        Message.error(message || '操作失败！');
+        $message.error(message || '操作失败！');
       }
     }
 
@@ -50,23 +51,24 @@ const transform = {
     if (code === httpEnum.SUCCESS) {
       return result;
     }
+
     // 接口请求错误，统一提示错误信息
-    if (code === httpEnum.ERROR) {
+    if (code === httpEnum.ERROR && !isShowSuccessMessage) {
       if (message) {
-        Message.error(data.message);
-        Promise.reject(new Error(message));
+        $message.error(data.message);
+        return reject(new Error(message));
       } else {
         const msg = '操作失败,系统异常!';
-        Message.error(msg);
-        Promise.reject(new Error(msg));
+        $message.error(msg);
+        return reject(new Error(msg));
       }
-      return reject();
+      // return
     }
 
     // 这里逻辑可以根据项目进行修改
-    if (!hasSuccess) {
-      return reject(new Error(message));
-    }
+    // if (!hasSuccess) {
+    //   return reject(new Error(message));
+    // }
 
     return data;
   },
@@ -78,9 +80,11 @@ const transform = {
     // 请求之前处理config
     const userStore = useUserStore();
     const token = userStore.getToken;
+    const csrfToken =  storage.getCookie('csrfToken')
     if (token) {
       // jwt token
       config.headers['yujie-token'] = token;
+      config.headers['yu-csrf-token'] = csrfToken;
     }
     return config;
   },
@@ -93,12 +97,12 @@ const transform = {
     const {response, code, message} = error || {};
     // TODO 此处要根据后端接口返回格式修改
     const msg = response && response.data && response.data.message ? response.data.message : '';
-    const err = error.toString();
-    try {
-      Message.error(err);
-    } catch (error) {
-      throw new Error(error);
-    }
+    // const err = error.toString();
+    // try {
+    //   Message.error(err);
+    // } catch (error) {
+    //   throw new Error(error);
+    // }
     // 请求是否被取消
     const isCancel = axios.isCancel(error);
     if (!isCancel) {
@@ -121,7 +125,7 @@ const Axios = new NAxios({
     // 需要对返回数据进行处理
     isTransformResponse: true
   },
-  withCredentials: false,
+  // withCredentials: true,
 });
 
 export default Axios;

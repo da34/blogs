@@ -16,14 +16,14 @@
       <NLayoutHeader bordered>
         <PageHeader v-model:collapsed="collapsed"/>
       </NLayoutHeader>
-      <NLayoutContent position="absolute" content-style="margin: 0 10px; margin-top: 15px;">
+      <NLayoutContent position="absolute" content-style="margin: 15px;">
         <PageMainView/>
       </NLayoutContent>
     </NLayout>
   </NLayout>
 </template>
 <script setup>
-import {NLayout, NLayoutHeader, NLayoutContent, NLayoutSider,useLoadingBar } from 'naive-ui'
+import {NLayout, NLayoutHeader, NLayoutContent, NLayoutSider,useLoadingBar,useMessage } from 'naive-ui'
 import PageSidebar from './components/Sidebar/index.vue'
 import PageMainView from "./components/MainView.vue";
 import PageHeader from "./components/Header/index.vue";
@@ -33,7 +33,8 @@ const collapsed = ref(false)
 onMounted(() => {
   //挂载在 window 方便与在js中使用
   window['$loading'] = useLoadingBar();
-  window['$loading'].finish();
+  window['$message'] = useMessage();
+
 });
 
 </script>

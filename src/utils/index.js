@@ -1,11 +1,19 @@
 import { h } from 'vue';
 import { NIcon } from 'naive-ui';
+import dayjs from 'dayjs'
 
 /**
  * render 图标
  * */
 export function renderIcon(icon) {
   return () => h(NIcon, null, { default: () => h(icon) });
+}
+
+/**
+ * 格式化时间
+ * */
+export function formatDate(date, str = 'YYYY-MM-DD HH:mm') {
+  return dayjs(date).format(str)
 }
 
 

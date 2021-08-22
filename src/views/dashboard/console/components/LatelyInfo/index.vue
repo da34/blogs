@@ -8,7 +8,7 @@
             <NListItem v-for="article in articles">
               <NThing :title="article.title">
                 <template #description>
-                  <p class="text-xs text-gray-500">{{ format(article.createdAt) }}</p>
+                  <p class="text-xs text-gray-500">{{ formatDate(article.createdAt) }}</p>
                 </template>
               </NThing>
             </NListItem>
@@ -31,7 +31,7 @@
                 />
               </template>
               <NThing :title="comment.nickName" :description="comment.text">
-                <p class="text-xs text-gray-500">{{ format(comment.createdAt) }}</p>
+                <p class="text-xs text-gray-500">{{ formatDate(comment.createdAt) }}</p>
               </NThing>
             </NListItem>
           </NList>
@@ -43,7 +43,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import dayjs from 'dayjs'
+import {formatDate} from "@/utils";
 import {NGrid, NGi, NCard, NList, NListItem, NThing, NAvatar, NSkeleton, NSpace} from 'naive-ui'
 import {getArticleNew} from "@/api/web/article";
 import {getCommentNew} from "@/api/web/comment";
@@ -57,9 +57,6 @@ Promise.all([getArticleNew(), getCommentNew()]).then(res => {
   [articles.value, comments.value] = res
 }).finally(() => loading.value = false)
 
-function format(date) {
-  return dayjs(date).format('YYYY-MM-DD HH:mm')
-}
 </script>
 
 <style scoped lang="scss">
