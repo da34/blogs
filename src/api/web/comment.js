@@ -12,9 +12,10 @@ export function getCommentNew() {
 /**
  * @description: 获取评论列表
  */
-export function getCommentList() {
+export function getCommentList(params) {
   return http.request({
     url: 'comments',
     method: 'get',
+    params
   });
 }

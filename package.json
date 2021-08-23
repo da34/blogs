@@ -21,6 +21,7 @@
     "naive-ui": "^2.16.2",
     "pinia": "^2.0.0-rc.4",
     "qiniu-js": "^3.3.1",
+    "ua-parser-js": "^0.7.28",
     "vditor": "^3.8.6",
     "vue": "^3.2.1",
     "vue-router": "^4.0.8"

@@ -5,38 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/BasicTable/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BasicTable/useColumns.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/content/article/action/public.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/content/tag/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/message/comment/columns.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/message/comment/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/system/config/email.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/system/config/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/system/site/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/web/link.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/content/link/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/article.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/tag.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/naive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/naive.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/common.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Storage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/tag/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -75,7 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/message/comment" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/content/link" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -86,8 +66,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="H:\github\blog\blog-admin\src\views\message\comment" />
       <recent name="H:\github\blog\blog-admin\src\views\content\link" />
+      <recent name="H:\github\blog\blog-admin\src\views\message\comment" />
       <recent name="H:\github\blog\blog-admin\public" />
       <recent name="H:\github\blog\blog-admin\src\assets\images" />
       <recent name="H:\github\blog\blog-admin\src\styles" />
@@ -113,7 +93,8 @@
       <workItem from="1628521783351" duration="11165000" />
       <workItem from="1628837326089" duration="6165000" />
       <workItem from="1628845853035" duration="65893000" />
-      <workItem from="1629122626469" duration="88310000" />
+      <workItem from="1629122626469" duration="90566000" />
+      <workItem from="1629695414229" duration="10622000" />
     </task>
     <servers />
   </component>
@@ -130,5 +111,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
