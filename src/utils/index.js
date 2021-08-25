@@ -1,12 +1,14 @@
-import { h } from 'vue';
-import { NIcon } from 'naive-ui';
+import {h, ref} from 'vue';
+import {NIcon} from 'naive-ui';
 import dayjs from 'dayjs'
+import * as qiniu from 'qiniu-js'
+import {getQiNiuToken} from "@/api/system/config";
 
 /**
  * render 图标
  * */
 export function renderIcon(icon) {
-  return () => h(NIcon, null, { default: () => h(icon) });
+  return () => h(NIcon, null, {default: () => h(icon)});
 }
 
 /**
@@ -24,21 +26,21 @@ export function generatorMenu(routerMap) {
   return filterRouter(routerMap)
     .sort(sortRoute)
     .map((item) => {
-    const isRoot = isRootRouter(item);
-    const info = isRoot ? item.children[0] : item;
-    // const info = item;
-    const currentMenu = {
-      ...info,
-      ...info.meta,
-      label: info.meta?.title,
-      key: info.name,
-    };
-    // 是否有子菜单，并递归处理
-    if (info.children && info.children.length > 0) {
-      currentMenu.children = generatorMenu(info.children);
-    }
-    return currentMenu;
-  });
+      const isRoot = isRootRouter(item);
+      const info = isRoot ? item.children[0] : item;
+      // const info = item;
+      const currentMenu = {
+        ...info,
+        ...info.meta,
+        label: info.meta?.title,
+        key: info.name,
+      };
+      // 是否有子菜单，并递归处理
+      if (info.children && info.children.length > 0) {
+        currentMenu.children = generatorMenu(info.children);
+      }
+      return currentMenu;
+    });
 }
 
 /**
@@ -57,9 +59,43 @@ export function filterRouter(routerMap) {
       return !item.hidden
     })
 }
+
 /**
  * 排序Router
  * */
 function sortRoute(a, b) {
   return (a.meta?.sort || 0) - (b.meta?.sort || 0);
+}
+
+/**
+ * 七牛上传
+ * */
+export async function qiniuUpload(file) {
+  const token = await getQiNiuToken()
+  const observable = qiniu.upload(file, 'blog/' + file.name, token)
+  const message = window['$message']
+  let messageReactive = message.loading('上传中')
+  return new Promise((resolve, reject) => {
+    const observer = {
+      next({total}) {
+        const {percent} = total
+        if (percent >= 100 && messageReactive) {
+          messageReactive.destroy()
+          messageReactive = null
+        }
+      },
+      error(err){
+        message.error(err)
+        reject(err)
+      },
+      complete(res) {
+        message.success('上传成功')
+        resolve(res)
+      }
+    }
+    observable.subscribe(observer)
+  })
+
+  // 上传开始
+  // console.log(subscription)
 }

@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/api/web/link.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/content/link/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/system/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/system/menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Markdown/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/menu/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/menu/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/public.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/public.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -55,7 +56,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/content/link" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/api/system" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -66,11 +67,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\github\blog\blog-admin\src\api\system" />
+      <recent name="H:\github\blog\blog-admin\src\views" />
       <recent name="H:\github\blog\blog-admin\src\views\content\link" />
       <recent name="H:\github\blog\blog-admin\src\views\message\comment" />
       <recent name="H:\github\blog\blog-admin\public" />
-      <recent name="H:\github\blog\blog-admin\src\assets\images" />
-      <recent name="H:\github\blog\blog-admin\src\styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="H:\github\blog\blog-admin\src\views\system\systemConfig" />
@@ -94,7 +95,7 @@
       <workItem from="1628837326089" duration="6165000" />
       <workItem from="1628845853035" duration="65893000" />
       <workItem from="1629122626469" duration="90566000" />
-      <workItem from="1629695414229" duration="10622000" />
+      <workItem from="1629695414229" duration="30399000" />
     </task>
     <servers />
   </component>

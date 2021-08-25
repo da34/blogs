@@ -21,8 +21,9 @@
     >
       <NFormItem label="添加标签">
         <NSelect
+            multiple
             placeholder="请选择标签"
-            :options="typeOptions"
+            :options="tagOptions"
             v-model:value="article.tag"
         />
       </NFormItem>
@@ -74,14 +75,36 @@ import {
   NSelect, NRadio, NUpload, NUploadDragger, NText, NP, NRadioGroup, NSwitch
 } from 'naive-ui'
 import {FileUploadOutlined} from '@vicons/material'
-import {reactive, ref, inject} from "vue";
+import {reactive, ref, inject, computed} from "vue";
 
 const useShowModal = inject('showModal', false)
 
 const article = reactive({
   title: '',
-  content: ''
+  content: '',
+  type: 0,
+  commentDisabled: true,
+  shareStatement: true,
+  contentOutline: '',
 })
+
+const props = defineProps({
+  tags: {
+    type: Array,
+    default: () => []
+  }
+})
+
+
+const tagOptions = computed(() => {
+  const tags = []
+  props.tags.forEach(tag => {
+    tags.push({label: tag.name, value: tag.id})
+  })
+  return tags
+})
+
+
 
 function submitCallback() {
   useShowModal.value = false

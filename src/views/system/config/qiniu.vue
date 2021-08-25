@@ -1,30 +1,33 @@
 <template>
-  <NForm
-      :label-width="100"
-      :model="formValue"
-      label-placement="left"
-      :rules="rules"
-      ref="formRef"
-  >
-    <NFormItem label="上传域名" path="url">
-      <NInput v-model:value="formValue.url"/>
-    </NFormItem>
-    <NFormItem label="公钥" path="publicKey">
-      <NInput v-model:value="formValue.publicKey"/>
-    </NFormItem>
-    <NFormItem label="私钥" path="privateKey">
-      <NInput v-model:value="formValue.privateKey"/>
-    </NFormItem>
-    <NFormItem label="上传机房" path="zone">
-      <NSelect v-model:value="formValue.zone" :options="uploadZone"/>
-    </NFormItem>
-    <NFormItem label="存储区域" path="area">
-      <NInput v-model:value="formValue.area"/>
-    </NFormItem>
-    <NFormItem label="">
-      <NButton style="margin-left: 100px;" @click="handleValidateClick" attr-type="button" type="primary">保存</NButton>
-    </NFormItem>
-  </NForm>
+  <NSpin size="large" :show="showSpin">
+    <NForm
+        :label-width="100"
+        :model="formValue"
+        label-placement="left"
+        :rules="rules"
+        ref="formRef"
+    >
+
+      <NFormItem label="上传域名" path="url">
+        <NInput v-model:value="formValue.url"/>
+      </NFormItem>
+      <NFormItem label="公钥" path="publicKey">
+        <NInput v-model:value="formValue.publicKey"/>
+      </NFormItem>
+      <NFormItem label="私钥" path="privateKey">
+        <NInput type="password" v-model:value="formValue.privateKey"/>
+      </NFormItem>
+      <NFormItem label="上传机房" path="zone">
+        <NSelect v-model:value="formValue.zone" :options="uploadZone"/>
+      </NFormItem>
+      <NFormItem label="存储空间" path="area">
+        <NInput v-model:value="formValue.area"/>
+      </NFormItem>
+      <NFormItem label="">
+        <NButton style="margin-left: 100px;" @click="handleValidateClick" attr-type="button" type="primary">保存</NButton>
+      </NFormItem>
+    </NForm>
+  </NSpin>
 </template>
 
 <script setup>
@@ -36,10 +39,13 @@ import {
   NButton,
   useMessage,
   NSelect,
+  NSpin,
 } from 'naive-ui'
 import {FileUploadOutlined} from '@vicons/material'
+import {getQiNiuConfig, updateQiniu} from "@/api/system/config";
 
 const formRef = ref(null)
+const showSpin = ref(true)
 const message = useMessage()
 const uploadZone = [
   {label: '华东', value: 'qiniu.zone.Zone_z0'},
@@ -84,13 +90,20 @@ const rules = {
   }
 }
 
+// 获取七牛配置
+getQiniu()
+
+async function getQiniu() {
+  const data = await getQiNiuConfig()
+  formValue.value = data.value
+  showSpin.value = false
+}
+
+
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      message.success('Valid')
-    } else {
-      console.log(errors)
-      message.error('Invalid')
+      updateQiniu({value: formValue.value})
     }
   })
 }

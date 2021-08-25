@@ -5,6 +5,7 @@ import {
   AdminPanelSettingsRound,
   ContentPasteTwotone,
   SettingsInputSvideoTwotone,
+  WebAssetFilled,
 } from '@vicons/material'
 import {
   MessageTwotone,
@@ -14,6 +15,7 @@ const RedirectName = 'redirect';
 const ContentName = 'content';
 const MessageName = 'message';
 const SystemName = 'system';
+const WebName = 'web';
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -154,7 +156,6 @@ const asyncRoutes = [
       icon: renderIcon(MessageTwotone),
       // sort: 2,
     },
-    redirect: '/message/comment',
     children: [
       {
         path: 'comment',
@@ -187,6 +188,24 @@ const asyncRoutes = [
         name: `${SystemName}_system_config`,
         component: () => import('@/views/system/config/index.vue'),
         meta: { title: '系统配置', keepAlive: true }
+      }
+    ]
+  },
+  {
+    path: '/web',
+    name: WebName,
+    component: Layout,
+    meta: {
+      alwaysShow: true,
+      title: '门户管理',
+      icon: renderIcon(WebAssetFilled),
+    },
+    children: [
+      {
+        path: 'menu',
+        name: `${WebName}_menu`,
+        component: () => import('@/views/web/menu/index.vue'),
+        meta: { title: '菜单管理', keepAlive: true }
       }
     ]
   },
