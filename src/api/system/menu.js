@@ -10,3 +10,15 @@ export function getMenus() {
   });
 }
 
+/**
+ * @description: 创建菜单
+ */
+export function createMenu(data) {
+  return http.request({
+    url: 'menus',
+    method: 'post',
+    data
+  }, {
+    isShowSuccessMessage: true
+  });
+}

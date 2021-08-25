@@ -41,7 +41,6 @@ import {
   NSelect,
   NSpin,
 } from 'naive-ui'
-import {FileUploadOutlined} from '@vicons/material'
 import {getQiNiuConfig, updateQiniu} from "@/api/system/config";
 
 const formRef = ref(null)

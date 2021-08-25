@@ -1,0 +1,65 @@
+Arguments: 
+  D:\Nodejs\node.exe C:\Users\lsy\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add rollup-plugin-analyzer
+
+PATH: 
+  H:\github\blog\blog-admin\node_modules\.bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;G:\Goenv\bin;D:\Nodejs\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\lsy\AppData\Local\Microsoft\WindowsApps;C:\Users\lsy\go\bin;C:\Users\lsy\AppData\Roaming\npm;D:\Microsoft VS Code\bin;F:\Fiddler
+
+Yarn version: 
+  1.22.11
+
+Node version: 
+  14.17.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'H:\github\blog\blog-admin\node_modules\esbuild\esbuild.exe'
+
+npm manifest: 
+  {
+    "name": "blog-admin",
+    "version": "1.5.4",
+    "author": {
+      "name": "da34",
+      "email": "1255029618@qq.com"
+    },
+    "scripts": {
+      "dev": "vite",
+      "build": "vite build",
+      "serve": "vite preview"
+    },
+    "dependencies": {
+      "@icon-park/vue-next": "^1.3.5",
+      "@vueuse/core": "^5.3.0",
+      "axios": "^0.21.1",
+      "dayjs": "^1.10.6",
+      "echarts": "^5.1.2",
+      "lodash-es": "^4.17.21",
+      "naive-ui": "^2.16.2",
+      "pinia": "^2.0.0-rc.4",
+      "qiniu-js": "^3.3.1",
+      "ua-parser-js": "^0.7.28",
+      "vditor": "^3.8.6",
+      "vue": "^3.2.1",
+      "vue-router": "^4.0.8"
+    },
+    "devDependencies": {
+      "@tailwindcss/postcss7-compat": "^2.2.7",
+      "@vicons/antd": "^0.11.0",
+      "@vicons/material": "^0.11.0",
+      "@vitejs/plugin-vue": "^1.2.3",
+      "@vue/compiler-sfc": "^3.2.4",
+      "autoprefixer": "^9.8.6",
+      "postcss": "^7.0.36",
+      "sass": "^1.34.1",
+      "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7",
+      "vite": "^2.3.5"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

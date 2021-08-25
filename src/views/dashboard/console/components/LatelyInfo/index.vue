@@ -46,7 +46,7 @@ import {ref} from 'vue'
 import {formatDate} from "@/utils";
 import {NGrid, NGi, NCard, NList, NListItem, NThing, NAvatar, NSkeleton, NSpace} from 'naive-ui'
 import {getArticleNew} from "@/api/web/article";
-import {getCommentNew} from "@/api/web/menu";
+import {getCommentNew} from "@/api/web/comment";
 
 const loading = ref(true)
 const comments = ref([])
@@ -60,7 +60,7 @@ Promise.all([getArticleNew(), getCommentNew()]).then(res => {
 </script>
 
 <style scoped lang="scss">
->>>.n-thing-main__content {
+:deep .n-thing-main__content {
   margin-top: 5px!important;
 }
 </style>

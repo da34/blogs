@@ -14,7 +14,7 @@
           <NUploadDragger>
             <div style="margin-bottom: 12px;">
               <NIcon size="48" :depth="3">
-                <FileUploadOutlined/>
+                <Upload/>
               </NIcon>
             </div>
             <NText>点击或者拖动文件到该区域来上传</NText>
@@ -46,7 +46,7 @@
 <script setup>
 import {ref} from 'vue'
 import {NForm, NFormItem, NInput, NButton, useMessage, NCard,NUpload,NUploadDragger,NIcon} from 'naive-ui'
-import {FileUploadOutlined} from '@vicons/material'
+import {Upload} from '@icon-park/vue-next'
 
 const formRef = ref(null)
 const message = useMessage()

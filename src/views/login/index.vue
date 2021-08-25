@@ -17,7 +17,7 @@
             <n-input v-model:value="formInline.username" placeholder="请输入用户名">
               <template #prefix>
                 <n-icon size="18" color="#808695">
-                   <AccountCircleFilled />
+<!--                   <AccountCircleFilled />-->
                 </n-icon>
               </template>
             </n-input>
@@ -31,7 +31,7 @@
             >
               <template #prefix>
                 <n-icon size="18" color="#808695">
-                   <LockOutlined />
+<!--                   <LockOutlined />-->
                 </n-icon>
               </template>
             </n-input>
@@ -54,7 +54,7 @@ import {useRoute, useRouter} from 'vue-router';
 import { useUserStore } from '@/stores/modules/user';
 import {useMessage} from 'naive-ui';
 import httpEnum from '@/utils/http/http-type'
-import { AccountCircleFilled, LockOutlined } from '@vicons/material'
+// import { AccountCircleFilled, LockOutlined } from '@vicons/material'
 
 const formRef = ref(null);
 const messagePro = useMessage();

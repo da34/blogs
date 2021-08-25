@@ -84,7 +84,7 @@ export async function qiniuUpload(file) {
           messageReactive = null
         }
       },
-      error(err){
+      error(err) {
         message.error(err)
         reject(err)
       },
@@ -98,4 +98,22 @@ export async function qiniuUpload(file) {
 
   // 上传开始
   // console.log(subscription)
+}
+
+/**
+ * 获取对应的菜单
+ * */
+let result = null;
+
+export function getTreeItem(data, key) {
+  data.map(item => {
+    if (item.key === key) {
+      result = item;
+    } else {
+      if (item.children && item.children.length) {
+        getTreeItem(item.children, key);
+      }
+    }
+  })
+  return result
 }

@@ -31,7 +31,7 @@
         <NUpload class="w-2/3" action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f">
           <NUploadDragger>
             <NIcon size="48" :depth="3">
-              <FileUploadOutlined/>
+              <Upload/>
             </NIcon>
             <NP depth="3">上传封面</NP>
           </NUploadDragger>
@@ -74,7 +74,7 @@ import {
   NForm, NFormItem, NSpace, NInput, NButton, NModal, NIcon,
   NSelect, NRadio, NUpload, NUploadDragger, NText, NP, NRadioGroup, NSwitch
 } from 'naive-ui'
-import {FileUploadOutlined} from '@vicons/material'
+import {Upload} from '@icon-park/vue-next'
 import {reactive, ref, inject, computed} from "vue";
 
 const useShowModal = inject('showModal', false)

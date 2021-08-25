@@ -7,7 +7,7 @@
           <div v-else class="p-1 flex justify-between">
             <CountTo class="text-3xl" :endVal="stateCount.articleCount"/>
             <NIcon color="#69c0ff" size="35">
-              <ArticleFilled />
+              <AlignTextBothOne />
             </NIcon>
           </div>
         </NCard>
@@ -18,7 +18,7 @@
           <div v-else class="p-1 flex justify-between">
             <CountTo class="text-3xl" :endVal="stateCount.tagCount"/>
             <NIcon color="#ff85c0" size="35">
-              <TagTwotone />
+              <TagOne />
             </NIcon>
           </div>
         </NCard>
@@ -29,7 +29,7 @@
           <div v-else class="p-1 flex justify-between">
             <CountTo class="text-3xl" :endVal="stateCount.commentCount"/>
             <NIcon color="#5cdbd3" size="35">
-              <ModeCommentTwotone />
+              <CommentOne />
             </NIcon>
           </div>
         </NCard>
@@ -40,7 +40,7 @@
           <div v-else class="p-1 flex justify-between">
             <CountTo class="text-3xl" :endVal="stateCount.linkCount"/>
             <NIcon color="#5cdbd3" size="35">
-              <LinkOutlined />
+              <Peoples />
             </NIcon>
           </div>
         </NCard>
@@ -55,12 +55,11 @@
 <script setup>
 import {ref} from 'vue'
 import {NGrid, NGi, NCard, NSkeleton,NIcon} from 'naive-ui'
-import {ArticleFilled,ModeCommentTwotone} from '@vicons/material'
-import {TagTwotone,LinkOutlined} from '@vicons/antd'
 import CountTo from '@/components/CountTo/index.vue'
 import VisiArticle from './components/VisiArticle/index.vue'
 import LatelyInfo from './components/LatelyInfo/index.vue'
 import {getDashboardInfo} from "@/api/dashboard";
+import {AlignTextBothOne,TagOne,CommentOne,Peoples} from '@icon-park/vue-next'
 
 const loading = ref(true)
 const stateCount = ref({})
@@ -70,5 +69,3 @@ getDashboardInfo().then(res => {
 }).finally(() => loading.value = false)
 
 </script>
-<style scoped lang="scss">
-</style>

@@ -1,15 +1,6 @@
-import { renderIcon } from '@/utils'
-import {
-  SpaceDashboardRound,
-  ReportGmailerrorredSharp,
-  AdminPanelSettingsRound,
-  ContentPasteTwotone,
-  SettingsInputSvideoTwotone,
-  WebAssetFilled,
-} from '@vicons/material'
-import {
-  MessageTwotone,
-} from '@vicons/antd'
+import {renderIcon} from '@/utils'
+import {DashboardOne,Permissions,FileWord,MessageOne,System,Page,PageTemplate} from '@icon-park/vue-next'
+
 const routeName = 'dashboard';
 const RedirectName = 'redirect';
 const ContentName = 'content';
@@ -27,6 +18,7 @@ const WebName = 'web';
  * @param meta.sort 排序越小越排前
  * */
 import Layout from '@/layout/index.vue'
+
 const constantRouters = [
   {
     path: '/login',
@@ -63,7 +55,7 @@ const asyncRoutes = [
     meta: {
       title: 'Dashboard',
       alwaysShow: true,
-      icon: renderIcon(SpaceDashboardRound),
+      icon: renderIcon(DashboardOne),
       // permissions: ['super_admin', 'admin'],
       sort: 0,
     },
@@ -72,9 +64,8 @@ const asyncRoutes = [
       {
         path: 'dashboard',
         name: `${routeName}_dashboard`,
-        // icon: renderIcon(SpaceDashboardRound),
         component: () => import('@/views/dashboard/console/console.vue'),
-        meta: { title: '控制台', keepAlive: true }
+        meta: {title: '控制台', keepAlive: true}
       }
     ]
   },
@@ -84,7 +75,7 @@ const asyncRoutes = [
     component: Layout,
     meta: {
       title: 'Test',
-      icon: renderIcon(AdminPanelSettingsRound),
+      icon: renderIcon(Permissions),
       sort: 99,
     },
     children: [
@@ -114,7 +105,7 @@ const asyncRoutes = [
     component: Layout,
     meta: {
       title: '内容管理',
-      icon: renderIcon(ContentPasteTwotone),
+      icon: renderIcon(FileWord),
       // sort: 1,
     },
     redirect: '/content/list',
@@ -123,26 +114,26 @@ const asyncRoutes = [
         path: 'list',
         name: `${ContentName}_list`,
         component: () => import('@/views/content/article/list/index.vue'),
-        meta: { title: '文章列表', keepAlive: true }
+        meta: {title: '文章列表', keepAlive: true}
       },
       {
         path: 'action',
         name: `${ContentName}_action`,
         component: () => import('@/views/content/article/action/index.vue'),
         hidden: true,
-        meta: { title: '文章操作' }
+        meta: {title: '文章操作'}
       },
       {
         path: 'tag/list',
         name: `${ContentName}_tag_list`,
         component: () => import('@/views/content/tag/index.vue'),
-        meta: { title: '标签列表', keepAlive: true }
+        meta: {title: '标签列表', keepAlive: true}
       },
       {
         path: 'link/list',
         name: `${ContentName}_link_list`,
         component: () => import('@/views/content/link/index.vue'),
-        meta: { title: '友联列表', keepAlive: true }
+        meta: {title: '友联列表', keepAlive: true}
       }
     ]
   },
@@ -153,7 +144,7 @@ const asyncRoutes = [
     meta: {
       alwaysShow: true,
       title: '消息管理',
-      icon: renderIcon(MessageTwotone),
+      icon: renderIcon(MessageOne),
       // sort: 2,
     },
     children: [
@@ -161,7 +152,7 @@ const asyncRoutes = [
         path: 'comment',
         name: `${MessageName}_comment`,
         component: () => import('@/views/message/comment/index.vue'),
-        meta: { title: '评论管理', keepAlive: true }
+        meta: {title: '评论管理', keepAlive: true}
       }
     ]
   },
@@ -172,7 +163,7 @@ const asyncRoutes = [
     meta: {
       alwaysShow: true,
       title: '系统管理',
-      icon: renderIcon(SettingsInputSvideoTwotone),
+      icon: renderIcon(System),
       // sort: 2,
     },
     // redirect: '/message/site',
@@ -181,13 +172,13 @@ const asyncRoutes = [
         path: 'site',
         name: `${SystemName}_site`,
         component: () => import('@/views/system/site/index.vue'),
-        meta: { title: '网站配置', keepAlive: true }
+        meta: {title: '网站配置', keepAlive: true}
       },
       {
         path: 'system_config',
         name: `${SystemName}_system_config`,
         component: () => import('@/views/system/config/index.vue'),
-        meta: { title: '系统配置', keepAlive: true }
+        meta: {title: '系统配置', keepAlive: true}
       }
     ]
   },
@@ -198,14 +189,14 @@ const asyncRoutes = [
     meta: {
       alwaysShow: true,
       title: '门户管理',
-      icon: renderIcon(WebAssetFilled),
+      icon: renderIcon(Page),
     },
     children: [
       {
         path: 'menu',
         name: `${WebName}_menu`,
         component: () => import('@/views/web/menu/index.vue'),
-        meta: { title: '菜单管理', keepAlive: true }
+        meta: {title: '菜单管理', keepAlive: true}
       }
     ]
   },
@@ -222,7 +213,7 @@ const asyncRoutes = [
       {
         path: '/:path(.*)*',
         name: 'errorPageSon',
-        icon: renderIcon(ReportGmailerrorredSharp),
+        icon: renderIcon(PageTemplate),
         component: () => import('@/views/exception/404.vue'),
         meta: {
           title: '404',

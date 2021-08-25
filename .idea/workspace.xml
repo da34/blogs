@@ -5,19 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/api/system/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/system/menu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Markdown/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/menu/columns.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/menu/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/system/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/action/public.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/public.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/site/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/menu/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/menu/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +67,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="advanced.settings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -81,6 +86,16 @@
       <recent name="H:\github\blog\blog-admin\src\views\dashboard\console" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/blog-admin/dist/index.html?_ij_reload" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -95,7 +110,9 @@
       <workItem from="1628837326089" duration="6165000" />
       <workItem from="1628845853035" duration="65893000" />
       <workItem from="1629122626469" duration="90566000" />
-      <workItem from="1629695414229" duration="30399000" />
+      <workItem from="1629695414229" duration="35576000" />
+      <workItem from="1629871688378" duration="9592000" />
+      <workItem from="1629896698783" duration="6167000" />
     </task>
     <servers />
   </component>
@@ -113,5 +130,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
