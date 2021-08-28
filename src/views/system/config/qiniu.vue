@@ -32,15 +32,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {
-  NForm,
-  NFormItem,
-  NInput,
-  NButton,
-  useMessage,
-  NSelect,
-  NSpin,
-} from 'naive-ui'
+import {useMessage} from 'naive-ui'
 import {getQiNiuConfig, updateQiniu} from "@/api/system/config";
 
 const formRef = ref(null)

@@ -2,47 +2,90 @@
   <div>
     <NCard :segmented="{ content: 'hard' }" :bordered="false" size="small">
       <template #header>
-        <NButton type="primary" ghost icon-placement="right" @click="openCreateDrawer">
+        <NButton type="primary" ghost icon-placement="right" @click="addMenu">
           添加菜单
         </NButton>
       </template>
       <!--表格-->
       <div class="w-full menu">
-        <BasicTable :data="treeData" :columns="columns" :actionColumn="actionColumn" />
+        <BasicTable :data="treeData" :columns="columns" :rowKey="(row) => row.id" :actionColumn="actionColumn"/>
       </div>
     </NCard>
-    <CreateDrawer ref="createDrawerRef" :width="'50%'" />
+    <CreateDrawer ref="createDrawerRef" width="50%" :title="createTitle" @submitAfter="reload"
+                  :menuOptions="menuOptions"/>
   </div>
 </template>
 <script setup>
-import {ref, onMounted} from 'vue';
-import {useMessage} from 'naive-ui';
-import {getMenus} from '@/api/system/menu';
-import {columns,createActionColumn} from "./columns";
+import {ref, onMounted, toRaw, computed} from 'vue';
+import {useDialog, useMessage} from 'naive-ui';
+import {getMenus, delMenu} from '@/api/system/menu';
+import {columns, createActionColumn} from "./columns";
 import BasicTable from '@/components/BasicTable/index.vue'
-import {
-  NCard,
-  NButton
-} from 'naive-ui'
 import CreateDrawer from './CreateDrawer.vue';
+
 const createDrawerRef = ref();
 const message = useMessage();
+const dialog = useDialog();
 const treeData = ref([]);
 const loading = ref(true);
+const createTitle = ref('添加菜单');
 const actionColumn = createActionColumn({handleDel, handleEdit})
 
 onMounted(async () => {
-  const treeMenuList = await getMenus();
-  treeData.value = treeMenuList
-  loading.value = false;
+  reload()
 });
 
-function handleDel() {
+const menuOptions = computed(() => {
+  return treeData.value.map(item => {
+    return {
+      label: item.name,
+      value: item.id
+    }
+  })
+})
+
+console.log(menuOptions)
+
+function handleDel(row) {
+  dialog.warning({
+    title: '警告',
+    content: '你确定删除吗？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      delMenu(row.id)
+      reload()
+    }
+  })
+}
+
+function openCreateDrawer() {
+  const {openDrawer} = createDrawerRef.value;
+  openDrawer()
 
 }
-function openCreateDrawer() {
-  const { openDrawer } = createDrawerRef.value;
-  openDrawer();
+
+function addMenu() {
+  openCreateDrawer()
+  createTitle.value = '添加菜单'
+  createDrawerRef.value.handleReset()
 }
-function handleEdit() {}
+function handleEdit(row) {
+  openCreateDrawer()
+  createTitle.value = '编辑菜单'
+  createDrawerRef.value.formParams = {...toRaw(row)}
+}
+
+async function reload() {
+  const treeMenuList = await getMenus();
+  treeData.value = treeMenuList.map(item => {
+    if (!item.children.length) {
+      delete item.children
+    }
+    return item
+  })
+  loading.value = false;
+}
+
+
 </script>

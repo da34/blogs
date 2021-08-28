@@ -34,12 +34,11 @@
 </template>
 
 <script setup>
-import {ref, unref, toRaw} from 'vue'
-import {NButton, NCard, NForm, NFormItem, NInput, NSelect} from 'naive-ui'
+import {ref, toRaw} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-
-import {getCommentList} from "@/api/web/comment";
+import {getCommentList, delComment} from "@/api/web/comment";
 import {createActionColumn, columns} from './columns'
+import {useDialog} from "naive-ui";
 
 const formValue = ref({
   name: null,
@@ -57,12 +56,12 @@ const pagination = ref({
     fetchComments(opt)
   }
 })
+const dialog = useDialog()
 
 const options = ref([
-  {label: '删除', value: 0},
-  {label: '正常', value: 1},
-  {label: '不通过', value: 2},
-  {label: '需要人工复查', value: 3}
+  {label: '正常', value: 0},
+  {label: '不通过', value: 1},
+  {label: '需要人工复查', value: 2}
 ])
 
 const actionColumn = createActionColumn({handleDel})
@@ -79,12 +78,20 @@ async function fetchComments(opt = {}) {
 
 async function queryComments() {
   const opt = toRaw(formValue.value)
-  console.log(opt)
   await fetchComments(opt)
 }
 
-function handleDel(row) {
-  console.log(unref(row))
+function handleDel(record) {
+  dialog.warning({
+    title: '警告',
+    content: '你确定删除吗？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      delComment(record.id)
+      fetchComments()
+    }
+  })
 }
 </script>
 

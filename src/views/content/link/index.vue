@@ -77,10 +77,10 @@
 
 <script setup>
 import {ref} from 'vue'
-import {NButton, NCard, NEmpty, NImage, NSwitch, NTag, NForm, NFormItem, NInput, NModal, NAvatar} from 'naive-ui'
 import BasicTable from '@/components/BasicTable/index.vue'
 import {getLinks, delLink, createLink, editLink, statusToggle} from "@/api/web/link";
 import {columns, createActionColumn} from './columns'
+import {useDialog} from "naive-ui";
 
 const pagination = ref({
   page: 1,
@@ -99,6 +99,7 @@ const data = ref([])
 const useShowModal = ref(false)
 const formData = ref({})
 const titleType = ref('new')
+const dialog = useDialog()
 
 const actionColumn = createActionColumn({handleDel, handleEdit})
 const createColumn = columns({handleUpdate})
@@ -153,8 +154,16 @@ function handleValidateClick(e) {
 
 
 function handleDel(record) {
-  delLink(record.id)
-  reload()
+  dialog.warning({
+    title: '警告',
+    content: '你确定删除吗？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      delLink(record.id)
+      reload()
+    }
+  })
 }
 
 function handleEdit(record) {

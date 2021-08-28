@@ -13,7 +13,6 @@
 
 <script setup>
 import {ref} from 'vue'
-import {NTabs,NTabPane,NCard} from 'naive-ui'
 import QiNiu from './qiniu.vue'
 import Email from './email.vue'
 </script>

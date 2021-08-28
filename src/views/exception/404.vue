@@ -11,7 +11,6 @@
 </template>
 
 <script setup>
-import { NButton } from 'naive-ui'
 import {useRouter} from 'vue-router';
 
 const router = useRouter();

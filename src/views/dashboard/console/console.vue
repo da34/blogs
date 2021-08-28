@@ -54,7 +54,6 @@
 </template>
 <script setup>
 import {ref} from 'vue'
-import {NGrid, NGi, NCard, NSkeleton,NIcon} from 'naive-ui'
 import CountTo from '@/components/CountTo/index.vue'
 import VisiArticle from './components/VisiArticle/index.vue'
 import LatelyInfo from './components/LatelyInfo/index.vue'

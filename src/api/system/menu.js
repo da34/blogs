@@ -22,3 +22,15 @@ export function createMenu(data) {
     isShowSuccessMessage: true
   });
 }
+
+/**
+ * @description: 删除菜单
+ */
+export function delMenu(id) {
+  return http.request({
+    url: 'menus/' + id,
+    method: 'delete'
+  }, {
+    isShowSuccessMessage: true
+  });
+}

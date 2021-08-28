@@ -19,3 +19,15 @@ export function getCommentList(params) {
     params
   });
 }
+
+/**
+ * @description: 删除评论
+ */
+export function delComment(id) {
+  return http.request({
+    url: 'comments/' + id,
+    method: 'delete',
+  },{
+    isShowSuccessMessage: true
+  });
+}

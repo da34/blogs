@@ -1,7 +1,6 @@
 <script>
   import { defineComponent, onBeforeMount } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import { NEmpty } from 'naive-ui';
   export default defineComponent({
     name: 'Redirect',
     setup() {

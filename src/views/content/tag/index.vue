@@ -67,11 +67,11 @@
 
 <script setup>
 import {h, ref} from 'vue'
-import {NButton, NCard, NEmpty, NImage, NSwitch, NTag, NForm, NFormItem, NInput, NModal} from 'naive-ui'
 import BasicTable from '@/components/BasicTable/index.vue'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 import {getTagList, delTag, createTag, editTag} from "@/api/web/tag";
 import {formatDate} from "@/utils";
+import {useDialog} from "naive-ui";
 
 const pagination = ref({
   page: 1,
@@ -95,6 +95,7 @@ const formData = ref({
   id: null
 })
 const titleType = ref('new')
+const dialog = useDialog()
 
 //表格
 const rules = {
@@ -178,8 +179,16 @@ function createActions(record) {
 }
 
 function handleDel(record) {
-  delTag(record.id)
-  reload()
+  dialog.warning({
+    title: '警告',
+    content: '你确定删除吗？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      delTag(record.id)
+      reload()
+    }
+  })
 }
 
 function handleEdit(record) {

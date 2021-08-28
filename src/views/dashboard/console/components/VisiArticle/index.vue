@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-import {NGrid, NGi,NCard} from 'naive-ui'
 import TagArticle from './TagArticle.vue'
 import ArticleTop from './ArticleTop.vue'
 </script>

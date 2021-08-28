@@ -1,6 +1,6 @@
 import {h} from "vue";
-import {NButton, NSwitch, NTag, NAvatar, NSpace} from "naive-ui";
 import {formatDate} from "@/utils";
+import {NAvatar, NTag,NSpace} from 'naive-ui'
 import UAParser from 'ua-parser-js'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 

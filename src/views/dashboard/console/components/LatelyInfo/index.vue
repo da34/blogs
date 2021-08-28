@@ -44,7 +44,6 @@
 <script setup>
 import {ref} from 'vue'
 import {formatDate} from "@/utils";
-import {NGrid, NGi, NCard, NList, NListItem, NThing, NAvatar, NSkeleton, NSpace} from 'naive-ui'
 import {getArticleNew} from "@/api/web/article";
 import {getCommentNew} from "@/api/web/comment";
 

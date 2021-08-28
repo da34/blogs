@@ -9,48 +9,52 @@
           :label-width="100"
       >
         <NGrid :cols="24" :x-gap="24">
-        <NFormItem label="名称" path="name">
-          <NInput placeholder="请输入名称" v-model:value="formParams.name"/>
-        </NFormItem>
-        <NFormItem label="路径" path="url">
-          <NInput placeholder="请输入路径" v-model:value="formParams.url"/>
-        </NFormItem>
-        <NFormItem>
-          <template #label>
-            图标
-            <NTooltip trigger="hover">
-              <template #trigger>
-                <NIcon class="text-yellow-500 cursor-pointer">
-<!--                  <WarningAmberRound />-->
-                </NIcon>
-              </template>
-             目前仅支持SVG代码
-            </NTooltip>
-          </template>
-            <NInput v-model:value="formParams.icon"/>
-        </NFormItem>
-        <NFormItem label="图标预览" v-show="formParams.icon">
-          <NIcon class="icon-preview" size="50">
-            <div v-html="formParams.icon"></div>
-          </NIcon>
-        </NFormItem>
-        <NFormItem label="排序">
-          <NInputNumber v-model:value="formParams.priority"/>
-        </NFormItem>
-        <NFormItem label="打开方式" path="target">
-          <NRadioGroup v-model:value="formParams.target" name="openType">
-            <NSpace>
-              <NRadio :value="0">当前窗口</NRadio>
-              <NRadio :value="1">新窗口</NRadio>
-            </NSpace>
-          </NRadioGroup>
-        </NFormItem>
-        <NFormItem label="状态">
-          <NSwitch :defaultValue="true">
-            <template #checked>启用</template>
-            <template #unchecked>禁用</template>
-          </NSwitch>
-        </NFormItem>
+          <NFormItemGi label="名称" path="name" :span="12">
+            <NInput placeholder="请输入名称" v-model:value="formParams.name"/>
+          </NFormItemGi>
+          <NFormItemGi label="上级菜单" :span="12">
+            <NSelect v-model:value="formParams.parentId" :options="menuOptions" />
+          </NFormItemGi>
+          <NFormItemGi label="路径" path="url" :span="12">
+            <NInput placeholder="请输入路径" v-model:value="formParams.url"/>
+          </NFormItemGi>
+<!--          <NFormItemGi :span="12">-->
+<!--            <template #label>-->
+<!--              图标-->
+<!--              <NTooltip trigger="hover">-->
+<!--                <template #trigger>-->
+<!--                  <NIcon class="text-yellow-500 cursor-pointer">-->
+<!--                    <Info/>-->
+<!--                  </NIcon>-->
+<!--                </template>-->
+<!--                目前仅支持SVG代码-->
+<!--              </NTooltip>-->
+<!--            </template>-->
+<!--            <NInput v-model:value="formParams.icon"/>-->
+<!--          </NFormItemGi>-->
+          <NFormItemGi label="排序" :span="12">
+            <NInputNumber v-model:value="formParams.priority"/>
+          </NFormItemGi>
+<!--          <NFormItemGi label="图标预览" :span="12">-->
+<!--            <NIcon class="icon-preview" size="50">-->
+<!--              <div v-html="formParams.icon"></div>-->
+<!--            </NIcon>-->
+<!--          </NFormItemGi>-->
+
+          <NFormItemGi label="打开方式" path="target" :span="12">
+            <NRadioGroup v-model:value="formParams.target" name="openType">
+              <NSpace>
+                <NRadio value="_self">当前窗口</NRadio>
+                <NRadio value="_blank">新窗口</NRadio>
+              </NSpace>
+            </NRadioGroup>
+          </NFormItemGi>
+          <NFormItemGi label="状态" :span="12">
+            <NSwitch  v-model:value="formParams.status">
+              <template #checked>启用</template>
+              <template #unchecked>禁用</template>
+            </NSwitch>
+          </NFormItemGi>
         </NGrid>
       </NForm>
       <template #footer>
@@ -66,25 +70,9 @@
 <script>
 import {defineComponent, reactive, ref, toRefs} from 'vue';
 import {createMenu} from "@/api/system/menu";
-import {
-  useMessage,
-  NDrawer,
-  NDrawerContent,
-  NInput,
-  NSpace,
-  NButton,
-  NRadio,
-  NRadioGroup,
-  NFormItem,
-  NForm,
-  NSwitch,
-  NInputGroupLabel,
-  NInputGroup,
-  NIcon,
-  NTooltip,
-  NGrid,
-  NInputNumber
-} from 'naive-ui';
+import {useMessage} from 'naive-ui';
+import {Info} from '@icon-park/vue-next'
+
 const rules = {
   name: {
     required: true,
@@ -100,24 +88,7 @@ const rules = {
 
 export default defineComponent({
   name: 'CreateDrawer',
-  components: {
-    NDrawer,
-    NDrawerContent,
-    NInput,
-    NSpace,
-    NButton,
-    NRadio,
-    NRadioGroup,
-    NFormItem,
-    NForm,
-    NInputNumber,
-    NInputGroupLabel,
-    NInputGroup,
-    NIcon,
-    NTooltip,
-    NGrid,
-    NSwitch
-  },
+  components: {Info},
   props: {
     title: {
       type: String,
@@ -127,16 +98,23 @@ export default defineComponent({
       type: [Number, String],
       default: 450,
     },
+    menuOptions: {
+      type: Array,
+      default: () => []
+    }
   },
-  setup() {
+  emits: ['submitAfter'],
+  setup(_, {emit}) {
     const message = useMessage();
     const formRef = ref(null);
     const defaultValueRef = () => ({
       name: '',
-      target: 0,
+      target: '_self',
       url: '',
       icon: '',
       priority: 0,
+      status: true,
+      parentId: null,
     });
     const state = reactive({
       subLoading: false,
@@ -160,6 +138,7 @@ export default defineComponent({
           await createMenu({...state.formParams})
           handleReset();
           closeDrawer();
+          emit('submitAfter')
         } else {
           message.error('请填写完整信息');
         }
@@ -167,7 +146,7 @@ export default defineComponent({
     }
 
     function handleReset() {
-      formRef.value.restoreValidation();
+      formRef.value?.restoreValidation();
       state.formParams = Object.assign(state.formParams, defaultValueRef());
     }
 

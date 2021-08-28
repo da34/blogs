@@ -70,10 +70,6 @@
 </template>
 
 <script setup>
-import {
-  NForm, NFormItem, NSpace, NInput, NButton, NModal, NIcon,
-  NSelect, NRadio, NUpload, NUploadDragger, NText, NP, NRadioGroup, NSwitch
-} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
 import {reactive, ref, inject, computed} from "vue";
 

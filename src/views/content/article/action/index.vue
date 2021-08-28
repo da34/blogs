@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-import {NSpace, NInput, NButton, NGrid, NGi, useMessage} from 'naive-ui'
 import {ref, reactive,provide} from 'vue'
 import Public from "./public.vue";
 import MarkDown from '@/components/Markdown/index.vue'

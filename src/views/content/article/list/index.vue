@@ -48,11 +48,11 @@
 </template>
 
 <script setup>
-import {ref, watchEffect} from 'vue'
+import {ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {NCard, NDataTable, useMessage, useDialog, NForm, NInput, NButton, NFormItem, NSpace, NSelect} from 'naive-ui'
 import {getArticleList, changeArticleState} from "@/api/web/article";
 import {createColumns} from "./columns";
+import {useDialog, useMessage} from 'naive-ui'
 
 const dialog = useDialog()
 const message = useMessage()

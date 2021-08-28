@@ -48,7 +48,6 @@
 </template>
 
 <script setup>
-import {NForm, NFormItem, NInput, NIcon, NCheckbox, NButton} from 'naive-ui'
 import {ref} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import { useUserStore } from '@/stores/modules/user';

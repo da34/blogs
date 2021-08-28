@@ -1,25 +1,26 @@
 import {h} from "vue";
-import {NTag,NIcon} from "naive-ui";
 import TableAction from '@/components/BasicTable/TableAction.vue'
+import {NIcon, NTag} from 'naive-ui'
 
 export const columns = [
   {title: '名称', key: 'name'},
-  {
-    title: '图标', key: 'icon',
-    render({icon}) {
-      const iconDom = h('div', {
-
-        }
-      )
-      return h(
-        NIcon,
-        null,
-        {
-          default: () => icon
-        }
-      )
-    }
-  },
+  // {
+  //   title: '图标', key: 'icon',
+  //   render({icon}) {
+  //     const iconDom = h(
+  //       'div'
+  //     )
+  //     // iconDom.innerHTML = icon
+  //     console.log(iconDom.elm, 'iconDom')
+  //     return h(
+  //       NIcon,
+  //       null,
+  //       {
+  //         // default: () => icon
+  //       }
+  //     )
+  //   }
+  // },
   {title: '路径', key: 'url'},
   {
     title: '打开方式', key: 'target',

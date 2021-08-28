@@ -3,8 +3,8 @@
     <div class="flex">
       <!--收缩菜单-->
       <NIcon size="20" class="cursor-pointer" @click="() => $emit('update:collapsed', !collapsed)">
-<!--        <MenuUnfoldOutlined v-if="collapsed"/>-->
-<!--        <MenuFoldOutlined v-else/>-->
+        <MenuUnfold v-if="collapsed"/>
+        <MenuFold v-else/>
       </NIcon>
 
       <!--面包屑-->
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-// import {MenuUnfoldOutlined, MenuFoldOutlined} from '@vicons/antd'
+import {MenuFold, MenuUnfold} from '@icon-park/vue-next'
 import {NIcon, NBreadcrumb, NBreadcrumbItem, NDropdown, NAvatar, useDialog, useMessage} from 'naive-ui'
 import {defineProps, computed} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
