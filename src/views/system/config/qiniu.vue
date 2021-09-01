@@ -33,8 +33,9 @@
 <script setup>
 import {ref} from 'vue'
 import {useMessage} from 'naive-ui'
-import {getQiNiuConfig, updateQiniu} from "@/api/system/config";
+import {getConfig, updateConfig} from "@/api/system/config";
 
+const key = 'qiniu'
 const formRef = ref(null)
 const showSpin = ref(true)
 const message = useMessage()
@@ -85,7 +86,7 @@ const rules = {
 getQiniu()
 
 async function getQiniu() {
-  const data = await getQiNiuConfig()
+  const data = await getConfig({ key })
   formValue.value = data.value
   showSpin.value = false
 }
@@ -94,7 +95,7 @@ async function getQiniu() {
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      updateQiniu({value: formValue.value})
+      updateConfig({value: formValue.value, key})
     }
   })
 }

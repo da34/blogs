@@ -5,30 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Upload/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/system/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/system/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/article.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/tag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/plugins/naive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/naive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/checkStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/checkStatus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/public.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/public.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/tag/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/tag/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/exception/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/exception/404.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/redirect/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/redirect/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/public.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/site/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -121,7 +113,7 @@
       <workItem from="1629871688378" duration="9592000" />
       <workItem from="1629896698783" duration="8135000" />
       <workItem from="1629966218588" duration="330000" />
-      <workItem from="1629966593900" duration="12922000" />
+      <workItem from="1629966593900" duration="52715000" />
     </task>
     <servers />
   </component>

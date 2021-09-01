@@ -58,3 +58,13 @@ export function editTag(data) {
     isShowSuccessMessage: true
   });
 }
+
+/**
+ * @description: 获取全部标签
+ */
+export function allTag() {
+  return http.request({
+    url: 'tag/all',
+    method: 'get',
+  });
+}

@@ -73,8 +73,9 @@ function sortRoute(a, b) {
 export async function qiniuUpload(file) {
   const token = await getQiNiuToken()
   const observable = qiniu.upload(file, 'blog/' + file.name, token)
-  const message = window['$message']
+  const message = window.$message
   let messageReactive = message.loading('上传中')
+
   return new Promise((resolve, reject) => {
     const observer = {
       next({total}) {

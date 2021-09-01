@@ -7,36 +7,22 @@
         label-placement="left"
         :rules="rules"
         ref="formRef"
-        :show-require-mark="false"
     >
-      <NFormItem label="LOGO" path="user.name">
-        <NUpload action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f">
-          <NUploadDragger>
-            <div style="margin-bottom: 12px;">
-              <NIcon size="48" :depth="3">
-                <Upload/>
-              </NIcon>
-            </div>
-            <NText>点击或者拖动文件到该区域来上传</NText>
-          </NUploadDragger>
-        </NUpload>
+      <NFormItem label="LOGO" path="logo">
+        <MUpload v-model:file-url="formValue.logo">
+          <p class="mb-3">上传图片</p>
+          <NIcon size="30">
+            <Upload/>
+          </NIcon>
+        </MUpload>
       </NFormItem>
-      <NFormItem label="网站名称" path="user.name">
-        <NInput v-model:value="formValue.user.name" placeholder="输入姓名"/>
+      <NFormItem label="网站名称" path="name">
+        <NInput v-model:value="formValue.name"/>
       </NFormItem>
-      <NFormItem label="标题" path="user.age">
-        <NInput placeholder="输入年龄" v-model:value="formValue.user.age"/>
+      <NFormItem label="备案号" path="internetNumber">
+        <NInput v-model:value="formValue.internetNumber"/>
       </NFormItem>
-      <NFormItem label="关键字" path="phone">
-        <NInput placeholder="电话号码" v-model:value="formValue.phone"/>
-      </NFormItem>
-      <NFormItem label="描述" path="phone">
-        <NInput placeholder="电话号码" v-model:value="formValue.phone"/>
-      </NFormItem>
-      <NFormItem label="备案号" path="phone">
-        <NInput placeholder="电话号码" v-model:value="formValue.phone"/>
-      </NFormItem>
-      <NFormItem label="">
+      <NFormItem>
         <NButton style="margin-left: 80px;" @click="handleValidateClick" attr-type="button" type="primary">保存</NButton>
       </NFormItem>
     </NForm>
@@ -44,47 +30,57 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import {NForm, NFormItem, NInput, NButton, useMessage, NCard,NUpload,NUploadDragger,NIcon} from 'naive-ui'
+import {ref, onMounted} from 'vue'
+import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
+import MUpload from '@/components/Upload/index.vue'
+import {getConfig, updateConfig} from "@/api/system/config";
 
+
+const key = 'site'
 const formRef = ref(null)
+const actionUrl = ref(import.meta.env.VITE_GLOB_UPLOAD_URL)
+const fileList = ref([])
 const message = useMessage()
 
-
 const formValue = ref({
-  user: {
-    name: '',
-    age: ''
-  },
-  phone: ''
+  name: '',
+  internetNumber: '',
+  logo: ''
 })
 const rules = {
-  user: {
-    name: {
-      message: '请输入姓名',
-      trigger: 'blur'
-    },
-    age: {
-      message: '请输入年龄',
-      trigger: ['input', 'blur']
-    }
+  name: {
+    required: true,
+    message: '请输入网站名称',
+    trigger: ['blur']
   },
-  phone: {
-    message: '请输入电话号码',
-    trigger: ['input']
+  internetNumber: {
+    required: true,
+    message: '请输入备案号',
+    trigger: ['blur']
   }
 }
+
+
+onMounted(async () => {
+  const {value} = await getConfig({key})
+  formValue.value = value
+  // console.log(config)
+})
 
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      message.success('Valid')
+      updateConfig({ key, value: formValue.value })
     } else {
-      console.log(errors)
-      message.error('Invalid')
+      message.error('请填写完成信息')
     }
   })
+}
+
+function uploadDone(file) {
+  formValue.value.logo = file.url
+  // console.log('file', file)
 }
 
 </script>

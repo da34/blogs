@@ -1,21 +1,22 @@
 import http from '@/utils/http/request';
 
 /**
- * @description: 获取七牛配置
+ * @description: 获取配置
  */
-export function getQiNiuConfig() {
+export function getConfig(params) {
   return http.request({
-    url: 'system/qiniu',
+    url: 'system/keyData',
     method: 'get',
+    params
   });
 }
 
 /**
- * @description: 保存七牛配置
+ * @description: 保存配置
  */
-export function updateQiniu(data) {
+export function updateConfig(data) {
   return http.request({
-    url: 'system/qiniu/update',
+    url: 'system/keyData/update',
     method: 'post',
     data
   }, {

@@ -36,6 +36,8 @@ import {
   NRadioGroup,
   NRadio,
   NInputNumber,
+  NImage,
+  NRadioButton,
 } from 'naive-ui';
 
 const naive = create({
@@ -76,6 +78,8 @@ const naive = create({
     NRadioGroup,
     NRadio,
     NInputNumber,
+    NImage,
+    NRadioButton,
   ],
 });
 

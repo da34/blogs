@@ -41,3 +41,16 @@ export function changeArticleState(data) {
     isShowSuccessMessage: true
   });
 }
+
+/**
+ * @description: 创建文章
+ */
+export function createArticle(data) {
+  return http.request({
+    url: 'contents',
+    method: 'post',
+    data
+  },{
+    isShowSuccessMessage: true
+  });
+}

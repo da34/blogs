@@ -93,7 +93,7 @@ const transform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (error) => {
-    const {$message: Message, $dialog: Modal} = window;
+    const {$message, $dialog} = window;
     const {response, code, message} = error || {};
     // TODO 此处要根据后端接口返回格式修改
     const msg = response && response.data && response.data.message ? response.data.message : '';
@@ -106,7 +106,7 @@ const transform = {
     // 请求是否被取消
     const isCancel = axios.isCancel(error);
     if (!isCancel) {
-      checkStatus(error.response && error.response.status, msg, Message);
+      checkStatus(error.response?.status, msg, $message);
     } else {
       console.warn(error, '请求被取消！');
     }
