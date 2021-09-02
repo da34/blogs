@@ -1,4 +1,5 @@
-import {computed, reactive, ref} from "vue";
+import {computed, reactive, ref, unref, watch} from "vue";
+import {createArticle} from "@/api/web/article";
 
 export function usePubilc(show) {
   const defaultVal = () => ({
@@ -12,13 +13,18 @@ export function usePubilc(show) {
     isTop: false,
   })
 // 初始化文章
-  const article = reactive({
-    ...defaultVal(),
-  })
+  const article = ref(defaultVal())
   const formRef = ref(null)
 
+  // 内容变化，更改描述
+  watch(
+    () => article.value.content,
+    () => {
+      article.value.contentOutline = article.value.content.slice(0, 80)
+    })
+
   function submitCallback() {
-    console.log(article)
+    createArticle(unref(article))
     show.value = false
   }
 
@@ -26,6 +32,7 @@ export function usePubilc(show) {
     show.value = false
   }
   return {
+    article,
     submitCallback,
     cancelCallback
   }

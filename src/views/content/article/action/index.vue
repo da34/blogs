@@ -96,7 +96,7 @@ const tagsOption = ref()
 const show = ref(false)
 
 // 发布逻辑
-const {submitCallback, cancelCallback} = usePubilc(show)
+const {article, submitCallback, cancelCallback} = usePubilc(show)
 
 // 获取标签
 const fetchState = async() => {
@@ -109,19 +109,19 @@ const fetchState = async() => {
 fetchState()
 
 const message = useMessage()
-const article = reactive({
-  title: '',
-  content: ''
-})
+// const article = reactive({
+//   title: '',
+//   content: ''
+// })
 
 
 
 function publicClick() {
-  if (!article.title) {
+  if (!article.value.title) {
     message.warning('标题不能为空')
     return
   }
-  if (!article.content) {
+  if (!article.value.content) {
     message.warning('内容不能为空')
     return
   }

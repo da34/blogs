@@ -46,6 +46,7 @@ export function changeArticleState(data) {
  * @description: 创建文章
  */
 export function createArticle(data) {
+  console.log(data, 'data')
   return http.request({
     url: 'contents',
     method: 'post',
