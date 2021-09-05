@@ -121,12 +121,12 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    prefix: '/api/', // baseURL
+    prefix: '/api', // baseURL
     credentials: true
   },
   proxy: {
-    '/api/': {
-      target: 'http://localhost:7001/api/v1/', // 代理地址
+    '/api': {
+      target: 'http://localhost:7001/api/', // 代理地址
       changeOrigin: true,
       pathRewrite: {
         '^/api': ''
@@ -162,7 +162,7 @@ export default {
       }
       return position
     },
-    linkActiveClass: 'circle-mini'
+    linkActiveClass: 'active-line'
     // middleware: 'menu'
   },
   loading: { color: 'pink' },

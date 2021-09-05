@@ -8,10 +8,10 @@
     <div v-if="total">
       <CommentList
         v-for="comment in commentList"
+        :id="'comment-' + comment.id"
         :key="comment.id"
         :avatar="comment.avatar"
         :content="comment.text"
-        :id="'comment-' + comment.id"
         :author="{ nickName: comment.nickName, os: parseOS(comment.ua), browser: parseBrowser(comment.ua) }"
       >
         <template #actions>
@@ -134,16 +134,16 @@ export default {
     parseBrowser,
     // 提交评论
     async onSubmit (comment) {
-      const data = {
+      const query = {
         contentId: this.contentId,
         anchor: this.$route.path
       }
-      comment = Object.assign(data, comment)
-      const { code, message } = await this.postComment(comment)
-      if (code === 0) {
-        this.$message.success('评论成功')
+      comment = Object.assign(query, comment)
+      const { data } = await this.postComment(comment)
+      if (data.code === 0) {
+        this.$message.success(data.message)
       } else {
-        this.$message.error(message)
+        this.$message.error(data.message)
       }
       await this.$fetch()
       this.editVisible = 0

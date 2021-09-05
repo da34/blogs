@@ -64,9 +64,9 @@ export default {
   layout: 'blog',
   transition: 'slide-in',
   async asyncData ({ $axios }) {
-    const { data } = await $axios.get('links')
+    const { result } = await $axios.get('links')
     return {
-      list: data
+      list: result
     }
   },
   head () {

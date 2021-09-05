@@ -23,16 +23,13 @@ export default function ({
       // 带上csrfToken
       config.headers['x-csrf-token'] = csrfToken
     }
-    // console.log(11, config)
   })
 
-  $axios.onResponse(res => {
-    const { data } = res
-    // console.log('axios##########data', data)
-    if (res.status === 200) {
-      return data
-    }
-  })
+  // $axios.onResponse(res => {
+  //   const { data } = res
+  //   // console.log('axios##########data', data)
+  //   return data
+  // })
 
   // 错误的回调
   $axios.onError(error => {

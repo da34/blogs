@@ -76,6 +76,8 @@ export default {
       line-height 1.6
       font-weight: 600;
       font-size: $font-size-medium
+      //&:hover
+      //  font-size 22px
   .menu-mini
     display none
 @media (max-width: $mobile)

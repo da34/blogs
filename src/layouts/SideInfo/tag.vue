@@ -9,7 +9,7 @@
         :key="item.id"
         :to="'/archive?name=' + item.name"
       >
-        <a-tag :color="randColor()" style="cursor: pointer;">
+        <a-tag :color="randColor()" style="cursor: pointer;margin-bottom: 5px;">
           {{ item.name }}
         </a-tag>
       </nuxt-link>

@@ -1,7 +1,7 @@
 <template>
   <div class="article-wrapper">
     <p class="verse">
-      每日一言：“ {{ verse }} ”
+      每日一言：“ {{ verse }}”
     </p>
     <article v-for="item in list" :key="item.id" class="article">
       <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
@@ -37,12 +37,16 @@
         </div>
       </div>
     </article>
-    <Pagination v-model="currentPage" :total="total" :limit="7" class="pagination-wrap" />
+    <Pagination v-model="currentPage" class="pagination-wrap" :total="total" :limit="7" @change="pageChange"/>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+let scrollTo
+if (process.client) {
+  scrollTo = require('@/utils/scroll-to').scrollTo
+}
 // import Pagination from '@/components/Pagination'
 
 export default {
@@ -73,7 +77,8 @@ export default {
   },
   computed: {
     ...mapState('modules/front', [
-      'verse'
+      'verse',
+      'from'
     ]),
     ...mapState('modules/content', [
       'list',
@@ -89,7 +94,10 @@ export default {
     ]),
     ...mapActions('modules/front', [
       'getVerse'
-    ])
+    ]),
+    pageChange () {
+      scrollTo(0)
+    }
   }
 }
 </script>

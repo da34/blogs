@@ -23,7 +23,8 @@ const actions = {
   // 获取文章列表
   async getList ({ commit }, { page = 1 }) {
     const params = `page=${page}&limit=7`
-    const { rows, count } = await this.$axios.$get(`contents?${params}`)
+    const { result } = await this.$axios.$get(`contents?${params}`)
+    const { rows, count } = result
     commit('setArticles', {
       data: rows,
       count
@@ -31,10 +32,10 @@ const actions = {
   },
   // 获取随机文章
   async getRandomList ({ commit }) {
-    const data = await this.$axios.$get('content/random?limit=5')
+    const { result } = await this.$axios.$get('content/random?limit=5')
     commit('setData', {
       key: 'randomList',
-      value: data
+      value: result
     })
   },
   // 获取文章详情
@@ -43,7 +44,7 @@ const actions = {
     // console.log(1111, data)
     commit('setData', {
       key: 'article',
-      value: data
+      value: data.result
     })
   },
   // 获取文章归档
@@ -53,7 +54,7 @@ const actions = {
       query = '?name=' + encodeURI(name)
     }
     const { data } = await this.$axios.get('content/archive' + query)
-    const { count, items } = data
+    const { count, items } = data.result
     commit('setArchive', {
       items,
       count

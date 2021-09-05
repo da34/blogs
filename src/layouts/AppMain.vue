@@ -1,7 +1,6 @@
 <template>
   <div class="app-wrapper">
     <a-row type="flex">
-      <!--      :gutter="{xs: 0, md: 0, lg:14, xl:14, xxl:14}"-->
       <a-col :xs="24" :md="24" :lg="17" :xl="18" :xxl="18">
         <nuxt keep-alive :include="['Index']" />
       </a-col>

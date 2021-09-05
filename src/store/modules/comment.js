@@ -51,7 +51,7 @@ const actions = {
   // 获取最新评论
   async getNewCommentList ({ commit }, { limit = 4 }) {
     const { data } = await this.$axios.get(`comments/new?limit=${limit}`)
-    commit('setNewList', data)
+    commit('setNewList', data.result)
   },
   // 发表评论
   async postComment ({ commit }, comment) {
@@ -70,16 +70,17 @@ const actions = {
   async getCommentList ({ commit, state }, { contentId }) {
     const { page, limit } = state
     const { data } = await this.$axios.get(`comments?page=${page}&limit=${limit}&contentId=${contentId}`)
-    commit('setCommentList', data.comments.rows)
-    commit('setCount', data.comments.count)
-    commit('setTotal', data.total)
+
+    commit('setCommentList', data.result.comments.rows)
+    commit('setCount', data.result.comments.count)
+    commit('setTotal', data.result.total)
   },
   // 获取更多评论列表
   async getMoreCommentList ({ commit, state }, { contentId }) {
     commit('setPage')
     const { page, limit } = state
     const { data } = await this.$axios.get(`comments?page=${page}&limit=${limit}&contentId=${contentId}`)
-    commit('pushCommentList', data.comments.rows)
+    commit('pushCommentList', data.result.comments.rows)
   }
 }
 
