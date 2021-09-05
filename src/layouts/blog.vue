@@ -54,7 +54,7 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
 
 @media (max-width: $mobile)
   .wrap
-    margin-top 70px
+    margin-top 60px
     .content
       min-height calc(100vh - 190px)
 //background url("../assets/images/bg.jpg")

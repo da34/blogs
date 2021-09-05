@@ -4,7 +4,7 @@
       <div class="footer">
         <div class="blog-info">
           <p>© {{ date }} 玉捷个人博客</p>
-          <a href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备2021002604号-1</a>
+          <a href="http://www.beian.miit.gov.cn" target="_blank">{{ site.internetNumber }}</a>
           <p>
             博客已运行 {{ activeTime }}
             <SvgIcon icon-class="heart" class="move" />
@@ -25,6 +25,7 @@
 
 <script>
 import { padLocation } from '@/utils'
+import { mapGetters } from 'vuex'
 export default {
   name: 'VFooter',
   data () {
@@ -36,6 +37,11 @@ export default {
   },
   created () {
     setInterval(() => { this.getRunTime() }, 1000)
+  },
+  computed: {
+    ...mapGetters([
+      'site'
+    ])
   },
   methods: {
     getRunTime () {

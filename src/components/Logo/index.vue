@@ -1,12 +1,20 @@
 <template>
   <div class="logo">
-    <nuxt-link class="circle" to="/" tag="h2" active-class="don't">玉捷博客</nuxt-link>
+    <nuxt-link class="circle" to="/" tag="h2" active-class="don't">
+      <img :src="site.logo" :alt="site.name" width="200">
+    </nuxt-link>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Logo'
+  name: 'Logo',
+  computed: {
+    ...mapGetters([
+      'site'
+    ])
+  }
 }
 </script>
 
@@ -15,6 +23,9 @@ export default {
   display flex
   align-items center
   justify-content center
+  img
+    height 100%
+    object-fit cover
   h2
     font-size 25px
     font-weight 600

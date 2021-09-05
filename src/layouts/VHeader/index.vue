@@ -66,5 +66,5 @@ export default {
     .header
       width 100%
       .logo
-        padding-left 20px
+        padding-left 5px
 </style>

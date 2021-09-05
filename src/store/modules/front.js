@@ -41,7 +41,7 @@ const actions = {
   async getConfigs ({ commit }) {
     const keys = ['site']
     const { data } = await this.$axios.get('site/configs?keys=' + keys)
-    console.log(data.result, 'data.configs')
+    // console.log(data.result, 'data.configs')
     commit('setConfigs', data.result)
   }
 }
