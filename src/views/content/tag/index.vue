@@ -21,14 +21,13 @@
     </NForm>
     <!--表格-->
     <BasicTable
-        :data="data"
+        ref="tableRef"
         :rowKey="row => row.id"
         :columns="createColumns"
-        :loading="loading"
-        :pagination="pagination"
         :actionColumn="actionColumn"
+        :pagination="pagination"
+        :request="getTagList"
     />
-
     <!--编辑、新建标签-->
     <NModal
         v-model:show="useShowModal"
@@ -66,19 +65,23 @@
 </template>
 
 <script setup>
-import {h, ref} from 'vue'
+import {h, ref,reactive, onMounted} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 import {getTagList, delTag, createTag, editTag} from "@/api/web/tag";
 import {formatDate} from "@/utils";
 import {useDialog} from "naive-ui";
 
-const pagination = ref({
+const pagination = reactive({
   page: 1,
+  pageCount: 1,
   pageSize: 10,
+  itemCount: 0,
+  prefix ({ itemCount }) {
+    return `共 ${itemCount} 项`
+  },
   onChange: (page) => {
-    pagination.value.page = page
-    console.log(page)
+    pagination.page = page
   }
 })
 
@@ -86,9 +89,8 @@ const formValue = ref({
   name: null,
 })
 const formRef = ref(null)
+const tableRef = ref(null)
 const formDataRef = ref(null)
-const loading = ref(false)
-const data = ref([])
 const useShowModal = ref(false)
 const formData = ref({
   name: null,
@@ -106,26 +108,15 @@ const rules = {
   }
 }
 
-fetchList()
-
-async function fetchList(opt) {
-  loading.value = true
-  const params = Object.assign({page: pagination.value.page}, opt)
-  const {rows, count} = await getTagList(params)
-  data.value = rows
-  pagination.value.pageCount = count
-  loading.value = false
-}
-
 function reload() {
   formValue.value.name = null
-  fetchList({page: 1})
+  tableRef.value.reload()
 }
 
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      fetchList({page: 1, name: formValue.value.name})
+      tableRef.value.fetchState({page: 1, name: formValue.value.name})
     }
   })
 }
@@ -186,7 +177,7 @@ function handleDel(record) {
     negativeText: '取消',
     onPositiveClick: () => {
       delTag(record.id)
-      reload()
+      tableRef.value.reload()
     }
   })
 }
@@ -213,7 +204,7 @@ function handleAction() {
   formDataRef.value.validate(async (errors) => {
     if (!errors) {
       formData.value.id ? await editTag(data) : await createTag(data)
-      reload()
+      tableRef.value.reload()
       useShowModal.value = false
     }
   })

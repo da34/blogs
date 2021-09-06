@@ -1,7 +1,7 @@
 import {computed, reactive, ref, unref, watch} from "vue";
 import {createArticle} from "@/api/web/article";
 
-export function usePubilc(show) {
+export function usePublic(show) {
   const defaultVal = () => ({
     title: '',
     content: '',
@@ -23,9 +23,14 @@ export function usePubilc(show) {
       article.value.contentOutline = article.value.content.slice(0, 80)
     })
 
-  function submitCallback() {
-    createArticle(unref(article))
+  async function submitCallback() {
+    await createArticle(unref(article))
+    resetData()
     show.value = false
+  }
+
+  function resetData() {
+    article.value = defaultVal()
   }
 
   function cancelCallback() {

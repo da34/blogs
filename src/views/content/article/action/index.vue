@@ -82,21 +82,21 @@
 </template>
 
 <script setup>
-import {ref, reactive} from 'vue'
+import {ref} from 'vue'
 import MarkDown from '@/components/Markdown/index.vue'
 import {allTag} from "@/api/web/tag";
 import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
 import MUpload from '@/components/Upload/index.vue'
-import {usePubilc} from "./composables/usePubilc";
+import {usePublic} from "./composables/usePubilc";
 
 
-
+const message = useMessage()
 const tagsOption = ref()
 const show = ref(false)
 
 // 发布逻辑
-const {article, submitCallback, cancelCallback} = usePubilc(show)
+const {article, submitCallback, cancelCallback} = usePublic(show)
 
 // 获取标签
 const fetchState = async() => {
@@ -108,15 +108,9 @@ const fetchState = async() => {
 
 fetchState()
 
-const message = useMessage()
-// const article = reactive({
-//   title: '',
-//   content: ''
-// })
-
-
 
 function publicClick() {
+  console.log(article.value)
   if (!article.value.title) {
     message.warning('标题不能为空')
     return

@@ -33,53 +33,54 @@
       </NFormItem>
       <NFormItem>
         <NButton @click="handleReset" attr-type="button">重置</NButton>
-        <NButton class="ml-3" @click="handleSearch" attr-type="button" type="primary" :loading="loading">查询</NButton>
+        <NButton class="ml-3" @click="handleSearch" attr-type="button" type="primary">查询</NButton>
       </NFormItem>
     </NForm>
-    <NDataTable
+    <BasicTable
+        ref="tableRef"
         :pagination="pagination"
         :columns="columns"
-        :data="data"
+        :request="getArticleList"
         :row-key="row => row.id"
-        :loading="loading"
         @update:checked-row-keys="handleCheck"
     />
   </NCard>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {getArticleList, changeArticleState} from "@/api/web/article";
 import {createColumns} from "./columns";
 import {useDialog, useMessage} from 'naive-ui'
+import BasicTable from '@/components/BasicTable/index.vue'
+
+const defaultVla = () => ({
+  title: null,
+  type: null,
+  status: null
+})
 
 const dialog = useDialog()
 const message = useMessage()
 const router = useRouter()
+const tableRef = ref(null)
 
-const data = ref([])
-const loading = ref(true)
-const pagination = ref({
+const formValue = ref(defaultVla())
+const pagination = reactive({
   page: 1,
+  pageCount: 1,
+  pageSize: 10,
+  itemCount: 0,
+  prefix ({ itemCount }) {
+    return `共 ${itemCount} 项`
+  },
   onChange: (page) => {
-    pagination.value.page = page
-    formValue.value.page = page
-    getData(formValue.value)
+    pagination.page = page
   }
 })
+
 let checkedRowKeys = []
-
-getData()
-
-// 表格
-async function getData(params = {}) {
-  loading.value = true
-  const {rows, count} = await getArticleList(params)
-  data.value = rows
-  pagination.value.pageCount = count
-  loading.value = false
-}
 
 const columns = createColumns({
   stateToggle(field, id, value) {
@@ -106,24 +107,13 @@ const typeOptions = ['article', 'page'].map(
     })
 )
 
-const formValue = ref({
-  title: null,
-  type: null,
-  status: null,
-  page: 1,
-})
-
 function handleReset() {
-  formValue.value = {
-    title: '',
-    type: null,
-    status: null
-  }
-  getData()
+  formValue.value = defaultVla()
+  tableRef.value.reload()
 }
 
 function handleSearch() {
-  getData(formValue.value)
+  tableRef.value.fetchState(formValue.value)
 }
 
 function handleCheck(keys) {
@@ -138,7 +128,7 @@ function handleDel() {
     negativeText: '取消',
     onPositiveClick: () => {
       changeArticleState({field: 'status', id: checkedRowKeys, value: 2})
-      getData(formValue.value)
+      handleSearch()
     }
   })
 }

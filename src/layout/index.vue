@@ -16,7 +16,7 @@
       <NLayoutHeader bordered>
         <PageHeader v-model:collapsed="collapsed"/>
       </NLayoutHeader>
-      <NLayoutContent position="absolute" content-style="margin: 15px;">
+      <NLayoutContent position="absolute" :nativeScrollbar="false">
         <PageMainView/>
       </NLayoutContent>
     </NLayout>
@@ -40,12 +40,13 @@ onMounted(() => {
 </script>
 <style scoped lang="scss">
 .n-layout-header {
-  height: 64px;
+  height: 60px;
 }
 
 .n-layout-content {
   background: #f5f7f9;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 75px);
   top: 60px;
 }
+
 </style>

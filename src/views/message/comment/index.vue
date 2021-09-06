@@ -23,62 +23,57 @@
     </NForm>
     <!--表格-->
     <BasicTable
-        :data="comments"
+        ref="tableRef"
         :rowKey="row => row.id"
         :columns="columns"
-        :loading="loading"
         :pagination="pagination"
         :actionColumn="actionColumn"
+        :request="getCommentList"
     />
   </NCard>
 </template>
 
 <script setup>
-import {ref, toRaw} from 'vue'
+import {reactive, ref, toRaw} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import {getCommentList, delComment} from "@/api/web/comment";
 import {createActionColumn, columns} from './columns'
 import {useDialog} from "naive-ui";
+
+const options = [
+  {label: '正常', value: 0},
+  {label: '不通过', value: 1},
+  {label: '需要人工复查', value: 2}
+]
 
 const formValue = ref({
   name: null,
   ip: null,
   status: null
 })
-const comments = ref([])
-const loading = ref(false)
-const pagination = ref({
+const tableRef = ref(null)
+
+const pagination = reactive({
   page: 1,
+  pageCount: 1,
   pageSize: 10,
+  itemCount: 0,
+  prefix ({ itemCount }) {
+    return `共 ${itemCount} 项`
+  },
   onChange: (page) => {
-    pagination.value.page = page
-    const opt = {page}
-    fetchComments(opt)
+    pagination.page = page
   }
 })
-const dialog = useDialog()
 
-const options = ref([
-  {label: '正常', value: 0},
-  {label: '不通过', value: 1},
-  {label: '需要人工复查', value: 2}
-])
+const dialog = useDialog()
 
 const actionColumn = createActionColumn({handleDel})
 
-fetchComments()
-
-async function fetchComments(opt = {}) {
-  loading.value = true
-  const {rows, count} = await getCommentList(opt)
-  comments.value = rows
-  pagination.value.pageCount = count
-  loading.value = false
-}
 
 async function queryComments() {
   const opt = toRaw(formValue.value)
-  await fetchComments(opt)
+  tableRef.value.fetchState(opt)
 }
 
 function handleDel(record) {
@@ -89,7 +84,7 @@ function handleDel(record) {
     negativeText: '取消',
     onPositiveClick: () => {
       delComment(record.id)
-      fetchComments()
+      tableRef.value.reload()
     }
   })
 }

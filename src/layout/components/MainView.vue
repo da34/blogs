@@ -1,19 +1,22 @@
 <template>
-  <RouterView>
-    <template #default="{ Component, route }">
-      <transition name="zoom-fade" mode="out-in" appear>
-        <keep-alive v-if="keepAliveComponents" :include="keepAliveComponents">
-          <component :is="Component" :key="route.fullPath" />
-        </keep-alive>
-        <component v-else :is="Component" :key="route.fullPath" />
-      </transition>
-    </template>
-  </RouterView>
+  <div class="layout-content-main-fix">
+    <RouterView>
+      <template #default="{ Component, route }">
+        <transition name="zoom-fade" mode="out-in" appear>
+          <keep-alive v-if="keepAliveComponents" :include="keepAliveComponents">
+            <component :is="Component" :key="route.fullPath"/>
+          </keep-alive>
+          <component v-else :is="Component" :key="route.fullPath"/>
+        </transition>
+      </template>
+    </RouterView>
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useAsyncRouteStore } from '@/stores/modules/asyncRoute';
+import {computed} from 'vue';
+import {useAsyncRouteStore} from '@/stores/modules/asyncRoute';
+
 const asyncRouteStore = useAsyncRouteStore();
 // 需要缓存的路由组件
 const keepAliveComponents = computed(() => asyncRouteStore.keepAliveComponents);
@@ -34,5 +37,7 @@ const keepAliveComponents = computed(() => asyncRouteStore.keepAliveComponents);
   opacity: 0;
   transform: scale(1.06);
 }
-
+.layout-content-main-fix {
+  margin: 15px;
+}
 </style>

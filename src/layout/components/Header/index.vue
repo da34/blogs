@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-between items-center h-full px-3 shadow-md">
+  <div class="flex flex-row justify-between items-center h-full px-3">
     <div class="flex">
       <!--收缩菜单-->
       <NIcon size="20" class="cursor-pointer" @click="() => $emit('update:collapsed', !collapsed)">

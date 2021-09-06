@@ -69,7 +69,7 @@
 
 <script>
 import {defineComponent, reactive, ref, toRefs} from 'vue';
-import {createMenu} from "@/api/system/menu";
+import {createMenu, updateMenu} from "@/api/system/menu";
 import {useMessage} from 'naive-ui';
 import {Info} from '@icon-park/vue-next'
 
@@ -135,7 +135,11 @@ export default defineComponent({
     function formSubmit() {
       formRef.value.validate(async (errors) => {
         if (!errors) {
-          await createMenu({...state.formParams})
+          if (state.formParams) {
+            await updateMenu({...state.formParams})
+          } else {
+            await createMenu({...state.formParams})
+          }
           handleReset();
           closeDrawer();
           emit('submitAfter')

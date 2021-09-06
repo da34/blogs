@@ -5,7 +5,7 @@
         <QiNiu class="mt-5" />
       </NTabPane>
       <NTabPane name="email" tab="邮箱配置">
-        <Email/>
+        <Email class="mt-5" />
       </NTabPane>
     </NTabs>
   </NCard>

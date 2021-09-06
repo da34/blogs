@@ -24,6 +24,19 @@ export function createMenu(data) {
 }
 
 /**
+ * @description: 修改菜单
+ */
+export function updateMenu(data) {
+  return http.request({
+    url: 'menus/' + data.id,
+    method: 'put',
+    data
+  }, {
+    isShowSuccessMessage: true
+  });
+}
+
+/**
  * @description: 删除菜单
  */
 export function delMenu(id) {

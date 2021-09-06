@@ -8,32 +8,33 @@
       </template>
       <!--表格-->
       <div class="w-full menu">
-        <BasicTable :data="treeData" :columns="columns" :rowKey="(row) => row.id" :actionColumn="actionColumn"/>
+        <BasicTable ref="tableRef" :request="fetch" :columns="columns" :rowKey="(row) => row.id" :actionColumn="actionColumn"/>
       </div>
     </NCard>
-    <CreateDrawer ref="createDrawerRef" width="50%" :title="createTitle" @submitAfter="reload"
-                  :menuOptions="menuOptions"/>
+    <CreateDrawer
+        ref="createDrawerRef"
+        width="50%"
+        :title="createTitle"
+        @submitAfter="reload"
+        :menuOptions="menuOptions"
+    />
   </div>
 </template>
 <script setup>
-import {ref, onMounted, toRaw, computed} from 'vue';
+import {ref, toRaw, computed} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';
 import {getMenus, delMenu} from '@/api/system/menu';
-import {columns, createActionColumn} from "./columns";
+import {columns, createActionColumn} from "./columns"
 import BasicTable from '@/components/BasicTable/index.vue'
-import CreateDrawer from './CreateDrawer.vue';
+import CreateDrawer from './CreateDrawer.vue'
 
 const createDrawerRef = ref();
+const treeData = ref([]);
+const tableRef = ref(null);
 const message = useMessage();
 const dialog = useDialog();
-const treeData = ref([]);
-const loading = ref(true);
 const createTitle = ref('添加菜单');
 const actionColumn = createActionColumn({handleDel, handleEdit})
-
-onMounted(async () => {
-  reload()
-});
 
 const menuOptions = computed(() => {
   return treeData.value.map(item => {
@@ -44,7 +45,6 @@ const menuOptions = computed(() => {
   })
 })
 
-console.log(menuOptions)
 
 function handleDel(row) {
   dialog.warning({
@@ -59,10 +59,13 @@ function handleDel(row) {
   })
 }
 
+function reload() {
+  tableRef.value.reload()
+}
+
 function openCreateDrawer() {
   const {openDrawer} = createDrawerRef.value;
   openDrawer()
-
 }
 
 function addMenu() {
@@ -70,21 +73,25 @@ function addMenu() {
   createTitle.value = '添加菜单'
   createDrawerRef.value.handleReset()
 }
+
 function handleEdit(row) {
   openCreateDrawer()
   createTitle.value = '编辑菜单'
   createDrawerRef.value.formParams = {...toRaw(row)}
 }
 
-async function reload() {
-  const treeMenuList = await getMenus();
-  treeData.value = treeMenuList.map(item => {
-    if (!item.children.length) {
-      delete item.children
-    }
-    return item
+
+async function fetch() {
+  return new Promise(async resolve => {
+    const treeMenuList = await getMenus();
+    treeData.value = treeMenuList.map(item => {
+      if (!item.children.length) {
+        delete item.children
+      }
+      return item
+    })
+    resolve(toRaw(treeData.value))
   })
-  loading.value = false;
 }
 
 
