@@ -35,13 +35,13 @@ export default {
       date: new Date().getFullYear()
     }
   },
-  created () {
-    setInterval(() => { this.getRunTime() }, 1000)
-  },
   computed: {
     ...mapGetters([
       'site'
     ])
+  },
+  created () {
+    setInterval(() => { this.getRunTime() }, 1000)
   },
   methods: {
     getRunTime () {

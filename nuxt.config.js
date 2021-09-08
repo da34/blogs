@@ -1,12 +1,12 @@
 import { resolve } from 'path'
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 export default {
   // 开启打包分析
   analyze: true,
   alias: {
     images: resolve(__dirname, './assets/images'),
-    css: resolve(__dirname, './assets/css')
+    css: resolve(__dirname, './assets/css'),
+    '@ant-design/icons/lib/dist$': resolve(__dirname, './src/icons.js')
   },
   server: { // 部署到线上nginx配置
     host: '0.0.0.0',
@@ -76,6 +76,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/ant-design-vue',
+    // '@/plugins/ant-icons',
     '@/plugins/axios',
     '@/plugins/components',
     '@/plugins/svg-icon',
@@ -173,42 +174,39 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     publicPath: 'https://resource.lsyboy.cn/blog',
-    transpile: ['view-design'],
-    babel: {
-      plugins: [['import', {
-        libraryName: 'view-design',
-        libraryDirectory: 'src/components'
-      }]]
-
-    },
-    extractCSS: true, // 单独提取css为文件
-    minimizer: [new OptimizeCssAssetsPlugin()],
+    transpile: [/ant-design-vue/],
+    // extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件
       splitChunks: {
-        chunks: 'all',
         cacheGroups: {
-          libs: {
-            name: 'chunk-libs',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 10,
-            chunks: 'initial' // only package third parties that are initially dependent
-          },
-          viewUI: {
-            name: 'chunk-ant-design-vue', // split elementUI into a single package
-            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]_?ant-design-vue(.*)/ // in order to adapt to cnpm
-          },
-          commons: {
-            name: 'chunk-commons',
-            test: resolve('src/components'), // can customize your rules
-            minChunks: 3, //  minimum common number
-            priority: 5,
-            reuseExistingChunk: true
+          styles: {
+            name: 'commons-styles', // 提取公共的css
+            test: /\.(css|vue|styl)$/,
+            chunks: 'initial',
+            enforce: true
           }
+          // libs: {
+          //   name: 'chunk-libs',
+          //   test: /[\\/]node_modules[\\/]/,
+          //   priority: 10,
+          //   chunks: 'initial' // only package third parties that are initially dependent
+          // },
+          // antUI: {
+          //   name: 'chunk-ant-design-vue',
+          //   priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+          //   test: /[\\/]node_modules[\\/]_?ant-design-vue(.*)/ // in order to adapt to cnpm
+          // },
+          // commons: {
+          //   name: 'chunk-commons',
+          //   test: resolve('src/components'), // can customize your rules
+          //   minChunks: 3, //  minimum common number
+          //   priority: 5,
+          //   reuseExistingChunk: true
+          // }
         }
       }
     },
-    extend (config, ctx) {
+    extend (config) {
       // 排除 nuxt 原配置的影响,Nuxt 默认有vue-loader,会处理svg,img等
       // 找到匹配.svg的规则,然后将存放svg文件的目录排除
       // console.log(resolve(__dirname, 'src/icons/svg'))

@@ -36,6 +36,9 @@
 </template>
 
 <script>
+import 'ant-design-vue/lib/form/style/css'
+import 'ant-design-vue/lib/input/style/css'
+import 'ant-design-vue/lib/button/style/css'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Edit',
@@ -90,7 +93,7 @@ export default {
   methods: {
     handleSubmit (e) {
       e.preventDefault()
-      this.form.validateFields(async (err, values) => {
+      this.form.validateFields((err, values) => {
         if (!err) {
           const tierId = this.tierId
           const targetName = this.targetName
@@ -101,12 +104,14 @@ export default {
             values = Object.assign({ tierId, targetName, pid }, values)
           }
           this.loading = true
-          await this.submitComment(values)
-          this.loading = false
-          this.form.setFieldsValue({
-            text: ''
+          this.submitComment(values).then(_ => {
+            this.form.setFieldsValue({
+              text: ''
+            })
+          }).finally(_ => {
+            this.loading = false
           })
-          console.log('Received values of form: ', values)
+          // console.log('Received values of form: ', values)
         }
       })
     },

@@ -66,12 +66,7 @@
 </template>
 
 <script>
-// import Pagination from '../Pagination'
-// import Login from '../Login'
-// import Beep from './components/Beep'
-
-// import CommentHeader from './components/Header'
-// import { parseOs, parseBrowser } from '../../plugins/filters'
+import 'ant-design-vue/lib/empty/style/css'
 import { mapActions, mapState } from 'vuex'
 import Markdown from '@/components/Markdown'
 import { parseOS, parseBrowser } from '../../utils'

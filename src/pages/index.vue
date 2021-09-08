@@ -42,12 +42,12 @@
 </template>
 
 <script>
+import 'ant-design-vue/lib/divider/style/css'
 import { mapState, mapActions } from 'vuex'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo
 }
-// import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Index',

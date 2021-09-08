@@ -9,16 +9,9 @@
 
 <script>
 import BackTop from '@/components/BackTop'
-
 import VHeader from './VHeader/index'
 import VFooter from './VFooter'
 import AppMain from './AppMain'
-// import ProgressBar from '@/components/ProgressBar'
-//
-// let scrollTo
-// if (process.client) {
-//   scrollTo = require('@/utils/scroll-to').scrollTo
-// }
 export default {
   name: 'Layout',
   components: {
@@ -40,7 +33,7 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
 
   .content
     min-height calc(100vh - 200px)
-    padding-bottom 50px
+    padding-bottom 20px
 
   #bg
     position fixed

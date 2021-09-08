@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import 'ant-design-vue/lib/tag/style/css'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Tag',

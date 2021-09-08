@@ -37,7 +37,7 @@ export default {
     const authorDom = (
       <div class="comment-info">
         <span class="author-name">{ author.nickName }</span>
-        <span class="author-other" style="margin-left: 30px">{ author.browser }</span>
+        <span class="author-other">{ author.browser }</span>
         <span class="author-other">{ author.os }</span>
       </div>
     )
@@ -130,6 +130,6 @@ export default {
       //max-height 18px
     .author-other
       color $color-subsidiary
-      margin-right 20px
+      margin-left 20px
       font-size $font-size-mini
 </style>

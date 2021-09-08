@@ -20,6 +20,8 @@
 
 <script>
 import SideInfo from './SideInfo'
+import 'ant-design-vue/lib/row/style/css'
+
 export default {
   name: 'AppMain',
   components: { SideInfo }
