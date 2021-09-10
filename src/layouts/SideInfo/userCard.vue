@@ -60,14 +60,6 @@ export default {
   height 120px
   background-position: 25% 75%;
   z-index: 0;
-  //&:after
-  //  content: '';
-  //  position: absolute;
-  //  top: 0;
-  //  bottom: 0;
-  //  left: 0;
-  //  right: 0;
-  //  background linear-gradient(0,rgba(255, 255, 255, .5),transparent)
 .user
   width 100%
   position absolute
@@ -93,7 +85,6 @@ export default {
   display flex
   text-align center
   margin-top 100px
-  padding-bottom 20px
   font-size $font-size-medium
   justify-content: space-evenly;
   p

@@ -67,8 +67,10 @@
 
 <script>
 import 'ant-design-vue/lib/empty/style/css'
+import 'ant-design-vue/lib/message/style/css'
 import { mapActions, mapState } from 'vuex'
 import Markdown from '@/components/Markdown'
+import { Icon } from 'ant-design-vue'
 import { parseOS, parseBrowser } from '../../utils'
 import Edit from './components/Edit'
 import Tool from './components/Tool'
@@ -80,7 +82,9 @@ export default {
     CommentList,
     Tool,
     Edit,
-    Markdown
+    Markdown,
+    // eslint-disable-next-line vue/no-unused-components
+    Icon
   },
   provide () {
     return {
@@ -114,11 +118,6 @@ export default {
       'limit'
     ])
   },
-  // watch: {
-  //   page (val) {
-  //     console.log('就这？', val)
-  //   }
-  // },
   methods: {
     ...mapActions('modules/comment', [
       'postComment',
@@ -134,14 +133,27 @@ export default {
         anchor: this.$route.path
       }
       comment = Object.assign(query, comment)
-      const { data } = await this.postComment(comment)
-      if (data.code === 0) {
-        this.$message.success(data.message)
-      } else {
-        this.$message.error(data.message)
+      try {
+        const { data } = await this.postComment(comment)
+        if (data.code === 0) {
+          this.$message.success({
+            content: data.message,
+            icon: <Icon type="check-circle" />
+          })
+        } else {
+          this.$message.error({
+            content: data.message,
+            icon: <Icon type="close-circle" />
+          })
+        }
+        await this.$fetch()
+        this.editVisible = 0
+      } catch (e) {
+        this.$message.error({
+          content: '评论失败。请稍后再试',
+          icon: <Icon type="close-circle" />
+        })
       }
-      await this.$fetch()
-      this.editVisible = 0
     },
     onReply (id) {
       this.editVisible = id

@@ -1,12 +1,8 @@
 // export what you need
 export {
-  default as SmileOutline
-} from '@ant-design/icons/lib/outline/SmileOutline'
-export {
-  default as MehOutline
-} from '@ant-design/icons/lib/outline/MehOutline'
+  default as CheckCircleOutline
+} from '@ant-design/icons/lib/outline/CheckCircleOutline'
 
-// export what antd other components need
 export {
-  default as CloseOutline
-} from '@ant-design/icons/lib/outline/CloseOutline'
+  default as CloseCircleOutline
+} from '@ant-design/icons/lib/outline/CloseCircleOutline'
