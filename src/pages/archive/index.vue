@@ -7,7 +7,7 @@
 
 <script>
 import Timeline from '@/components/Timeline'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   name: 'Pigeonhole',
   components: { Timeline },
@@ -18,12 +18,12 @@ export default {
   },
   head () {
     return {
-      title: '归档-玉捷博客',
+      title: `归档-${this.site.name}`,
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: '玉捷-个人博客'
+          content: this.site.name
         }
       ]
     }
@@ -31,6 +31,9 @@ export default {
   computed: {
     ...mapState('modules/content', [
       'archive'
+    ]),
+    ...mapGetters([
+      'site'
     ])
   },
   // activated () {
@@ -51,6 +54,7 @@ export default {
   border-radius-5()
   shadow-2-down()
   border 1px solid $color-line-1
+  background-color #fff
 .tag
   padding 30px
   text-align center

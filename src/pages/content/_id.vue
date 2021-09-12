@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
 export default {
@@ -57,7 +57,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.article.title}-玉捷博客`,
+      title: `${this.article.title}-${this.site.name}`,
       meta: [
         {
           hid: 'content',
@@ -70,6 +70,9 @@ export default {
   computed: {
     ...mapState('modules/content', [
       'article'
+    ]),
+    ...mapGetters([
+      'site'
     ])
   }
 }
@@ -80,6 +83,7 @@ export default {
   border 1px solid $color-line-1
   shadow-2-down()
   border-radius-5()
+  z-index: 1;
 .entry-thumbnail
   width: 100%;
   position relative

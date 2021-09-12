@@ -37,10 +37,12 @@
         </p>
       </div>
     </div>
-    <h2 class="title" style="padding: 20px 0;margin-top: 20px">
-      友联
-    </h2>
-    <!--    <h3 style="font-weight: 600;font-size: 16px;">以下排名不分先后顺序</h3>-->
+<!--    <h2 class="title" style="padding: 20px 0;margin-top: 20px">-->
+<!--      友联-->
+<!--    </h2>-->
+    <h3 class="sort-desc">
+      以下排名不分先后顺序
+    </h3>
     <ul class="links">
       <li v-for="link in list" :key="link.URL" :title="link.name">
         <a :href="getURL(link.URL)" target="_blank">
@@ -58,28 +60,34 @@
 
 <script>
 import Comments from '@/components/Comments'
+import { mapGetters } from 'vuex'
 export default {
   name: 'FriendLink',
   components: { Comments },
   layout: 'blog',
   transition: 'slide-in',
   async asyncData ({ $axios }) {
-    const { result } = await $axios.get('links')
+    const { data } = await $axios.get('links')
     return {
-      list: result
+      list: data.result
     }
   },
   head () {
     return {
-      title: '友情链接-玉捷博客',
+      title: `友情链接-${this.site.name}`,
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: '玉捷-个人博客'
+          content: this.site.name
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters([
+      'site'
+    ])
   },
   methods: {
     getURL (str) {
@@ -105,6 +113,12 @@ export default {
   display flex
   flex-direction column
   color $color-content
+  background-color #fff
+
+  .sort-desc
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 20px
 
   .links
     margin 20px 0
@@ -132,7 +146,6 @@ export default {
       &:before
         content ''
         background-color rgba(233,67,40, .1)
-        //background-color rgba(255, 174, 173, .3)
         width 0
         height 100%
         position absolute
@@ -175,7 +188,7 @@ export default {
     font-weight 600
   .require-text
     margin-left 30px
-    line-height 2
+    line-height 1.5
 @media (max-width: $mobile)
   .link-wrapper
     padding 20px

@@ -4,6 +4,7 @@
     <AppMain class="content" />
     <VFooter />
     <BackTop />
+    <canvas class="canvas" />
   </div>
 </template>
 
@@ -22,11 +23,18 @@ export default {
   }
 }
 /* eslint-disable */
-console.log('%c version 2.0', 'font-size:20pt;color:#FFA7A6')
+console.log('%c version 2.1', 'font-size:20pt;color:#FFA7A6')
 console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
 </script>
 
 <style scoped lang="stylus">
+.canvas
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -99;
 .wrap
   width 100%
   margin-top 80px
@@ -34,6 +42,8 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
   .content
     min-height calc(100vh - 200px)
     padding-bottom 20px
+    position relative!important
+    z-index: 1!important;
 
   #bg
     position fixed

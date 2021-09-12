@@ -93,6 +93,10 @@ export default {
     {
       src: '@/plugins/click-effects',
       ssr: false
+    },
+    {
+      src: '@/plugins/bg-canvas',
+      ssr: false
     }
   ],
 

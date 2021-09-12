@@ -1,10 +1,3 @@
-// 清除浮动
-.clearfix:after
-  content ''
-  height 0
-  display block
-  clear both
-
 // 路由active
 .active-line
   position relative
@@ -43,7 +36,7 @@
 .box-card
   border-radius-5()
   shadow-2-down()
-  position relative
+  //position relative
   background-color #fff
   border 1px solid $color-line-1
   color $color-content
@@ -72,7 +65,7 @@
 .slide-out-leave-active,
 .slide-in-enter-active,
 .slide-in-leave-active {
-  transition all  .3s ease
+  transition all  .3s cubic-bezier(0, 0.85, 0.65, 1)
 }
 
 .slide-out-enter {
@@ -80,20 +73,22 @@
   transform: translate3d(-50px, 0, 0);
 }
 
-.slide-out-leave-active {
+.slide-out-leave-active
   opacity .2
   transform: translate3d(50px, 0, 0);
-}
 
-.slide-in-enter {
+
+.slide-in-enter
   opacity .2
   transform translate3d(50px, 0, 0)
-}
 
-.slide-in-leave-active {
+
+
+.slide-in-leave-active
   opacity .2
   transform translate3d(-50px, 0, 0)
-}
+  .canvas
+    opacity 0
 
 
 

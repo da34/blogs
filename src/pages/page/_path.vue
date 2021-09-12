@@ -8,7 +8,7 @@
 <script>
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'DiyPage', // 滚动到顶端
   components: {
@@ -23,18 +23,8 @@ export default {
   },
   head () {
     return {
-      title: `${this.article.title}-玉捷博客`,
+      title: `${this.article.title}-${this.site.name}`,
       meta: [
-        {
-          hid: 'article',
-          name: 'description',
-          content: '玉捷-个人博客'
-        },
-        {
-          hid: 'classify',
-          vmid: 'keywords',
-          content: '玉捷-YuJie'
-        },
         {
           hid: 'content',
           vmid: 'description',
@@ -46,6 +36,9 @@ export default {
   computed: {
     ...mapState('modules/content', [
       'article'
+    ]),
+    ...mapGetters([
+      'site'
     ])
   }
 }
@@ -58,4 +51,5 @@ export default {
   border 1px solid $color-line-1
   shadow-2-down()
   border-radius-5()
+  background-color #fff
 </style>

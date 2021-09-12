@@ -43,7 +43,7 @@
 
 <script>
 import 'ant-design-vue/lib/divider/style/css'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo
@@ -65,12 +65,12 @@ export default {
   },
   head () {
     return {
-      title: '首页-玉捷博客',
+      title: `首页-${this.site.name}`,
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: '玉捷-个人博客'
+          content: this.site.name
         }
       ]
     }
@@ -83,6 +83,9 @@ export default {
     ...mapState('modules/content', [
       'list',
       'total'
+    ]),
+    ...mapGetters([
+      'site'
     ])
   },
   watch: {

@@ -32,6 +32,7 @@ export default {
 .app-wrapper
   position relative
   margin 0 auto
+  z-index: 1;
   .side-wrapper
     padding-left 16px
   @media (min-width: 768px) {

@@ -61,7 +61,15 @@
         加载更多评论
       </div>
     </div>
-    <a-empty v-else description="快做第一个评论的人吧" style="padding: 40px" />
+    <a-empty
+      v-else
+      description="快做第一个评论的人吧"
+      style="padding: 40px"
+      :image="require('~/assets/images/undraw_New_message_re_fp03.png')"
+      :imageStyle="{
+        height: '120px',
+      }"
+    />
   </div>
 </template>
 

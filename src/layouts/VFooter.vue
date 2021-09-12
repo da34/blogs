@@ -3,7 +3,7 @@
     <footer class="footer-content">
       <div class="footer">
         <div class="blog-info">
-          <p>© {{ date }} 玉捷个人博客</p>
+          <p>© {{ date }} {{ site.name }}</p>
           <a href="http://www.beian.miit.gov.cn" target="_blank">{{ site.internetNumber }}</a>
           <p>
             博客已运行 {{ activeTime }}
