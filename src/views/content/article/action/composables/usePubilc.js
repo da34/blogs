@@ -1,5 +1,6 @@
-import {computed, reactive, ref, unref, watch} from "vue";
-import {createArticle} from "@/api/web/article";
+import {ref, unref, watch} from "vue";
+import { useRouter } from 'vue-router'
+import {createArticle, updateArticle} from "@/api/web/article";
 
 export function usePublic(show) {
   const defaultVal = () => ({
@@ -11,10 +12,11 @@ export function usePublic(show) {
     contentOutline: '',
     firstPicture: '',
     isTop: false,
+    tags: [],
   })
-// 初始化文章
+  // 初始化文章
   const article = ref(defaultVal())
-  const formRef = ref(null)
+  const router = useRouter()
 
   // 内容变化，更改描述
   watch(
@@ -24,9 +26,10 @@ export function usePublic(show) {
     })
 
   async function submitCallback() {
-    await createArticle(unref(article))
+    await article.value.id ? updateArticle(unref(article)) : createArticle(unref(article))
     resetData()
     show.value = false
+    router.back()
   }
 
   function resetData() {
@@ -36,9 +39,15 @@ export function usePublic(show) {
   function cancelCallback() {
     show.value = false
   }
+
+  function setArticle(data) {
+    article.value = data
+  }
+
   return {
     article,
     submitCallback,
-    cancelCallback
+    cancelCallback,
+    setArticle,
   }
 }

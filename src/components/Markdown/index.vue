@@ -1,49 +1,22 @@
 <template>
-  <div id="vditor" ref="vditorRef"></div>
+  <div id="vditor" />
 </template>
-
 <script>
-import {onMounted, ref, defineComponent, watch} from "vue";
+import {onMounted,defineComponent, ref} from "vue";
 import Vditor from "vditor";
 import {qiniuUpload} from "@/utils";
 import "vditor/src/assets/scss/index.scss"
 
-const props = {
-  text: {
-    type: String,
-    default: ''
-  }
-}
-
 export default defineComponent({
-  props,
-  emits: ['update:text'],
-  setup(props, {emit}) {
+  setup() {
     // mark dom
-    let vditorDom
-
-    watch(
-        () => props.text,
-        (newVal) => {
-          console.log(newVal)
-          if (!newVal) {
-            vditorDom.setValue('')
-          }
-        }
-    )
+    const vditorRef = ref()
 
     onMounted(() => {
-      vditorDom = new Vditor('vditor', {
+      vditorRef.value = new Vditor('vditor', {
         mode: 'sv',
-        value: props.text,
-        input: (string) => {
-          emit('update:text', string)
-        },
         cache: {
           enable: false,
-          after(ss) {
-            console.log(ss)
-          }
         },
         upload: {
           multiple: false,  // 不允许批量上传
@@ -94,7 +67,21 @@ export default defineComponent({
           },
         ],
       })
+
     })
+
+    function getValue() {
+      return vditorRef.value.getValue()
+    }
+
+    function setValue(val) {
+        vditorRef.value.setValue(val)
+    }
+
+    return {
+      getValue,
+      setValue
+    }
   }
 })
 

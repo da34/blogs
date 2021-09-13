@@ -3,9 +3,11 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import { visualizer } from 'rollup-plugin-visualizer'
 
-
+// console.log(import.meta.env)
+// const prod = import.meta.env.PROD
 // https://vitejs.dev/config/
 export default defineConfig({
+  // base: '/dist/',
   base: './',
   plugins: [
     vue(),

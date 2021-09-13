@@ -35,17 +35,30 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
       ellipsis: true,
       render(row) {
         const statusMap = {
-          publish: 'success',
-          draft: 'default',
-          delete: 'error',
+          0: 'success',
+          1: 'default',
+          2: 'error',
         }
         const typeMap = {
-          article: 'warning',
-          page: 'info'
+          0: 'warning',
+          1: 'info'
+        }
+
+        const statusEnum = {
+          0: 'publish',
+          1: 'draft',
+          2: 'delete',
+        }
+        const typeEnum = {
+          0: 'article',
+          1: 'page'
         }
 
         const status = statusMap[row.status]
         const type = typeMap[row.type]
+        const statusText = statusEnum[row.status]
+        const typeText = typeEnum[row.type]
+
         const tagDom = (type, text) => h(NTag,
           {class: 'mr-3', type, round: true},
           {default: () => text}
@@ -55,8 +68,8 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
           'div',
           null,
           [
-            tagDom(status, row.status),
-            tagDom(type, row.type),
+            tagDom(status, statusText),
+            tagDom(type, typeText),
             row.title,
           ]
         )

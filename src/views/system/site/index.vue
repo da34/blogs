@@ -19,6 +19,9 @@
       <NFormItem label="网站名称" path="name">
         <NInput v-model:value="formValue.name"/>
       </NFormItem>
+      <NFormItem label="网站域名" path="url">
+        <NInput v-model:value="formValue.url"/>
+      </NFormItem>
       <NFormItem label="备案号" path="internetNumber">
         <NInput v-model:value="formValue.internetNumber"/>
       </NFormItem>
@@ -46,7 +49,8 @@ const message = useMessage()
 const formValue = ref({
   name: '',
   internetNumber: '',
-  logo: ''
+  logo: '',
+  url: ''
 })
 const rules = {
   name: {
@@ -54,6 +58,18 @@ const rules = {
     message: '请输入网站名称',
     trigger: ['blur']
   },
+  url: [
+    {
+      required: true,
+      message: '请输入网站名称',
+      trigger: ['blur']
+    },
+    {
+      type: 'url',
+      message: '请输入正确的域名',
+      trigger: ['input']
+    },
+  ],
   internetNumber: {
     required: true,
     message: '请输入备案号',
@@ -71,7 +87,7 @@ onMounted(async () => {
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      updateConfig({ key, value: formValue.value })
+      updateConfig({key, value: formValue.value})
     } else {
       message.error('请填写完成信息')
     }

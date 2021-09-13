@@ -80,12 +80,11 @@ const transform = {
     // 请求之前处理config
     const userStore = useUserStore();
     const token = userStore.getToken;
-    const csrfToken =  storage.getCookie('csrfToken')
-    if (token) {
-      // jwt token
-      config.headers['yujie-token'] = token;
-      config.headers['yu-csrf-token'] = csrfToken;
-    }
+    const csrfToken = storage.getCookie('csrfToken')
+
+    csrfToken && (config.headers['yu-csrf-token'] = csrfToken)
+    // jwt token
+    token && (config.headers['yujie-token'] = token)
     return config;
   },
 

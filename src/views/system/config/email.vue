@@ -14,10 +14,13 @@
       <NFormItem label="授权码" path="pass">
         <NInput v-model:value="formValue.pass" type="password" />
       </NFormItem>
+      <NFormItem label="host" path="host">
+        <NInput v-model:value="formValue.host"/>
+      </NFormItem>
       <NFormItem label="端口" path="port">
         <NInput v-model:value="formValue.port"/>
       </NFormItem>
-      <NFormItem label="TLS">
+      <NFormItem label="tls">
         <NSwitch v-model:value="formValue.TLS"/>
       </NFormItem>
       <NFormItem label="">
@@ -54,6 +57,11 @@ const rules = {
   port: {
     required: true,
     message: '请输入端口',
+    trigger: ['blur']
+  },
+  host: {
+    required: true,
+    message: '请输入host',
     trigger: ['blur']
   }
 }

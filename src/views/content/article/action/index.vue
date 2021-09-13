@@ -10,7 +10,7 @@
     </NGrid>
 
     <!--markdown-->
-    <MarkDown v-model:text="article.content" />
+    <Markdown ref="markDownRef" />
 
     <!--发布NDrawer-->
     <NDrawer
@@ -49,7 +49,7 @@
                   multiple
                   placeholder="请选择标签"
                   :options="tagsOption"
-                  v-model:value="article.tag"
+                  v-model:value="article.tags"
               />
             </NFormItemGi>
             <NFormItemGi label="文章类型">
@@ -82,21 +82,25 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import MarkDown from '@/components/Markdown/index.vue'
-import {allTag} from "@/api/web/tag";
+import {ref, onMounted} from 'vue'
+import {useRoute} from 'vue-router'
 import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
+import Markdown from '@/components/Markdown/index.vue'
+import {allTag} from "@/api/web/tag";
+import {getArticleById} from "@/api/web/article";
 import MUpload from '@/components/Upload/index.vue'
 import {usePublic} from "./composables/usePubilc";
 
-
+const markDownRef = ref(null)
 const message = useMessage()
+const route = useRoute()
 const tagsOption = ref()
 const show = ref(false)
+const { id } = route.params
 
 // 发布逻辑
-const {article, submitCallback, cancelCallback} = usePublic(show)
+const {article, submitCallback, cancelCallback, setArticle} = usePublic(show)
 
 // 获取标签
 const fetchState = async() => {
@@ -106,11 +110,24 @@ const fetchState = async() => {
   })
 }
 
-fetchState()
+onMounted(async () => {
+  // 有id 才获取文章
+  if (id) {
+    await getArticle(id)
+  }
+  await fetchState()
+})
 
+async function getArticle(id) {
+  const data = await getArticleById(id)
+  console.log(data.content)
+  markDownRef.value.setValue(data.content)
+  setArticle(data)
+}
 
 function publicClick() {
-  console.log(article.value)
+  article.value.content = markDownRef.value.getValue()
+
   if (!article.value.title) {
     message.warning('标题不能为空')
     return

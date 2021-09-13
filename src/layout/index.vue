@@ -23,7 +23,7 @@
   </NLayout>
 </template>
 <script setup>
-import {NLayout, NLayoutHeader, NLayoutContent, NLayoutSider,useLoadingBar,useMessage } from 'naive-ui'
+import {useLoadingBar,useMessage } from 'naive-ui'
 import PageSidebar from './components/Sidebar/index.vue'
 import PageMainView from "./components/MainView.vue";
 import PageHeader from "./components/Header/index.vue";

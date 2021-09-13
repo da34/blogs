@@ -52,7 +52,6 @@ import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {getArticleList, changeArticleState} from "@/api/web/article";
 import {createColumns} from "./columns";
-import {useDialog, useMessage} from 'naive-ui'
 import BasicTable from '@/components/BasicTable/index.vue'
 
 const defaultVla = () => ({
@@ -61,8 +60,6 @@ const defaultVla = () => ({
   status: null
 })
 
-const dialog = useDialog()
-const message = useMessage()
 const router = useRouter()
 const tableRef = ref(null)
 
@@ -89,7 +86,7 @@ const columns = createColumns({
   },
   handleDel,
   handleEdit(id) {
-    message.info('send mail to ' + id)
+    router.push({name: 'content_action', params: { id }})
   },
 })
 
