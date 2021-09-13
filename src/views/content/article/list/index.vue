@@ -4,7 +4,6 @@
         inline
         label-placement="left"
         :model="formValue"
-        ref="formRef"
     >
       <NFormItem>
         <NSpace>

@@ -6,17 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Markdown/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Markdown/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/naive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/naive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_serve.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin_serve.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/email.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/email.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/site/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/link/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/stats.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
     </list>
@@ -114,7 +109,7 @@
       <workItem from="1629966593900" duration="83218000" />
       <workItem from="1630824217659" duration="15258000" />
       <workItem from="1631269387182" duration="2548000" />
-      <workItem from="1631350595013" duration="12025000" />
+      <workItem from="1631350595013" duration="16960000" />
     </task>
     <servers />
   </component>

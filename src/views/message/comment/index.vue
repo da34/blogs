@@ -5,7 +5,6 @@
         inline
         label-placement="left"
         :model="formValue"
-        ref="formRef"
     >
       <NFormItem>
         <NInput v-model:value="formValue.nickName" placeholder="请输入评论人"/>
