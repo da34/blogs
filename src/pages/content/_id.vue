@@ -84,6 +84,7 @@ export default {
   shadow-2-down()
   border-radius-5()
   z-index: 1;
+  background-color #fff
 .entry-thumbnail
   width: 100%;
   position relative

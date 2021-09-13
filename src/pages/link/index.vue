@@ -37,9 +37,9 @@
         </p>
       </div>
     </div>
-<!--    <h2 class="title" style="padding: 20px 0;margin-top: 20px">-->
-<!--      友联-->
-<!--    </h2>-->
+    <!--    <h2 class="title" style="padding: 20px 0;margin-top: 20px">-->
+    <!--      友联-->
+    <!--    </h2>-->
     <h3 class="sort-desc">
       以下排名不分先后顺序
     </h3>
@@ -124,6 +124,7 @@ export default {
     margin 20px 0
     display flex
     a
+
       display flex
       align-items center
       .link-text
@@ -145,7 +146,7 @@ export default {
         margin-left 0
       &:before
         content ''
-        background-color rgba(233,67,40, .1)
+        background-color rgba(233,67,40, .2)
         width 0
         height 100%
         position absolute
@@ -153,7 +154,7 @@ export default {
         left -60px
         transform skewX(45deg)
         transition all .3s
-        z-index -1
+        //z-index -1
       &:hover
         border-color rgba(233,67,40, .2)
         &:before
@@ -184,11 +185,11 @@ export default {
   .title
     text-align center
   .require
-    margin 30px 0 20px
+    margin 30px 0 15px
     font-weight 600
   .require-text
     margin-left 30px
-    line-height 1.5
+    line-height 2.5
 @media (max-width: $mobile)
   .link-wrapper
     padding 20px

@@ -94,6 +94,7 @@ export default {
         margin-left auto
     img
       border-radius 50%
+      width 42px
   .comment-text
     text-omit(1)
     color $color-title

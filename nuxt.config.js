@@ -183,12 +183,12 @@ export default {
     optimization: { // 拆分大文件
       splitChunks: {
         cacheGroups: {
-          styles: {
-            name: 'commons-styles', // 提取公共的css
-            test: /\.(css|vue|styl)$/,
-            chunks: 'initial',
-            enforce: true
-          }
+          // styles: {
+          //   name: 'commons-styles', // 提取公共的css
+          //   test: /\.(styl)$/,
+          //   chunks: 'initial',
+          //   enforce: true
+          // }
           // libs: {
           //   name: 'chunk-libs',
           //   test: /[\\/]node_modules[\\/]/,
