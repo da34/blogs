@@ -5,10 +5,8 @@ import UAParser from 'ua-parser-js'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const columns = [
-  {type: 'selection', key: 'selection'},
-  {title: '序号', key: 'number', render: (row, index) => index + 1},
   {
-    title: '头像', key: 'name', width: 50,
+    title: '头像', key: 'name', width: 90, align: 'center',
     render({avatar}) {
       return h(
         NAvatar,
@@ -21,11 +19,11 @@ export const columns = [
       )
     }
   },
-  {title: '评论人', key: 'nickName', width: 100,},
-  {title: '被评论人', key: 'targetName', width: 100,},
-  {title: '评论内容', key: 'text' },
+  {title: '评论人', key: 'nickName', width: 100, align: 'center',},
+  // {title: '被评论人', key: 'targetName', width: 100,},
+  {title: '评论内容', key: 'text', align: 'center',},
   {
-    title: 'ua', key: 'ua', width: 300,
+    title: 'ua', key: 'ua', width: 280, align: 'center',
     render({ua}) {
 
       const parser = new UAParser(ua);
@@ -53,17 +51,19 @@ export const columns = [
 
       return h(
         NSpace,
-        null,
+        {
+          justify: "center"
+        },
         {
           default: () => [osDom, browserDom]
         }
       )
     }
   },
-  {title: 'ip', key: 'ip', width: 150},
-  {title: '来源', key: 'anchor', width: 100},
+  {title: 'ip', key: 'ip', width: 150, align: 'center',},
+  {title: '来源', key: 'anchor', width: 150, align: 'center',},
   {
-    title: '状态', key: 'status',
+    title: '状态', key: 'status', width: 50, align: 'center',
     render({status}) {
       const typeMap = {
         '删除': 'error',
@@ -87,6 +87,7 @@ export const columns = [
     title: '创建时间',
     key: 'createdAt',
     width: 200,
+    align: 'center',
     render(row) {
       return h(
         'span',

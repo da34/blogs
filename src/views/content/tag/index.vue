@@ -157,13 +157,12 @@ function handleValidateClick(e) {
 }
 
 const createColumns = [
-  {type: 'selection', key: 'selection'},
-  {title: '序号', key: 'number', render: (row, index) => index + 1},
-  {title: '标签名', key: 'name', ellipsis: true,},
-  {title: '浏览量', key: 'views'},
+  {title: '标签名', key: 'name', ellipsis: true, align: 'center',},
+  {title: '浏览量', key: 'views', align: 'center',},
   {
     title: '创建时间',
     key: 'createdAt',
+    align: 'center',
     render(row) {
       return h(
           'span',

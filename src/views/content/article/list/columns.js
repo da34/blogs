@@ -1,47 +1,45 @@
 import {h} from "vue";
-import {NButton, NSwitch, NTag,NImage, NEmpty} from "naive-ui";
+import {NButton, NSwitch, NTag} from "naive-ui";
 import {formatDate} from "@/utils";
 import {isFunction} from "lodash-es";
 
 export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
   return [
-    { type: 'selection', key: 'selection'},
-    {title: '序号', key: 'number', render: (row, index) => index + 1},
-    {title: '头图', key: 'firstPicture', width: 190,
-      render({firstPicture, title}) {
-        if (firstPicture) {
-          return h(
-            NImage,
-            {
-              alt: title,
-              width: 150,
-              objectFit: 'cover',
-              style: 'height: 80px',
-              src: firstPicture
-            }
-          )
-        }
-        return h(
-            NEmpty,
-            {
-              description: '没有图片'
-            }
-          )
-      }
-    },
     {
       title: '标题',
       key: 'title',
       ellipsis: true,
+      align: 'center'
+    },
+    {
+      title: '创建时间',
+      key: 'createdAt',
+      align: 'center',
+      // sorter (rowA, rowB) {
+      //   console.log(rowA, rowB)
+      //   return rowA.createdAt - rowB.createdAt
+      // },
       render(row) {
+        return h(
+          'span',
+          null,
+          {
+            default: () => row.createdAt && formatDate(row.createdAt)
+          }
+        )
+      }
+    },
+    {
+      title: '类型', key: 'type', align: 'center',
+      render({type}) {
         const statusMap = {
           0: 'success',
           1: 'default',
           2: 'error',
         }
         const typeMap = {
-          0: 'warning',
-          1: 'info'
+          0: 'info',
+          1: 'warning'
         }
 
         const statusEnum = {
@@ -53,33 +51,44 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
           0: 'article',
           1: 'page'
         }
-
-        const status = statusMap[row.status]
-        const type = typeMap[row.type]
-        const statusText = statusEnum[row.status]
-        const typeText = typeEnum[row.type]
-
-        const tagDom = (type, text) => h(NTag,
-          {class: 'mr-3', type, round: true},
-          {default: () => text}
-        )
-
         return h(
-          'div',
-          null,
-          [
-            tagDom(status, statusText),
-            tagDom(type, typeText),
-            row.title,
-          ]
+          NTag,
+          {
+            type: typeMap[type]
+          },
+          {default: () => typeEnum[type]}
         )
-      }
+      },
     },
-    {title: '浏览量', key: 'views'},
-    {title: '点赞数', key: 'likeNum'},
+    {
+      title: '状态', key: 'status', align: 'center',
+      render({status}) {
+        const statusMap = {
+          0: 'success',
+          1: 'default',
+          2: 'error',
+        }
+
+        const statusEnum = {
+          0: 'publish',
+          1: 'draft',
+          2: 'delete',
+        }
+        return h(
+          NTag,
+          {
+            type: statusMap[status]
+          },
+          {default: () => statusEnum[status]}
+        )
+      },
+    },
+    {title: '浏览量', key: 'views', align: 'center'},
+    {title: '点赞数', key: 'likeNum', align: 'center'},
     {
       title: '置顶',
       key: 'isTop',
+      align: 'center',
       render(row) {
         return h(
           NSwitch,
@@ -93,6 +102,7 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
     {
       title: '评论',
       key: 'commentDisabled',
+      align: 'center',
       render(row) {
         return h(
           NSwitch,
@@ -106,6 +116,7 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
     {
       title: '版权',
       key: 'shareStatement',
+      align: 'center',
       render(row) {
         return h(
           NSwitch,
@@ -117,21 +128,9 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
       }
     },
     {
-      title: '创建时间',
-      key: 'createdAt',
-      render(row) {
-        return h(
-          'span',
-          null,
-          {
-            default: () => row.createdAt && formatDate(row.createdAt)
-          }
-        )
-      }
-    },
-    {
       title: '操作',
       key: 'actions',
+      align: 'center',
       render(row) {
         const editBtn = h(NButton,
           {

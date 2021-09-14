@@ -6,40 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Application/Application.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Application/Application.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Upload/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Upload/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/MainView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/MainView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/link/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/tag/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/tag/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/ArticleTop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/ArticleTop.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/TagArticle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/TagArticle.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/exception/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/exception/404.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/jurisdiction/admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/jurisdiction/admin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/jurisdiction/super_admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/jurisdiction/super_admin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/message/comment/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/email.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/email.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/site/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/menu/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +109,7 @@
       <workItem from="1631269387182" duration="2548000" />
       <workItem from="1631350595013" duration="22152000" />
       <workItem from="1631604003639" duration="20000" />
-      <workItem from="1631616257822" duration="2716000" />
+      <workItem from="1631616257822" duration="5507000" />
     </task>
     <servers />
   </component>

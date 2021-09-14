@@ -146,7 +146,7 @@ const rules = {
 
 export default defineComponent({
   name: 'CreateDrawer',
-  components: {Info},
+  // components: {Info},
   props: {
     title: {
       type: String,

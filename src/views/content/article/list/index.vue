@@ -13,12 +13,12 @@
           >
             新建文章
           </NButton>
-          <NButton
-            type="error"
-            @click="handleDel"
-          >
-            批量删除
-          </NButton>
+<!--          <NButton-->
+<!--            type="error"-->
+<!--            @click="handleDel"-->
+<!--          >-->
+<!--            批量删除-->
+<!--          </NButton>-->
         </NSpace>
       </NFormItem>
       <NFormItem

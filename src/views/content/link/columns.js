@@ -7,10 +7,8 @@ import {isFunction } from "lodash-es";
 
 export const columns = ({handleUpdate}) => {
   return [
-    {type: 'selection', key: 'selection'},
-    {title: '序号', key: 'number', render: (row, index) => index + 1},
     {
-      title: 'logo', key: 'avatar',
+      title: 'logo', key: 'avatar', align: 'center',
       render({avatar}) {
         return h(
           NAvatar,
@@ -23,10 +21,10 @@ export const columns = ({handleUpdate}) => {
         )
       }
     },
-    {title: '名称', key: 'name', ellipsis: true,},
-    {title: '简述', key: 'outline', ellipsis: true,},
+    {title: '名称', key: 'name', ellipsis: true, align: 'center',},
+    {title: '简述', key: 'outline', ellipsis: true, align: 'center',},
     {
-      title: '状态', key: 'status',
+      title: '状态', key: 'status',align: 'center',
       render(row) {
         return h(
           NSwitch,
@@ -44,6 +42,7 @@ export const columns = ({handleUpdate}) => {
     {
       title: '创建时间',
       key: 'createdAt',
+      align: 'center',
       render(row) {
         return h(
           'span',
