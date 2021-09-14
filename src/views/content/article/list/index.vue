@@ -1,47 +1,75 @@
 <template>
   <NCard>
     <NForm
-        inline
-        label-placement="left"
-        :model="formValue"
+      inline
+      label-placement="left"
+      :model="formValue"
     >
       <NFormItem>
         <NSpace>
-          <NButton type="primary" @click="handleAction">新建文章</NButton>
-          <NButton type="error" @click="handleDel">批量删除</NButton>
+          <NButton
+            type="primary"
+            @click="handleAction"
+          >
+            新建文章
+          </NButton>
+          <NButton
+            type="error"
+            @click="handleDel"
+          >
+            批量删除
+          </NButton>
         </NSpace>
       </NFormItem>
-      <NFormItem class="ml-auto" label="类型">
+      <NFormItem
+        class="ml-auto"
+        label="类型"
+      >
         <NSelect
-            class="w-40"
-            placeholder="请选择类型"
-            :options="typeOptions"
-            v-model:value="formValue.type"
+          v-model:value="formValue.type"
+          class="w-40"
+          placeholder="请选择类型"
+          :options="typeOptions"
         />
       </NFormItem>
       <NFormItem label="状态">
         <NSelect
-            class="w-40"
-            placeholder="请选择状态"
-            :options="statusOptions"
-            v-model:value="formValue.status"
+          v-model:value="formValue.status"
+          class="w-40"
+          placeholder="请选择状态"
+          :options="statusOptions"
         />
       </NFormItem>
       <NFormItem label="标题">
-        <NInput v-model:value="formValue.title" placeholder="输入标题"/>
+        <NInput
+          v-model:value="formValue.title"
+          placeholder="输入标题"
+        />
       </NFormItem>
       <NFormItem>
-        <NButton @click="handleReset" attr-type="button">重置</NButton>
-        <NButton class="ml-3" @click="handleSearch" attr-type="button" type="primary">查询</NButton>
+        <NButton
+          attr-type="button"
+          @click="handleReset"
+        >
+          重置
+        </NButton>
+        <NButton
+          class="ml-3"
+          attr-type="button"
+          type="primary"
+          @click="handleSearch"
+        >
+          查询
+        </NButton>
       </NFormItem>
     </NForm>
     <BasicTable
-        ref="tableRef"
-        :pagination="pagination"
-        :columns="columns"
-        :request="getArticleList"
-        :row-key="row => row.id"
-        @update:checked-row-keys="handleCheck"
+      ref="tableRef"
+      :pagination="pagination"
+      :columns="columns"
+      :request="getArticleList"
+      :row-key="row => row.id"
+      @update:checked-row-keys="handleCheck"
     />
   </NCard>
 </template>

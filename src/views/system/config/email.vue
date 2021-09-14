@@ -1,30 +1,54 @@
 <template>
-  <NSpin size="large" :show="showSpin">
+  <NSpin
+    size="large"
+    :show="showSpin"
+  >
     <NForm
-        :label-width="100"
-        :model="formValue"
-        label-placement="left"
-        :rules="rules"
-        ref="formRef"
+      ref="formRef"
+      :label-width="100"
+      :model="formValue"
+      label-placement="left"
+      :rules="rules"
     >
-
-      <NFormItem label="账号" path="user">
-        <NInput v-model:value="formValue.user"/>
+      <NFormItem
+        label="账号"
+        path="user"
+      >
+        <NInput v-model:value="formValue.user" />
       </NFormItem>
-      <NFormItem label="授权码" path="pass">
-        <NInput v-model:value="formValue.pass" type="password" />
+      <NFormItem
+        label="授权码"
+        path="pass"
+      >
+        <NInput
+          v-model:value="formValue.pass"
+          type="password"
+        />
       </NFormItem>
-      <NFormItem label="host" path="host">
-        <NInput v-model:value="formValue.host"/>
+      <NFormItem
+        label="host"
+        path="host"
+      >
+        <NInput v-model:value="formValue.host" />
       </NFormItem>
-      <NFormItem label="端口" path="port">
-        <NInput v-model:value="formValue.port"/>
+      <NFormItem
+        label="端口"
+        path="port"
+      >
+        <NInput v-model:value="formValue.port" />
       </NFormItem>
       <NFormItem label="tls">
-        <NSwitch v-model:value="formValue.TLS"/>
+        <NSwitch v-model:value="formValue.TLS" />
       </NFormItem>
       <NFormItem label="">
-        <NButton style="margin-left: 100px;" @click="handleValidateClick" attr-type="button" type="primary">保存</NButton>
+        <NButton
+          style="margin-left: 100px;"
+          attr-type="button"
+          type="primary"
+          @click="handleValidateClick"
+        >
+          保存
+        </NButton>
       </NFormItem>
     </NForm>
   </NSpin>

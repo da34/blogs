@@ -1,5 +1,8 @@
 <template>
-  <div ref="chartRef" style="height: 300px"></div>
+  <div
+    ref="chartRef"
+    style="height: 300px"
+  />
 </template>
 
 <script setup>

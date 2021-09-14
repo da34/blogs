@@ -1,17 +1,25 @@
 <template>
   <div class="logo flex justify-center items-center py-3 overflow-hidden ">
-    <img src="@/assets/images/logo.png" class="w-auto">
-    <h2 v-show="!collapsed" class="">博客管理后台</h2>
+    <img
+      src="@/assets/images/logo.png"
+      class="w-auto"
+    >
+    <h2
+      v-show="!collapsed"
+      class=""
+    >
+      博客管理后台
+    </h2>
   </div>
   <n-menu
-      inverted
-      :collapsed="collapsed"
-      :options="menus"
-      :collapsed-width="68"
-      :collapsed-icon-size="20"
-      :indent="24"
-      :value="activeKey"
-      @update:value="handleUpdateValue"
+    inverted
+    :collapsed="collapsed"
+    :options="menus"
+    :collapsed-width="68"
+    :collapsed-icon-size="20"
+    :indent="24"
+    :value="activeKey"
+    @update:value="handleUpdateValue"
   />
 </template>
 

@@ -1,14 +1,29 @@
 <template>
   <div class="mt-3 mb-5">
-    <NGrid cols="1 s:2 m:2 l:2 xl:2 2xl:2" responsive="screen" :x-gap="12" :y-gap="8">
+    <NGrid
+      cols="1 s:2 m:2 l:2 xl:2 2xl:2"
+      responsive="screen"
+      :x-gap="12"
+      :y-gap="8"
+    >
       <NGi>
-        <NCard segmented size="small" :bordered="false" title="最近文章">
-          <NSkeleton v-if="loading"/>
+        <NCard
+          segmented
+          size="small"
+          :bordered="false"
+          title="最近文章"
+        >
+          <NSkeleton v-if="loading" />
           <NList v-else>
-            <NListItem v-for="article in articles">
+            <NListItem
+              v-for="article in articles"
+              :key="article.id"
+            >
               <NThing :title="article.title">
                 <template #description>
-                  <p class="text-xs text-gray-500">{{ formatDate(article.createdAt) }}</p>
+                  <p class="text-xs text-gray-500">
+                    {{ formatDate(article.createdAt) }}
+                  </p>
                 </template>
               </NThing>
             </NListItem>
@@ -16,22 +31,41 @@
         </NCard>
       </NGi>
       <NGi>
-        <NCard segmented size="small" :bordered="false" title="最近评论">
+        <NCard
+          segmented
+          size="small"
+          :bordered="false"
+          title="最近评论"
+        >
           <NSpace v-if="loading">
-            <NSkeleton circle width="40px"/>
-            <NSkeleton height="55px" :width="500"/>
+            <NSkeleton
+              circle
+              width="40px"
+            />
+            <NSkeleton
+              height="55px"
+              :width="500"
+            />
           </NSpace>
           <NList v-else>
-            <NListItem v-for="comment in comments">
+            <NListItem
+              v-for="comment in comments"
+              :key="comment.id"
+            >
               <template #prefix>
                 <NAvatar
-                    circle
-                    :size="40"
-                    :src="`https://gravatar.loli.net/avatar/${ comment.avatar}?s=40&d=retro`"
+                  circle
+                  :size="40"
+                  :src="`https://gravatar.loli.net/avatar/${ comment.avatar}?s=40&d=retro`"
                 />
               </template>
-              <NThing :title="comment.nickName" :description="comment.text">
-                <p class="text-xs text-gray-500">{{ formatDate(comment.createdAt) }}</p>
+              <NThing
+                :title="comment.nickName"
+                :description="comment.text"
+              >
+                <p class="text-xs text-gray-500">
+                  {{ formatDate(comment.createdAt) }}
+                </p>
               </NThing>
             </NListItem>
           </NList>

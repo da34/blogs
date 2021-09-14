@@ -2,7 +2,7 @@
   <NLoadingBarProvider>
     <NDialogProvider>
       <NMessageProvider>
-        <slot/>
+        <slot />
       </NMessageProvider>
     </NDialogProvider>
   </NLoadingBarProvider>

@@ -1,22 +1,37 @@
 <template>
   <div>
-    <NCard :segmented="{ content: 'hard' }" :bordered="false" size="small">
+    <NCard
+      :segmented="{ content: 'hard' }"
+      :bordered="false"
+      size="small"
+    >
       <template #header>
-        <NButton type="primary" ghost icon-placement="right" @click="addMenu">
+        <NButton
+          type="primary"
+          ghost
+          icon-placement="right"
+          @click="addMenu"
+        >
           添加菜单
         </NButton>
       </template>
       <!--表格-->
       <div class="w-full menu">
-        <BasicTable ref="tableRef" :request="fetch" :columns="columns" :rowKey="(row) => row.id" :actionColumn="actionColumn"/>
+        <BasicTable
+          ref="tableRef"
+          :request="fetch"
+          :columns="columns"
+          :row-key="(row) => row.id"
+          :action-column="actionColumn"
+        />
       </div>
     </NCard>
     <CreateDrawer
-        ref="createDrawerRef"
-        width="50%"
-        :title="createTitle"
-        @submitAfter="reload"
-        :menuOptions="menuOptions"
+      ref="createDrawerRef"
+      width="50%"
+      :title="createTitle"
+      :menu-options="menuOptions"
+      @submitAfter="reload"
     />
   </div>
 </template>

@@ -1,32 +1,53 @@
 <template>
   <NCard>
     <NForm
-        class="w-2/5 m-auto"
-        :label-width="80"
-        :model="formValue"
-        label-placement="left"
-        :rules="rules"
-        ref="formRef"
+      ref="formRef"
+      class="w-2/5 m-auto"
+      :label-width="80"
+      :model="formValue"
+      label-placement="left"
+      :rules="rules"
     >
-      <NFormItem label="LOGO" path="logo">
+      <NFormItem
+        label="LOGO"
+        path="logo"
+      >
         <MUpload v-model:file-url="formValue.logo">
-          <p class="mb-3">上传图片</p>
+          <p class="mb-3">
+            上传图片
+          </p>
           <NIcon size="30">
-            <Upload/>
+            <Upload />
           </NIcon>
         </MUpload>
       </NFormItem>
-      <NFormItem label="网站名称" path="name">
-        <NInput v-model:value="formValue.name"/>
+      <NFormItem
+        label="网站名称"
+        path="name"
+      >
+        <NInput v-model:value="formValue.name" />
       </NFormItem>
-      <NFormItem label="网站域名" path="url">
-        <NInput v-model:value="formValue.url"/>
+      <NFormItem
+        label="网站域名"
+        path="url"
+      >
+        <NInput v-model:value="formValue.url" />
       </NFormItem>
-      <NFormItem label="备案号" path="internetNumber">
-        <NInput v-model:value="formValue.internetNumber"/>
+      <NFormItem
+        label="备案号"
+        path="internetNumber"
+      >
+        <NInput v-model:value="formValue.internetNumber" />
       </NFormItem>
       <NFormItem>
-        <NButton style="margin-left: 80px;" @click="handleValidateClick" attr-type="button" type="primary">保存</NButton>
+        <NButton
+          style="margin-left: 80px;"
+          attr-type="button"
+          type="primary"
+          @click="handleValidateClick"
+        >
+          保存
+        </NButton>
       </NFormItem>
     </NForm>
   </NCard>

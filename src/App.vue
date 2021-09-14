@@ -1,7 +1,7 @@
 <template>
   <NConfigProvider>
     <Application>
-      <router-view/>
+      <router-view />
     </Application>
   </NConfigProvider>
 </template>

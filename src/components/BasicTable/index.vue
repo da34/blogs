@@ -1,5 +1,8 @@
 <template>
-  <NDataTable :="getBindValues" @update:page="updatePage" />
+  <NDataTable
+    :="getBindValues"
+    @update:page="updatePage"
+  />
 </template>
 
 <script>

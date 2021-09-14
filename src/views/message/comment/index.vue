@@ -2,32 +2,54 @@
   <NCard>
     <!--搜索工具-->
     <NForm
-        inline
-        label-placement="left"
-        :model="formValue"
+      inline
+      label-placement="left"
+      :model="formValue"
     >
       <NFormItem>
-        <NInput v-model:value="formValue.nickName" placeholder="请输入评论人"/>
+        <NInput
+          v-model:value="formValue.nickName"
+          placeholder="请输入评论人"
+        />
       </NFormItem>
       <NFormItem>
-        <NInput v-model:value="formValue.ip" placeholder="请输入ip地址"/>
+        <NInput
+          v-model:value="formValue.ip"
+          placeholder="请输入ip地址"
+        />
       </NFormItem>
       <NFormItem>
-        <NSelect style="width: 180px;" placeholder="请选择状态" v-model:value="formValue.status" :options="options"/>
+        <NSelect
+          v-model:value="formValue.status"
+          style="width: 180px;"
+          placeholder="请选择状态"
+          :options="options"
+        />
       </NFormItem>
       <NFormItem>
-        <NButton attr-type="button" type="primary" @click="queryComments">查询</NButton>
-        <NButton class="ml-3" attr-type="button">重置</NButton>
+        <NButton
+          attr-type="button"
+          type="primary"
+          @click="queryComments"
+        >
+          查询
+        </NButton>
+        <NButton
+          class="ml-3"
+          attr-type="button"
+        >
+          重置
+        </NButton>
       </NFormItem>
     </NForm>
     <!--表格-->
     <BasicTable
-        ref="tableRef"
-        :rowKey="row => row.id"
-        :columns="columns"
-        :pagination="pagination"
-        :actionColumn="actionColumn"
-        :request="getCommentList"
+      ref="tableRef"
+      :row-key="row => row.id"
+      :columns="columns"
+      :pagination="pagination"
+      :action-column="actionColumn"
+      :request="getCommentList"
     />
   </NCard>
 </template>

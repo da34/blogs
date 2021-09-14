@@ -8,8 +8,8 @@ export const columns = [
   {type: 'selection', key: 'selection'},
   {title: '序号', key: 'number', render: (row, index) => index + 1},
   {
-    title: '头像', key: 'name', width: 100,
-    render({avatar, nickName}) {
+    title: '头像', key: 'name', width: 50,
+    render({avatar}) {
       return h(
         NAvatar,
         {
@@ -21,9 +21,9 @@ export const columns = [
       )
     }
   },
-  {title: '评论人', key: 'nickName'},
-  {title: '被评论人', key: 'targetName'},
-  {title: '评论内容', key: 'text'},
+  {title: '评论人', key: 'nickName', width: 100,},
+  {title: '被评论人', key: 'targetName', width: 100,},
+  {title: '评论内容', key: 'text' },
   {
     title: 'ua', key: 'ua', width: 300,
     render({ua}) {
@@ -60,8 +60,8 @@ export const columns = [
       )
     }
   },
-  {title: 'ip', key: 'ip'},
-  {title: '来源', key: 'anchor'},
+  {title: 'ip', key: 'ip', width: 150},
+  {title: '来源', key: 'anchor', width: 100},
   {
     title: '状态', key: 'status',
     render({status}) {
@@ -86,6 +86,7 @@ export const columns = [
   {
     title: '创建时间',
     key: 'createdAt',
+    width: 200,
     render(row) {
       return h(
         'span',

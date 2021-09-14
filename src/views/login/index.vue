@@ -3,41 +3,58 @@
     <!-- <div class="view-account-header"></div> -->
     <div class="view-account-container">
       <div class="view-account-top">
-        <div class="view-account-top-title">博客后台</div>
+        <div class="view-account-top-title">
+          博客后台
+        </div>
       </div>
       <div class="view-account-form">
         <n-form
-            ref="formRef"
-            label-placement="left"
-            size="large"
-            :model="formInline"
-            :rules="rules"
+          ref="formRef"
+          label-placement="left"
+          size="large"
+          :model="formInline"
+          :rules="rules"
         >
           <n-form-item path="username">
-            <n-input v-model:value="formInline.username" placeholder="请输入用户名">
+            <n-input
+              v-model:value="formInline.username"
+              placeholder="请输入用户名"
+            >
               <template #prefix>
-                <n-icon size="18" color="#808695">
-<!--                   <AccountCircleFilled />-->
+                <n-icon
+                  size="18"
+                  color="#808695"
+                >
+                  <!--                   <AccountCircleFilled />-->
                 </n-icon>
               </template>
             </n-input>
           </n-form-item>
           <n-form-item path="password">
             <n-input
-                v-model:value="formInline.password"
-                type="password"
-                show-password-toggle
-                placeholder="请输入密码"
+              v-model:value="formInline.password"
+              type="password"
+              show-password-toggle
+              placeholder="请输入密码"
             >
               <template #prefix>
-                <n-icon size="18" color="#808695">
-<!--                   <LockOutlined />-->
+                <n-icon
+                  size="18"
+                  color="#808695"
+                >
+                  <!--                   <LockOutlined />-->
                 </n-icon>
               </template>
             </n-input>
           </n-form-item>
           <n-form-item>
-            <n-button type="primary" @click="handleSubmit" size="large" :loading="loading" block>
+            <n-button
+              type="primary"
+              size="large"
+              :loading="loading"
+              block
+              @click="handleSubmit"
+            >
               登录
             </n-button>
           </n-form-item>

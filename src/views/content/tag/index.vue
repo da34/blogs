@@ -2,40 +2,60 @@
   <NCard>
     <!--搜索工具-->
     <NForm
-        inline
-        label-placement="left"
-        :model="formValue"
-        :rules="rules"
-        ref="formRef"
+      ref="formRef"
+      inline
+      label-placement="left"
+      :model="formValue"
+      :rules="rules"
     >
       <NFormItem path="name">
-        <NInput v-model:value="formValue.name" placeholder="请输入标签名"/>
+        <NInput
+          v-model:value="formValue.name"
+          placeholder="请输入标签名"
+        />
       </NFormItem>
       <NFormItem>
-        <NButton @click="handleValidateClick" attr-type="button" type="primary">查询</NButton>
-        <NButton class="ml-3" @click="reload" attr-type="button">重置</NButton>
+        <NButton
+          attr-type="button"
+          type="primary"
+          @click="handleValidateClick"
+        >
+          查询
+        </NButton>
+        <NButton
+          class="ml-3"
+          attr-type="button"
+          @click="reload"
+        >
+          重置
+        </NButton>
       </NFormItem>
       <NFormItem>
-        <NButton type="primary" @click="handleNew">新建标签</NButton>
+        <NButton
+          type="primary"
+          @click="handleNew"
+        >
+          新建标签
+        </NButton>
       </NFormItem>
     </NForm>
     <!--表格-->
     <BasicTable
-        ref="tableRef"
-        :rowKey="row => row.id"
-        :columns="createColumns"
-        :actionColumn="actionColumn"
-        :pagination="pagination"
-        :request="getTagList"
+      ref="tableRef"
+      :row-key="row => row.id"
+      :columns="createColumns"
+      :action-column="actionColumn"
+      :pagination="pagination"
+      :request="getTagList"
     />
     <!--编辑、新建标签-->
     <NModal
-        v-model:show="useShowModal"
-        preset="card"
-        :showIcon="false"
-        :closable="false"
-        class="w-1/3"
-        :segmented="{content: 'hard', action: 'hard'}"
+      v-model:show="useShowModal"
+      preset="card"
+      :show-icon="false"
+      :closable="false"
+      class="w-1/3"
+      :segmented="{content: 'hard', action: 'hard'}"
     >
       <template #header>
         <div class="border-b-1 border-gray-200">
@@ -43,21 +63,36 @@
         </div>
       </template>
       <NForm
-          class="mt-5"
-          label-placement="left"
-          :model="formData"
-          :rules="rules"
-          ref="formDataRef"
+        ref="formDataRef"
+        class="mt-5"
+        label-placement="left"
+        :model="formData"
+        :rules="rules"
       >
-        <NFormItem label="标签名" path="name">
-          <NInput v-model:value="formData.name" placeholder="请输入标签名"/>
+        <NFormItem
+          label="标签名"
+          path="name"
+        >
+          <NInput
+            v-model:value="formData.name"
+            placeholder="请输入标签名"
+          />
         </NFormItem>
-
       </NForm>
       <template #action>
         <div class="flex justify-end">
-          <NButton @click="useShowModal = false" class="mr-4">取消</NButton>
-          <NButton @click="handleAction" type="primary">确定</NButton>
+          <NButton
+            class="mr-4"
+            @click="useShowModal = false"
+          >
+            取消
+          </NButton>
+          <NButton
+            type="primary"
+            @click="handleAction"
+          >
+            确定
+          </NButton>
         </div>
       </template>
     </NModal>

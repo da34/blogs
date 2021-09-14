@@ -1,8 +1,16 @@
 <template>
   <div class="tableAction">
     <div class="flex items-center justify-center">
-      <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
-        <NButton v-bind="action" class="mx-2">{{ action.label }}</NButton>
+      <template
+        v-for="(action, index) in getActions"
+        :key="`${index}-${action.label}`"
+      >
+        <NButton
+          v-bind="action"
+          class="mx-2"
+        >
+          {{ action.label }}
+        </NButton>
       </template>
     </div>
   </div>

@@ -1,13 +1,32 @@
 <template>
   <div>
-    <input type="file" class="hidden" :accept="accept" ref="fileRef">
-    <button v-if="!fileUrl" class="w-52 h-32 border-solid border-gray-200 border rounded" @click="handleUpload">
-      <slot></slot>
+    <input
+      ref="fileRef"
+      type="file"
+      class="hidden"
+      :accept="accept"
+    >
+    <button
+      v-if="!fileUrl"
+      class="w-52 h-32 border-solid border-gray-200 border rounded"
+      @click="handleUpload"
+    >
+      <slot />
     </button>
-    <div v-else class="relative">
-      <img class="w-52 h-32 img rounded" :src="fileUrl"/>
-      <NIcon @click="handleClose" class="absolute top-1.5 right-1.5 text-white cursor-pointer" size="20">
-        <Close/>
+    <div
+      v-else
+      class="relative"
+    >
+      <img
+        class="w-52 h-32 img rounded"
+        :src="fileUrl"
+      >
+      <NIcon
+        class="absolute top-1.5 right-1.5 text-white cursor-pointer"
+        size="20"
+        @click="handleClose"
+      >
+        <Close />
       </NIcon>
     </div>
   </div>

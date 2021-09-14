@@ -1,10 +1,12 @@
 <template>
-  <h1 class="text-lg">super_admin</h1>
+  <h1 class="text-lg">
+    super_admin
+  </h1>
 </template>
 
 <script>
 export default {
-  name: "super_admin"
+  name: "SuperAdmin"
 }
 </script>
 

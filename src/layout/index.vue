@@ -1,23 +1,29 @@
 <template>
-  <NLayout position="absolute" has-sider>
+  <NLayout
+    position="absolute"
+    has-sider
+  >
     <NLayoutSider
-        inverted
-        :width="220"
-        collapse-mode="width"
-        :collapsed-width="68"
-        show-trigger
-        :collapsed="collapsed"
-        @collapse="collapsed = true"
-        @expand="collapsed = false"
+      inverted
+      :width="220"
+      collapse-mode="width"
+      :collapsed-width="68"
+      show-trigger
+      :collapsed="collapsed"
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
     >
-      <PageSidebar :collapsed="collapsed"/>
+      <PageSidebar :collapsed="collapsed" />
     </NLayoutSider>
     <NLayout>
       <NLayoutHeader bordered>
-        <PageHeader v-model:collapsed="collapsed"/>
+        <PageHeader v-model:collapsed="collapsed" />
       </NLayoutHeader>
-      <NLayoutContent position="absolute" :nativeScrollbar="false">
-        <PageMainView/>
+      <NLayoutContent
+        position="absolute"
+        :native-scrollbar="false"
+      >
+        <PageMainView />
       </NLayoutContent>
     </NLayout>
   </NLayout>

@@ -2,10 +2,24 @@
   <NSpace vertical>
     <NGrid class="flex items-center">
       <NGi span="18">
-        <NInput class="w-screen" v-model:value="article.title" size="large" type="text" placeholder="输入文章标题"/>
+        <NInput
+          v-model:value="article.title"
+          class="w-screen"
+          size="large"
+          type="text"
+          placeholder="输入文章标题"
+        />
       </NGi>
-      <NGi class="ml-3" span="1">
-        <NButton type="primary" @click="publicClick">发布</NButton>
+      <NGi
+        class="ml-3"
+        span="1"
+      >
+        <NButton
+          type="primary"
+          @click="publicClick"
+        >
+          发布
+        </NButton>
       </NGi>
     </NGrid>
 
@@ -14,67 +28,89 @@
 
     <!--发布NDrawer-->
     <NDrawer
-        v-model:show="show"
-        width="45%"
-        placement="right"
+      v-model:show="show"
+      width="45%"
+      placement="right"
     >
       <NDrawerContent title="发布文章">
         <NForm
-            class="mt-5"
-            label-placement="left"
-            :model="article"
-            ref="formRef"
+          ref="formRef"
+          class="mt-5"
+          label-placement="left"
+          :model="article"
         >
-          <NGrid :cols="2" :x-gap="30">
+          <NGrid
+            :cols="2"
+            :x-gap="30"
+          >
             <NFormItemGi label="文章封面">
               <MUpload v-model:file-url="article.firstPicture">
                 <NIcon size="30">
-                  <Upload/>
+                  <Upload />
                 </NIcon>
-                <p class="mt-3">上传图片</p>
+                <p class="mt-3">
+                  上传图片
+                </p>
               </MUpload>
             </NFormItemGi>
             <NFormItemGi label="编辑摘要">
               <NInput
-                  type="textarea"
-                  show-count
-                  :rows="5"
-                  maxlength="80"
-                  minlength="30"
-                  v-model:value="article.contentOutline"
+                v-model:value="article.contentOutline"
+                type="textarea"
+                show-count
+                :rows="5"
+                maxlength="80"
+                minlength="30"
               />
             </NFormItemGi>
-            <NFormItemGi :span="2" label="添加标签">
+            <NFormItemGi
+              :span="2"
+              label="添加标签"
+            >
               <NSelect
-                  multiple
-                  placeholder="请选择标签"
-                  :options="tagsOption"
-                  v-model:value="article.tags"
+                v-model:value="article.tags"
+                multiple
+                placeholder="请选择标签"
+                :options="tagsOption"
               />
             </NFormItemGi>
             <NFormItemGi label="文章类型">
               <NRadioGroup v-model:value="article.type">
                 <NSpace>
-                  <NRadioButton :value="0">article</NRadioButton>
-                  <NRadioButton :value="1">page</NRadioButton>
+                  <NRadioButton :value="0">
+                    article
+                  </NRadioButton>
+                  <NRadioButton :value="1">
+                    page
+                  </NRadioButton>
                 </NSpace>
               </NRadioGroup>
             </NFormItemGi>
             <NFormItemGi label="置顶">
-              <NSwitch v-model:value="article.isTop"/>
+              <NSwitch v-model:value="article.isTop" />
             </NFormItemGi>
 
             <NFormItemGi label="评论">
-              <NSwitch v-model:value="article.commentDisabled"/>
+              <NSwitch v-model:value="article.commentDisabled" />
             </NFormItemGi>
             <NFormItemGi label="版权">
-              <NSwitch v-model:value="article.shareStatement"/>
+              <NSwitch v-model:value="article.shareStatement" />
             </NFormItemGi>
           </NGrid>
         </NForm>
         <template #footer>
-          <NButton @click="cancelCallback" class="mr-4">取消</NButton>
-          <NButton @click="submitCallback" type="primary">确定并发布</NButton>
+          <NButton
+            class="mr-4"
+            @click="cancelCallback"
+          >
+            取消
+          </NButton>
+          <NButton
+            type="primary"
+            @click="submitCallback"
+          >
+            确定并发布
+          </NButton>
         </template>
       </NDrawerContent>
     </NDrawer>

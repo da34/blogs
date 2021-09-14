@@ -2,11 +2,25 @@
   <div class="layout-content-main-fix">
     <RouterView>
       <template #default="{ Component, route }">
-        <transition name="zoom-fade" mode="out-in" appear>
-          <keep-alive v-if="keepAliveComponents" :include="keepAliveComponents">
-            <component :is="Component" :key="route.fullPath"/>
+        <transition
+          name="zoom-fade"
+          mode="out-in"
+          appear
+        >
+          <keep-alive
+            v-if="keepAliveComponents"
+            :include="keepAliveComponents"
+          >
+            <component
+              :is="Component"
+              :key="route.fullPath"
+            />
           </keep-alive>
-          <component v-else :is="Component" :key="route.fullPath"/>
+          <component
+            :is="Component"
+            v-else
+            :key="route.fullPath"
+          />
         </transition>
       </template>
     </RouterView>

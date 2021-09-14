@@ -2,16 +2,28 @@
   <div class="flex flex-row justify-between items-center h-full px-3">
     <div class="flex">
       <!--收缩菜单-->
-      <NIcon size="20" class="cursor-pointer" @click="() => $emit('update:collapsed', !collapsed)">
-        <MenuUnfold v-if="collapsed"/>
-        <MenuFold v-else/>
+      <NIcon
+        size="20"
+        class="cursor-pointer"
+        @click="() => $emit('update:collapsed', !collapsed)"
+      >
+        <MenuUnfold v-if="collapsed" />
+        <MenuFold v-else />
       </NIcon>
 
       <!--面包屑-->
       <NBreadcrumb class="ml-8">
-        <template v-for="breadcrumb in breadcrumbList" :key="breadcrumb.label">
+        <template
+          v-for="breadcrumb in breadcrumbList"
+          :key="breadcrumb.label"
+        >
           <NBreadcrumbItem v-if="breadcrumb.children.length > 1">
-            <NDropdown :options="breadcrumb.children" @select="handleSelect">{{ breadcrumb.label }}</NDropdown>
+            <NDropdown
+              :options="breadcrumb.children"
+              @select="handleSelect"
+            >
+              {{ breadcrumb.label }}
+            </NDropdown>
           </NBreadcrumbItem>
           <NBreadcrumbItem v-else>
             <span>{{ breadcrumb.label }}</span>
@@ -21,7 +33,11 @@
     </div>
     <div class="ml-auto mr-6">
       <div class="user cursor-pointer">
-        <NDropdown trigger="hover" @select="avatarSelect" :options="avatarOptions">
+        <NDropdown
+          trigger="hover"
+          :options="avatarOptions"
+          @select="avatarSelect"
+        >
           <NAvatar round>
             {{ username }}
           </NAvatar>
@@ -49,6 +65,8 @@ defineProps({
     type: Boolean,
   }
 })
+
+defineEmits(['update:collapsed'])
 
 // 面包屑
 const generator = (routeMap) => {
