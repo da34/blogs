@@ -150,12 +150,13 @@ const loginSucceed = () => {
   flex-direction: column;
   height: 100vh;
   overflow: auto;
+  justify-content: center;
 
   &-container {
     /* flex: 1; */
     padding: 32px 0;
     width: 384px;
-    margin: 0 auto;
+    margin: 0 auto 200px;
   }
 
   &-top {
