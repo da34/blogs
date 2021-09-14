@@ -25,7 +25,7 @@
                   size="18"
                   color="#808695"
                 >
-                  <!--                   <AccountCircleFilled />-->
+                  <User />
                 </n-icon>
               </template>
             </n-input>
@@ -42,7 +42,7 @@
                   size="18"
                   color="#808695"
                 >
-                  <!--                   <LockOutlined />-->
+                  <Lock />
                 </n-icon>
               </template>
             </n-input>
@@ -58,6 +58,16 @@
               登录
             </n-button>
           </n-form-item>
+          <n-form-item>
+            <n-button
+              size="large"
+              :loading="loading"
+              block
+              @click="handleTourist"
+            >
+              游客登陆
+            </n-button>
+          </n-form-item>
         </n-form>
       </div>
     </div>
@@ -67,16 +77,18 @@
 <script setup>
 import {ref} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
-import { useUserStore } from '@/stores/modules/user';
+import {useUserStore} from '@/stores/modules/user';
 import {useMessage} from 'naive-ui';
 import httpEnum from '@/utils/http/http-type'
 // import { AccountCircleFilled, LockOutlined } from '@vicons/material'
+import {User, Lock} from '@icon-park/vue-next'
+import {touLogin} from "@/api/system/user";
 
 const formRef = ref(null);
 const messagePro = useMessage();
 const formInline = ref({
-  username: 'admin',
-  password: 'Qq7531356+',
+  username: '',
+  password: '',
 })
 const loading = ref(false)
 
@@ -93,31 +105,42 @@ const handleSubmit = (e) => {
   e.preventDefault();
   formRef.value.validate(async (errors) => {
     if (!errors) {
-      const {username, password} = formInline.value;
-      messagePro.loading('登录中...');
-      loading.value = true;
-      const params = {
-        username,
-        password,
-      };
-      const { code, message } = await userStore.login(params);
-      console.log(code, message)
-      if (code === httpEnum.SUCCESS) {
-        loading.value = false
-        const toPath = decodeURIComponent((route.query?.redirect || '/'))
-        messagePro.success('登录成功！');
-        router.replace(toPath).then((_) => {
-          if (route.name === 'login') {
-            router.replace('/');
-          }
-        });
-      } else {
-        messagePro.info(message || '登录失败');
-      }
+      handleLogin(formInline.value)
     }
   });
 };
 
+// 游客登陆
+const handleTourist = async () => {
+  const params = {
+    username: 'tourist',
+    password: '123456'
+  }
+  handleLogin(params)
+}
+
+const handleLogin = async (params) => {
+  messagePro.loading('登录中...');
+  loading.value = true;
+  const {code, message} = await userStore.login(params);
+  console.log(code, message)
+  if (code === httpEnum.SUCCESS) {
+    loading.value = false
+    loginSucceed()
+  } else {
+    messagePro.info(message || '登录失败');
+  }
+}
+
+const loginSucceed = () => {
+  const toPath = decodeURIComponent((route.query?.redirect || '/'))
+  messagePro.success('登录成功！');
+  router.replace(toPath).then((_) => {
+    if (route.name === 'login') {
+      router.replace('/');
+    }
+  });
+}
 
 </script>
 

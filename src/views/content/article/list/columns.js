@@ -2,8 +2,9 @@ import {h} from "vue";
 import {NButton, NSwitch, NTag} from "naive-ui";
 import {formatDate} from "@/utils";
 import {isFunction} from "lodash-es";
+import TableAction from '@/components/BasicTable/TableAction.vue'
 
-export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
+export const createColumns = ({stateToggle}) => {
   return [
     {
       title: '标题',
@@ -32,21 +33,11 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
     {
       title: '类型', key: 'type', align: 'center',
       render({type}) {
-        const statusMap = {
-          0: 'success',
-          1: 'default',
-          2: 'error',
-        }
         const typeMap = {
           0: 'info',
           1: 'warning'
         }
 
-        const statusEnum = {
-          0: 'publish',
-          1: 'draft',
-          2: 'delete',
-        }
         const typeEnum = {
           0: 'article',
           1: 'page'
@@ -126,33 +117,35 @@ export const createColumns = ({handleEdit, handleDel, stateToggle}) => {
           }
         )
       }
+    }
+  ]
+}
+
+export const createActionColumn = ({handleDel, handleEdit}) => {
+  return {
+    width: 150,
+    title: '操作',
+    key: 'action',
+    fixed: 'right',
+    align: 'center',
+    render(record) {
+      return h(TableAction, {
+        style: 'button',
+        actions: createActions(record, handleDel, handleEdit),
+      });
+    }
+  }
+}
+
+function createActions(record, handleDel, handleEdit) {
+  return [
+    {
+      label: '编辑',
+      onClick: () => handleEdit(record),
     },
     {
-      title: '操作',
-      key: 'actions',
-      align: 'center',
-      render(row) {
-        const editBtn = h(NButton,
-          {
-            size: 'small',
-            class: 'mr-3',
-            onClick: () => isFunction(handleEdit) && handleEdit(row.id)
-          },
-          {default: () => '编辑'}
-        )
-        const delBtn = h(NButton,
-          {
-            size: 'small',
-            onClick: () => isFunction(handleDel) && handleDel(row.id),
-          },
-          {default: () => '删除'}
-        )
-        return h(
-          'div',
-          null,
-          [editBtn, delBtn]
-        )
-      }
+      label: '删除',
+      onClick: () => handleDel(record),
     }
   ]
 }

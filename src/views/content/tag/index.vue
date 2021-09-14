@@ -47,6 +47,7 @@
       :action-column="actionColumn"
       :pagination="pagination"
       :request="getTagList"
+      :single-line="false"
     />
     <!--编辑、新建标签-->
     <NModal

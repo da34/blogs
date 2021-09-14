@@ -178,7 +178,7 @@ const asyncRoutes = [
         path: 'system_config',
         name: `${SystemName}_system_config`,
         component: () => import('@/views/system/config/index.vue'),
-        meta: {title: '系统配置', keepAlive: true}
+        meta: {title: '系统配置', keepAlive: true, permissions: ['super_admin']}
       }
     ]
   },

@@ -13,12 +13,12 @@
           >
             新建文章
           </NButton>
-<!--          <NButton-->
-<!--            type="error"-->
-<!--            @click="handleDel"-->
-<!--          >-->
-<!--            批量删除-->
-<!--          </NButton>-->
+          <!--          <NButton-->
+          <!--            type="error"-->
+          <!--            @click="handleDel"-->
+          <!--          >-->
+          <!--            批量删除-->
+          <!--          </NButton>-->
         </NSpace>
       </NFormItem>
       <NFormItem
@@ -66,10 +66,11 @@
     <BasicTable
       ref="tableRef"
       :pagination="pagination"
-      :columns="columns"
+      :columns="column"
+      :action-column="actionColumn"
       :request="getArticleList"
       :row-key="row => row.id"
-      @update:checked-row-keys="handleCheck"
+      :single-line="false"
     />
   </NCard>
 </template>
@@ -78,8 +79,9 @@
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {getArticleList, changeArticleState} from "@/api/web/article";
-import {createColumns} from "./columns";
+import {createColumns, createActionColumn} from "./columns";
 import BasicTable from '@/components/BasicTable/index.vue'
+import {useDialog} from 'naive-ui'
 
 const defaultVla = () => ({
   title: null,
@@ -88,6 +90,7 @@ const defaultVla = () => ({
 })
 
 const router = useRouter()
+const dialog = useDialog()
 const tableRef = ref(null)
 
 const formValue = ref(defaultVla())
@@ -96,7 +99,7 @@ const pagination = reactive({
   pageCount: 1,
   pageSize: 10,
   itemCount: 0,
-  prefix ({ itemCount }) {
+  prefix({itemCount}) {
     return `共 ${itemCount} 项`
   },
   onChange: (page) => {
@@ -104,18 +107,9 @@ const pagination = reactive({
   }
 })
 
-let checkedRowKeys = []
-
-const columns = createColumns({
-  stateToggle(field, id, value) {
-    value /= 1
-    changeArticleState({field, id, value})
-  },
-  handleDel,
-  handleEdit(id) {
-    router.push({name: 'content_action', params: { id }})
-  },
-})
+// 表格列
+const actionColumn = createActionColumn({handleDel, handleEdit})
+const column = createColumns({stateToggle})
 
 // 表单
 const statusOptions = ['public', 'draft', 'delete'].map(
@@ -140,21 +134,26 @@ function handleSearch() {
   tableRef.value.fetchState(formValue.value)
 }
 
-function handleCheck(keys) {
-  checkedRowKeys = keys
-}
-
-function handleDel() {
+function handleDel({id}) {
   dialog.warning({
     title: '警告',
     content: '你确定删除吗？',
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      changeArticleState({field: 'status', id: checkedRowKeys, value: 2})
+      changeArticleState({field: 'status', id, value: 2})
       handleSearch()
     }
   })
+}
+
+function handleEdit({id}) {
+  router.push({name: 'content_action', params: {id}})
+}
+
+function stateToggle(field, id, value) {
+  value /= 1
+  changeArticleState({field, id, value})
 }
 
 function handleAction() {

@@ -50,6 +50,7 @@
       :pagination="pagination"
       :action-column="actionColumn"
       :request="getCommentList"
+      :single-line="false"
     />
   </NCard>
 </template>

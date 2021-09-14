@@ -27,6 +27,18 @@ export function login(data) {
 }
 
 /**
+ * @description: 游客登录
+ */
+export function touLogin() {
+  return http.request(
+    {
+      url: 'touLogin',
+      method: 'POST'
+    }
+  );
+}
+
+/**
  * @description: 用户登出
  */
 export function logout(params) {
