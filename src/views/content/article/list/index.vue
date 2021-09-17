@@ -151,9 +151,10 @@ function handleEdit({id}) {
   router.push({name: 'content_action', params: {id}})
 }
 
-function stateToggle(field, id, value) {
+async function stateToggle(field, id, value) {
   value /= 1
-  changeArticleState({field, id, value})
+  await changeArticleState({field, id, value})
+  tableRef.value.reload()
 }
 
 function handleAction() {

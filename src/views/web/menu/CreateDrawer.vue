@@ -193,7 +193,7 @@ export default defineComponent({
     function formSubmit() {
       formRef.value.validate(async (errors) => {
         if (!errors) {
-          if (state.formParams) {
+          if (state.formParams.id) {
             await updateMenu({...state.formParams})
           } else {
             await createMenu({...state.formParams})
