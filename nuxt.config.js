@@ -68,11 +68,11 @@ export default {
   css: [
     '@/assets/css/index.styl'
   ],
-  script: [
-    {
-      src: 'https://hm.baidu.com/hm.js?3230f1b67bd3a390cf15e01ba7b348a1' // 百度统计js
-    }
-  ],
+  // script: [
+  //   {
+  //     src: 'https://hm.baidu.com/hm.js?a791e699f5f9b2e511033c8e4e57ab74' // 百度统计js
+  //   }
+  // ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/ant-design-vue',
@@ -81,23 +81,9 @@ export default {
     '@/plugins/components',
     '@/plugins/svg-icon',
     '@/plugins/filters',
-    {
-      src: '@/plugins/baidu',
-      mode: 'client'
-    }, // 百度统计
-    // '@/plugins/baidu-push', // 百度自动推送
-    {
-      src: '@/plugins/vue-lazy-load',
-      ssr: false
-    },
-    {
-      src: '@/plugins/click-effects',
-      ssr: false
-    },
-    {
-      src: '@/plugins/bg-canvas',
-      ssr: false
-    }
+    { src: '@/plugins/vue-lazy-load', ssr: false },
+    { src: '@/plugins/click-effects', ssr: false },
+    { src: '@/plugins/bg-canvas', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

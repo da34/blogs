@@ -83,6 +83,7 @@ export default {
   height 40px
   background #fff
   border-radius 50%
+  z-index 9999
   shadow-3-down()
   text-align center
   border 1px solid $color-line-1

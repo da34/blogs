@@ -25,7 +25,7 @@ export default {
     //   return node instanceof VNode
     // }
 
-    const avatar = `https://gravatar.loli.net/avatar/${this.$props.avatar}?s=50&d=retro`
+    const avatar = `https://gravatar.loli.net/avatar/${this.$props.avatar}?s=42&d=retro`
     const author = this.$props.author
     const content = this.$props.content ?? this.$slots.content
     const actions = this.$slots.actions
@@ -88,8 +88,8 @@ export default {
       &:last-child
         border none
 .avatar
-  width 50px
-  height 50px
+  width 42px
+  height 42px
   border-radius 50%
 
 .content
@@ -97,17 +97,12 @@ export default {
   padding-left 20px
   flex 1
   font-size $font-size-small
-  display flex
-  flex-direction column
+  width 100%
+  overflow auto
 
   .mark-text
     color $color-content
-    flex 1
-    display flex
-    align-items center
     padding-top 5px
-    padding-right 50px
-    font-weight 500
   .comment-action
     color $color-subsidiary
     font-size $font-size-mini
@@ -123,13 +118,11 @@ export default {
     color $color-content
     display flex
     align-items center
-    .author-name
-      display inline-block
-      max-width 300px
+    .author-name, .author-other
+      flex 1
       text-omit(1)
-      //max-height 18px
     .author-other
       color $color-subsidiary
-      margin-left 20px
+      margin-left 10px
       font-size $font-size-mini
 </style>

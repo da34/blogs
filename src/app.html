@@ -2,6 +2,17 @@
 <html {{ HTML_ATTRS }} lang="zh-cn">
 <head {{ HEAD_ATTRS }}>
     {{ HEAD }}
+
+  <!--百度统计-->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a791e699f5f9b2e511033c8e4e57ab74";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 </head>
 <body {{ BODY_ATTRS }}>
 {{ APP }}

@@ -21,7 +21,7 @@ export default function ({
       const token = getToken()
       config.headers.Authorization = `Bearer ${token}`
       // 带上csrfToken
-      config.headers['x-csrf-token'] = csrfToken
+      config.headers['yu-csrf-token'] = csrfToken
     }
   })
 
