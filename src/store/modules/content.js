@@ -3,7 +3,8 @@ const state = () => ({
   total: 0,
   article: {},
   randomList: [],
-  archive: {}
+  archive: {},
+  nowToc: []
 })
 
 const mutations = {
@@ -16,6 +17,9 @@ const mutations = {
   setArticles (state, { data, count }) {
     state.list = data
     state.total = count
+  },
+  setNowToc (state, data) {
+    state.nowToc = data
   }
 }
 
@@ -39,14 +43,14 @@ const actions = {
     })
   },
   // 获取文章详情
-  async getDetail ({ commit }, { id }) {
-    const { data } = await this.$axios.get(`contents/${id}`)
-    // console.log(1111, data)
-    commit('setData', {
-      key: 'article',
-      value: data.result
-    })
-  },
+  // async getDetail ({ commit }, { id }) {
+  //   const { data } = await this.$axios.get(`contents/${id}`)
+  //   // console.log(1111, data)
+  //   commit('setData', {
+  //     key: 'article',
+  //     value: data.result
+  //   })
+  // },
   // 获取文章归档
   async getArchiveList ({ commit }, { name }) {
     let query = ''

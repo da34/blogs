@@ -118,11 +118,22 @@ export default {
     color $color-content
     display flex
     align-items center
-    .author-name, .author-other
-      flex 1
+    .author-name
+      max-width 100px
       text-omit(1)
     .author-other
       color $color-subsidiary
-      margin-left 10px
+      margin-left 20px
       font-size $font-size-mini
+
+>>> .vuepress-markdown-body:not(.custom)
+  padding 0
+  font-size $font-size-small
+
+@media (max-width: $mobile)
+  .comment-info
+    .author-other
+      flex 1
+      text-omit(1)
+      margin-left 10px!important
 </style>

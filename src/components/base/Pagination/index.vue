@@ -35,7 +35,7 @@
 
 <script>
 // import { scrollTo } from '@/utils/scroll-to'
-import { padLocation } from '../../utils'
+import { padLocation } from '../../../utils'
 
 const calculatePage = (p, max) => {
   if (p < 1) { return 1 }

@@ -4,17 +4,24 @@
       <span>文章目录</span>
     </div>
     <div class="box-content">
-      <div v-if="toc" class="catalog-wrapper" v-html="toc" />
-      <h4 v-else style="text-align: center;padding: 30px;">此文章没有目录</h4>
+      <div v-if="toc.length" class="catalog-wrapper">
+        <ul class="toc-list">
+          <li v-for="(anchor, index) in toc" :key="index" class="item">
+            <a :style="{ marginLeft: `${anchor.indent * 15}px` }">{{ anchor.title }}</a>
+          </li>
+        </ul>
+      </div>
+      <h4 v-else style="text-align: center;padding: 30px;">
+        此文章没有目录
+      </h4>
     </div>
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { getToc } from '@/utils/index'
 import { scrollMixin } from '@/minxi/handleScroll'
-import marked from 'marked'
+import VMdPreview, { xss } from '@kangc/v-md-editor/lib/preview'
 
 export default {
   name: 'ArticleToc',
@@ -23,10 +30,6 @@ export default {
     ...mapState('modules/content', [
       'article'
     ]),
-    toc () {
-      const content = this.article.content
-      return content && getToc(marked(content))
-    },
     styleObj () {
       let result = {
         position: 'fixed',
@@ -38,6 +41,30 @@ export default {
         result = {}
       }
       return result
+    },
+    toc () {
+      if (process.client && this.article.content) {
+        const html = xss.process(VMdPreview.themeConfig.markdownParser.render(this.article.content))
+        const $div = document.createElement('div')
+        $div.innerHTML = html
+
+        const anchors = $div.querySelectorAll('h1,h2,h3')
+        let titles = Array.from(anchors).filter(title => !!title.textContent.trim())
+
+        if (!titles.length) {
+          titles = []
+          return
+        }
+
+        const hTags = Array.from(new Set(titles.map(title => title.tagName))).sort()
+
+        return titles.map(el => ({
+          title: el.textContent,
+          lineIndex: el.getAttribute('data-v-md-line'),
+          indent: hTags.indexOf(el.tagName)
+        })) || []
+      }
+      return []
     }
   },
   mounted () {
@@ -93,9 +120,22 @@ export default {
   font-size $font-size-small
   .item
     color $color-content
-    padding 5px
+    padding 7px
     padding-left 0
     border-radius 4px
+    a
+      display block
+      position: relative
+      &:before
+        content: ""
+        position: absolute
+        top 50%
+        left -15px
+        margin-top -2px
+        width 4px
+        height 4px
+        background-color currentColor
+        border-radius 50%
     &:hover
       background rgba(235, 237, 239, .7)
       a
@@ -104,8 +144,7 @@ export default {
       background rgba(235, 237, 239, .7)
       a
         color $color-focus
-  li
-    list-style disc
+
 .toc-title
   &:target
     padding-top 100px

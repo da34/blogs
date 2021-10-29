@@ -163,6 +163,16 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    babel: {
+      plugins: [
+        [
+          'prismjs',
+          {
+            languages: ['javascript', 'bash', 'html', 'css', 'c', 'http', 'yaml', 'sql', 'scss', 'tsx', 'jsx', 'python']
+          }
+        ]
+      ]
+    },
     publicPath: 'https://resource.lsyboy.cn/blog',
     transpile: [/ant-design-vue/],
     // extractCSS: true, // 单独提取css为文件

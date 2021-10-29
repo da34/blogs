@@ -1,5 +1,8 @@
 <template>
-  <section class="content-wrap">
+  <p v-if="$fetchState.pending">
+    Fetching mountains...
+  </p>
+  <section v-else class="content-wrap">
     <div class="entry-thumbnail">
       <div
         v-if="article.firstPicture"
@@ -19,7 +22,7 @@
     </div>
     <div class="article-content">
       <div class="blog-post">
-        <Marked :value="article.content" />
+        <Marked :value="article.content" :is-article="true" />
         <div v-if="article.shareStatement" class="copyright">
           本作品采用
           <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
@@ -31,7 +34,7 @@
           <svg-icon icon-class="tag" />
           <span v-for="(tag, i) in article.tags" :key="tag.name"><a-divider v-if="i !== 0" type="vertical" />{{ tag.name }} </span>
         </div>
-        <div v-else />
+        <!--        <div v-else />-->
         <p>最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
       </div>
       <Comments v-if="article.commentDisabled" :content-id="$route.params.id" />
@@ -40,7 +43,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
 export default {
@@ -52,8 +55,16 @@ export default {
   layout: 'blog',
   scrollToTop: true,
   transition: 'slide-out',
-  async fetch ({ store, params }) {
-    await store.dispatch('modules/content/getDetail', { id: params.id })
+  data () {
+    return {
+      article: {}
+    }
+  },
+  async fetch () {
+    const { id } = this.$route.params
+    const { data } = await this.$axios.get(`contents/${id}`)
+    this.article = data.result
+    this.setData({ key: 'article', value: this.article })
   },
   head () {
     return {
@@ -62,17 +73,19 @@ export default {
         {
           hid: 'content',
           vmid: 'description',
-          content: this.article.content.slice(0, 50)
+          content: this.article.content?.slice(0, 50)
         }
       ]
     }
   },
   computed: {
-    ...mapState('modules/content', [
-      'article'
-    ]),
     ...mapGetters([
       'site'
+    ])
+  },
+  methods: {
+    ...mapMutations('modules/content', [
+      'setData'
     ])
   }
 }
@@ -85,6 +98,7 @@ export default {
   border-radius-5()
   z-index: 1;
   background-color #fff
+  position relative
 .entry-thumbnail
   width: 100%;
   position relative
@@ -142,7 +156,8 @@ export default {
         color $color-content
         font-weight 600
         font-size $font-size-medium
-
+>>> .vuepress-markdown-body:not(.custom)
+  padding 0
 @media (max-width: $mobile)
   .article-content
     padding 0 20px

@@ -1,88 +1,83 @@
 <template>
-  <div id="editor">
-    <div class="markdown-body" :style="styleObj" v-html="content" />
-  </div>
+  <VMdPreview ref="preview" :text="value" />
 </template>
 <script>
-import marked from 'marked'
-import hljs from './hljs'
+import VMdPreview from '@kangc/v-md-editor/lib/preview'
+import '@kangc/v-md-editor/lib/style/preview.css'
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
+import '@kangc/v-md-editor/lib/theme/style/vuepress.css'
+
+// 代码高亮
+import Prism from 'prismjs'
+
+// emoji
+import createEmojiPlugin from '@kangc/v-md-editor/lib/plugins/emoji/index'
+import '@kangc/v-md-editor/lib/plugins/emoji/emoji.css'
+
+// todo-list
+import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index'
+import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css'
+
+// code line
+import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index'
+
+// copy code
+import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index'
+import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css'
+import { mapMutations } from 'vuex'
+
+VMdPreview.use(vuepressTheme, {
+  Prism
+})
+
+VMdPreview.use(createEmojiPlugin())
+VMdPreview.use(createTodoListPlugin())
+VMdPreview.use(createLineNumbertPlugin())
+VMdPreview.use(createCopyCodePlugin())
 
 export default {
-  name: 'Editor',
+  components: { VMdPreview },
   props: {
     value: {
       type: String,
       default: ''
     },
-    styleObj: {
-      type: Object,
-      default () {
-        return {}
-      }
+    isArticle: {
+      type: Boolean,
+      default: false
     }
   },
-  computed: {
-    content: {
-      get () {
-        return marked(this.value)
-      },
-      set (v) {
-        return marked(v)
-      }
-    }
-  },
-  watch: {
-    value (newVla) {
-      this.content = marked(newVla)
-    }
-  },
-  created () {
-    this.initMarked()
-  },
+  // mounted () {
+  //   // eslint-disable-next-line nuxt/no-env-in-hooks
+  //   if (process.client && this.isArticle) {
+  //     this.$nextTick(() => {
+  //       const anchors = this.$refs.preview.$el.querySelectorAll('h1,h2,h3')
+  //       const titles = Array.from(anchors).filter(title => !!title.textContent.trim())
+  //
+  //       if (!titles.length) {
+  //         this.setNowToc([])
+  //         return
+  //       }
+  //
+  //       const hTags = Array.from(new Set(titles.map(title => title.tagName))).sort()
+  //
+  //       const tocs = titles.map(el => ({
+  //         title: el.textContent,
+  //         lineIndex: el.getAttribute('data-v-md-line'),
+  //         indent: hTags.indexOf(el.tagName)
+  //       }))
+  //
+  //       this.setNowToc(tocs)
+  //     })
+  //   }
+  // },
   methods: {
-    initMarked () {
-      marked.setOptions({
-        // renderer: this.renderer(),
-        highlight (code) {
-          // 增加行数
-          // <span class="line-number" >${i + 1}</span>
-          // 按行分组
-          let codeStr = hljs.highlightAuto(code).value.match(/[^\r\n]+/g)
-          codeStr = codeStr.map((str, i) => `<div class="line">${str}</div>`).join('')
-          return codeStr
-        },
-        gfm: true, // 默认为true。 允许 Git Hub标准的markdown.
-        tables: true, // 默认为true。 允许支持表格语法。该选项要求 gfm 为true。
-        breaks: true, // 默认为false。 允许回车换行。该选项要求 gfm 为true。
-        pedantic: false, // 默认为false。 尽可能地兼容 markdown.pl的晦涩部分。不纠正原始模型任何的不良行为和错误。
-        sanitize: false, // 对输出进行过滤（清理）
-        smartLists: true,
-        smartypants: false, // 使用更为时髦的标点，比如在引用语法中加入破折号。
-        langPrefix: ''
-      })
-      marked.use({ renderer: this.renderer() })
-    },
-    renderer () {
-      const renderer = {
-        heading (text, level, raw, slugger) {
-          const id = slugger.slug(text)
-          const className = level <= 4 ? 'toc-title' : ''
-          return `<h${level} class="${className}" id="${id}">${text}</h${level}>
-`
-        },
-        image (url, title, alt) {
-          return `<img src="${url}" alt="${alt || '玉捷'}" title="${title || '玉捷'}"">`
-        }
-      }
-      return renderer
-    }
+    ...mapMutations('modules/content', [
+      'setNowToc'
+    ])
   }
 }
 </script>
 <style lang="stylus" scoped>
-//.markdown-body
-//  box-sizing border-box
-//  padding: 15px
-//  @media (max-width 786px)
-//    padding 0
+
 </style>

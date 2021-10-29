@@ -9,7 +9,7 @@
 
 <script>
 import { throttle } from '@/utils'
-import { appendBody } from '../../minxi/appendBody'
+import { appendBody } from '../../../minxi/appendBody'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo

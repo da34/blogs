@@ -61,3 +61,12 @@ export function scrollTo (to, duration = 500, callback) {
   }
   animateScroll()
 }
+
+/**
+ * @param {number} target  --> 目标元素
+ * @param {number} duration --> 持续时间
+ * @param {Function} callback --> 回调函数
+ */
+
+export function scrollToTarget (target, duration = 500, callback) {
+}

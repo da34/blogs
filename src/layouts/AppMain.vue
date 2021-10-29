@@ -3,6 +3,7 @@
     <a-row type="flex">
       <a-col :xs="24" :md="24" :lg="17" :xl="18" :xxl="18">
         <nuxt keep-alive :include="['Index']" />
+<!--        <nuxt keep-alive />-->
       </a-col>
       <a-col
         :xs="0"

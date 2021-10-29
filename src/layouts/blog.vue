@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import BackTop from '@/components/BackTop'
+import BackTop from '@/components/base/BackTop'
 import VHeader from './VHeader/index'
 import VFooter from './VFooter'
 import AppMain from './AppMain'

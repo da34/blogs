@@ -8,7 +8,7 @@
 <script>
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'DiyPage', // 滚动到顶端
   components: {
@@ -18,8 +18,16 @@ export default {
   layout: 'blog',
   scrollToTop: true,
   transition: 'slide-in',
-  async fetch ({ store, params }) {
-    await store.dispatch('modules/content/getDetail', { id: params.path })
+  data () {
+    return {
+      article: {}
+    }
+  },
+  async fetch () {
+    const { path: id } = this.$route.params
+    const { data } = await this.$axios.get(`contents/${id}`)
+    this.article = data.result
+    // await store.dispatch('modules/content/getDetail', { id: params.path })
   },
   head () {
     return {
@@ -34,9 +42,6 @@ export default {
     }
   },
   computed: {
-    ...mapState('modules/content', [
-      'article'
-    ]),
     ...mapGetters([
       'site'
     ])
@@ -52,4 +57,6 @@ export default {
   shadow-2-down()
   border-radius-5()
   background-color #fff
+>>> .vuepress-markdown-body:not(.custom)
+  padding 0
 </style>
