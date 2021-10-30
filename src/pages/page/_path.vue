@@ -27,7 +27,6 @@ export default {
     const { path: id } = this.$route.params
     const { data } = await this.$axios.get(`contents/${id}`)
     this.article = data.result
-    // await store.dispatch('modules/content/getDetail', { id: params.path })
   },
   head () {
     return {
@@ -36,7 +35,7 @@ export default {
         {
           hid: 'content',
           vmid: 'description',
-          content: this.article.content.slice(0, 50)
+          content: this.article.content?.slice(0, 50)
         }
       ]
     }

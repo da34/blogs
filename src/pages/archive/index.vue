@@ -1,6 +1,8 @@
 <template>
   <div class="time-line-wrapper">
-    <h2 v-if="$route.query.name" class="tag">"{{$route.query.name}}" 下的文章</h2>
+    <h2 v-if="$route.query.name" class="tag">
+      "{{ $route.query.name }}" 下的文章
+    </h2>
     <Timeline :data="list" :total="total" />
   </div>
 </template>

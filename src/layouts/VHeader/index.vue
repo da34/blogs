@@ -4,9 +4,7 @@
       <div v-show="visible" class="header-wrapper">
         <header class="header">
           <Logo />
-          <!--          <Search/>-->
           <Navbar />
-<!--          <User class="user" />-->
         </header>
       </div>
     </transition>
@@ -14,11 +12,9 @@
 </template>
 
 <script>
-// import Search from './Search'
 import { scrollMixin } from '@/minxi/handleScroll'
 import Logo from '@/components/Logo'
 import Navbar from './Navbar'
-// import User from './User'
 
 export default {
   name: 'VHeader',
