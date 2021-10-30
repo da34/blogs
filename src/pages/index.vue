@@ -1,49 +1,52 @@
 <template>
-    <div class="article-wrapper">
-      <p class="verse">
-        每日一言：“ {{ verse }}”
-      </p>
-      <article v-for="item in list" :key="item.id" class="article">
-        <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
-        <div v-if="item.firstPicture" class="img-wrap">
-          <NuxtLink :to="`/content/${item.id}`" tag="div">
-            <img v-lazy="item.firstPicture" class="img">
-          </NuxtLink>
-        </div>
-        <div class="article-content">
-          <NuxtLink class="title" :to="`/content/${item.id}`" tag="h2">
-            {{ item.title }}
-          </NuxtLink>
-          <p class="desc">
-            {{ item.contentOutline }}
-          </p>
-          <div class="info">
-            <div v-if="item.tags.length" class="info-item">
-              <SvgIcon icon-class="tag" />
-              <nuxt-link v-for="(tag, i) in item.tags" :key="tag.id" class="tag" :to="'/archive?name=' + tag.name">
-                <a-divider v-if="i!==0" type="vertical" />
-                {{ tag.name }}
-              </nuxt-link>
-            </div>
-            <div class="info-item">
-              <SvgIcon icon-class="date" />{{ item.createdAt | convertDate }}
-            </div>
-            <div class="info-item">
-              <SvgIcon icon-class="comment" />{{ item.comments.length }}
-            </div>
-            <NuxtLink class="read-more" :to="`/content/${item.id}`" tag="span">
-              阅读全文
-            </NuxtLink>
+  <div class="article-wrapper">
+    <p class="verse">
+      每日一言：“ {{ verse }}”
+    </p>
+    <article v-for="item in list" :key="item.id" class="article">
+      <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
+      <div v-if="item.firstPicture" class="img-wrap">
+        <NuxtLink :to="`/content/${item.id}`" tag="div">
+          <img v-lazy="item.firstPicture" class="img">
+        </NuxtLink>
+      </div>
+      <div class="article-content">
+        <NuxtLink class="title" :to="`/content/${item.id}`" tag="h2">
+          {{ item.title }}
+        </NuxtLink>
+        <p class="desc">
+<!--          <Marked :value="item.contentOutline" />-->
+          {{ item.contentOutline }}
+        </p>
+        <div class="info">
+          <div v-if="item.tags.length" class="info-item">
+            <SvgIcon icon-class="tag" />
+            <nuxt-link v-for="(tag, i) in item.tags" :key="tag.id" class="tag" :to="'/archive?name=' + tag.name">
+              <a-divider v-if="i!==0" type="vertical" />
+              {{ tag.name }}
+            </nuxt-link>
           </div>
+          <div class="info-item">
+            <SvgIcon icon-class="date" />{{ item.createdAt | convertDate }}
+          </div>
+          <div class="info-item">
+            <SvgIcon icon-class="comment" />{{ item.comments.length }}
+          </div>
+          <NuxtLink class="read-more" :to="`/content/${item.id}`" tag="span">
+            阅读全文
+          </NuxtLink>
         </div>
-      </article>
-      <Pagination v-model="currentPage" class="pagination-wrap" :total="total" :limit="7" @change="pageChange"/>
-    </div>
+      </div>
+    </article>
+    <Pagination v-model="currentPage" class="pagination-wrap" :total="total" :limit="7" @change="pageChange" />
+  </div>
 </template>
 
 <script>
 import 'ant-design-vue/lib/divider/style/css'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import Pagination from '@/components/base/Pagination'
+// import Marked from '@/components/Markdown'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo
@@ -51,9 +54,9 @@ if (process.client) {
 
 export default {
   name: 'Index',
+  components: { Pagination },
   layout: 'blog',
   transition: 'slide-in',
-  // components: { Pagination },
   data () {
     return {
       currentPage: 1

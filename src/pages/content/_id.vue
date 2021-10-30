@@ -1,6 +1,6 @@
 <template>
   <p v-if="$fetchState.pending">
-    Fetching mountains...
+    <Loading />
   </p>
   <section v-else class="content-wrap">
     <div class="entry-thumbnail">
@@ -43,14 +43,16 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
+import Loading from '@/components/base/Loading'
 export default {
   name: 'Content',
   components: {
     Marked,
-    Comments
+    Comments,
+    Loading
   },
   layout: 'blog',
   scrollToTop: true,
@@ -81,7 +83,14 @@ export default {
   computed: {
     ...mapGetters([
       'site'
-    ])
+    ]),
+    ...mapState('modules/content', {
+      articleCopy: 'article'
+    })
+  },
+  // 页面切换的时候重新将当前页面的文章set vuex
+  activated () {
+    this.setData({ key: 'article', value: this.article })
   },
   methods: {
     ...mapMutations('modules/content', [
