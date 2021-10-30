@@ -30,26 +30,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
 export default {
   name: 'NewComment',
   components: {},
   data () {
-    return {}
+    return {
+      newList: []
+    }
   },
   async fetch () {
-    await this.getNewCommentList({ limit: 5 })
-    // await this.$store.dispatch('comment/getCommentList', { limit: 4 })
-  },
-  computed: {
-    ...mapState('modules/comment', [
-      'newList'
-    ])
-  },
-  methods: {
-    ...mapActions('modules/comment', [
-      'getNewCommentList'
-    ])
+    const { data } = await this.$axios.get(`comments/new?limit=${4}`)
+    this.newList = data.result
   }
 }
 </script>

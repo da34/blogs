@@ -20,22 +20,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
 export default {
   name: 'RandomArticle',
   components: {},
+  data () {
+    return {
+      randomList: []
+    }
+  },
   async fetch () {
-    await this.getRandomList({ limit: 5 })
-  },
-  computed: {
-    ...mapState('modules/content', [
-      'randomList'
-    ])
-  },
-  methods: {
-    ...mapActions('modules/content', [
-      'getRandomList'
-    ])
+    const { result } = await this.$axios.$get('content/random?limit=5')
+    this.randomList = result
   }
 }
 </script>

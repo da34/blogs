@@ -19,23 +19,19 @@
 
 <script>
 import 'ant-design-vue/lib/tag/style/css'
-import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Tag',
   // serverCacheKey: () => 'StaticTag',
-  components: {},
-  async fetch () {
-    await this.getList()
+  data () {
+    return {
+      list: []
+    }
   },
-  computed: {
-    ...mapState('modules/tag', [
-      'list'
-    ])
+  async fetch () {
+    const { data } = await this.$axios.get('tags')
+    this.list = data.result
   },
   methods: {
-    ...mapActions('modules/tag', [
-      'getList'
-    ]),
     randColor () {
       const colors = ['#f2d6ed', '#a9adeb', '#ff7978', '#5586ff', '#f4d596', '#7d7575', '#ff7978']
       const index = Math.floor(Math.random() * 7)

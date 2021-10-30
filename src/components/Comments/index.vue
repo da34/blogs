@@ -176,10 +176,10 @@ export default {
       await this.getMoreCommentList(query)
     }
     // async handlePage (page) {
-    //   this.loading = true
+    //   this.Loading = true
     //   const { data } = await this.$axios.$get(`comments?articleId=${this.articleId}&page=${page}`)
     //   this.commentList = data.rows
-    //   this.loading = false
+    //   this.Loading = false
     // }
   }
 }

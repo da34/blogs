@@ -1,18 +1,10 @@
 const state = () => ({
-  verse: '温柔的晚风 ，傍晚的晚霞 ，解暑的西瓜 冒泡的可乐 ，人间的美好多着呢 !不要为眼前的黑暗所迷惑，你要相信自己配得上世间一切的美好。',
-  from: '',
   articleCollect: {},
   menus: [],
   configs: []
 })
 
 const mutations = {
-  setVerse (state, verse) {
-    state.verse = verse
-  },
-  setFrom (state, from) {
-    state.from = from
-  },
   setArticleCollect (state, data) {
     state.articleCollect = data
   },
@@ -25,11 +17,6 @@ const mutations = {
 }
 
 const actions = {
-  async getVerse ({ commit }) {
-    const { data } = await this.$axios.get('outside/verse')
-    commit('setVerse', data.result.hitokoto)
-    commit('setFrom', data.result.from)
-  },
   async getCollect ({ commit }) {
     const { data } = await this.$axios.get('site/info')
     commit('setArticleCollect', data.result)

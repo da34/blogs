@@ -1,20 +1,26 @@
 <template>
   <div class="time-line-wrapper">
     <h2 v-if="$route.query.name" class="tag">"{{$route.query.name}}" 下的文章</h2>
-    <Timeline :data="archive.items" :total="archive.count" />
+    <Timeline :data="list" :total="total" />
   </div>
 </template>
 
 <script>
 import Timeline from '@/components/Timeline'
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Pigeonhole',
   components: { Timeline },
   layout: 'blog',
   transition: 'slide-in',
-  async fetch ({ route, store }) {
-    await store.dispatch('modules/content/getArchiveList', { name: route.query.name })
+  data () {
+    return {
+      list: [],
+      total: 0
+    }
+  },
+  async fetch () {
+    await this.getArchiveList()
   },
   head () {
     return {
@@ -29,22 +35,22 @@ export default {
     }
   },
   computed: {
-    ...mapState('modules/content', [
-      'archive'
-    ]),
     ...mapGetters([
       'site'
     ])
   },
-  // activated () {
-  //   // setTimeout(_ => {
-  //   //   this.$store.dispatch('bus/HTML_Height')
-  //   // }, 1000)
-  // },
   methods: {
-    ...mapActions('modules/content', [
-      'getArchiveList'
-    ])
+    async getArchiveList () {
+      const name = this.$route.query.name
+      let query = ''
+      if (name) {
+        query = '?name=' + encodeURI(name)
+      }
+      const { data } = await this.$axios.get('content/archive' + query)
+      const { count, items } = data.result
+      this.list = items
+      this.total = count
+    }
   }
 }
 </script>

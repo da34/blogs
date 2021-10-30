@@ -5,7 +5,7 @@ import Vue from 'vue'
 // 图片懒加载
 Vue.use(VueLazyload, {
   // error: 'dist/error.png',
-  // loading: require('../assets/images/loading.gif'),
+  // Loading: require('../assets/images/Loading.gif'),
   filter: {
     imgFormat (img) {
       const originSrc = img.src

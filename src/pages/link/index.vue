@@ -66,11 +66,14 @@ export default {
   components: { Comments },
   layout: 'blog',
   transition: 'slide-in',
-  async asyncData ({ $axios }) {
-    const { data } = await $axios.get('links')
+  data () {
     return {
-      list: data.result
+      list: []
     }
+  },
+  async fetch () {
+    const { data } = await this.$axios.get('links')
+    this.list = data.result
   },
   head () {
     return {

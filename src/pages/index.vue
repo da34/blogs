@@ -15,7 +15,7 @@
           {{ item.title }}
         </NuxtLink>
         <p class="desc">
-<!--          <Marked :value="item.contentOutline" />-->
+          <!--          <Marked :value="item.contentOutline" />-->
           {{ item.contentOutline }}
         </p>
         <div class="info">
@@ -44,9 +44,8 @@
 
 <script>
 import 'ant-design-vue/lib/divider/style/css'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import Pagination from '@/components/base/Pagination'
-// import Marked from '@/components/Markdown'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo
@@ -59,12 +58,17 @@ export default {
   transition: 'slide-in',
   data () {
     return {
-      currentPage: 1
+      currentPage: 1,
+      verse: '温柔的晚风 ，傍晚的晚霞 ，解暑的西瓜 冒泡的可乐 ，人间的美好多着呢 !不要为眼前的黑暗所迷惑，你要相信自己配得上世间一切的美好。',
+      list: [],
+      total: 0
     }
   },
   async fetch () {
-    await this.getList({ page: this.currentPage })
     await this.getVerse()
+    await this.getList()
+    // await this.getList({ page: this.currentPage })
+    // await this.getList({ page: this.currentPage })
   },
   head () {
     return {
@@ -79,14 +83,6 @@ export default {
     }
   },
   computed: {
-    ...mapState('modules/front', [
-      'verse',
-      'from'
-    ]),
-    ...mapState('modules/content', [
-      'list',
-      'total'
-    ]),
     ...mapGetters([
       'site'
     ])
@@ -95,12 +91,23 @@ export default {
     currentPage: '$fetch'
   },
   methods: {
-    ...mapActions('modules/content', [
-      'getList'
-    ]),
-    ...mapActions('modules/front', [
-      'getVerse'
-    ]),
+    // ...mapActions('modules/content', [
+    //   'getList'
+    // ]),
+    // ...mapActions('modules/front', [
+    //   'getVerse'
+    // ]),
+    async getList () {
+      const params = `page=${this.currentPage}&limit=7`
+      const { result } = await this.$axios.$get(`contents?${params}`)
+      const { rows, count } = result
+      this.list = rows
+      this.total = count
+    },
+    async getVerse () {
+      const { data } = await this.$axios.get('outside/verse')
+      this.verse = data.result.hitokoto
+    },
     pageChange () {
       scrollTo(0)
     }

@@ -3,7 +3,6 @@ import { setLocalStore, getLocalStore } from '@/utils'
 const STORE_KEY = 'y_Cache_Meta'
 const state = () => ({
   commentList: [],
-  newList: [],
   total: 0,
   count: 0,
   page: 1,
@@ -17,9 +16,6 @@ const mutations = {
   },
   pushCommentList (state, data) {
     state.commentList.push(...data)
-  },
-  setNewList (state, data) {
-    state.newList = data
   },
   setCount (state, data) {
     state.count = data
@@ -48,11 +44,6 @@ const actions = {
   //   const { expression } = await this.$axios.get('comment/Emoji')
   //   commit('setList', expression)
   // },
-  // 获取最新评论
-  async getNewCommentList ({ commit }, { limit = 4 }) {
-    const { data } = await this.$axios.get(`comments/new?limit=${limit}`)
-    commit('setNewList', data.result)
-  },
   // 发表评论
   async postComment ({ commit }, comment) {
     const { nickName, email } = comment
