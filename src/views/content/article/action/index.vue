@@ -24,7 +24,7 @@
     </NGrid>
 
     <!--markdown-->
-    <Markdown ref="markDownRef" />
+    <Markdown v-model:text="article.content" />
 
     <!--发布NDrawer-->
     <NDrawer
@@ -34,7 +34,6 @@
     >
       <NDrawerContent title="发布文章">
         <NForm
-          ref="formRef"
           class="mt-5"
           label-placement="left"
           :model="article"
@@ -128,7 +127,6 @@ import {getArticleById} from "@/api/web/article";
 import MUpload from '@/components/Upload/index.vue'
 import {usePublic} from "./composables/usePubilc";
 
-const markDownRef = ref(null)
 const message = useMessage()
 const route = useRoute()
 const tagsOption = ref()
@@ -156,14 +154,10 @@ onMounted(async () => {
 
 async function getArticle(id) {
   const data = await getArticleById(id)
-  console.log(data.content)
-  markDownRef.value.setValue(data.content)
   setArticle(data)
 }
 
 function publicClick() {
-  article.value.content = markDownRef.value.getValue()
-
   if (!article.value.title) {
     message.warning('标题不能为空')
     return
@@ -178,11 +172,6 @@ function publicClick() {
 </script>
 
 <style scoped lang="scss">
-
-#vditor {
-  min-height: calc(100vh - 180px);
-}
-
 :deep .n-dialog.n-modal {
   width: 600px !important;
 }

@@ -1,90 +1,43 @@
 <template>
-  <div id="vditor" />
+  <v-md-editor
+      v-model="poetText"
+      height="80vh"
+      :disabled-menus="[]"
+      @upload-image="handleUploadImage"
+      left-toolbar="undo redo clear | emoji h bold italic strikethrough quote | ul ol table hr | link image code | save"
+  />
 </template>
-<script>
-import {onMounted,defineComponent, ref} from "vue";
-import Vditor from "vditor";
+<script setup>
+import {computed} from "vue";
 import {qiniuUpload} from "@/utils";
-import "vditor/src/assets/scss/index.scss"
 
-export default defineComponent({
-  setup() {
-    // mark dom
-    const vditorRef = ref()
-
-    onMounted(() => {
-      vditorRef.value = new Vditor('vditor', {
-        mode: 'sv',
-        cache: {
-          enable: false,
-        },
-        upload: {
-          multiple: false,  // 不允许批量上传
-          async handler(file) {
-            const res = await qiniuUpload(file[0])
-            vditorRef.value.insertValue(`![](${res.url} "${res.fileName}")`)
-          }
-        },
-        toolbar: [
-          "emoji",
-          "headings",
-          "bold",
-          "italic",
-          "strike",
-          "|",
-          "list",
-          "ordered-list",
-          "table",
-          "check",
-          "outdent",
-          "indent",
-          "|",
-          "quote",
-          "line",
-          "code",
-          "inline-code",
-          "insert-before",
-          "insert-after",
-          "|",
-          "upload",
-          "link",
-          "|",
-          "undo",
-          "redo",
-          "|",
-          "fullscreen",
-          "edit-mode",
-          {
-            name: "more",
-            toolbar: [
-              "both",
-              "code-theme",
-              "content-theme",
-              "export",
-              "outline",
-              "preview",
-            ],
-          },
-        ],
-      })
-
-    })
-
-    function getValue() {
-      return vditorRef.value.getValue()
-    }
-
-    function setValue(val) {
-        vditorRef.value.setValue(val)
-    }
-
-    return {
-      getValue,
-      setValue
-    }
+const props = defineProps({
+  text: {
+    type: String,
+    default: ''
   }
 })
 
+const emit = defineEmits(['update:text'])
+
+const poetText = computed({
+  get: () => props.text,
+  set: val => {
+    emit('update:text', val)
+    // poetText.value = val
+  }
+})
+
+async function handleUploadImage(event, insertImage, files) {
+  // 拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
+  const { fileName, url } = await qiniuUpload(files[0])
+  insertImage({
+    url,
+    desc: fileName,
+    width: 'auto',
+    height: 'auto',
+  });
+}
 
 </script>
 

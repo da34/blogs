@@ -92,7 +92,7 @@ const transform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (error) => {
-    const {$message, $dialog} = window;
+    const {$message} = window;
     const {response, code, message} = error || {};
     // TODO 此处要根据后端接口返回格式修改
     const msg = response && response.data && response.data.message ? response.data.message : '';
