@@ -131,7 +131,6 @@ export default {
   shadow-2-down()
   position relative
   background-color #fff
-  border 1px solid $color-line-1
   width 100%
   display flex
   height 180px

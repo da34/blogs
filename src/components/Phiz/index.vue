@@ -1,7 +1,7 @@
 <template>
   <div class="expression clearfix">
     <div ref="title" class="title-r" @click="show = !show">
-<!--      <svg-icon name="funny" :style-obj="{ width: '2em', height: '2em' }" />-->
+      <!--      <svg-icon name="funny" :style-obj="{ width: '2em', height: '2em' }" />-->
     </div>
     <div v-show="show" class="triangle" />
     <div v-show="show" class="expression-body">

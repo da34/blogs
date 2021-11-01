@@ -4,17 +4,18 @@
       <span>文章目录</span>
     </div>
     <div class="box-content">
-      <div v-if="toc.length" class="catalog-wrapper">
+      <div v-show="toc.length" class="catalog-wrapper">
         <ul class="toc-list">
-          <li v-for="(anchor, index) in toc" :key="index" class="item">
+          <li v-for="(anchor, index) in toc" :key="index" class="item" @click="handleAnchorClick(anchor)">
             <a :style="{ marginLeft: `${anchor.indent * 15}px` }">{{ anchor.title }}</a>
           </li>
         </ul>
       </div>
-      <h4 v-else style="text-align: center;padding: 30px;">
+      <div v-show="!toc.length" style="text-align: center;padding: 30px;">
         此文章没有目录
-      </h4>
+      </div>
     </div>
+    <v-md-preview v-show="false" ref="preview" />
   </section>
 </template>
 
@@ -23,12 +24,14 @@ import { mapState } from 'vuex'
 import { scrollMixin } from '@/minxi/handleScroll'
 import VMdPreview, { xss } from '@kangc/v-md-editor/lib/preview'
 
+const LEVEL = 'h1,h2,h3' // 获取文章的标题
+
 export default {
   name: 'ArticleToc',
   mixins: [scrollMixin],
   computed: {
     ...mapState('modules/content', [
-      'article'
+      'content'
     ]),
     styleObj () {
       let result = {
@@ -43,17 +46,17 @@ export default {
       return result
     },
     toc () {
-      if (process.client && this.article.content) {
-        const html = xss.process(VMdPreview.themeConfig.markdownParser.render(this.article.content))
+      if (process.client && this.content) {
+        const html = xss.process(VMdPreview.themeConfig.markdownParser.render(this.content))
         const $div = document.createElement('div')
         $div.innerHTML = html
 
-        const anchors = $div.querySelectorAll('h1,h2,h3')
+        const anchors = $div.querySelectorAll(LEVEL) // 获取h标签
         let titles = Array.from(anchors).filter(title => !!title.textContent.trim())
 
         if (!titles.length) {
           titles = []
-          return
+          return []
         }
 
         const hTags = Array.from(new Set(titles.map(title => title.tagName))).sort()
@@ -79,8 +82,16 @@ export default {
       this.listTocHeight = []
       this.listToc = []
       this.linkList = []
-
-      this.listToc = document.querySelectorAll('.toc-title')
+      let titleQuery = ''
+      this.toc.forEach((item, i) => {
+        const { lineIndex } = item
+        if (i === 0) {
+          titleQuery += `[data-v-md-line="${lineIndex}"]`
+        } else {
+          titleQuery += `,[data-v-md-line="${lineIndex}"]`
+        }
+      })
+      this.listToc = document.querySelectorAll(titleQuery)
       this.linkList = document.querySelectorAll('.toc-list .item')
 
       this.listToc.forEach($to => {
@@ -101,6 +112,18 @@ export default {
           this.linkList[index].classList.add('active')
         }
       })
+    },
+    handleAnchorClick (anchor) {
+      const { preview } = this.$refs
+      const { lineIndex } = anchor
+      const heading = document.querySelector(`.blog-post [data-v-md-line="${lineIndex}"]`)
+      if (heading) {
+        preview.scrollToTarget({
+          target: heading,
+          scrollContainer: window,
+          top: 60
+        })
+      }
     }
   }
 }
@@ -145,8 +168,8 @@ export default {
       a
         color $color-focus
 
-.toc-title
-  &:target
-    padding-top 100px
-    margin-top -100px
+//.toc-title
+//  &:target
+//    padding-top 100px
+//    margin-top -100px
 </style>

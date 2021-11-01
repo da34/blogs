@@ -66,7 +66,7 @@ export default {
     const { id } = this.$route.params
     const { data } = await this.$axios.get(`contents/${id}`)
     this.article = data.result
-    this.setData({ key: 'article', value: this.article })
+    this.setContent(this.article.content)
   },
   head () {
     return {
@@ -84,17 +84,17 @@ export default {
     ...mapGetters([
       'site'
     ]),
-    ...mapState('modules/content', {
-      articleCopy: 'article'
-    })
+    ...mapState('modules/content', [
+      'content'
+    ])
   },
   // 页面切换的时候重新将当前页面的文章set vuex
   activated () {
-    this.setData({ key: 'article', value: this.article })
+    this.setContent(this.article.content)
   },
   methods: {
     ...mapMutations('modules/content', [
-      'setData'
+      'setContent'
     ])
   }
 }

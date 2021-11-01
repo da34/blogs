@@ -53,6 +53,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+.box-card
+  padding-bottom 10px
 .avatar-bg
   position: relative;
   background-image url("https://resource.lsyboy.cn/blog/option/avatar-bg.png")

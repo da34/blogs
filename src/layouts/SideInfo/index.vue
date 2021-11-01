@@ -1,4 +1,6 @@
 <template>
+  <!--  <client-only placeholder="Loading...">-->
+  <!-- 组件只会在客户端被渲染 -->
   <div class="sidebar">
     <user-card />
     <newComment v-if="$route.name !== 'content-id'" />
@@ -6,6 +8,7 @@
     <Tag v-if="$route.name !== 'content-id'" />
     <Toc v-if="$route.name === 'content-id'" />
   </div>
+<!--  </client-only>-->
 </template>
 
 <script>

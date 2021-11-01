@@ -1,11 +1,14 @@
 const state = () => ({
-  article: {},
+  content: '',
   nowToc: []
 })
 
 const mutations = {
   setNowToc (state, data) {
     state.nowToc = data
+  },
+  setContent (state, data) {
+    state.content = data
   }
 }
 
