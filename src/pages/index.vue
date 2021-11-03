@@ -127,14 +127,15 @@ export default {
   margin-bottom 10px
 .article
   margin-bottom 20px
-  border-radius-5()
+  border-radius-10()
   shadow-2-down()
   position relative
   background-color #fff
   width 100%
   display flex
-  height 180px
+  height 190px
   overflow hidden
+  padding 10px
   .img-wrap
     width 30%
     div
@@ -144,6 +145,7 @@ export default {
     width 100%
     height 100%
     object-fit cover
+    border-radius-10()
     //background-size: cover;
     //background-position: 50% 50%;
 .article-content

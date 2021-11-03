@@ -3,9 +3,9 @@
   <!-- 组件只会在客户端被渲染 -->
   <div class="sidebar">
     <user-card />
-    <newComment v-if="$route.name !== 'content-id'" />
-    <randomArticle v-if="$route.name !== 'content-id'" />
-    <Tag v-if="$route.name !== 'content-id'" />
+    <newComment v-show="$route.name !== 'content-id'" />
+    <randomArticle v-show="$route.name !== 'content-id'" />
+    <Tag v-show="$route.name !== 'content-id'" />
     <Toc v-if="$route.name === 'content-id'" />
   </div>
 <!--  </client-only>-->

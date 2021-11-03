@@ -4,14 +4,14 @@
       <span>文章目录</span>
     </div>
     <div class="box-content">
-      <div v-show="toc.length" class="catalog-wrapper">
+      <div v-if="toc.length" class="catalog-wrapper" ref="listRef">
         <ul class="toc-list">
           <li v-for="(anchor, index) in toc" :key="index" class="item" @click="handleAnchorClick(anchor)">
             <a :style="{ marginLeft: `${anchor.indent * 15}px` }">{{ anchor.title }}</a>
           </li>
         </ul>
       </div>
-      <div v-show="!toc.length" style="text-align: center;padding: 30px;">
+      <div v-else style="text-align: center;padding: 30px;">
         此文章没有目录
       </div>
     </div>
@@ -27,7 +27,6 @@ import VMdPreview, { xss } from '@kangc/v-md-editor/lib/preview'
 const LEVEL = 'h1,h2,h3' // 获取文章的标题
 
 export default {
-  name: 'ArticleToc',
   mixins: [scrollMixin],
   computed: {
     ...mapState('modules/content', [
@@ -72,15 +71,15 @@ export default {
   },
   mounted () {
     this.initHandle()
-    this.titleHandleScroll()
+    window.addEventListener('scroll', this.titleHandleScroll)
   },
   destroyed () {
     window.removeEventListener('scroll', this.titleHandleScroll)
   },
   methods: {
     initHandle () {
-      this.listTocHeight = []
-      this.listToc = []
+      this.articleTocHeight = []
+      this.articleToc = []
       this.linkList = []
       let titleQuery = ''
       this.toc.forEach((item, i) => {
@@ -91,24 +90,27 @@ export default {
           titleQuery += `,[data-v-md-line="${lineIndex}"]`
         }
       })
-      this.listToc = document.querySelectorAll(titleQuery)
-      this.linkList = document.querySelectorAll('.toc-list .item')
-
-      this.listToc.forEach($to => {
-        this.listTocHeight.push($to.offsetTop - 50)
-      })
+      console.log(titleQuery, 'titleQuery')
+      // 文章存在标题，才获取
+      if (titleQuery) {
+        this.articleToc = document.querySelectorAll(titleQuery)
+        this.linkList = this.$refs.listRef.querySelectorAll('.item')
+        console.log(this.articleToc, 'this.articleToc')
+        this.articleToc.forEach($to => {
+          this.articleTocHeight.push($to.offsetTop - 50)
+        })
+      }
       // 获取当前组件距离顶部的距离和宽度
       this.offsetTop = this.$el.offsetTop
       this.clientWidth = this.$el.clientWidth
-      // 绑定事件
-      window.addEventListener('scroll', this.handleScroll)
-      window.addEventListener('scroll', this.titleHandleScroll)
     },
     titleHandleScroll () {
       const offsetTop = window.pageYOffset || document.documentElement.scrollTop
-      this.listTocHeight.forEach((top, index) => {
+      // console.log(offsetTop, 'offsetTop')
+      // console.log(this.linkList, 'this.linkList')
+      this.articleTocHeight.forEach((top, index) => {
         if (offsetTop > top) {
-          this.linkList.forEach($item => $item.classList.remove('active'))
+          this.linkList.forEach($item => $item && $item.classList.remove('active'))
           this.linkList[index].classList.add('active')
         }
       })

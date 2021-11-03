@@ -55,6 +55,7 @@ export default {
 <style scoped lang="stylus">
 .box-card
   padding-bottom 10px
+  overflow hidden
 .avatar-bg
   position: relative;
   background-image url("https://resource.lsyboy.cn/blog/option/avatar-bg.png")

@@ -9,7 +9,7 @@
 
 <script>
 import { throttle } from '@/utils'
-import { appendBody } from '../../../minxi/appendBody'
+import { appendBody } from '@/minxi/appendBody'
 let scrollTo
 if (process.client) {
   scrollTo = require('@/utils/scroll-to').scrollTo
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     handleTo () {
-      scrollTo(0, 800)
+      scrollTo(0, 500)
     },
     handleScroll () {
       const offsetTop = document.body.scrollTop || document.documentElement.scrollTop

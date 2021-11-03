@@ -39,7 +39,7 @@ export default {
   color $color-title
   transition all .3s
   box-shadow 0 .125rem .25rem rgba(0, 0, 0, .075);
-  background-color rgba(255, 255, 255, 0.7)
+  background-color #fff
   backdrop-filter blur(20px)
 
   &.fade-enter-active, &.fade-leave-active

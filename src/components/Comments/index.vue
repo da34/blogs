@@ -115,6 +115,7 @@ export default {
     const query = {
       contentId: this.contentId
     }
+    console.log(query)
     await this.getCommentList(query)
   },
   computed: {

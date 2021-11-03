@@ -1,7 +1,7 @@
 <template>
-  <p v-if="$fetchState.pending">
-    <Loading />
-  </p>
+  <div v-if="$fetchState.pending" class="content-wrap" style="background: #fff">
+    <a-skeleton  active :title="false" :paragraph="{ rows: 4, width: '100%' }" />
+  </div>
   <section v-else class="content-wrap">
     <div class="entry-thumbnail">
       <div
@@ -44,15 +44,14 @@
 
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
+import 'ant-design-vue/lib/skeleton/style/index.css'
 import Marked from '@/components/Markdown'
 import Comments from '@/components/Comments'
-import Loading from '@/components/base/Loading'
 export default {
   name: 'Content',
   components: {
     Marked,
-    Comments,
-    Loading
+    Comments
   },
   layout: 'blog',
   scrollToTop: true,
@@ -102,12 +101,13 @@ export default {
 
 <style scoped lang="stylus">
 .content-wrap
-  border 1px solid $color-line-1
   shadow-2-down()
-  border-radius-5()
+  border-radius-10()
   z-index: 1;
   background-color #fff
   position relative
+  overflow hidden
+  padding 30px
 .entry-thumbnail
   width: 100%;
   position relative
@@ -118,6 +118,7 @@ export default {
     background-position center
     background-size cover
     height 200px
+    border-radius-10()
 
   .article-header
     position relative
@@ -125,20 +126,21 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 20px 30px;
+    padding: 30px 0 40px;
     .content-desc
       margin-top 5px
       color $color-subsidiary
       font-size $font-size-small
     .title
-      font-size: 24px
+      font-size: 40px
       color $color-title
       text-omit(1)
+      font-weight 700
 
 .article-content
   width 100%
   color $color-content
-  padding 0 30px
+  position: relative;
   .copyright
     background-color rgba(220, 220, 220, .7)
     margin-top 25px
@@ -167,10 +169,25 @@ export default {
         font-size $font-size-medium
 >>> .vuepress-markdown-body:not(.custom)
   padding 0
+
+//骨架屏 定制
+>>> .ant-skeleton-paragraph
+  li
+    &:nth-child(1)
+      height 200px
+    &:nth-child(2)
+      height 50px
+    &:nth-child(3)
+      width 200px
+    &:nth-child(4)
+      height 300px
+
 @media (max-width: $mobile)
+  .entry-thumbnail
+    padding 20px
   .article-content
     padding 0 20px
   .entry-thumbnail
     .article-header
-      padding 20px 20px 0
+      padding 20px 0 20px
 </style>
