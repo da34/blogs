@@ -23,6 +23,9 @@ import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/
 import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index'
 import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css'
 
+// 内容定位
+import createAlignPlugin from '@kangc/v-md-editor/lib/plugins/align'
+
 VMdPreview.use(vuepressTheme, {
   Prism
 })
@@ -31,6 +34,7 @@ VMdPreview.use(createEmojiPlugin())
 VMdPreview.use(createTodoListPlugin())
 VMdPreview.use(createLineNumbertPlugin())
 VMdPreview.use(createCopyCodePlugin())
+VMdPreview.use(createAlignPlugin())
 
 Vue.use(VMdPreview)
 //

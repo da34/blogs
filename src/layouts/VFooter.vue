@@ -63,8 +63,10 @@ export default {
 
 <style scoped lang="stylus">
 .footer-wrap
-  border-top 1px solid $color-line-1
+  //border-top 1px solid $color-line-1
   height 120px
+  background #232323
+  color #888
 .footer-content
   width $width
   margin 0 auto

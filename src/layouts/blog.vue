@@ -41,9 +41,8 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
 
   .content
     min-height calc(100vh - 200px)
-    padding-bottom 20px
-    position relative!important
-    z-index: 1!important;
+    padding-bottom 50px
+    position relative
 
   #bg
     position fixed

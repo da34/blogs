@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$fetchState.pending" class="content-wrap" style="background: #fff">
+  <div v-if="$fetchState.pending" class="content-wrap">
     <a-skeleton  active :title="false" :paragraph="{ rows: 4, width: '100%' }" />
   </div>
   <section v-else class="content-wrap">
@@ -119,6 +119,7 @@ export default {
     background-size cover
     height 200px
     border-radius-10()
+    margin-bottom 20px
 
   .article-header
     position relative
@@ -126,13 +127,13 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 30px 0 40px;
+    padding-bottom 30px
     .content-desc
       margin-top 5px
       color $color-subsidiary
       font-size $font-size-small
     .title
-      font-size: 40px
+      font-size: 34px
       color $color-title
       text-omit(1)
       font-weight 700
@@ -183,11 +184,11 @@ export default {
       height 300px
 
 @media (max-width: $mobile)
-  .entry-thumbnail
+  .content-wrap
     padding 20px
-  .article-content
-    padding 0 20px
+  .entry-thumbnail
+    padding 0
   .entry-thumbnail
     .article-header
-      padding 20px 0 20px
+      padding-bottom 20px
 </style>

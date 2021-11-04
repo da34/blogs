@@ -149,7 +149,7 @@ export default {
     //background-size: cover;
     //background-position: 50% 50%;
 .article-content
-  padding 20px 30px
+  padding 10px 20px
   flex 1
   display: flex;
   flex-direction: column;
@@ -199,14 +199,13 @@ export default {
   .article-content
     .title
       text-omit(2)
-      font-weight normal
       margin-bottom 10px
     .info
       justify-content start
   .article
     height 100%
     flex-direction column
-    padding 20px
+    padding 15px
     margin-bottom 10px
     overflow hidden
     .img-wrap
