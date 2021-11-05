@@ -1,6 +1,12 @@
 import { resolve } from 'path'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default {
+export default defineNuxtConfig({
+  bridge: false,
+  // bridge: {
+  //   scriptSetup: true
+  //   // vite: true
+  // },
   // 开启打包分析
   analyze: true,
   alias: {
@@ -224,4 +230,4 @@ export default {
       })
     }
   }
-}
+})

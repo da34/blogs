@@ -27,6 +27,7 @@ import VMdPreview, { xss } from '@kangc/v-md-editor/lib/preview'
 const LEVEL = 'h1,h2,h3' // 获取文章的标题
 
 export default {
+  name: 'Toc',
   mixins: [scrollMixin],
   computed: {
     ...mapState('modules/content', [
@@ -51,6 +52,8 @@ export default {
         const $div = document.createElement('div')
         $div.innerHTML = html
 
+        // console.log(document.querySelectorAll('.blog-post .v-md-editor-preview' + LEVEL))
+        // console.log('.blog-post ' + LEVEL)
         const anchors = $div.querySelectorAll(LEVEL) // 获取h标签
         let titles = Array.from(anchors).filter(title => !!title.textContent.trim())
 

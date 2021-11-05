@@ -51,7 +51,6 @@ export default {
   }
 }
 </script>
-
 <style scoped lang="stylus">
 .box-card
   padding-bottom 10px

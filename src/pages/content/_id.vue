@@ -58,8 +58,7 @@ export default {
   transition: 'slide-out',
   data () {
     return {
-      article: {},
-      leave: false
+      article: {}
     }
   },
   async fetch () {
@@ -67,6 +66,7 @@ export default {
     const { data } = await this.$axios.get(`contents/${id}`)
     this.article = data.result
     this.setContent(this.article.content)
+    // console.log('fetch')
   },
   head () {
     return {
@@ -85,38 +85,38 @@ export default {
       'site'
     ]),
     ...mapState('modules/content', [
-      'content',
-      'isLoading'
+      'content'
+    ]),
+    ...mapState('modules/front', [
+      'renderCompToc'
     ])
   },
-  // 页面切换的时候重新将当前页面的文章set vuex
+  watch: {
+    '$fetchState.pending' (oldVal, newVal) {
+      if (newVal) {
+        this.$nextTick(() => {
+          this.setRenderCompToc('Toc')
+        })
+      }
+    }
+  },
   activated () {
-    this.leave = false
     this.setContent(this.article.content)
-    console.log(this.isLoading, '111111')
-  },
-  deactivated () {
-    this.leave = true
-    this.setIsLoading(true)
-    console.log(this.isLoading)
-    console.log('2222222')
-  },
-  updated () {
-    this.$nextTick(function () {
-      // 如果是ture 表示是要离开
-      console.log(this.leave, 'this.leave')
-      // console.log(this.leave, 'this.leave')
-      if (!this.leave) {
-        this.setIsLoading(false)
-        this.leave = false
-        console.log(this.isLoading, '3333333')
+    this.$nextTick(() => {
+      if (!this.$fetchState.pending) {
+        this.setRenderCompToc('Toc')
       }
     })
   },
+  deactivated () {
+    this.setRenderCompToc('')
+  },
   methods: {
     ...mapMutations('modules/content', [
-      'setContent',
-      'setIsLoading'
+      'setContent'
+    ]),
+    ...mapMutations('modules/front', [
+      'setRenderCompToc'
     ])
   }
 }

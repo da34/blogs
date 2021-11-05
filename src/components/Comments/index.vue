@@ -145,23 +145,23 @@ export default {
       try {
         const { data } = await this.postComment(comment)
         if (data.code === 0) {
-          this.$message.success({
-            content: data.message,
-            icon: <Icon type="check-circle" />
-          })
+          // this.$message.success({
+          //   content: data.message,
+          //   icon: <Icon type="check-circle" />
+          // })
         } else {
-          this.$message.error({
-            content: data.message,
-            icon: <Icon type="close-circle" />
-          })
+          // this.$message.error({
+          //   content: data.message,
+          //   icon: <Icon type="close-circle" />
+          // })
         }
         await this.$fetch()
         this.editVisible = 0
       } catch (e) {
-        this.$message.error({
-          content: '评论失败。请稍后再试',
-          icon: <Icon type="close-circle" />
-        })
+        // this.$message.error({
+        //   content: '评论失败。请稍后再试',
+        //   icon: <Icon type="close-circle" />
+        // })
       }
     },
     onReply (id) {

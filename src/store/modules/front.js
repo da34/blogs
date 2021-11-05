@@ -1,7 +1,8 @@
 const state = () => ({
   articleCollect: {},
   menus: [],
-  configs: []
+  configs: [],
+  renderCompToc: ''
 })
 
 const mutations = {
@@ -13,6 +14,9 @@ const mutations = {
   },
   setConfigs (state, data) {
     state.configs = data
+  },
+  setRenderCompToc (state, data) {
+    state.renderCompToc = data
   }
 }
 
