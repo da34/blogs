@@ -1,6 +1,6 @@
 <template>
   <div v-if="$fetchState.pending" class="content-wrap">
-    <a-skeleton  active :title="false" :paragraph="{ rows: 4, width: '100%' }" />
+    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }" />
   </div>
   <section v-else class="content-wrap">
     <div class="entry-thumbnail">
@@ -58,7 +58,8 @@ export default {
   transition: 'slide-out',
   data () {
     return {
-      article: {}
+      article: {},
+      leave: false
     }
   },
   async fetch () {
@@ -84,16 +85,38 @@ export default {
       'site'
     ]),
     ...mapState('modules/content', [
-      'content'
+      'content',
+      'isLoading'
     ])
   },
   // 页面切换的时候重新将当前页面的文章set vuex
   activated () {
+    this.leave = false
     this.setContent(this.article.content)
+    console.log(this.isLoading, '111111')
+  },
+  deactivated () {
+    this.leave = true
+    this.setIsLoading(true)
+    console.log(this.isLoading)
+    console.log('2222222')
+  },
+  updated () {
+    this.$nextTick(function () {
+      // 如果是ture 表示是要离开
+      console.log(this.leave, 'this.leave')
+      // console.log(this.leave, 'this.leave')
+      if (!this.leave) {
+        this.setIsLoading(false)
+        this.leave = false
+        console.log(this.isLoading, '3333333')
+      }
+    })
   },
   methods: {
     ...mapMutations('modules/content', [
-      'setContent'
+      'setContent',
+      'setIsLoading'
     ])
   }
 }

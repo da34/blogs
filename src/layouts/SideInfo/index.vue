@@ -6,13 +6,13 @@
     <newComment v-show="$route.name !== 'content-id'" />
     <randomArticle v-show="$route.name !== 'content-id'" />
     <Tag v-show="$route.name !== 'content-id'" />
-    <Toc v-if="$route.name === 'content-id'" />
+    <Toc v-if="$route.name === 'content-id' && !isLoading" />
   </div>
 <!--  </client-only>-->
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import Toc from '@/components/Toc'
 import newComment from './newComment'
 import randomArticle from './randomArticle'
@@ -26,6 +26,11 @@ export default {
     randomArticle,
     newComment,
     Toc
+  },
+  computed: {
+    ...mapState('modules/content', [
+      'isLoading'
+    ])
   }
 }
 </script>

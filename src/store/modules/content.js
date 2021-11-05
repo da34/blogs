@@ -1,6 +1,7 @@
 const state = () => ({
   content: '',
-  nowToc: []
+  nowToc: [],
+  isLoading: true
 })
 
 const mutations = {
@@ -9,6 +10,9 @@ const mutations = {
   },
   setContent (state, data) {
     state.content = data
+  },
+  setIsLoading (state, bool) {
+    state.isLoading = bool
   }
 }
 

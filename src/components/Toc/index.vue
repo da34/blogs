@@ -4,7 +4,7 @@
       <span>文章目录</span>
     </div>
     <div class="box-content">
-      <div v-if="toc.length" class="catalog-wrapper" ref="listRef">
+      <div v-if="toc.length" ref="listRef" class="catalog-wrapper">
         <ul class="toc-list">
           <li v-for="(anchor, index) in toc" :key="index" class="item" @click="handleAnchorClick(anchor)">
             <a :style="{ marginLeft: `${anchor.indent * 15}px` }">{{ anchor.title }}</a>
@@ -43,6 +43,7 @@ export default {
         result = {}
       }
       return result
+      // return {}
     },
     toc () {
       if (process.client && this.content) {
@@ -90,16 +91,18 @@ export default {
           titleQuery += `,[data-v-md-line="${lineIndex}"]`
         }
       })
-      console.log(titleQuery, 'titleQuery')
+      // console.log(titleQuery, 'titleQuery')
       // 文章存在标题，才获取
+
       if (titleQuery) {
         this.articleToc = document.querySelectorAll(titleQuery)
         this.linkList = this.$refs.listRef.querySelectorAll('.item')
-        console.log(this.articleToc, 'this.articleToc')
+        // console.log(this.articleToc, 'this.articleToc')
         this.articleToc.forEach($to => {
           this.articleTocHeight.push($to.offsetTop - 50)
         })
       }
+
       // 获取当前组件距离顶部的距离和宽度
       this.offsetTop = this.$el.offsetTop
       this.clientWidth = this.$el.clientWidth
@@ -136,8 +139,10 @@ export default {
   margin-top 10px
   padding 20px
   position absolute
-  transition top .4s
+  //position sticky
+  transition top .3s
   width 100%
+  //top 10px
 
 .toc-list
   position relative
