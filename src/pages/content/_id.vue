@@ -65,8 +65,6 @@ export default {
     const { id } = this.$route.params
     const { data } = await this.$axios.get(`contents/${id}`)
     this.article = data.result
-    this.setContent(this.article.content)
-    // console.log('fetch')
   },
   head () {
     return {
@@ -84,9 +82,6 @@ export default {
     ...mapGetters([
       'site'
     ]),
-    ...mapState('modules/content', [
-      'content'
-    ]),
     ...mapState('modules/front', [
       'renderCompToc'
     ])
@@ -101,7 +96,6 @@ export default {
     }
   },
   activated () {
-    this.setContent(this.article.content)
     this.$nextTick(() => {
       if (!this.$fetchState.pending) {
         this.setRenderCompToc('Toc')
@@ -112,9 +106,6 @@ export default {
     this.setRenderCompToc('')
   },
   methods: {
-    ...mapMutations('modules/content', [
-      'setContent'
-    ]),
     ...mapMutations('modules/front', [
       'setRenderCompToc'
     ])

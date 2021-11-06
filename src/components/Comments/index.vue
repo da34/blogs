@@ -127,6 +127,9 @@ export default {
       'limit'
     ])
   },
+  mounted () {
+    console.log('111111111111111111')
+  },
   methods: {
     ...mapActions('modules/comment', [
       'postComment',
@@ -167,7 +170,7 @@ export default {
     onReply (id) {
       this.editVisible = id
     },
-    onClose (id) {
+    onClose () {
       this.editVisible = 0
     },
     async moreComment () { // 加载更多评论
@@ -176,12 +179,6 @@ export default {
       }
       await this.getMoreCommentList(query)
     }
-    // async handlePage (page) {
-    //   this.Loading = true
-    //   const { data } = await this.$axios.$get(`comments?articleId=${this.articleId}&page=${page}`)
-    //   this.commentList = data.rows
-    //   this.Loading = false
-    // }
   }
 }
 </script>

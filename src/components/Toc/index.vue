@@ -20,19 +20,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { scrollMixin } from '@/minxi/handleScroll'
-import VMdPreview, { xss } from '@kangc/v-md-editor/lib/preview'
 
 const LEVEL = 'h1,h2,h3' // 获取文章的标题
 
 export default {
   name: 'Toc',
   mixins: [scrollMixin],
+  data () {
+    return {
+      toc: []
+    }
+  },
   computed: {
-    ...mapState('modules/content', [
-      'content'
-    ]),
     styleObj () {
       let result = {
         position: 'fixed',
@@ -44,76 +44,53 @@ export default {
         result = {}
       }
       return result
-      // return {}
-    },
-    toc () {
-      if (process.client && this.content) {
-        const html = xss.process(VMdPreview.themeConfig.markdownParser.render(this.content))
-        const $div = document.createElement('div')
-        $div.innerHTML = html
-
-        // console.log(document.querySelectorAll('.blog-post .v-md-editor-preview' + LEVEL))
-        // console.log('.blog-post ' + LEVEL)
-        const anchors = $div.querySelectorAll(LEVEL) // 获取h标签
-        let titles = Array.from(anchors).filter(title => !!title.textContent.trim())
-
-        if (!titles.length) {
-          titles = []
-          return []
-        }
-
-        const hTags = Array.from(new Set(titles.map(title => title.tagName))).sort()
-
-        return titles.map(el => ({
-          title: el.textContent,
-          lineIndex: el.getAttribute('data-v-md-line'),
-          indent: hTags.indexOf(el.tagName)
-        })) || []
-      }
-      return []
     }
   },
   mounted () {
-    this.initHandle()
-    window.addEventListener('scroll', this.titleHandleScroll)
+    this.getArticleTitle()
+    this.$nextTick(() => {
+      this.initHandle()
+      window.addEventListener('scroll', this.titleHandleScroll)
+    })
   },
   destroyed () {
     window.removeEventListener('scroll', this.titleHandleScroll)
   },
   methods: {
-    initHandle () {
-      this.articleTocHeight = []
-      this.articleToc = []
-      this.linkList = []
-      let titleQuery = ''
-      this.toc.forEach((item, i) => {
-        const { lineIndex } = item
-        if (i === 0) {
-          titleQuery += `[data-v-md-line="${lineIndex}"]`
-        } else {
-          titleQuery += `,[data-v-md-line="${lineIndex}"]`
-        }
-      })
-      // console.log(titleQuery, 'titleQuery')
-      // 文章存在标题，才获取
-
-      if (titleQuery) {
-        this.articleToc = document.querySelectorAll(titleQuery)
-        this.linkList = this.$refs.listRef.querySelectorAll('.item')
-        // console.log(this.articleToc, 'this.articleToc')
-        this.articleToc.forEach($to => {
-          this.articleTocHeight.push($to.offsetTop - 50)
-        })
+    // 获取文章标题
+    getArticleTitle () {
+      this.articleToc = document.querySelector('.v-md-editor-preview').querySelectorAll(LEVEL)
+      let titles = Array.from(this.articleToc).filter(title => !!title.textContent.trim())
+      if (!titles.length) {
+        titles = []
+        return
       }
+      const hTags = Array.from(new Set(titles.map(title => title.tagName))).sort()
 
+      titles.forEach(el => {
+        const lineIndex = el.getAttribute('data-v-md-line')
+        this.toc.push({
+          title: el.textContent,
+          lineIndex,
+          indent: hTags.indexOf(el.tagName)
+        })
+        this.titleQuery = this.titleQuery ? ',' + lineIndex : lineIndex
+      })
+    },
+    initHandle () {
+      this.articleTocHeight = [] // 文章标题距离顶部高度
+      this.linkList = [] // 文章目录
+
+      this.linkList = this.$refs.listRef.querySelectorAll('.item')
+      this.articleToc.forEach($to => {
+        this.articleTocHeight.push($to.offsetTop - 50)
+      })
       // 获取当前组件距离顶部的距离和宽度
       this.offsetTop = this.$el.offsetTop
       this.clientWidth = this.$el.clientWidth
     },
     titleHandleScroll () {
       const offsetTop = window.pageYOffset || document.documentElement.scrollTop
-      // console.log(offsetTop, 'offsetTop')
-      // console.log(this.linkList, 'this.linkList')
       this.articleTocHeight.forEach((top, index) => {
         if (offsetTop > top) {
           this.linkList.forEach($item => $item && $item.classList.remove('active'))
