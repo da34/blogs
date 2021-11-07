@@ -56,7 +56,6 @@
         </template>
       <!--      子级回复结束-->
       </CommentList>
-      <!--    <Pagination :total="21" />-->
       <div v-if="page * limit < count" class="comment-more" @click="moreComment">
         加载更多评论
       </div>
@@ -76,7 +75,7 @@
 <script>
 import 'ant-design-vue/lib/empty/style/css'
 import 'ant-design-vue/lib/message/style/css'
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import Markdown from '@/components/Markdown'
 import { Icon } from 'ant-design-vue'
 import { parseOS, parseBrowser } from '../../utils'
@@ -107,34 +106,35 @@ export default {
   },
   data () {
     return {
-      editVisible: 0
+      editVisible: 0,
+      page: 1,
+      oldPage: 1,
+      limit: 10,
+      commentList: [],
+      total: 0,
+      count: 0
     }
   },
   async fetch () {
     // 获取评论
-    const query = {
-      contentId: this.contentId
+    const { data } = await this.$axios.get(`comments?page=${this.page}&limit=${this.limit}&contentId=${this.contentId}`)
+    const { result } = data
+    this.total = result.total
+    this.count = result.comments.count
+    // 是否是翻页, 相同证明不是
+    if (this.oldPage === this.page) {
+      this.commentList = result.comments.rows
+    } else {
+      this.oldPage = this.page
+      this.commentList.push(...result.comments.rows)
     }
-    // console.log(query)
-    await this.getCommentList(query)
   },
-  computed: {
-    ...mapState('modules/comment', [
-      'commentList',
-      'total',
-      'count',
-      'page',
-      'limit'
-    ])
-  },
-  mounted () {
-    console.log('111111111111111111')
+  watch: {
+    page: '$fetch'
   },
   methods: {
     ...mapActions('modules/comment', [
-      'postComment',
-      'getCommentList',
-      'getMoreCommentList'
+      'actionUser'
     ]),
     parseOS,
     parseBrowser,
@@ -145,27 +145,20 @@ export default {
         anchor: this.$route.path
       }
       comment = Object.assign(query, comment)
-      try {
-        const { data } = await this.postComment(comment)
-        if (data.code === 0) {
-          // this.$message.success({
-          //   content: data.message,
-          //   icon: <Icon type="check-circle" />
-          // })
-        } else {
-          // this.$message.error({
-          //   content: data.message,
-          //   icon: <Icon type="close-circle" />
-          // })
-        }
-        await this.$fetch()
-        this.editVisible = 0
-      } catch (e) {
-        // this.$message.error({
-        //   content: '评论失败。请稍后再试',
-        //   icon: <Icon type="close-circle" />
-        // })
+      await this.actionUser(comment)
+      const { data } = await this.$axios.post('comments', comment)
+      if (data.code === 0) {
+        this.$message.success({
+          content: data.message,
+          icon: <Icon type="check-circle" />
+        })
+      } else {
+        this.$message.error({
+          content: data.message,
+          icon: <Icon type="close-circle" />
+        })
       }
+      await this.$fetch()
     },
     onReply (id) {
       this.editVisible = id
@@ -173,11 +166,8 @@ export default {
     onClose () {
       this.editVisible = 0
     },
-    async moreComment () { // 加载更多评论
-      const query = {
-        contentId: this.contentId
-      }
-      await this.getMoreCommentList(query)
+    moreComment () { // 加载更多评论
+      this.page++
     }
   }
 }

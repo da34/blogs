@@ -54,11 +54,11 @@ export default {
       default: null
     },
     tierId: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     pid: {
-      type: Number,
+      type: [Number, String],
       default: null
     }
   },
@@ -98,20 +98,18 @@ export default {
           const tierId = this.tierId
           const targetName = this.targetName
           const pid = this.pid
-          // this.submitComment(values)
-          // this.$emit('submitComment', values)
+
           if (tierId && targetName && pid) {
             values = Object.assign({ tierId, targetName, pid }, values)
           }
           this.loading = true
-          this.submitComment(values).then(_ => {
-            this.form.setFieldsValue({
-              text: ''
-            })
-          }).finally(_ => {
-            this.loading = false
+          this.submitComment(values)
+          this.form.setFieldsValue({
+            text: ''
           })
-          // console.log('Received values of form: ', values)
+          this.loading = false
+          // 评论完成关闭二级 编辑器
+          this.$parent.$parent.onClose()
         }
       })
     },
