@@ -1,8 +1,6 @@
 import { resolve } from 'path'
-import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default defineNuxtConfig({
-  bridge: false,
+export default {
   // bridge: {
   //   scriptSetup: true
   //   // vite: true
@@ -185,30 +183,18 @@ export default defineNuxtConfig({
     optimization: { // 拆分大文件
       splitChunks: {
         cacheGroups: {
-          // styles: {
-          //   name: 'commons-styles', // 提取公共的css
-          //   test: /\.(styl)$/,
-          //   chunks: 'initial',
-          //   enforce: true
-          // }
-          // libs: {
-          //   name: 'chunk-libs',
-          //   test: /[\\/]node_modules[\\/]/,
-          //   priority: 10,
-          //   chunks: 'initial' // only package third parties that are initially dependent
-          // },
-          // antUI: {
-          //   name: 'chunk-ant-design-vue',
-          //   priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-          //   test: /[\\/]node_modules[\\/]_?ant-design-vue(.*)/ // in order to adapt to cnpm
-          // },
-          // commons: {
-          //   name: 'chunk-commons',
-          //   test: resolve('src/components'), // can customize your rules
-          //   minChunks: 3, //  minimum common number
-          //   priority: 5,
-          //   reuseExistingChunk: true
-          // }
+          mdEditor: {
+            name: 'chunk-v-md-editor',
+            priority: 10, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            // test: /[\\/]node_modules[\\/]@kangc\/v-md-editor\/lib\/(.*)/ // in order to adapt to cnpm
+            test: /[\\/]node_modules[\\/]@kangc/ // in order to adapt to cnpm
+          },
+          default: {
+            name: 'chunk-commons',
+            chunks: 'initial',
+            minChunks: 3, // 模块被引用3次以上的才抽离
+            priority: -20
+          }
         }
       }
     },
@@ -230,4 +216,4 @@ export default defineNuxtConfig({
       })
     }
   }
-})
+}
