@@ -30,7 +30,7 @@ const poetText = computed({
 
 async function handleUploadImage(event, insertImage, files) {
   // 拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
-  const { fileName, url } = await qiniuUpload(files[0])
+  const { fileName, url } = await qiniuUpload(files[0], true)
   insertImage({
     url,
     desc: fileName,

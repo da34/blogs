@@ -13,7 +13,7 @@ export default defineConfig({
   // base: './',
   plugins: [
     vue(),
-    viteESLint()
+    // viteESLint()
   ],
   resolve: {
     alias: {

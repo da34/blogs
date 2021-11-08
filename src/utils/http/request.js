@@ -1,6 +1,5 @@
 import axios from 'axios';
 import httpEnum from './http-type'
-import router from '@/router';
 import {useUserStore} from '@/stores/modules/user'
 import {storage} from '@/utils/Storage';
 import {NAxios} from './NAxios'
@@ -93,7 +92,7 @@ const transform = {
    */
   responseInterceptorsCatch: (error) => {
     const {$message} = window;
-    const {response, code, message} = error || {};
+    const {response} = error || {};
     // TODO 此处要根据后端接口返回格式修改
     const msg = response && response.data && response.data.message ? response.data.message : '';
     // const err = error.toString();

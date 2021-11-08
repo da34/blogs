@@ -1,4 +1,4 @@
-import {h, ref} from 'vue';
+import {h} from 'vue';
 import {NIcon} from 'naive-ui';
 import dayjs from 'dayjs'
 import * as qiniu from 'qiniu-js'
@@ -70,9 +70,15 @@ function sortRoute(a, b) {
 /**
  * 七牛上传
  * */
-export async function qiniuUpload(file) {
+export async function qiniuUpload(file, isCv = false) {
+
   const token = await getQiNiuToken()
-  const observable = qiniu.upload(file, 'blog/' + file.name, token)
+  let prefix = 'blog/'
+  // 证明是粘贴,添加时间戳
+  if (isCv) {
+    prefix += Date.now() + '.'
+  }
+  const observable = qiniu.upload(file, prefix + file.name, token)
   const message = window.$message
   let messageReactive = message.loading('上传中')
 

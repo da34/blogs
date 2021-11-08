@@ -2863,7 +2863,7 @@ ms@2.1.2:
   resolved "https://registry.npmmirror.com/ms/download/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
 
-naive-ui@^2.18.1:
+naive-ui@2.20.0:
   version "2.20.0"
   resolved "https://registry.npmmirror.com/naive-ui/download/naive-ui-2.20.0.tgz#1a0b8a3db3c77b72ac36c6cc46e9b091dc266bd0"
   integrity sha1-GguKPbPHe3KsNsbMRumwkdwma9A=

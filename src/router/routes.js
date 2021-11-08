@@ -151,8 +151,14 @@ const asyncRoutes = [
       {
         path: 'comment',
         name: `${MessageName}_comment`,
-        component: () => import('@/views/message/comment/index.vue'),
+        component: () => import('@/views/message/comment/list/index.vue'),
         meta: {title: '评论管理', keepAlive: true}
+      },
+      {
+        path: 'comment/check',
+        name: `${MessageName}_comment_check`,
+        component: () => import('@/views/message/comment/check/index.vue'),
+        meta: {title: '评论审核', keepAlive: true}
       }
     ]
   },

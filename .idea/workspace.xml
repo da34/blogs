@@ -5,16 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/plugins/markdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Markdown/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Markdown/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/common.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +59,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/message/comment/check" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -66,18 +71,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\check" />
       <recent name="H:\github\blog\blog-admin\src\api\system" />
       <recent name="H:\github\blog\blog-admin\src\views" />
       <recent name="H:\github\blog\blog-admin\src\views\content\link" />
       <recent name="H:\github\blog\blog-admin\src\views\message\comment" />
-      <recent name="H:\github\blog\blog-admin\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\list" />
       <recent name="H:\github\blog\blog-admin\src\views\system\systemConfig" />
       <recent name="H:\github\blog\blog-admin\src\views\content\article\action" />
       <recent name="H:\github\blog\blog-admin\src\views\content\article\list" />
       <recent name="H:\github\blog\blog-admin\src\views\content\article" />
-      <recent name="H:\github\blog\blog-admin\src\views\dashboard\console" />
     </key>
   </component>
   <component name="RunManager">
@@ -120,7 +125,8 @@
       <workItem from="1632810942923" duration="1702000" />
       <workItem from="1633662213557" duration="1635000" />
       <workItem from="1634271000346" duration="1661000" />
-      <workItem from="1635586008533" duration="5617000" />
+      <workItem from="1635586008533" duration="12526000" />
+      <workItem from="1636160887867" duration="9418000" />
     </task>
     <servers />
   </component>

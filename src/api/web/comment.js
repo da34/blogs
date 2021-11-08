@@ -31,3 +31,16 @@ export function delComment(id) {
     isShowSuccessMessage: true
   });
 }
+
+/**
+ * @description: 编辑评论
+ */
+export function editComment(data) {
+  return http.request({
+    url: 'comments/' + data.id,
+    method: 'put',
+    data
+  },{
+    isShowSuccessMessage: true
+  });
+}

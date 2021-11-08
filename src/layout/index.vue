@@ -17,7 +17,7 @@
     </NLayoutSider>
     <NLayout>
       <NLayoutHeader bordered>
-        <PageHeader v-model:collapsed="collapsed" />
+        <PageHeader v-model="collapsed" />
       </NLayoutHeader>
       <NLayoutContent
         position="absolute"
