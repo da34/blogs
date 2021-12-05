@@ -29,19 +29,12 @@
   </NLayout>
 </template>
 <script setup>
-import {useLoadingBar,useMessage } from 'naive-ui'
 import PageSidebar from './components/Sidebar/index.vue'
 import PageMainView from "./components/MainView.vue";
 import PageHeader from "./components/Header/index.vue";
-import {ref,onMounted} from 'vue'
+import {ref} from 'vue'
 
 const collapsed = ref(false)
-onMounted(() => {
-  //挂载在 window 方便与在js中使用
-  window.$loading = useLoadingBar();
-  window.$message = useMessage();
-
-});
 
 </script>
 <style scoped lang="scss">

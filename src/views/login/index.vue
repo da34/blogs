@@ -74,11 +74,11 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {useUserStore} from '@/stores/modules/user';
-import {useMessage} from 'naive-ui';
-import httpEnum from '@/utils/http/http-type'
+import {useLoadingBar, useMessage} from 'naive-ui';
+import httpEnum from '@/utils/http/httpType'
 // import { AccountCircleFilled, LockOutlined } from '@vicons/material'
 import {User, Lock} from '@icon-park/vue-next'
 import {touLogin} from "@/api/system/user";
@@ -140,6 +140,13 @@ const loginSucceed = () => {
     }
   });
 }
+
+onMounted(() => {
+  //挂载在 window 方便与在js中使用
+  window.$loading = useLoadingBar();
+  window.$message = useMessage();
+
+});
 
 </script>
 

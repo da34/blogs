@@ -3,7 +3,7 @@ import {storage} from '@/utils/Storage';
 import {store} from '@/stores';
 import {ACCESS_TOKEN} from '@/stores/mutation-types';
 import {getUserInfo, login} from '@/api/system/user';
-import httpEnum from '@/utils/http/http-type'
+import httpEnum from '@/utils/http/httpType'
 
 // const Storage = createStorage();
 export const useUserStore = defineStore('app-user', {

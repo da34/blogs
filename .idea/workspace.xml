@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/DialogContent/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MessageContent/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Application/Application.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Application/Application.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/modules/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/checkStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/checkStatus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/http-type.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/httpType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -44,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/message/comment/check" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -56,11 +66,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\文件\备份\blog\blog-admin\src\components" />
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\check" />
       <recent name="H:\github\blog\blog-admin\src\api\system" />
       <recent name="H:\github\blog\blog-admin\src\views" />
       <recent name="H:\github\blog\blog-admin\src\views\content\link" />
-      <recent name="H:\github\blog\blog-admin\src\views\message\comment" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\list" />
@@ -111,7 +121,8 @@
       <workItem from="1633662213557" duration="1635000" />
       <workItem from="1634271000346" duration="1661000" />
       <workItem from="1635586008533" duration="12526000" />
-      <workItem from="1636160887867" duration="10124000" />
+      <workItem from="1636160887867" duration="11433000" />
+      <workItem from="1638670287646" duration="5310000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,5 @@
 export function checkStatus(status, msg, message) {
-  console.log(status, msg, message)
+  // console.log(status, msg, message)
   switch (status) {
     case 400:
       message.error(`${msg}`);

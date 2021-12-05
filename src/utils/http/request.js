@@ -1,10 +1,11 @@
 import axios from 'axios';
-import httpEnum from './http-type'
+import httpEnum from './httpType'
 import {useUserStore} from '@/stores/modules/user'
 import {storage} from '@/utils/Storage';
 import {NAxios} from './NAxios'
 import {checkStatus} from "./checkStatus";
-
+import router from '@/router';
+const LOGIN_PAGE_NAME = 'login'
 /**
  * @description: 数据处理，方便区分多种处理方式
  */
@@ -13,7 +14,7 @@ const transform = {
    * @description: 处理响应数据
    */
   transformResponseData: (res, options) => {
-    const {$message} = window;
+    const {$message, $dialog} = window;
     const {
       isTransformResponse,
       isShowSuccessMessage
@@ -23,10 +24,10 @@ const transform = {
     if (!isTransformResponse) {
       return res.data;
     }
-    const reject = Promise.reject;
+    const reject = Promise.reject.bind(Promise);
 
     const {data} = res;
-
+    // console.log(data, 111111)
     if (!data) {
       return reject(data);
     }
@@ -68,6 +69,29 @@ const transform = {
     // if (!hasSuccess) {
     //   return reject(new Error(message));
     // }
+    // 登录超时
+    if (code === httpEnum.TIMEOUT) {
+      if (router.currentRoute.value.name === LOGIN_PAGE_NAME) return;
+      // 到登录页
+      const timeoutMsg = '登录超时,请重新登录!';
+      $dialog.warning({
+        title: '提示',
+        content: '登录身份已失效，请重新登录!',
+        positiveText: '确定',
+        negativeText: '取消',
+        onPositiveClick: () => {
+          storage.clear();
+          router.replace({
+            name: LOGIN_PAGE_NAME,
+            query: {
+              redirect: router.currentRoute.value.fullPath,
+            },
+          });
+        },
+        onNegativeClick: () => {},
+      });
+      return reject(new Error(timeoutMsg));
+    }
 
     return data;
   },
@@ -103,6 +127,7 @@ const transform = {
     // }
     // 请求是否被取消
     const isCancel = axios.isCancel(error);
+    // console.log(window)
     if (!isCancel) {
       checkStatus(error.response?.status, msg, $message);
     } else {
