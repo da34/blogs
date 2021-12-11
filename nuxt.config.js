@@ -48,7 +48,7 @@ export default {
       },
       {
         property: 'og:url',
-        content: 'http://blog.lsyboy.cn'
+        content: 'https://blog.lsyboy.cn'
       },
       {
         property: 'og:site_name',
@@ -67,7 +67,6 @@ export default {
       }
     ]
   },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/css/index.styl'
@@ -161,10 +160,6 @@ export default {
     // middleware: 'menu'
   },
   loading: { color: 'pink' },
-  env: {
-    githubClientId: process.env.NODE_ENV === 'production' ? '6293ac70e392ef1074ad' : '33c8761380f2b72d865f',
-    qqClientId: '101938464'
-  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel: {
@@ -185,15 +180,9 @@ export default {
         cacheGroups: {
           mdEditor: {
             name: 'chunk-v-md-editor',
-            priority: 10, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            // test: /[\\/]node_modules[\\/]@kangc\/v-md-editor\/lib\/(.*)/ // in order to adapt to cnpm
-            test: /[\\/]node_modules[\\/]@kangc/ // in order to adapt to cnpm
-          },
-          default: {
-            name: 'chunk-commons',
             chunks: 'initial',
-            minChunks: 3, // 模块被引用3次以上的才抽离
-            priority: -20
+            priority: 10,
+            test: /[\\/]node_modules[\\/]@kangc/
           }
         }
       }

@@ -56,6 +56,7 @@ export default {
   components: { Pagination },
   layout: 'blog',
   transition: 'slide-in',
+  fetchKey: 'home',
   data () {
     return {
       currentPage: 1,

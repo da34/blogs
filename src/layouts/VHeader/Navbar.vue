@@ -40,6 +40,7 @@ export default {
     addMenus () {
       const defaultMenus = [
         { name: '首页', url: '/', exact: true, icon: 'article' },
+        // { name: '专栏', url: '/column', icon: 'article' },
         { name: '归档', url: '/archive', icon: 'archive' },
         { name: '友联', url: '/link', icon: 'link' }
       ]

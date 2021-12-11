@@ -3,20 +3,18 @@
   <!-- 组件只会在客户端被渲染 -->
   <div class="sidebar">
     <user-card />
-    <newComment v-show="$route.name !== 'content-id'" />
-    <randomArticle v-show="$route.name !== 'content-id'" />
+    <contact v-show="$route.name !== 'content-id'" />
     <Tag v-show="$route.name !== 'content-id'" />
+    <siteInfo v-show="$route.name !== 'content-id'" />
     <component :is="renderCompToc" />
-    <!--    <Toc v-if="$route.name === 'content-id' && !isLoading" />-->
   </div>
 <!--  </client-only>-->
 </template>
 
 <script>
 import { mapState } from 'vuex'
-// import Toc from '@/components/Toc'
-import newComment from './newComment'
-import randomArticle from './randomArticle'
+import siteInfo from './siteInfo'
+import contact from './contact'
 import UserCard from './userCard'
 import Tag from './tag'
 export default {
@@ -24,9 +22,8 @@ export default {
   components: {
     Tag,
     UserCard,
-    randomArticle,
-    newComment
-    // Toc
+    siteInfo,
+    contact
   },
   computed: {
     ...mapState('modules/content', [

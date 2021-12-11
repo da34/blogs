@@ -24,7 +24,7 @@
           申请格式
         </h3>
         <p class="require-text">
-          博客标题：玉捷博客
+          博客标题：玉捷 Code
         </p>
         <p class="require-text">
           博客简介：一个前端小站，交流、记录自己的前端学习

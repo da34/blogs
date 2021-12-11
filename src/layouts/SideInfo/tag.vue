@@ -9,16 +9,15 @@
         :key="item.id"
         :to="'/archive?name=' + item.name"
       >
-        <a-tag :color="randColor()" style="cursor: pointer;margin-bottom: 5px;">
+        <span style="cursor: pointer;margin-bottom: 5px;padding: 5px;">
           {{ item.name }}
-        </a-tag>
+        </span>
       </nuxt-link>
     </div>
   </section>
 </template>
 
 <script>
-import 'ant-design-vue/lib/tag/style/css'
 export default {
   name: 'Tag',
   // serverCacheKey: () => 'StaticTag',
@@ -30,14 +29,14 @@ export default {
   async fetch () {
     const { data } = await this.$axios.get('tags')
     this.list = data.result
-  },
-  methods: {
-    randColor () {
-      const colors = ['#f2d6ed', '#a9adeb', '#ff7978', '#5586ff', '#f4d596', '#7d7575', '#ff7978']
-      const index = Math.floor(Math.random() * 7)
-      return colors[index]
-    }
   }
+  // methods: {
+  //   randColor () {
+  //     const colors = ['#f2d6ed', '#a9adeb', '#ff7978', '#5586ff', '#f4d596', '#7d7575', '#ff7978']
+  //     const index = Math.floor(Math.random() * 7)
+  //     return colors[index]
+  //   }
+  // }
 }
 </script>
 
