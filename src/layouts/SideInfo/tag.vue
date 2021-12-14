@@ -3,15 +3,14 @@
     <div class="box-title">
       <span>标签</span>
     </div>
-    <div class="box-content">
+    <div class="box-content flex-wrap space-x-2">
       <nuxt-link
         v-for="item in list"
         :key="item.id"
+        class="tag"
         :to="'/archive?name=' + item.name"
       >
-        <span class="mb-2 p-1">
-          {{ item.name }}
-        </span>
+        {{ item.name }}
       </nuxt-link>
     </div>
   </section>

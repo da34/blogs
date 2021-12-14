@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$fetchState.pending" class="content-wrap">
+  <div v-if="$fetchState.pending" class="content-wrap flex">
     <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }" />
   </div>
   <section v-else class="content-wrap">
