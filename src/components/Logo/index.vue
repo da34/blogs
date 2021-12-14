@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
-    <nuxt-link class="circle" to="/" tag="h2" active-class="don't">
-      <img :src="site.logo" :alt="site.name" width="200">
+    <nuxt-link to="/" tag="a" active-class="don't">
+      <img :src="site.logo" :alt="site.name" width="200" class="h-full object-cover">
     </nuxt-link>
   </div>
 </template>
@@ -17,17 +17,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="stylus">
-.logo
-  display flex
-  align-items center
-  justify-content center
-  img
-    height 100%
-    object-fit cover
-  h2
-    font-size 25px
-    font-weight 600
-    color $color-title
-</style>

@@ -1,10 +1,6 @@
 <template>
   <div class="article-wrapper">
-    <p class="verse">
-      每日一言：“ {{ verse }}”
-    </p>
     <article v-for="item in list" :key="item.id" class="article">
-      <!--      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="img" />-->
       <div v-if="item.firstPicture" class="img-wrap">
         <NuxtLink :to="`/content/${item.id}`" tag="div">
           <img v-lazy="item.firstPicture" class="img">
@@ -60,16 +56,12 @@ export default {
   data () {
     return {
       currentPage: 1,
-      verse: '温柔的晚风 ，傍晚的晚霞 ，解暑的西瓜 冒泡的可乐 ，人间的美好多着呢 !不要为眼前的黑暗所迷惑，你要相信自己配得上世间一切的美好。',
       list: [],
       total: 0
     }
   },
   async fetch () {
-    await this.getVerse()
     await this.getList()
-    // await this.getList({ page: this.currentPage })
-    // await this.getList({ page: this.currentPage })
   },
   head () {
     return {
@@ -92,22 +84,12 @@ export default {
     currentPage: '$fetch'
   },
   methods: {
-    // ...mapActions('modules/content', [
-    //   'getList'
-    // ]),
-    // ...mapActions('modules/front', [
-    //   'getVerse'
-    // ]),
     async getList () {
       const params = `page=${this.currentPage}&limit=7`
       const { result } = await this.$axios.$get(`contents?${params}`)
       const { rows, count } = result
       this.list = rows
       this.total = count
-    },
-    async getVerse () {
-      const { data } = await this.$axios.get('outside/verse')
-      this.verse = data.result.hitokoto
     },
     pageChange () {
       scrollTo(0)
@@ -119,13 +101,6 @@ export default {
 <style scoped lang="stylus">
 .article-wrapper
   position: relative;
-
-.verse
-  font-size $font-size-medium
-  color $color-subsidiary
-  line-height 1.5
-  font-weight bold
-  margin-bottom 10px
 .article
   margin-bottom 20px
   border-radius-10()

@@ -69,13 +69,9 @@ export default {
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/css/index.styl'
+    '@/assets/css/index.styl',
+    '@/assets/css/main.css'
   ],
-  // script: [
-  //   {
-  //     src: 'https://hm.baidu.com/hm.js?a791e699f5f9b2e511033c8e4e57ab74' // 百度统计js
-  //   }
-  // ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/ant-design-vue',
@@ -94,9 +90,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    // '@nuxtjs/eslint-module',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxt/postcss8'
   ],
   // 全局导入css 不用@import
   styleResources: {
@@ -157,11 +152,16 @@ export default {
       return position
     },
     linkActiveClass: 'active-line'
-    // middleware: 'menu'
   },
   loading: { color: 'pink' },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {}
+      }
+    },
     babel: {
       plugins: [
         [

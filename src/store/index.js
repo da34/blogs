@@ -1,4 +1,4 @@
-import content from './modules/content'
+
 import comment from './modules/comment'
 import user from './modules/user'
 import front from './modules/front'
@@ -6,7 +6,6 @@ import getters from './getters'
 
 const store = {
   modules: {
-    content,
     comment,
     user,
     front

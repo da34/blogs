@@ -1,8 +1,8 @@
 <template>
-  <div style="position: relative">
+  <div class="relative">
     <transition name="fade">
-      <div v-show="visible" class="header-wrapper">
-        <header class="header">
+      <div v-show="visible" class="fixed inset-0 h-[65px] text-slate-900 bg-white shadow duration-300 z-50 backdrop-blur-md">
+        <header class="flex m-auto h-full items-center xl:w-[1440px] ">
           <Logo />
           <Navbar />
         </header>
@@ -12,9 +12,9 @@
 </template>
 
 <script>
+import Navbar from './Navbar'
 import { scrollMixin } from '@/minxi/handleScroll'
 import Logo from '@/components/Logo'
-import Navbar from './Navbar'
 
 export default {
   name: 'VHeader',
@@ -29,32 +29,11 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.header-wrapper
-  position fixed
-  top 0
-  left 0
-  right 0
-  z-index 99
-  height 65px
-  color $color-title
-  transition all .3s
-  box-shadow 0 .125rem .25rem rgba(0, 0, 0, .075);
-  background-color #fff
-  backdrop-filter blur(20px)
-
-  &.fade-enter-active, &.fade-leave-active
+.fade-enter-active, &.fade-leave-active
     transition all .3s
 
-  &.fade-enter, &.fade-leave-to
+.fade-enter, &.fade-leave-to
     height 0
-  .header
-    width $width
-    height 100%
-    margin 0 auto
-    position relative
-    display flex
-    //justify-content center
-    align-items center
 
 @media (max-width: $mobile)
   .header-wrapper

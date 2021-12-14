@@ -1,12 +1,12 @@
 <template>
-  <section class="box-card site-wrap">
+  <section class="box-card mt-3">
     <div class="box-title">
       <span>站点信息</span>
     </div>
     <div class="box-content">
-      <div class="info">
-        <p>已运行时间</p>
-        <p>{{ activeTime }}</p>
+      <div class="flex justify-between w-full">
+        <span>已运行时间</span>
+        <span>{{ activeTime }}</span>
       </div>
     </div>
   </section>
@@ -30,13 +30,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-.site-wrap
-  margin-top 10px
-  padding 20px
-  font-size $font-size-small
-  .info
-    display flex
-    justify-content space-between
-</style>

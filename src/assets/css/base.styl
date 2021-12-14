@@ -34,32 +34,19 @@
     z-index: -1;
 
 .box-card
-  border-radius-5()
-  shadow-2-down()
-  //position relative
-  background-color #fff
-  color $color-content
+  @apply relative shadow-sm rounded bg-white p-5
   .box-title
-    font-weight 700
-    position relative
-    padding-top 10px
-    //font-size 16px
+    @apply font-bold py-1 text-sm text-gray-500
     span
-      position relative
+      @apply relative
       &:before
-        position absolute
-        top -10px
-        content ' '
-        display block
+        content: ''
         height 2px
-        width 100%
-        background $color-content
-        transition width .3s ease-in-out
+        top -8px
+        @apply absolute w-full bg-gray-500
   .box-content
-    position: relative;
-    padding-top 15px
-    display flex
-    flex-direction column
+    @apply relative text-gray-700 mt-2 flex
+
 // 路由动画
 .slide-out-enter-active,
 .slide-out-leave-active,
