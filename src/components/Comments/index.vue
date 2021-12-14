@@ -76,12 +76,12 @@
 import 'ant-design-vue/lib/empty/style/css'
 import 'ant-design-vue/lib/message/style/css'
 import { mapActions } from 'vuex'
-import Markdown from '@/components/Markdown'
 import { Icon } from 'ant-design-vue'
 import { parseOS, parseBrowser } from '../../utils'
 import Edit from './components/Edit'
 import Tool from './components/Tool'
 import CommentList from './components/CommentList'
+import Markdown from '@/components/Markdown'
 
 export default {
   name: 'List',
