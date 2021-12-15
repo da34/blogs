@@ -5,7 +5,7 @@
       :key="item.id"
       tag="section"
       :to="`/content/${item.id}`"
-      class="hover:shadow-lg duration-300 hover:-translate-y-0.5 flex rounded shadow bg-white mb-5 h-[190px] cursor-pointer overflow-hidden"
+      class="hover:shadow-lg duration-300 hover:-translate-y-0.5 flex rounded shadow-sm bg-white mb-5 h-[190px] cursor-pointer overflow-hidden"
     >
       <div v-if="item.firstPicture" class="basis-1/3">
         <img v-lazy="item.firstPicture" class="h-[210px] w-full object-cover">
