@@ -1,9 +1,9 @@
 <template>
-  <div class="xl:w-[1300px] m-auto flex space-x-4">
-    <div class="basis-4/5">
+  <div class="xl:max-w-screen-xl m-auto relative">
+    <div class="w-[950px] max-w-full">
       <nuxt keep-alive :include="['Index']" />
     </div>
-    <div class="basis-1/5">
+    <div class="absolute top-0 right-0 w-[19rem]">
       <SideInfo />
     </div>
   </div>

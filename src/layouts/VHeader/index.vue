@@ -2,7 +2,7 @@
   <div class="relative">
     <transition name="fade">
       <div v-show="visible" class="fixed inset-0 h-[65px] text-slate-900 bg-white shadow duration-300 z-50 backdrop-blur-md">
-        <header class="flex m-auto h-full items-center xl:w-[1440px] ">
+        <header class="flex m-auto h-full items-center xl:max-w-screen-xl">
           <Logo />
           <Navbar />
         </header>

@@ -13,7 +13,7 @@
 @layer components {
   /*卡片 start*/
   .box-card {
-    @apply relative shadow-sm rounded bg-white p-5;
+    @apply relative rounded bg-white p-5;
   }
   .box-card .box-title {
     @apply font-bold py-1 text-sm text-gray-500;
