@@ -11,7 +11,7 @@ document.documentElement.addEventListener('click', function (e) {
     left: ${pageX}px;
     color: rgb(${~~(255 * Math.random())},${~~(255 * Math.random())},${~~(255 * Math.random())})
   `
-  this.appendChild(spanDom)
+  document.body.appendChild(spanDom)
 
   // 动画结束后删除自己
   spanDom.addEventListener('animationend', function () {

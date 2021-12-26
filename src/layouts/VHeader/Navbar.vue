@@ -12,8 +12,8 @@
       </NuxtLink>
     </div>
     <div class="hidden">
-      <svg-icon v-show="!isMobileNav" icon-class="menu" @click="isMobileNav = true" />
-      <svg-icon v-show="isMobileNav" icon-class="close-2" @click="isMobileNav = false" />
+      <BaseSvgIcon v-show="!isMobileNav" icon-class="menu" @click="isMobileNav = true" />
+      <BaseSvgIcon v-show="isMobileNav" icon-class="close-2" @click="isMobileNav = false" />
     </div>
     <MobileNav :menus="defaultMenus" :visible="isMobileNav" @close="onClose" />
   </div>

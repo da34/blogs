@@ -1,16 +1,10 @@
 import { resolve } from 'path'
-
 export default {
-  // bridge: {
-  //   scriptSetup: true
-  //   // vite: true
-  // },
   // 开启打包分析
   analyze: true,
   alias: {
     images: resolve(__dirname, './assets/images'),
-    css: resolve(__dirname, './assets/css'),
-    '@ant-design/icons/lib/dist$': resolve(__dirname, './src/icons.js')
+    css: resolve(__dirname, './assets/css')
   },
   server: { // 部署到线上nginx配置
     host: '0.0.0.0',
@@ -74,7 +68,6 @@ export default {
   ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/ant-design-vue',
     '@/plugins/axios',
     '@/plugins/components',
     '@/plugins/svg-icon',
@@ -172,7 +165,7 @@ export default {
       ]
     },
     publicPath: 'https://resource.lsyboy.cn/blog',
-    transpile: [/ant-design-vue/],
+    // transpile: [/ant-design-vue/],
     // extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件
       splitChunks: {

@@ -1,45 +1,29 @@
 <template>
-  <div class="edit">
-    <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
-      <a-form-item class="inline-block input-width" style="width: 40%;margin-bottom: 15px;">
-        <a-input
-          v-decorator="['nickName', { rules: [{ required: true, message: '请输入昵称!' }] }]"
-          placeholder="昵称"
-        />
-      </a-form-item>
-      <a-form-item class="inline-block input-width" style="width: 40%;margin-bottom: 15px;">
-        <a-input
-          v-decorator="['email', { rules: [{ type: 'email', message: '邮箱格式不正确!' }] }]"
-          placeholder="邮箱"
-        />
-      </a-form-item>
-      <a-form-item>
-        <a-textarea
-          v-decorator="['text', { rules: [{ required: true, message: '请输入评论内容!' }] }]"
-          :rows="5"
-          :placeholder="textPlaceholder"
-        />
-      </a-form-item>
-      <a-form-item :wrapper-col="{ span: 24}" class="inline-block" style="width: 49.5%;margin-bottom: 0;">
+  <div class="border border-gray-100 border-solid p-5 rounded relative">
+    <div>
+      <div>
+        <input v-model="formVal.nickName" class="w-64 p-3 pl-0" placeholder="昵称">
+        <input v-model="formVal.email" class="w-64 p-3" placeholder="邮箱">
+      </div>
+      <textarea v-model="formVal.text" rows="5" :placeholder="textPlaceholder" class="w-full mt-5" />
+      <div class="flex justify-between mt-3 items-center">
         <a class="markdown" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
-          <SvgIcon icon-class="markdown" style="font-size: 16px" />
+          <BaseSvgIcon icon-class="markdown" />
         </a>
-      </a-form-item>
-      <a-form-item :wrapper-col="{ span: 24 }" class="inline-block submit" style="width: 50%;margin-bottom: 0;text-align: right;">
-        <a-button type="primary" html-type="submit" :loading="loading">
+        <button class="bg-red-400 text-white py-2 px-3 rounded" @click="handleSubmit">
           提交
-        </a-button>
-      </a-form-item>
-    </a-form>
-    <svg-icon v-if="close" icon-class="close" class="close" @click="onClose" />
+        </button>
+      </div>
+    </div>
+    <BaseSvgIcon v-if="close" icon-class="close" class="absolute right-5 top-5" @click="onClose" />
   </div>
 </template>
 
 <script>
-import 'ant-design-vue/lib/form/style/css'
-import 'ant-design-vue/lib/input/style/css'
-import 'ant-design-vue/lib/button/style/css'
 import { mapActions, mapState } from 'vuex'
+import Message from '../../base/Message'
+const EMAIL_REG = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
+
 export default {
   name: 'Edit',
   components: {},
@@ -64,7 +48,11 @@ export default {
   },
   data () {
     return {
-      form: this.$form.createForm(this, { name: 'coordinated' }),
+      formVal: {
+        nickName: '',
+        email: '',
+        text: ''
+      },
       loading: false
     }
   },
@@ -85,33 +73,61 @@ export default {
     // 初始化，从缓存中去用户信息
     this.initUser()
     const userInfo = this.userInfo
-    this.form.setFieldsValue({
-      nickName: userInfo.nickName,
-      email: userInfo.email
-    })
+    this.formVal.nickName = userInfo.nickName
+    this.formVal.email = userInfo.email
   },
   methods: {
     handleSubmit (e) {
       e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          const tierId = this.tierId
-          const targetName = this.targetName
-          const pid = this.pid
+      if (!this.formVal.nickName) {
+        Message({
+          text: '请输入昵称',
+          type: 'info'
+        })
+        return
+      }
+      if (!this.formVal.email) {
+        Message({
+          text: '请输入邮箱',
+          type: 'info'
+        })
+        return
+      } else if (!EMAIL_REG.test(this.formVal.email)) {
+        Message({
+          text: '请输入正确的邮箱地址',
+          type: 'info'
+        })
+        return
+      }
 
-          if (tierId && targetName && pid) {
-            values = Object.assign({ tierId, targetName, pid }, values)
-          }
-          this.loading = true
-          this.submitComment(values)
-          this.form.setFieldsValue({
-            text: ''
-          })
-          this.loading = false
-          // 评论完成关闭二级 编辑器
-          this.$parent.$parent.onClose()
-        }
-      })
+      if (!this.formVal.text) {
+        Message({
+          text: '请输入留言内容',
+          type: 'info'
+        })
+        return
+      }
+
+      const values = {
+        ...this.formVal
+      }
+      // const tierId = this.tierId
+      // const targetName = this.targetName
+      // const pid = this.pid
+      // let values
+      // if (tierId && targetName && pid) {
+      //   values = Object.assign({
+      //     tierId,
+      //     targetName,
+      //     pid
+      //   }, values)
+      // }
+      // this.loading = true
+      this.submitComment(values)
+      this.formVal.text = ''
+      // this.loading = false
+      // 评论完成关闭二级 编辑器
+      // this.$parent.$parent.onClose()
     },
     onClose () {
       this.$emit('onClose')
@@ -124,46 +140,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.edit
-  position relative
-  border 1px solid $color-line-2
-  border-radius-5()
-  padding 10px 20px
-  margin 20px 0
-  input
-    font-size: $font-size-small
-    line-height: 20px;
-    border: 0;
-    color: $color-content
-    outline: 0;
-    padding 0
-  .ant-input
-    &:focus
-      border none
-      box-shadow none
-  textarea
-    transition: all .2s ease
-    border none
-    outline none
-    width 100%
-    padding 0
-.close
-  position: absolute;
-  top 20px
-  right 20px
-  z-index 99
-  cursor pointer
-  font-size $font-size-title
-  transition color .3s
-  &:hover
-    color $color-focus
+textarea {
+  background-image url("~assets/images/baba.gif")
+  background-size 30%;
+  background-repeat no-repeat
+  background-position right bottom
+  transition all .4s
+}
 
-@media (max-width: $tablet)
-  .comment-nest
-    .input-width
-      width 40%!important
-  .input-width
-    width 49%!important
-  .submit
-    width 49.2%!important
+textarea:focus {
+  background-position 150% bottom
+}
 </style>

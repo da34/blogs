@@ -22,7 +22,7 @@
             {{ item.createdAt | convertDate }}
           </div>
           <div v-if="item.tags.length" class="info-item">
-            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2" :to="'/archive?name=' + tag.name">
+            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2 tag" :to="'/archive?name=' + tag.name">
               {{ tag.name }}
             </NuxtLink>
           </div>
@@ -34,13 +34,12 @@
 </template>
 
 <script>
-import 'ant-design-vue/lib/divider/style/css'
 import { mapGetters } from 'vuex'
 import Pagination from '@/components/base/Pagination'
-let scrollTo
-if (process.client) {
-  scrollTo = require('@/utils/scroll-to').scrollTo
-}
+// let scrollTo
+// if (process.client) {
+//   scrollTo = require('@/utils/scroll-to').scrollTo
+// }
 
 export default {
   name: 'Index',
@@ -87,7 +86,7 @@ export default {
       this.total = count
     },
     pageChange () {
-      scrollTo(0)
+      // scrollTo(0)
     }
   }
 }

@@ -1,10 +1,10 @@
 <template>
-  <div class="comments-wrapper">
+  <div class="pb-5">
     <Edit v-if="editVisible === 0" />
     <Tool />
-    <div class="comment-list-header">
+    <h1 class="font-bold text-lg mt-5 mb-3">
       {{ total }} 评论
-    </div>
+    </h1>
     <div v-if="total">
       <CommentList
         v-for="comment in commentList"
@@ -15,56 +15,46 @@
         :author="{ nickName: comment.nickName, os: parseOS(comment.ua), browser: parseBrowser(comment.ua) }"
       >
         <template #actions>
-          <span>{{ comment.createdAt | convertDate }}</span>
-          <span class="reply" @click="onReply(comment.id)">回复</span>
+          <div class="text-gray-400 flex">
+            <span>{{ comment.createdAt | convertDate }}</span>
+            <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id)">回复</span>
+          </div>
         </template>
-        <Edit
-          v-if="editVisible === comment.id"
-          :target-name="comment.nickName"
-          :tier-id="comment.id"
-          :pid="comment.id"
-          close
-          @onClose="onClose"
-        />
         <!--      子级回复开始-->
         <template v-if="comment.comments.length > 0">
           <CommentList
             v-for="reply in comment.comments"
             :key="reply.id"
             :avatar="reply.avatar"
+            class="bg-gray-50"
             :author="{ nickName: reply.nickName, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
           >
             <template #content>
-              <div class="comment-r-wrapper">
-                <span class="comment-r">@{{ reply.targetName }}</span>
-                <Markdown :value="reply.text" />
+              <div class="flex items-center text-base">
+                <span class="text-red-400">@{{ reply.targetName }}</span>，
+                <Markdown class="bg-transparent" :value="reply.text" />
               </div>
             </template>
             <template #actions>
               <span>{{ reply.createdAt | convertDate }}</span>
-              <span class="reply" @click="onReply(reply.id)">回复</span>
+              <span @click="onReply(reply.id)">回复</span>
             </template>
-            <Edit
-              v-if="editVisible === reply.id"
-              :target-name="reply.nickName"
-              :tier-id="comment.id"
-              :pid="reply.id"
-              close
-              @onClose="onClose"
-            />
           </CommentList>
         </template>
-      <!--      子级回复结束-->
+        <!--      子级回复结束-->
       </CommentList>
-      <div v-if="page * limit < count" class="comment-more" @click="moreComment">
+      <div
+        v-if="page * limit < count"
+        class="bg-gray-100 p-2 text-center rounded cursor-pointer hover:text-red-400"
+        @click="moreComment"
+      >
         加载更多评论
       </div>
     </div>
-    <a-empty
+    <BaseEmpty
       v-else
+      class="p-3"
       description="快做第一个评论的人吧"
-      style="padding: 40px"
-      :image="require('~/assets/images/undraw_New_message_re_fp03.png')"
       :image-style="{
         height: '120px',
       }"
@@ -73,25 +63,17 @@
 </template>
 
 <script>
-import 'ant-design-vue/lib/empty/style/css'
-import 'ant-design-vue/lib/message/style/css'
 import { mapActions } from 'vuex'
-import { Icon } from 'ant-design-vue'
-import { parseOS, parseBrowser } from '../../utils'
 import Edit from './components/Edit'
 import Tool from './components/Tool'
 import CommentList from './components/CommentList'
-import Markdown from '@/components/Markdown'
+import { parseOS, parseBrowser } from '@/utils'
 
 export default {
-  name: 'List',
   components: {
     CommentList,
     Tool,
-    Edit,
-    Markdown,
-    // eslint-disable-next-line vue/no-unused-components
-    Icon
+    Edit
   },
   provide () {
     return {
@@ -148,15 +130,15 @@ export default {
       await this.actionUser(comment)
       const { data } = await this.$axios.post('comments', comment)
       if (data.code === 0) {
-        this.$message.success({
-          content: data.message,
-          icon: <Icon type="check-circle" />
-        })
+        // this.$message.success({
+        //   content: data.message,
+        //   icon: <Icon type="check-circle"/>
+        // })
       } else {
-        this.$message.error({
-          content: data.message,
-          icon: <Icon type="close-circle" />
-        })
+        // this.$message.error({
+        //   content: data.message,
+        //   icon: <Icon type="close-circle"/>
+        // })
       }
       await this.$fetch()
     },
@@ -172,33 +154,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="stylus">
-.comment-list-header
-  padding 5px
-  font-size 20px
-  font-weight 600
-  color $color-title
-  line-height 2
-.comment-r-wrapper
-  display flex
-  align-items center
-  padding-top 5px
-  .comment-r
-    color $color-focus
-    font-weight 600
-    margin-right 5px
-.comment-more
-  font-size: 14px;
-  font-weight: 400;
-  display: block;
-  text-align: center;
-  padding: 11px 14px;
-  margin: 0 0 24px;
-  background: #687a86;
-  color: #fff;
-  cursor: pointer;
-  transition opacity .3s
-  &:hover
-    opacity .8
-</style>

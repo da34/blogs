@@ -1,10 +1,9 @@
 import VueLazyload from 'vue-lazyload'
 import Vue from 'vue'
-// import '@/utils/quaint' // 樱花
 
 // 图片懒加载
 Vue.use(VueLazyload, {
-  // error: 'dist/error.png',
+  // error: 'https://gravatar.loli.net/avatar/xxxxx?s=52&d=retro',
   // Loading: require('../assets/images/Loading.gif'),
   filter: {
     imgFormat (img) {

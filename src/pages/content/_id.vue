@@ -1,6 +1,6 @@
 <template>
   <div v-if="$fetchState.pending" class="content-wrap flex">
-    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>
+<!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
   </div>
   <section v-else class="bg-white">
     <div class="p-10 pt-8 pb-0">
@@ -19,7 +19,7 @@
       >
     </div>
     <div class="article-content">
-      <Marked :value="article.content" :is-article="true"/>
+      <Markdown :value="article.content" :is-article="true"/>
       <div class="p-10">
         <div v-if="article.shareStatement" class="p-6 bg-gray-100 rounded-xl text-center">
           本作品采用
@@ -41,16 +41,9 @@
 
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
-import 'ant-design-vue/lib/skeleton/style/index.css'
-import Marked from '@/components/Markdown'
-import Comments from '@/components/Comments'
 
 export default {
   name: 'Content',
-  components: {
-    Marked,
-    Comments
-  },
   layout: 'blog',
   scrollToTop: true,
   transition: 'slide-out',
