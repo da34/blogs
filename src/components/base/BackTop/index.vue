@@ -66,7 +66,7 @@ export default {
   width 70px
   height 90%
   animation move 3s infinite
-  z-index 9999
+  z-index 99
   background url("~/assets/images/scroll.png") no-repeat center bottom
   &.scroll-enter-active, &.scroll-leave-active
     transition all .7s

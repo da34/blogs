@@ -1,21 +1,28 @@
 <template>
-  <div class="border border-gray-100 border-solid p-5 rounded relative">
+  <div class="border border-gray-100 border-solid p-5 rounded">
     <div>
       <div>
         <input v-model="formVal.nickName" class="w-64 p-3 pl-0" placeholder="昵称">
         <input v-model="formVal.email" class="w-64 p-3" placeholder="邮箱">
       </div>
-      <textarea v-model="formVal.text" rows="5" :placeholder="textPlaceholder" class="w-full mt-5" />
+      <textarea v-model="formVal.text" rows="5" placeholder="发条友善的评论... （填写邮箱可以收到回复）" class="w-full mt-5" />
       <div class="flex justify-between mt-3 items-center">
         <a class="markdown" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
           <BaseSvgIcon icon-class="markdown" />
         </a>
-        <button class="bg-red-400 text-white py-2 px-3 rounded" @click="handleSubmit">
-          提交
-        </button>
+        <div>
+          <button v-if="close" class="bg-gray-400 text-white py-2 px-4 rounded" @click="onClose">
+            取消
+          </button>
+          <button class="bg-gray-400 text-white py-2 px-4 rounded" @click="handlePreview">
+            预览
+          </button>
+          <button class="bg-red-400 text-white py-2 px-4 rounded" @click="handleSubmit">
+            发送
+          </button>
+        </div>
       </div>
     </div>
-    <BaseSvgIcon v-if="close" icon-class="close" class="absolute right-5 top-5" @click="onClose" />
   </div>
 </template>
 
@@ -32,18 +39,6 @@ export default {
     close: {
       type: Boolean,
       default: false
-    },
-    targetName: {
-      type: String,
-      default: null
-    },
-    tierId: {
-      type: [Number, String],
-      default: null
-    },
-    pid: {
-      type: [Number, String],
-      default: null
     }
   },
   data () {
@@ -59,15 +54,7 @@ export default {
   computed: {
     ...mapState('modules/comment', [
       'userInfo'
-    ]),
-    textPlaceholder () {
-      const text = '发条友善的评论... （填写邮箱可以收到回复）'
-      const targetName = this.targetName
-      if (targetName) {
-        return '@' + targetName
-      }
-      return text
-    }
+    ])
   },
   mounted () {
     // 初始化，从缓存中去用户信息
@@ -107,21 +94,9 @@ export default {
         })
         return
       }
-
       const values = {
         ...this.formVal
       }
-      // const tierId = this.tierId
-      // const targetName = this.targetName
-      // const pid = this.pid
-      // let values
-      // if (tierId && targetName && pid) {
-      //   values = Object.assign({
-      //     tierId,
-      //     targetName,
-      //     pid
-      //   }, values)
-      // }
       // this.loading = true
       this.submitComment(values)
       this.formVal.text = ''
@@ -130,6 +105,9 @@ export default {
       // this.$parent.$parent.onClose()
     },
     onClose () {
+      this.$emit('onClose')
+    },
+    handlePreview () {
       this.$emit('onClose')
     },
     ...mapActions('modules/comment', [

@@ -37,7 +37,3 @@ VMdPreview.use(createCopyCodePlugin())
 VMdPreview.use(createAlignPlugin())
 
 Vue.use(VMdPreview)
-//
-// [Blur].forEach(component => {
-//   Vue.component(component.name, component)
-// })

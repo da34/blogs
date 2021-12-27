@@ -1,7 +1,6 @@
 <template>
   <div class="pb-5">
-    <Edit v-if="editVisible === 0" />
-    <Tool />
+    <Edit />
     <h1 class="font-bold text-lg mt-5 mb-3">
       {{ total }} 评论
     </h1>
@@ -17,7 +16,7 @@
         <template #actions>
           <div class="text-gray-400 flex">
             <span>{{ comment.createdAt | convertDate }}</span>
-            <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id)">回复</span>
+            <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, comment.id, comment.nickName)">回复</span>
           </div>
         </template>
         <!--      子级回复开始-->
@@ -36,8 +35,10 @@
               </div>
             </template>
             <template #actions>
-              <span>{{ reply.createdAt | convertDate }}</span>
-              <span @click="onReply(reply.id)">回复</span>
+              <div class="text-gray-400 flex">
+                <span>{{ reply.createdAt | convertDate }}</span>
+                <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, reply.id, reply.nickName)">回复</span>
+              </div>
             </template>
           </CommentList>
         </template>
@@ -59,20 +60,29 @@
         height: '120px',
       }"
     />
+    <!--二级回复-->
+    <div v-show="replyShow" class="inset-0 fixed z-[99] flex items-center" style="background-color: rgba(0,0,0,.5)" />
+    <transition name="slide-in-right">
+      <div v-show="replyShow" class="w-[1000px] bg-white z-[100] fixed top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] rounded">
+        <h1 class="bg-white pl-5 pt-5">
+          回复「 <span class="text-red-400">{{ commentInfo.targetName }}</span> 」：
+        </h1>
+        <Edit :close="true" @onClose="replyShow = false" />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import Message from '../base/Message'
 import Edit from './components/Edit'
-import Tool from './components/Tool'
 import CommentList from './components/CommentList'
 import { parseOS, parseBrowser } from '@/utils'
 
 export default {
   components: {
     CommentList,
-    Tool,
     Edit
   },
   provide () {
@@ -88,13 +98,18 @@ export default {
   },
   data () {
     return {
-      editVisible: 0,
       page: 1,
       oldPage: 1,
       limit: 10,
       commentList: [],
       total: 0,
-      count: 0
+      count: 0,
+      replyShow: false,
+      commentInfo: {
+        tierId: '',
+        pid: '',
+        targetName: ''
+      }
     }
   },
   async fetch () {
@@ -126,27 +141,24 @@ export default {
         contentId: this.contentId,
         anchor: this.$route.path
       }
-      comment = Object.assign(query, comment)
+      comment = Object.assign(query, comment, this.commentInfo)
       await this.actionUser(comment)
       const { data } = await this.$axios.post('comments', comment)
-      if (data.code === 0) {
-        // this.$message.success({
-        //   content: data.message,
-        //   icon: <Icon type="check-circle"/>
-        // })
-      } else {
-        // this.$message.error({
-        //   content: data.message,
-        //   icon: <Icon type="close-circle"/>
-        // })
-      }
+      Message({
+        text: data.message,
+        type: data.code === 0 ? 'success' : 'error'
+      })
+      this.onClose()
       await this.$fetch()
     },
-    onReply (id) {
-      this.editVisible = id
+    onReply (tierId, pid, targetName) {
+      this.commentInfo = {
+        tierId, pid, targetName
+      }
+      this.replyShow = true
     },
     onClose () {
-      this.editVisible = 0
+      this.replyShow = false
     },
     moreComment () { // 加载更多评论
       this.page++
@@ -154,3 +166,25 @@ export default {
   }
 }
 </script>
+<style scoped lang="stylus">
+
+.slide-in-right-enter-active {
+  animation: slide-in-right .4s;
+}
+
+.slide-in-right-leave-active {
+  animation: slide-in-right .4s reverse;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform translate3d(100%, -50%, 0);
+    opacity: 0;
+  }
+  100% {
+    transform translate3d(-50%, -50%, 0);
+    opacity: 1;
+  }
+}
+
+</style>

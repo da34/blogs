@@ -3,7 +3,7 @@
     <div class="box-title">
       <span>标签</span>
     </div>
-    <div class="box-content flex-wrap space-x-2">
+    <div class="box-content flex-wrap">
       <nuxt-link
         v-for="item in list"
         :key="item.id"

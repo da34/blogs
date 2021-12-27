@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="ml-10 mt-5">
+    <div class="ml-10 mt-5 sub-comment">
       <slot></slot>
     </div>
   </div>
@@ -49,4 +49,7 @@ export default {
 <style scoped lang="stylus">
 >>> .vuepress-markdown-body:not(.custom)
   padding 0
+.sub-comment >>>.vuepress-markdown-body  {
+  background-color transparent
+}
 </style>
