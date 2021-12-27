@@ -14,9 +14,9 @@
           <button v-if="close" class="bg-gray-400 text-white py-2 px-4 rounded" @click="onClose">
             取消
           </button>
-          <button class="bg-gray-400 text-white py-2 px-4 rounded" @click="handlePreview">
-            预览
-          </button>
+<!--          <button class="bg-gray-400 text-white py-2 px-4 rounded" @click="handlePreview">-->
+<!--            预览-->
+<!--          </button>-->
           <button class="bg-red-400 text-white py-2 px-4 rounded" @click="handleSubmit">
             发送
           </button>

@@ -4,11 +4,11 @@
   </div>
   <section v-else class="bg-white">
     <div class="p-10 pt-8 pb-0">
-      <div class="mb-5">
+      <div class="">
         <h1 class="text-4xl font-bold">
           {{ article.title }}
         </h1>
-        <div class="text-gray-400 flex space-x-5">
+        <div class="text-gray-400 flex space-x-5 mt-5">
           <span>{{ article.createdAt | formatDate('YYYY年MM月DD日') }}</span>
           <span>阅读：{{ article.views }}</span>
         </div>

@@ -1,14 +1,14 @@
 <template>
   <ul class="pagination">
     <li class="pagination-item" title="上一页" @click="onAction(stateCurrent-1)">
-      <svg-icon icon-class="arrow_left" />
+      <BaseSvgIcon icon-class="arrow_left" />
     </li>
     <li v-if="stateCurrent > 3" class="pagination-item" title="01" @click="onAction(1)">
       01
     </li>
     <li v-if="stateCurrent > 4" class="pagination-item pagination-jump-prev" title="向前5页" @click="onAction(stateCurrent-5)">
       <span>•••</span>
-      <svg-icon icon-class="arrow-double-left" />
+      <BaseSvgIcon icon-class="arrow-double-left" />
     </li>
     <li
       v-for="page in pageList"
@@ -22,13 +22,13 @@
     </li>
     <li v-if="stateCurrent < maxPage - 3" class="pagination-item pagination-jump-next" title="向后5页" @click="onAction(stateCurrent+5)">
       <span>•••</span>
-      <svg-icon icon-class="arrow-double-right" />
+      <BaseSvgIcon icon-class="arrow-double-right" />
     </li>
     <li v-if="stateCurrent < maxPage - 2" class="pagination-item" :title="padLocation(maxPage, 0, 2, 0)" @click="onAction(maxPage)">
       {{ padLocation(maxPage, 0, 2, 0) }}
     </li>
     <li class="pagination-item" @click="onAction(stateCurrent+1)">
-      <svg-icon icon-class="arrow_right" />
+      <BaseSvgIcon icon-class="arrow_right" />
     </li>
   </ul>
 </template>

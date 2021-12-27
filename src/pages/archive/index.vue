@@ -1,5 +1,5 @@
 <template>
-  <div class="time-line-wrapper">
+  <div class="time-line-wrapper bg-white">
     <h2 v-if="$route.query.name" class="tag">
       "{{ $route.query.name }}" 下的文章
     </h2>
@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Timeline from '@/components/Timeline'
 import { mapGetters } from 'vuex'
+import Timeline from '@/components/Timeline'
 export default {
   name: 'Pigeonhole',
   components: { Timeline },
@@ -58,19 +58,19 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.time-line-wrapper
-  border-radius-5()
-  shadow-2-down()
-  border 1px solid $color-line-1
-  background-color #fff
-.tag
-  padding 30px
-  text-align center
-
-@media (max-width: $mobile)
-  .time-line-wrapper
-    .posts-collapse
-      padding 20px
-      .time
-        width 42px!important
+//.time-line-wrapper
+//  border-radius-5()
+//  shadow-2-down()
+//  border 1px solid $color-line-1
+//  background-color #fff
+//.tag
+//  padding 30px
+//  text-align center
+//
+//@media (max-width: $mobile)
+//  .time-line-wrapper
+//    .posts-collapse
+//      padding 20px
+//      .time
+//        width 42px!important
 </style>

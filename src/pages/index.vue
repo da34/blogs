@@ -14,7 +14,7 @@
         <h2 class="text-2xl hover:text-red-400 duration-150">
           {{ item.title }}
         </h2>
-        <p class="text-gray-600 desc overflow-hidden">
+        <p class="text-gray-500 desc overflow-hidden">
           {{ item.contentOutline }}
         </p>
         <div class="flex justify-between">

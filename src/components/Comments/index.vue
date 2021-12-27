@@ -64,8 +64,8 @@
     <div v-show="replyShow" class="inset-0 fixed z-[99] flex items-center" style="background-color: rgba(0,0,0,.5)" />
     <transition name="slide-in-right">
       <div v-show="replyShow" class="w-[1000px] bg-white z-[100] fixed top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] rounded">
-        <h1 class="bg-white pl-5 pt-5">
-          回复「 <span class="text-red-400">{{ commentInfo.targetName }}</span> 」：
+        <h1 class="bg-white p-3">
+          回复 <span class="underline decoration-red-400 decoration-4">{{ commentInfo.targetName }}</span> ：
         </h1>
         <Edit :close="true" @onClose="replyShow = false" />
       </div>
