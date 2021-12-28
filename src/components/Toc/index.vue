@@ -6,7 +6,7 @@
     <div class="box-content">
       <div v-if="toc.length" ref="listRef" class="catalog-wrapper">
         <ul class="toc-list">
-          <li v-for="(anchor, index) in toc" :key="index" class="item" @click="handleAnchorClick(anchor)">
+          <li v-for="(anchor, index) in toc" :key="index" class="item cursor-pointer" @click="handleAnchorClick(anchor)">
             <a :style="{ marginLeft: `${anchor.indent * 15}px` }">{{ anchor.title }}</a>
           </li>
         </ul>

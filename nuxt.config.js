@@ -73,8 +73,8 @@ export default {
     '@/plugins/svg-icon',
     '@/plugins/filters',
     { src: '@/plugins/vue-lazy-load', ssr: false },
-    { src: '@/plugins/click-effects', ssr: false },
-    { src: '@/plugins/bg-canvas', ssr: false }
+    { src: '@/plugins/click-effects', ssr: false }
+    // { src: '@/plugins/bg-canvas', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

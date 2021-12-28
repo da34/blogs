@@ -1,6 +1,6 @@
 <template>
   <div v-if="$fetchState.pending" class="content-wrap flex">
-<!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
+    <!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
   </div>
   <section v-else class="bg-white">
     <div class="p-10 pt-8 pb-0">
@@ -16,9 +16,10 @@
       <img
         v-if="article.firstPicture"
         :src="article.firstPicture"
+        class="mt-5"
       >
     </div>
-    <div class="article-content">
+    <div class="blog-post">
       <Markdown :value="article.content" :is-article="true"/>
       <div class="p-10">
         <div v-if="article.shareStatement" class="p-6 bg-gray-100 rounded-xl text-center">
@@ -26,16 +27,21 @@
           <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
           进行许可
         </div>
-        <div v-if="article.tags.length" class="tags">
-          <svg-icon icon-class="tag"/>
-          <span v-for="(tag, i) in article.tags" :key="tag.name">
-            <a-divider v-if="i !== 0" type="vertical"/>{{ tag.name }}
-          </span>
+        <div class="flex justify-between items-center mt-2">
+          <p>
+            最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}
+          </p>
+          <div v-if="article.tags.length" class="flex items-center">
+            <BaseSvgIcon icon-class="tag" class="mr-2"/>
+            <span v-for="(tag) in article.tags" :key="tag.name" class="tag">
+              <!--            <a-divider v-if="i !== 0" type="vertical"/>-->
+              {{ tag.name }}
+            </span>
+          </div>
         </div>
-        <p class="mt-5">最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}</p>
       </div>
     </div>
-    <Comments class="px-10" v-if="article.commentDisabled" :content-id="$route.params.id"/>
+    <Comments v-if="article.commentDisabled" class="px-10" :content-id="$route.params.id"/>
   </section>
 </template>
 

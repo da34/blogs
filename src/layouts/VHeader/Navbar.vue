@@ -32,9 +32,10 @@ export default {
         { name: '首页', url: '/', exact: true, icon: 'article' },
         { name: '归档', url: '/archive', icon: 'archive' },
         { name: '友联', url: '/link', icon: 'link' },
-        { name: '留言', url: '/link', icon: 'link' },
-        { name: '建站', url: '/link', icon: 'link' },
-        { name: '关于', url: '/link', icon: 'link' }
+        { name: '留言', url: '/msg', icon: 'link' },
+        { name: '作品', url: '/work', icon: 'link' },
+        { name: '建站', url: '/log', icon: 'link' },
+        { name: '关于', url: '/about', icon: 'link' }
       ]
     }
   },

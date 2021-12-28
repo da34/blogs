@@ -25,7 +25,7 @@
             v-for="reply in comment.comments"
             :key="reply.id"
             :avatar="reply.avatar"
-            class="bg-gray-50"
+            class="bg-gray-50 pl-4"
             :author="{ nickName: reply.nickName, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
           >
             <template #content>

@@ -5,19 +5,19 @@
       :key="item.id"
       tag="section"
       :to="`/content/${item.id}`"
-      class="duration-300 hover:-translate-y-0.5 flex rounded bg-white mb-5 h-[190px] cursor-pointer overflow-hidden"
+      class="duration-300 hover:scale-[1.02] flex rounded-2xl bg-white mb-5 h-[190px] cursor-pointer overflow-hidden"
     >
-      <div v-if="item.firstPicture" class="basis-1/3">
-        <img v-lazy="item.firstPicture" class="h-[210px] w-full object-cover">
+      <div v-if="item.firstPicture" class="basis-1/3 flex items-center justify-center">
+        <img v-lazy="item.firstPicture" class="h-[160px] rounded-xl w-11/12 object-cover">
       </div>
-      <div :class="['p-3', 'px-5', 'basis-2/3', 'flex', 'flex-col', 'justify-between', { 'basis-full': !item.firstPicture }]">
-        <h2 class="text-2xl hover:text-red-400 duration-150">
+      <div :class="['py-6', 'px-5', 'basis-2/3', 'flex', 'flex-col', 'justify-between', { 'basis-full': !item.firstPicture }]">
+        <h2 class="text-2xl duration-150">
           {{ item.title }}
         </h2>
-        <p class="text-gray-500 desc overflow-hidden">
+        <p class="text-gray-500 desc overflow-hidden text-base">
           {{ item.contentOutline }}
         </p>
-        <div class="flex justify-between">
+        <div class="flex justify-between text-base">
           <div class="info-item">
             {{ item.createdAt | convertDate }}
           </div>
