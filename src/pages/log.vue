@@ -1,5 +1,5 @@
 <template>
-  <div>log</div>
+  <div class="bg-white">log</div>
 </template>
 
 <script>
