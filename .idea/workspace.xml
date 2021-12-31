@@ -4,31 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/system/work.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/work/columns.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/work/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="更新eslint">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/DialogContent/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogContent/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Markdown/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Markdown/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MessageContent/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageContent/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/tailwind.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/tailwind.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,8 +124,16 @@
       <workItem from="1640833107994" duration="1243000" />
       <workItem from="1640838080875" duration="1152000" />
       <workItem from="1640847131682" duration="3430000" />
-      <workItem from="1640919868238" duration="7871000" />
+      <workItem from="1640919868238" duration="9561000" />
     </task>
+    <task id="LOCAL-00001" summary="更新eslint">
+      <created>1640947897624</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640947897624</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +149,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="更新eslint" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新eslint" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

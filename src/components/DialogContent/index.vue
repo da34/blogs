@@ -1,4 +1,4 @@
-<template/>
+<template />
 <script>
 import {useDialog} from 'naive-ui';
 

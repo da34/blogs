@@ -34,7 +34,7 @@
 
 <script setup>
 import {ref, toRef,onMounted} from 'vue'
-import {qiniuUpload} from "@/utils";
+import {qiniuUpload} from '@/utils';
 import {Close} from '@icon-park/vue-next'
 
 const props = defineProps({

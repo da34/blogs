@@ -31,60 +31,35 @@
           </NFormItemGi>
           <NFormItemGi
             :span="12"
-            label="上级菜单"
+            label="描述"
+            path="desc"
           >
-            <NSelect
-              v-model:value="formParams.parentId"
-              :options="menuOptions"
+            <NInput
+              v-model:value="formParams.desc"
+              placeholder="请输入描述"
             />
           </NFormItemGi>
           <NFormItemGi
             :span="12"
-            label="路径"
-            path="url"
+            label="网址"
+            path="linkUrl"
           >
             <NInput
-              v-model:value="formParams.url"
-              placeholder="请输入路径"
+              v-model:value="formParams.linkUrl"
+              placeholder="请输入网址"
             />
           </NFormItemGi>
           <NFormItemGi
             :span="12"
             label="排序"
           >
-            <NInputNumber v-model:value="formParams.priority"/>
+            <NInputNumber v-model:value="formParams.priority" />
           </NFormItemGi>
           <NFormItemGi
             :span="12"
-            label="打开方式"
-            path="target"
+            label="封面"
           >
-            <NRadioGroup
-              v-model:value="formParams.target"
-              name="openType"
-            >
-              <NSpace>
-                <NRadio value="_self">
-                  当前窗口
-                </NRadio>
-                <NRadio value="_blank">
-                  新窗口
-                </NRadio>
-              </NSpace>
-            </NRadioGroup>
-          </NFormItemGi>
-          <NFormItemGi
-            :span="12"
-            label="状态"
-          >
-            <NSwitch v-model:value="formParams.status">
-              <template #checked>
-                启用
-              </template>
-              <template #unchecked>
-                禁用
-              </template>
-            </NSwitch>
+            <Upload v-model:fileUrl="formParams.imgUrl" />
           </NFormItemGi>
         </NGrid>
       </NForm>
@@ -108,8 +83,9 @@
 
 <script>
 import {defineComponent, reactive, ref, toRefs} from 'vue';
-import {createMenu, updateMenu} from '@/api/system/menu';
+import {createWork, updateWork} from '@/api/system/work';
 import {useMessage} from 'naive-ui';
+import Upload from '@/components/Upload/index.vue'
 
 const rules = {
   name: {
@@ -117,16 +93,22 @@ const rules = {
     message: '请输入标题',
     trigger: 'blur',
   },
-  url: {
+  linkUrl: {
     required: true,
-    message: '请输入路径',
+    message: '请输入网址',
+    trigger: 'blur',
+    type: 'url'
+  },
+  desc: {
+    required: true,
+    message: '请输入描述',
     trigger: 'blur',
   },
 };
 
 export default defineComponent({
   name: 'CreateDrawer',
-  // components: {Info},
+  components: {Upload},
   props: {
     title: {
       type: String,
@@ -147,12 +129,10 @@ export default defineComponent({
     const formRef = ref(null);
     const defaultValueRef = () => ({
       name: '',
-      target: '_self',
-      url: '',
-      icon: '',
-      priority: 0,
-      status: true,
-      parentId: null,
+      linkUrl: '',
+      imgUrl: '',
+      priority: 1,
+      desc: ''
     });
     const state = reactive({
       subLoading: false,
@@ -174,9 +154,9 @@ export default defineComponent({
       formRef.value.validate(async (errors) => {
         if (!errors) {
           if (state.formParams.id) {
-            await updateMenu({...state.formParams})
+            await updateWork({...state.formParams})
           } else {
-            await createMenu({...state.formParams})
+            await createWork({...state.formParams})
           }
           handleReset();
           closeDrawer();

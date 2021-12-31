@@ -1,4 +1,4 @@
-<template/>
+<template />
 <script>
 import {useMessage} from 'naive-ui';
 
