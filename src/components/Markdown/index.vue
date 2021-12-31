@@ -1,15 +1,15 @@
 <template>
   <v-md-editor
-      v-model="poetText"
-      height="80vh"
-      :disabled-menus="[]"
-      @upload-image="handleUploadImage"
-      left-toolbar="undo redo clear | emoji h bold italic strikethrough quote | ul ol table hr | link image code | save"
+    v-model="poetText"
+    :disabled-menus="[]"
+    height="80vh"
+    left-toolbar="undo redo clear | emoji h bold italic strikethrough quote | ul ol table hr | link image code | save"
+    @upload-image="handleUploadImage"
   />
 </template>
 <script setup>
-import {computed} from "vue";
-import {qiniuUpload} from "@/utils";
+import {computed} from 'vue';
+import {qiniuUpload} from '@/utils';
 
 const props = defineProps({
   text: {

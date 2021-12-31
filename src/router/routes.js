@@ -1,12 +1,5 @@
 import {renderIcon} from '@/utils'
-import {DashboardOne,Permissions,FileWord,MessageOne,System,Page,PageTemplate} from '@icon-park/vue-next'
-
-const routeName = 'dashboard';
-const RedirectName = 'redirect';
-const ContentName = 'content';
-const MessageName = 'message';
-const SystemName = 'system';
-const WebName = 'web';
+import {DashboardOne, FileWord, MessageOne, Page, PageTemplate, Permissions, System} from '@icon-park/vue-next'
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -18,6 +11,13 @@ const WebName = 'web';
  * @param meta.sort 排序越小越排前
  * */
 import Layout from '@/layout/index.vue'
+
+const routeName = 'dashboard';
+const RedirectName = 'redirect';
+const ContentName = 'content';
+const MessageName = 'message';
+const SystemName = 'system';
+const WebName = 'web';
 
 const constantRouters = [
   {
@@ -203,6 +203,12 @@ const asyncRoutes = [
         name: `${WebName}_menu`,
         component: () => import('@/views/web/menu/index.vue'),
         meta: {title: '菜单管理', keepAlive: true}
+      },
+      {
+        path: 'work',
+        name: `${WebName}_work`,
+        component: () => import('@/views/web/work/index.vue'),
+        meta: {title: '作品管理', keepAlive: true}
       }
     ]
   },

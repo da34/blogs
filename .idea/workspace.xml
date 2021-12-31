@@ -5,17 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/DialogContent/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MessageContent/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/system/work.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/work/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/work/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Application/Application.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Application/Application.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/modules/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/checkStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/checkStatus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/http-type.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/httpType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DialogContent/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogContent/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Markdown/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Markdown/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MessageContent/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageContent/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/tailwind.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/tailwind.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +38,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="SCSS File" />
         <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -42,6 +55,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1teTyLy72OlBEfyY0OMZta5yv1I" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -51,26 +67,30 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="advanced.settings" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\文件\备份\blog\blog-admin\src\api\system" />
+      <recent name="E:\文件\备份\blog\blog-admin\src\views\web" />
       <recent name="E:\文件\备份\blog\blog-admin\src\components" />
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\check" />
       <recent name="H:\github\blog\blog-admin\src\api\system" />
-      <recent name="H:\github\blog\blog-admin\src\views" />
-      <recent name="H:\github\blog\blog-admin\src\views\content\link" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\list" />
@@ -84,11 +104,6 @@
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/blog-admin/dist/index.html?_ij_reload" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JavaScript Debug.index.html" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -123,6 +138,13 @@
       <workItem from="1635586008533" duration="12526000" />
       <workItem from="1636160887867" duration="11433000" />
       <workItem from="1638670287646" duration="5310000" />
+      <workItem from="1638705996060" duration="508000" />
+      <workItem from="1638706691685" duration="9000" />
+      <workItem from="1639195962658" duration="5260000" />
+      <workItem from="1640833107994" duration="1243000" />
+      <workItem from="1640838080875" duration="1152000" />
+      <workItem from="1640847131682" duration="3430000" />
+      <workItem from="1640919868238" duration="7871000" />
     </task>
     <servers />
   </component>
@@ -139,7 +161,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

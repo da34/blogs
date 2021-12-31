@@ -1,24 +1,10 @@
-import {h} from "vue";
-import {formatDate} from "@/utils";
-import {NAvatar, NTag,NSpace} from 'naive-ui'
+import {h} from 'vue';
+import {formatDate} from '@/utils';
+import {NSpace, NTag} from 'naive-ui'
 import UAParser from 'ua-parser-js'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const columns = [
-  {
-    title: '头像', key: 'name', width: 90, align: 'center',
-    render({avatar}) {
-      return h(
-        NAvatar,
-        {
-          round: true,
-          objectFit: 'cover',
-          size: 48,
-          src: `https://gravatar.loli.net/avatar/${avatar}?s=48&d=retro`
-        }
-      )
-    }
-  },
   {title: '评论人', key: 'nickName', width: 100, align: 'center',},
   // {title: '被评论人', key: 'targetName', width: 100,},
   {title: '评论内容', key: 'text', align: 'center',},
@@ -52,7 +38,7 @@ export const columns = [
       return h(
         NSpace,
         {
-          justify: "center"
+          justify: 'center'
         },
         {
           default: () => [osDom, browserDom]

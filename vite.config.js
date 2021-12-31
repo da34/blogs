@@ -1,7 +1,6 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
-import viteESLint from '@ehutch79/vite-eslint'
+import {resolve} from 'path'
 // import { visualizer } from 'rollup-plugin-visualizer'
 
 // console.log(import.meta.env)
