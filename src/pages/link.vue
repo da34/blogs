@@ -1,5 +1,8 @@
 <template>
   <div class="link-wrapper bg-white p-5">
+    <h1 class="text-3xl font-bold mb-7">
+      以下排名不分先后
+    </h1>
     <div class="flex space-x-5">
       <a
         v-for="link in list"
@@ -34,6 +37,11 @@ export default {
     const { data } = await this.$axios.get('links')
     this.list = data.result
   },
+  computed: {
+    ...mapGetters([
+      'site'
+    ])
+  },
   head () {
     return {
       title: `友情链接-${this.site.name}`,
@@ -45,11 +53,6 @@ export default {
         }
       ]
     }
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
   },
   methods: {
     getURL (str) {

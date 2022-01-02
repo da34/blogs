@@ -166,7 +166,7 @@ export default {
     },
     publicPath: 'https://resource.lsyboy.cn/blog',
     // transpile: [/ant-design-vue/],
-    // extractCSS: true, // 单独提取css为文件
+    extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件
       splitChunks: {
         cacheGroups: {

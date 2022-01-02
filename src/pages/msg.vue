@@ -15,9 +15,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   layout: 'blog',
-  transition: 'slide-in'
+  transition: 'slide-in',
+  head () {
+    return {
+      title: `留言板-${this.site.name}`,
+      meta: [
+        {
+          hid: 'home',
+          name: 'description',
+          content: this.site.name
+        }
+      ]
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'site'
+    ])
+  }
 }
 </script>
 
