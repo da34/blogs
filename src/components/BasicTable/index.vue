@@ -7,10 +7,10 @@
 
 <script>
 import {NDataTable} from 'naive-ui'
-import {ref, unref, computed, defineComponent, onMounted, watchEffect} from 'vue'
+import {computed, defineComponent, onMounted, ref, unref} from 'vue'
 import useColumns from './useColumns'
-import {useLoading} from "./useLoading";
-import { isFunction, isArray } from "lodash-es";
+import {useLoading} from './useLoading';
+import {isArray, isFunction} from 'lodash-es';
 
 const LIST_FIELD = 'rows' // 接口返回数据名
 const TOTAL_FIELD = 'count' // 接口返回数据总数名

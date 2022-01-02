@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="更新eslint">
+      <change afterPath="$PROJECT_DIR$/src/api/system/log.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/log/CreateDrawer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/log/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/web/log/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DialogContent/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogContent/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MessageContent/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageContent/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/useColumns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/useColumns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugins/naive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/naive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/tailwind.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/tailwind.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/work/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/work/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +63,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/api/system" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -124,7 +135,7 @@
       <workItem from="1640833107994" duration="1243000" />
       <workItem from="1640838080875" duration="1152000" />
       <workItem from="1640847131682" duration="3430000" />
-      <workItem from="1640919868238" duration="9561000" />
+      <workItem from="1640919868238" duration="17244000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>

@@ -1,6 +1,7 @@
 import {h} from 'vue';
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
+
 export const columns = [
   {title: '名称', key: 'name'},
   {title: '描述', key: 'desc'},
@@ -17,15 +18,29 @@ export const columns = [
     }
   },
   {
-    title: '链接', key: 'linkUrl', render({linkUrl}) {
+    title: '预览链接', key: 'linkUrl', render({linkUrl}) {
       return h(
         'a',
         {
           href: linkUrl,
-          target: '__blank'
+          target: '_blank'
         },
         {
           default: () => linkUrl
+        }
+      )
+    }
+  },
+  {
+    title: '源码链接', key: 'sourceUrl', render({sourceUrl}) {
+      return h(
+        'a',
+        {
+          href: sourceUrl,
+          target: '_blank'
+        },
+        {
+          default: () => sourceUrl
         }
       )
     }

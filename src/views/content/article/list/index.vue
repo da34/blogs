@@ -78,8 +78,8 @@
 <script setup>
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {getArticleList, changeArticleState} from "@/api/web/article";
-import {createColumns, createActionColumn} from "./columns";
+import {changeArticleState, getArticleList} from '@/api/web/article';
+import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
 

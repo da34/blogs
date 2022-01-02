@@ -1,6 +1,6 @@
 <template>
   <div class="tableAction">
-    <div class="flex items-center justify-center">
+    <div class="flex items-center">
       <template
         v-for="(action, index) in getActions"
         :key="`${index}-${action.label}`"

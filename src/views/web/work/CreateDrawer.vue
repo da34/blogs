@@ -41,19 +41,29 @@
           </NFormItemGi>
           <NFormItemGi
             :span="12"
-            label="网址"
+            label="预览链接"
             path="linkUrl"
           >
             <NInput
               v-model:value="formParams.linkUrl"
-              placeholder="请输入网址"
+              placeholder="请输入预览链接"
+            />
+          </NFormItemGi>
+          <NFormItemGi
+            :span="12"
+            label="源码链接"
+            path="sourceUrl"
+          >
+            <NInput
+              v-model:value="formParams.sourceUrl"
+              placeholder="请输入源码链接"
             />
           </NFormItemGi>
           <NFormItemGi
             :span="12"
             label="排序"
           >
-            <NInputNumber v-model:value="formParams.priority" />
+            <NInputNumber v-model:value="formParams.priority"/>
           </NFormItemGi>
           <NFormItemGi
             :span="12"
@@ -95,7 +105,12 @@ const rules = {
   },
   linkUrl: {
     required: true,
-    message: '请输入网址',
+    message: '请输入预览链接',
+    trigger: 'blur',
+    type: 'url'
+  },
+  sourceUrl: {
+    message: '请输入源码链接',
     trigger: 'blur',
     type: 'url'
   },
@@ -117,10 +132,6 @@ export default defineComponent({
     width: {
       type: [Number, String],
       default: 450,
-    },
-    menuOptions: {
-      type: Array,
-      default: () => []
     }
   },
   emits: ['submitAfter'],
@@ -131,6 +142,7 @@ export default defineComponent({
       name: '',
       linkUrl: '',
       imgUrl: '',
+      sourceUrl: '',
       priority: 1,
       desc: ''
     });

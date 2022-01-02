@@ -21,6 +21,7 @@
           ref="tableRef"
           :action-column="actionColumn"
           :columns="columns"
+          :pagination="pagination"
           :request="fetch"
           :row-key="(row) => row.id"
         />
@@ -35,9 +36,9 @@
   </div>
 </template>
 <script setup>
-import {ref, toRaw} from 'vue';
+import {reactive, ref, toRaw} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';
-import {delWork, getWorks} from '@/api/system/work';
+import {getLogs} from '@/api/system/log';
 import {columns, createActionColumn} from './columns'
 import BasicTable from '@/components/BasicTable/index.vue'
 import CreateDrawer from './CreateDrawer.vue'
@@ -46,9 +47,20 @@ const createDrawerRef = ref();
 const tableRef = ref(null);
 const message = useMessage();
 const dialog = useDialog();
-const createTitle = ref('添加作品');
+const createTitle = ref('添加日志');
 const actionColumn = createActionColumn({handleDel, handleEdit})
-
+const pagination = reactive({
+  page: 1,
+  pageCount: 1,
+  pageSize: 10,
+  itemCount: 0,
+  prefix({itemCount}) {
+    return `共 ${itemCount} 项`
+  },
+  onChange: (page) => {
+    pagination.page = page
+  }
+})
 
 function handleDel(row) {
   dialog.warning({
@@ -74,19 +86,19 @@ function openCreateDrawer() {
 
 function addMenu() {
   openCreateDrawer()
-  createTitle.value = '添加作品'
+  createTitle.value = '添加日志'
   createDrawerRef.value.handleReset()
 }
 
 function handleEdit(row) {
   openCreateDrawer()
-  createTitle.value = '编辑作品'
+  createTitle.value = '编辑日志'
   createDrawerRef.value.formParams = {...toRaw(row)}
 }
 
 
 async function fetch() {
-  return await getWorks()
+  return await getLogs()
 }
 
 
