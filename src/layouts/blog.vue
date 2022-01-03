@@ -37,10 +37,9 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
   z-index: -99;
 .wrap
   width 100%
-  margin-top 80px
 
   .content
-    min-height calc(100vh - 200px)
+    min-height calc(100vh - 183px)
     padding-bottom 50px
     position relative
 
@@ -54,11 +53,12 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
     background-attachment fixed
 
 
-@media (max-width: $mobile)
-  .wrap
-    margin-top 60px
-    .content
-      min-height calc(100vh - 190px)
+//@media (max-width: $mobile)
+//  .wrap
+//    margin-top 60px
+//    .content
+//      //min-height calc(100vh - 190px)
+//      min-height calc(100vh - 163px)
 //background url("../assets/images/bg.jpg")
 /*background url("https://acg.toubiec.cn/random")*/
 </style>

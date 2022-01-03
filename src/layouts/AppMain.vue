@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:max-w-screen-xl relative px-2 md:px-0 mt-14 m-auto md:mt-0">
+  <div class="xl:max-w-screen-xl relative px-2 md:px-0 mt-14 m-auto md:mt-20">
     <div class="w-[950px] max-w-full relative">
       <nuxt keep-alive :include="['Index']" />
     </div>

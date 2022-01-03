@@ -11,7 +11,7 @@
       </div>
       <nuxt-link v-for="article in item.list" :key="article.id" class="flex items-center ml-5 mt-3 hover:text-red-400 duration-300" :to="'/content/' + article.id" @click.native="select">
         <span class="text-gray-400 whitespace-nowrap">{{ article.createdAt | formatDate('MM-DD') }}</span>
-        <span class="ml-3">
+        <span class="ml-3 text-base">
           {{ article.title }}
         </span>
       </nuxt-link>

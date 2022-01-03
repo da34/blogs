@@ -78,6 +78,9 @@ export default {
     stateCurrent (val) {
       this.$emit('change', val)
       this.initPage(val)
+    },
+    maxPage () {
+      this.initPage()
     }
   },
   created () {

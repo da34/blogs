@@ -5,7 +5,7 @@
         v-for="menu in defaultMenus"
         :key="menu.url"
         :to="menu.url"
-        class="break-all ml-14 font-semibold h-full text-lg"
+        class="break-all lg:ml-14 ml-8 font-semibold h-full text-lg"
         :exact="menu.exact"
       >
         {{ menu.name }}

@@ -47,6 +47,9 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scoped>
+<style>
+.vuepress-markdown-body p {
+  margin: 10px 0!important;
+}
 
 </style>

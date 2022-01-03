@@ -4,7 +4,7 @@
       网站更新日志
     </h1>
     <section
-      class="relative before:bg-blue-950 pb-7 before:w-[2px] before:absolute before:top-7 before:bottom-0 md:before:left-1/2 before:right-2 md:before:right-0"
+      class="relative before:bg-blue-950 before:w-[2px] before:absolute before:top-7 before:bottom-0 md:before:left-1/2 before:right-2 md:before:right-0"
     >
       <ul class="timeline space-y-12">
         <li

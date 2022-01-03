@@ -10,10 +10,10 @@
 <script>
 import { throttle } from '@/utils'
 import { appendBody } from '@/minxi/appendBody'
-// let scrollTo
-// if (process.client) {
-//   scrollTo = require('@/utils/scroll-to').scrollTo
-// }
+let scrollTo
+if (process.client) {
+  scrollTo = require('@/utils/scroll-to').scrollTo
+}
 
 const MAX_WIDTH = 1200
 export default {
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     handleTo () {
-      // scrollTo(0, 500)
+      scrollTo(0, 500)
     },
     handleScroll () {
       const offsetTop = document.body.scrollTop || document.documentElement.scrollTop
