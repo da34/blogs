@@ -5,8 +5,8 @@
       <div class="ml-3 w-full">
         <div class="space-x-4 text-gray-400 leading-6">
           <span class="text-red-400 text-base font-medium">{{ author.nickName }}</span>
-          <span class="text-xs">{{ author.browser }}</span>
-          <span class="text-xs">{{ author.os }}</span>
+          <span class="text-xs hidden md:inline-block">{{ author.browser }}</span>
+          <span class="text-xs hidden md:inline-block">{{ author.os }}</span>
         </div>
         <div class="leading-8 text-xs">
           <slot name="actions"></slot>
@@ -15,7 +15,7 @@
           <div v-if="typeof content !== 'string'">
             <slot name="content"></slot>
           </div>
-          <Markdown v-else :value="content" class="blog-post"/>
+          <Markdown v-else :value="content"/>
         </div>
       </div>
     </div>

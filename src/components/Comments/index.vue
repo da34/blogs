@@ -29,9 +29,9 @@
             :author="{ nickName: reply.nickName, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
           >
             <template #content>
-              <div class="flex items-center text-base">
-                <span class="text-red-400">@{{ reply.targetName }}</span>，
-                <Markdown class="bg-transparent" :value="reply.text" />
+              <div>
+                <span class="text-red-400">@{{ reply.targetName }}</span>
+                <Markdown class="bg-transparent inline-block" :value="reply.text" />
               </div>
             </template>
             <template #actions>

@@ -3,12 +3,12 @@
     <!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
   </div>
   <section v-else class="bg-white">
-    <div class="p-10 pt-8 pb-0">
+    <div class="md:p-8 pb-0 p-5">
       <div class="">
-        <h1 class="text-4xl font-bold">
+        <h1 class="md:text-4xl text-xl title font-bold">
           {{ article.title }}
         </h1>
-        <div class="text-gray-400 flex space-x-5 mt-5">
+        <div class="text-gray-400 flex space-x-5 md:mt-5 mt-2">
           <span>{{ article.createdAt | formatDate('YYYY年MM月DD日') }}</span>
           <span>阅读：{{ article.views }}</span>
         </div>
@@ -20,8 +20,8 @@
       >
     </div>
     <div class="blog-post">
-      <Markdown :value="article.content" :is-article="true"/>
-      <div class="p-10">
+      <Markdown :value="article.content" :is-article="true" />
+      <div class="md:p-10 p-5">
         <div v-if="article.shareStatement" class="p-6 bg-gray-100 rounded-xl text-center">
           本作品采用
           <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
@@ -32,7 +32,7 @@
             最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}
           </p>
           <div v-if="article.tags.length" class="flex items-center">
-            <BaseSvgIcon icon-class="tag" class="mr-2"/>
+            <BaseSvgIcon icon-class="tag" class="mr-2" />
             <span v-for="(tag) in article.tags" :key="tag.name" class="tag">
               <!--            <a-divider v-if="i !== 0" type="vertical"/>-->
               {{ tag.name }}
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <Comments v-if="article.commentDisabled" class="px-10" :content-id="$route.params.id"/>
+    <Comments v-if="article.commentDisabled" class="md:px-10 px-5" :content-id="$route.params.id" />
   </section>
 </template>
 
@@ -109,3 +109,13 @@ export default {
   }
 }
 </script>
+<style scoped lang="stylus">
+.desc
+  text-omit(2)
+.title
+  text-omit(2)
+
+@media (min-width: 768px)
+  .desc
+    text-omit(3)
+</style>

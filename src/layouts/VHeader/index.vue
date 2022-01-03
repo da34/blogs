@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
     <transition name="fade">
-      <div v-show="visible" class="fixed inset-0 h-[65px] text-slate-900 bg-white shadow duration-300 z-50 backdrop-blur-md">
-        <header class="flex m-auto h-full items-center xl:max-w-screen-xl">
+      <div v-show="visible" class="fixed p-2 md:px-0 inset-0 md:h-[65px] h-12 text-slate-900 md:px-0 bg-white shadow duration-300 z-50 backdrop-blur-md">
+        <header class="flex m-auto h-full items-center xl:max-w-screen-xl w-full">
           <Logo />
           <Navbar />
         </header>

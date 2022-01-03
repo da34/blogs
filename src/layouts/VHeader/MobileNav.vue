@@ -15,7 +15,8 @@
           :target="menu.target || '_self'"
           @click="onClose"
         >
-          <svg-icon :icon-class="menu.icon || 'others'" />{{ menu.name }}
+          {{ menu.name }}
+<!--          <svg-icon :icon-class="menu.icon || 'others'" />{{ menu.name }}-->
         </NuxtLink>
         <div ref="mobile-header-backdrop" class="mobile-header-backdrop" @click="onClose" />
       </div>

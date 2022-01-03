@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="flex">
+  <div class="ml-auto md:ml-0">
+    <div class="hidden md:flex">
       <NuxtLink
         v-for="menu in defaultMenus"
         :key="menu.url"
@@ -11,7 +11,7 @@
         {{ menu.name }}
       </NuxtLink>
     </div>
-    <div class="hidden">
+    <div class="md:hidden block">
       <BaseSvgIcon v-show="!isMobileNav" icon-class="menu" @click="isMobileNav = true" />
       <BaseSvgIcon v-show="isMobileNav" icon-class="close-2" @click="isMobileNav = false" />
     </div>

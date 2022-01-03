@@ -1,5 +1,5 @@
 <template>
-  <ul class="pagination">
+  <ul class="pagination md:py-5">
     <li class="pagination-item" title="上一页" @click="onAction(stateCurrent-1)">
       <BaseSvgIcon icon-class="arrow_left" />
     </li>
@@ -114,7 +114,7 @@ export default {
 
 <style scoped lang="stylus">
 .pagination
-  padding 30px 0
+  //padding 30px 0
   text-align center
   font-size $font-size-small
   display flex

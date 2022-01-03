@@ -5,19 +5,19 @@
       :key="item.id"
       tag="section"
       :to="`/content/${item.id}`"
-      class="duration-300 hover:scale-[1.02] flex rounded-2xl bg-white mb-5 h-[190px] cursor-pointer overflow-hidden"
+      class="md:duration-300 hover:scale-[1.02] md:flex rounded-2xl bg-white mb-5 md:h-[190px] cursor-pointer overflow-hidden"
     >
-      <div v-if="item.firstPicture" class="basis-1/3 flex items-center justify-center">
-        <img v-lazy="item.firstPicture" class="h-[160px] rounded-xl w-11/12 object-cover">
+      <div v-if="item.firstPicture" class="md:basis-1/3 flex items-center justify-center">
+        <img v-lazy="item.firstPicture" class="md:h-[160px] md:w-11/12 h-32 w-full object-cover">
       </div>
-      <div :class="['py-6', 'px-5', 'basis-2/3', 'flex', 'flex-col', 'justify-between', { 'basis-full': !item.firstPicture }]">
-        <h2 class="text-2xl duration-150">
+      <div :class="['md:py-6', 'px-5', 'p-4', 'basis-2/3', 'flex', 'flex-col', 'justify-between', { 'basis-full': !item.firstPicture }]">
+        <h2 class="md:text-2xl duration-150 text-lg title">
           {{ item.title }}
         </h2>
-        <p class="text-gray-500 desc overflow-hidden text-base">
+        <p class="text-gray-500 desc overflow-hidden text-base mt-1 md:mt-0">
           {{ item.contentOutline }}
         </p>
-        <div class="flex justify-between text-base">
+        <div class="flex justify-between md:text-base text-sm mt-1 md:mt-0">
           <div class="info-item">
             {{ item.createdAt | convertDate }}
           </div>
@@ -93,6 +93,12 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .desc
+    text-omit(2)
+  .title
+    text-omit(2)
+
+@media (min-width: 768px)
   .desc
     text-omit(3)
 </style>
