@@ -1,5 +1,8 @@
 import { resolve } from 'path'
-export default {
+import { defineNuxtConfig } from '@nuxt/bridge'
+
+export default defineNuxtConfig({
+  bridge: false,
   // 开启打包分析
   analyze: true,
   alias: {
@@ -165,7 +168,7 @@ export default {
       ]
     },
     publicPath: 'https://resource.lsyboy.cn/blog',
-    // transpile: [/ant-design-vue/],
+    // transpile: ['tailwindcss', '@kangc/v-md-editor'],
     extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件
       splitChunks: {
@@ -197,4 +200,4 @@ export default {
       })
     }
   }
-}
+})

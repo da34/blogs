@@ -12,7 +12,7 @@ import { throttle } from '@/utils'
 import { appendBody } from '@/minxi/appendBody'
 let scrollTo
 if (process.client) {
-  scrollTo = require('@/utils/scroll-to').scrollTo
+  // scrollTo = require('@/utils/scroll-to').scrollTo
 }
 
 const MAX_WIDTH = 1200
