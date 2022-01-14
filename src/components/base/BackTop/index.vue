@@ -1,21 +1,24 @@
 <template>
-  <transition name="scroll">
-    <div v-if="visible && isBig" class="back-wrapper" @click="handleTo" />
-    <div v-if="visible && !isBig" class="min-back" @click="handleTo">
-      <span class="triangle" />
+  <!--  <transition name="scroll">-->
+  <div>
+    <transition name="scroll">
+      <div v-if="visible" class="back-wrapper hidden md:block" @click="handleTo" />
+    </transition>
+    <div v-if="visible" class="cursor-pointer fixed right-4 bottom-8 w-10 h-10 bg-white text-center rounded-full md:hidden" @click="handleTo">
+      <span class="relative -top-1 border-8 border-solid border-x-transparent border-t-transparent border-b-black" />
     </div>
-  </transition>
+  </div>
+
+  <!--  </transition>-->
 </template>
 
 <script>
-import { throttle } from '@/utils'
 import { appendBody } from '@/minxi/appendBody'
 let scrollTo
 if (process.client) {
-  // scrollTo = require('@/utils/scroll-to').scrollTo
+  scrollTo = require('@/utils/scroll-to').scrollTo
 }
 
-const MAX_WIDTH = 1200
 export default {
   name: 'BackTop',
   mixins: [appendBody],
@@ -27,18 +30,14 @@ export default {
   },
   data () {
     return {
-      isBig: true,
       visible: false
     }
   },
   mounted () {
-    this.handleResize()
     window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', throttle(this.handleResize, 500))
   },
   destroyed () {
     window.removeEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', this.handleResize)
   },
   methods: {
     handleTo () {
@@ -47,11 +46,6 @@ export default {
     handleScroll () {
       const offsetTop = document.body.scrollTop || document.documentElement.scrollTop
       this.visible = offsetTop > this.visibilityHeight
-    },
-    handleResize () {
-      // 切换backTop
-      const { width } = document.documentElement.getBoundingClientRect()
-      this.isBig = width > MAX_WIDTH
     }
   }
 }
@@ -72,33 +66,7 @@ export default {
     transition all .7s
   &.scroll-enter, &.scroll-leave-to
     top -900px
-  @media  (max-width 1200px)
-    display none
-.min-back
-  cursor pointer
-  position fixed
-  right 30px
-  bottom 90px
-  width 40px
-  height 40px
-  background #fff
-  border-radius 50%
-  z-index 9999
-  shadow-3-down()
-  text-align center
-  border 1px solid $color-line-1
-  &:hover
-    box-shadow 0 0 5px rgba(0,0,0,.3)
-    .triangle
-      border-color transparent transparent $color-focus
-  .triangle
-    width 0
-    height 0
-    position relative
-    top -3px
-    border-width 7px
-    border-style solid
-    border-color transparent transparent $color-title transparent
+
 @keyframes move
   0% {
     transform translateY(0)

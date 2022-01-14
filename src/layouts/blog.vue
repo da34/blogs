@@ -3,7 +3,9 @@
     <VHeader />
     <AppMain class="content" />
     <VFooter />
-    <BackTop />
+    <!--    <client-only placeholder="Loading...">-->
+    <BaseBackTop />
+    <!--    </client-only>-->
     <canvas class="canvas" />
   </div>
 </template>
@@ -12,14 +14,13 @@
 import VHeader from './VHeader/index'
 import VFooter from './VFooter'
 import AppMain from './AppMain'
-import BackTop from '@/components/base/BackTop'
+
 export default {
   name: 'Layout',
   components: {
     VHeader,
     VFooter,
-    AppMain,
-    BackTop
+    AppMain
   }
 }
 /* eslint-disable */
@@ -35,6 +36,7 @@ console.log('%c 欢迎来到玉捷博客', 'font-size:20pt;color:#FFA7A6')
   left: 0;
   top: 0;
   z-index: -99;
+
 .wrap
   width 100%
 

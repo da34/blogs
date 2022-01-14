@@ -5,6 +5,7 @@
        * c: change in value（变化量）；
        * d: duration（持续时间）。
    */
+
 // 加速减速曲线
 function easeBoth (t, b, c, d) {
   if ((t /= d / 2) < 1) {
@@ -16,8 +17,6 @@ function easeBoth (t, b, c, d) {
 // 兼容性写法
 const requestAnimFrame = (function () {
   return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
     function (callback) {
       window.setTimeout(callback, 1000 / 60)
     }
@@ -60,13 +59,4 @@ export function scrollTo (to, duration = 500, callback) {
     }
   }
   animateScroll()
-}
-
-/**
- * @param {number} target  --> 目标元素
- * @param {number} duration --> 持续时间
- * @param {Function} callback --> 回调函数
- */
-
-export function scrollToTarget (target, duration = 500, callback) {
 }

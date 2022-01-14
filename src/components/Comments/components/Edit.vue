@@ -1,11 +1,11 @@
 <template>
-  <div class="border border-gray-100 border-solid p-5 rounded">
+  <div class="border border-gray-100 border-solid p-5 pt-0 md:pt-5 rounded">
     <div>
-      <div>
+      <div class="flex flex-col md:flex-row">
         <input v-model="formVal.nickName" class="w-64 p-3 pl-0" placeholder="昵称">
-        <input v-model="formVal.email" class="w-64 p-3" placeholder="邮箱">
+        <input v-model="formVal.email" class="w-64 p-3 pl-0" placeholder="邮箱">
       </div>
-      <textarea v-model="formVal.text" rows="5" placeholder="发条友善的评论... （填写邮箱可以收到回复）" class="w-full mt-5" />
+      <textarea v-model="formVal.text" rows="5" placeholder="发条友善的评论... （填写邮箱可以收到回复）" class="bg-[length:50%] md:bg-[length:30%] w-full mt-5 " />
       <div class="flex justify-between mt-3 items-center">
         <a class="markdown" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
           <BaseSvgIcon icon-class="markdown" />
@@ -120,7 +120,6 @@ export default {
 <style lang="stylus" scoped>
 textarea {
   background-image url("~assets/images/baba.gif")
-  background-size 30%;
   background-repeat no-repeat
   background-position right bottom
   transition all .4s
