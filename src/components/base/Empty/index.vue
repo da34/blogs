@@ -14,8 +14,8 @@ export default {
       default: '没有数据'
     },
     imgUrl: {
-      type: String
-      // default: require('~/assets/images/undraw_New_message_re_fp03.png')
+      type: String,
+      default: require('~/assets/images/undraw_New_message_re_fp03.png')
     },
     imageStyle: {
       type: [Object, String]

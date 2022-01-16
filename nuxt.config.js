@@ -75,9 +75,9 @@ export default defineNuxtConfig({
     '@/plugins/components',
     '@/plugins/svg-icon',
     '@/plugins/filters',
-    { src: '@/plugins/vue-lazy-load', ssr: false },
-    { src: '@/plugins/click-effects', ssr: false }
-    // { src: '@/plugins/bg-canvas', ssr: false }
+    '@/plugins/vue-lazy-load.client.js',
+    '@/plugins/click-effects.client.js',
+    '@/plugins/baidu-push.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
