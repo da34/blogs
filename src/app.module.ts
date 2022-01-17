@@ -4,15 +4,24 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from '../config/configuration';
-import { User } from './users/user.entity';
-import { Content } from './contents/content.entity';
-import { Tag } from './tag/tag.entity';
-import { Link } from './links/link.entity';
-import { Log } from './logs/log.entity';
-import { Class } from './classify/class.entity';
-import { Option } from './options/option.entity';
-import { Work } from './work/work.entity';
-import { Comment } from './comments/comments.entity';
+import { User } from './users/entities/user.entity';
+import { Content } from './contents/entities/content.entity';
+import { Tag } from './tags/entities/tag.entity';
+import { Link } from './links/entities/link.entity';
+import { Log } from './logs/entities/log.entity';
+import { Class } from './classify/entities/classify.entity';
+import { Option } from './options/entities/option.entity';
+import { Work } from './works/entities/work.entity';
+import { Comment } from './comments/entities/comment.entity';
+import { UsersModule } from './users/users.module';
+import { ClassifyModule } from './classify/classify.module';
+import { CommentsModule } from './comments/comments.module';
+import { ContentsModule } from './contents/contents.module';
+import { LinksModule } from './links/links.module';
+import { LogsModule } from './logs/logs.module';
+import { OptionsModule } from './options/options.module';
+import { TagsModule } from './tags/tags.module';
+import { WorksModule } from './works/works.module';
 
 @Module({
   imports: [
@@ -36,6 +45,15 @@ import { Comment } from './comments/comments.entity';
         // autoLoadEntities: true, // 自动加载实体
       }),
     }),
+    UsersModule,
+    ClassifyModule,
+    CommentsModule,
+    ContentsModule,
+    LinksModule,
+    LogsModule,
+    OptionsModule,
+    TagsModule,
+    WorksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

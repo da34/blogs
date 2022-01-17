@@ -9,9 +9,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Comment } from '../comments/comments.entity';
-import { Class } from '../classify/class.entity';
-import { Tag } from '../tag/tag.entity';
+import { Comment } from '../../comments/entities/comment.entity';
+import { Class } from '../../classify/entities/classify.entity';
+import { Tag } from '../../tags/entities/tag.entity';
 
 enum TypeContent {
   ARTICLE = 'article',

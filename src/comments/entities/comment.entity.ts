@@ -5,7 +5,7 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Content } from '../contents/content.entity';
+import { Content } from '../../contents/entities/content.entity';
 
 export enum StatusComment {
   PASS = 'pass',
