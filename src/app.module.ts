@@ -39,10 +39,10 @@ import { WorksModule } from './works/works.module';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User, Content, Tag, Class, Link, Log, Option, Work, Comment],
+        // entities: [User, Content, Tag, Class, Link, Log, Option, Work, Comment],
         synchronize: configService.get<boolean>('DB_SYNCHRONIZE'), //根据实体自动创建数据库表， 生产环境建议关闭
         timezone: '+08:00', //服务器上配置的时区
-        // autoLoadEntities: true, // 自动加载实体
+        autoLoadEntities: true, // 自动导入实体
       }),
     }),
     UsersModule,

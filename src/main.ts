@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './core/interceptor/transform.interceptor';
 import { HttpExceptionFilter } from './core/filter/http-exception-filter.filter';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,7 +12,6 @@ async function bootstrap() {
     .setTitle('博客接口')
     .setDescription('博客接口Api文档')
     .setVersion('1.0')
-    // .addTag('blog')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
@@ -21,6 +21,9 @@ async function bootstrap() {
 
   // 注册错误过滤器
   app.useGlobalFilters(new HttpExceptionFilter());
+
+  // 注册全局管道
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(7001);
 }

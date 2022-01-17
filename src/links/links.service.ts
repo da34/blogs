@@ -7,17 +7,17 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class LinksService {
-  constructor(
-    @InjectRepository(Link)
-    private linkRepository: Repository<Link>,
-  ) {}
+  // constructor(
+  //   @InjectRepository(Link)
+  //   private readonly linkRepository: Repository<Link>,
+  // ) {}
 
   create(createLinkDto: CreateLinkDto) {
-    return this.linkRepository.create(createLinkDto);
+    // return this.linkRepository.create(createLinkDto);
   }
 
-  findAll(): Promise<Link[]> {
-    return this.linkRepository.find();
+  findAll() {
+    // return this.linkRepository.find();
   }
 
   findOne(id: number) {

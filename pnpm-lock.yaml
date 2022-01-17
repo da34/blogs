@@ -19,6 +19,8 @@ specifiers:
   '@types/supertest': ^2.0.11
   '@typescript-eslint/eslint-plugin': ^5.0.0
   '@typescript-eslint/parser': ^5.0.0
+  class-transformer: ^0.5.1
+  class-validator: ^0.13.2
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
@@ -40,13 +42,15 @@ specifiers:
   typescript: ^4.3.5
 
 dependencies:
-  '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+  '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
   '@nestjs/config': registry.npmmirror.com/@nestjs/config/1.1.6_4d34bcc4311a780925020c9f901d5309
   '@nestjs/core': registry.npmmirror.com/@nestjs/core/8.2.5_2d391bccf7bae46d184f78881868b795
-  '@nestjs/mapped-types': registry.npmmirror.com/@nestjs/mapped-types/1.0.1_aa8e181d047099a185145df0c4f9704b
+  '@nestjs/mapped-types': registry.npmmirror.com/@nestjs/mapped-types/1.0.1_156c8e2af2c7dad431aaf14c3b14437b
   '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
-  '@nestjs/swagger': registry.npmmirror.com/@nestjs/swagger/5.1.5_8c4ce0f0d9c3f30a1c824ac33c82e06d
+  '@nestjs/swagger': registry.npmmirror.com/@nestjs/swagger/5.1.5_53f26b9e3dfc6f35a6f9eba4606ad5ff
   '@nestjs/typeorm': registry.npmmirror.com/@nestjs/typeorm/8.0.2_fa8dda60a9697e2f31bd24497506afa8
+  class-transformer: registry.npmmirror.com/class-transformer/0.5.1
+  class-validator: registry.npmmirror.com/class-validator/0.13.2
   husky: registry.npmmirror.com/husky/7.0.4
   mysql2: registry.npmmirror.com/mysql2/2.3.3
   reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
@@ -4125,7 +4129,7 @@ packages:
       - webpack-cli
     dev: true
 
-  registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643:
+  registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca:
     resolution: {integrity: sha512-8VOZmHcCyhBtfvxehDfudsCrNghUoqDpZA5W8d/PUhMgz4Y1eT0M2ENBIuxr3C3j1vLypFOo30La2ymfQlOC8Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/common/download/@nestjs/common-8.2.5.tgz}
     id: registry.npmmirror.com/@nestjs/common/8.2.5
     name: '@nestjs/common'
@@ -4145,6 +4149,8 @@ packages:
         optional: true
     dependencies:
       axios: registry.npmmirror.com/axios/0.24.0
+      class-transformer: registry.npmmirror.com/class-transformer/0.5.1
+      class-validator: registry.npmmirror.com/class-validator/0.13.2
       iterare: registry.npmmirror.com/iterare/1.2.1
       reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
       rxjs: registry.npmmirror.com/rxjs/7.5.2
@@ -4164,7 +4170,7 @@ packages:
       reflect-metadata: ^0.1.13
       rxjs: ^6.0.0 || ^7.2.0
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
       dotenv: registry.npmmirror.com/dotenv/10.0.0
       dotenv-expand: registry.nlark.com/dotenv-expand/5.1.0
       lodash: registry.npmmirror.com/lodash/4.17.21
@@ -4194,7 +4200,7 @@ packages:
       '@nestjs/websockets':
         optional: true
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
       '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
       '@nuxtjs/opencollective': registry.npmmirror.com/@nuxtjs/opencollective/0.3.2
       fast-safe-stringify: registry.nlark.com/fast-safe-stringify/2.1.1
@@ -4209,7 +4215,7 @@ packages:
       - encoding
     dev: false
 
-  registry.npmmirror.com/@nestjs/mapped-types/1.0.0_aa8e181d047099a185145df0c4f9704b:
+  registry.npmmirror.com/@nestjs/mapped-types/1.0.0_156c8e2af2c7dad431aaf14c3b14437b:
     resolution: {integrity: sha1-UqBEF5X22oFEo1lw0+vBkoHzHP0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/mapped-types/download/@nestjs/mapped-types-1.0.0.tgz}
     id: registry.npmmirror.com/@nestjs/mapped-types/1.0.0
     name: '@nestjs/mapped-types'
@@ -4220,11 +4226,13 @@ packages:
       class-validator: ^0.11.1 || ^0.12.0 || ^0.13.0
       reflect-metadata: ^0.1.12
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
+      class-transformer: registry.npmmirror.com/class-transformer/0.5.1
+      class-validator: registry.npmmirror.com/class-validator/0.13.2
       reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
     dev: false
 
-  registry.npmmirror.com/@nestjs/mapped-types/1.0.1_aa8e181d047099a185145df0c4f9704b:
+  registry.npmmirror.com/@nestjs/mapped-types/1.0.1_156c8e2af2c7dad431aaf14c3b14437b:
     resolution: {integrity: sha512-NFvofzSinp00j5rzUd4tf+xi9od6383iY0JP7o0Bnu1fuItAUkWBgc4EKuIQ3D+c2QI3i9pG1kDWAeY27EMGtg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/mapped-types/download/@nestjs/mapped-types-1.0.1.tgz}
     id: registry.npmmirror.com/@nestjs/mapped-types/1.0.1
     name: '@nestjs/mapped-types'
@@ -4240,7 +4248,9 @@ packages:
       class-validator:
         optional: true
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
+      class-transformer: registry.npmmirror.com/class-transformer/0.5.1
+      class-validator: registry.npmmirror.com/class-validator/0.13.2
       reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
     dev: false
 
@@ -4253,7 +4263,7 @@ packages:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
       '@nestjs/core': registry.npmmirror.com/@nestjs/core/8.2.5_2d391bccf7bae46d184f78881868b795
       body-parser: registry.npmmirror.com/body-parser/1.19.1
       cors: registry.npmmirror.com/cors/2.8.5
@@ -4298,7 +4308,7 @@ packages:
       - chokidar
     dev: true
 
-  registry.npmmirror.com/@nestjs/swagger/5.1.5_8c4ce0f0d9c3f30a1c824ac33c82e06d:
+  registry.npmmirror.com/@nestjs/swagger/5.1.5_53f26b9e3dfc6f35a6f9eba4606ad5ff:
     resolution: {integrity: sha512-jvsgciVEFcYVVEuLdNAmgJDpFSQzIoukg+Ovz1vJ97OeCprx0sVhmocn13nCl/dEwIkwoM3eby9OiaccX0A+3A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/swagger/download/@nestjs/swagger-5.1.5.tgz}
     id: registry.npmmirror.com/@nestjs/swagger/5.1.5
     name: '@nestjs/swagger'
@@ -4315,9 +4325,9 @@ packages:
       swagger-ui-express:
         optional: true
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
       '@nestjs/core': registry.npmmirror.com/@nestjs/core/8.2.5_2d391bccf7bae46d184f78881868b795
-      '@nestjs/mapped-types': registry.npmmirror.com/@nestjs/mapped-types/1.0.0_aa8e181d047099a185145df0c4f9704b
+      '@nestjs/mapped-types': registry.npmmirror.com/@nestjs/mapped-types/1.0.0_156c8e2af2c7dad431aaf14c3b14437b
       lodash: registry.npmmirror.com/lodash/4.17.21
       path-to-regexp: registry.npmmirror.com/path-to-regexp/3.2.0
       reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
@@ -4344,7 +4354,7 @@ packages:
         optional: true
     dependencies:
       optional: registry.npmmirror.com/optional/0.1.4
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
       '@nestjs/core': registry.npmmirror.com/@nestjs/core/8.2.5_2d391bccf7bae46d184f78881868b795
       '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
       tslib: registry.npmmirror.com/tslib/2.3.1
@@ -4362,7 +4372,7 @@ packages:
       rxjs: ^7.2.0
       typeorm: ^0.2.34
     dependencies:
-      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_88a789cb3f20cca25c3f70fe96f41643
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_e2dd7264172553abc41c1a07952dd8ca
       '@nestjs/core': registry.npmmirror.com/@nestjs/core/8.2.5_2d391bccf7bae46d184f78881868b795
       reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
       rxjs: registry.npmmirror.com/rxjs/7.5.2
@@ -5185,6 +5195,21 @@ packages:
     name: ci-info
     version: 3.3.0
     dev: true
+
+  registry.npmmirror.com/class-transformer/0.5.1:
+    resolution: {integrity: sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/class-transformer/download/class-transformer-0.5.1.tgz}
+    name: class-transformer
+    version: 0.5.1
+    dev: false
+
+  registry.npmmirror.com/class-validator/0.13.2:
+    resolution: {integrity: sha512-yBUcQy07FPlGzUjoLuUfIOXzgynnQPPruyK1Ge2B74k9ROwnle1E+NxLWnUv5OLU8hA/qL5leAE9XnXq3byaBw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/class-validator/download/class-validator-0.13.2.tgz}
+    name: class-validator
+    version: 0.13.2
+    dependencies:
+      libphonenumber-js: registry.npmmirror.com/libphonenumber-js/1.9.44
+      validator: registry.npmmirror.com/validator/13.7.0
+    dev: false
 
   registry.npmmirror.com/cli-spinners/2.6.1:
     resolution: {integrity: sha1-rclU6+KBw3pjGb+kAebdJIj/tw0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cli-spinners/download/cli-spinners-2.6.1.tgz}
@@ -6729,6 +6754,12 @@ packages:
     engines: {'0': node >= 0.2.0}
     dev: true
 
+  registry.npmmirror.com/libphonenumber-js/1.9.44:
+    resolution: {integrity: sha512-zhw8nUMJuQf7jG1dZfEOKKOS6M3QYIv3HnvB/vGohNd0QfxIQcObH3a6Y6s350H+9xgBeOXClOJkS0hJ0yvS3g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/libphonenumber-js/download/libphonenumber-js-1.9.44.tgz}
+    name: libphonenumber-js
+    version: 1.9.44
+    dev: false
+
   registry.npmmirror.com/lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lines-and-columns/download/lines-and-columns-1.2.4.tgz}
     name: lines-and-columns
@@ -7780,6 +7811,13 @@ packages:
       convert-source-map: registry.nlark.com/convert-source-map/1.8.0
       source-map: registry.nlark.com/source-map/0.7.3
     dev: true
+
+  registry.npmmirror.com/validator/13.7.0:
+    resolution: {integrity: sha1-T5ZYuhO6jz2C7ogdNRZInqhcCFc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/validator/download/validator-13.7.0.tgz}
+    name: validator
+    version: 13.7.0
+    engines: {node: '>= 0.10'}
+    dev: false
 
   registry.npmmirror.com/w3c-xmlserializer/2.0.0:
     resolution: {integrity: sha1-PnEEoFt1FGzGD1ZDgLf2g6zxAgo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/w3c-xmlserializer/download/w3c-xmlserializer-2.0.0.tgz}
