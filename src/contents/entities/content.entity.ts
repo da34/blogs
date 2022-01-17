@@ -85,11 +85,11 @@ export class Content {
   })
   likeNum: number;
 
-  @CreateDateColumn()
-  createDate: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createTime: Date;
 
-  @UpdateDateColumn()
-  updateDate: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updateTime: Date;
 
   @OneToMany(() => Comment, (comment) => comment.content)
   comments: Comment[];

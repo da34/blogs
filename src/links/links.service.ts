@@ -1,15 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLinkDto } from './dto/create-link.dto';
 import { UpdateLinkDto } from './dto/update-link.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Link } from './entities/link.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class LinksService {
+  constructor(
+    @InjectRepository(Link)
+    private linkRepository: Repository<Link>,
+  ) {}
+
   create(createLinkDto: CreateLinkDto) {
-    return 'This action adds a new link';
+    return this.linkRepository.create(createLinkDto);
   }
 
-  findAll() {
-    return `This action returns all links`;
+  findAll(): Promise<Link[]> {
+    return this.linkRepository.find();
   }
 
   findOne(id: number) {

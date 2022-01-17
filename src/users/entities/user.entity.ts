@@ -25,5 +25,5 @@ export class User {
     enum: UserRole,
     default: UserRole.NORMAL,
   })
-  permissions: string;
+  role: string;
 }

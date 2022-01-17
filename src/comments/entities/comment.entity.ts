@@ -78,10 +78,8 @@ export class Comment {
   })
   pid: string;
 
-  @Column({
-    default: () => 'NOW()',
-  })
-  createdAt: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createTime: Date;
 
   @ManyToOne(() => Content, (content) => content.comments)
   content: Content;
