@@ -10,6 +10,8 @@ export class Tag {
   })
   name: string;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   views: number;
 }

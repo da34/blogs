@@ -20,9 +20,13 @@ export class Work {
   @Column()
   desc: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   linkUrl: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   sourceUrl: string;
 }

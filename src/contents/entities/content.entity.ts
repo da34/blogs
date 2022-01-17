@@ -38,6 +38,7 @@ export class Content {
 
   @Column({
     comment: '头图',
+    nullable: true,
   })
   firstPicture: string;
 
@@ -56,7 +57,9 @@ export class Content {
   })
   status: string;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   views: number;
 
   @Column({
@@ -77,7 +80,9 @@ export class Content {
   })
   isTop: boolean;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   likeNum: number;
 
   @CreateDateColumn()

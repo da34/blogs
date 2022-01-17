@@ -1,5 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+enum UserRole {
+  NORMAL = 'normal',
+  ADMIN = 'admin',
+  SUPER_ADMIN = 'super_admin',
+}
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -16,7 +21,9 @@ export class User {
   password: string;
 
   @Column({
-    default: 'normal',
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.NORMAL,
   })
   permissions: string;
 }

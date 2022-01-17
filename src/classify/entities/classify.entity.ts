@@ -11,7 +11,9 @@ export class Class {
   })
   name: string;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   views: number;
 
   @OneToMany(() => Content, (content) => content.id)
