@@ -15,12 +15,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const exceptionRes = exception.getResponse();
     let message = exceptionRes?.['message'] || exception.message;
 
-    // 处理message
+    // 处理message，如果数组长度等于1，直接返回字符串
     if (Array.isArray(message) && message.length === 1) {
       message = message.join();
     }
 
-    console.log(JSON.stringify(exception.getResponse()));
     response.status(status).json({
       message,
       code: -1,

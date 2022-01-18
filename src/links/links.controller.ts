@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  ForbiddenException,
 } from '@nestjs/common';
 import { LinksService } from './links.service';
 import { CreateLinkDto } from './dto/create-link.dto';
@@ -20,7 +19,6 @@ export class LinksController {
 
   @Post()
   create(@Body() createLinkDto: CreateLinkDto) {
-    throw new ForbiddenException();
     return this.linksService.create(createLinkDto);
   }
 

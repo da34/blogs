@@ -6,11 +6,9 @@ import {
   OneToOne,
   ManyToMany,
   JoinTable,
-  CreateDateColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Comment } from '../../comments/entities/comment.entity';
-import { Class } from '../../classify/entities/classify.entity';
+import { Category } from '../../categories/entities/category.entity';
 import { Tag } from '../../tags/entities/tag.entity';
 
 enum TypeContent {
@@ -94,8 +92,8 @@ export class Content {
   @OneToMany(() => Comment, (comment) => comment.content)
   comments: Comment[];
 
-  @OneToOne(() => Class, (_class) => _class.id)
-  class: Class;
+  @OneToOne(() => Category, (_class) => _class.id)
+  category: Category;
 
   @ManyToMany(() => Tag)
   @JoinTable()

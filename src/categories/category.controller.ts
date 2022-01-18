@@ -7,18 +7,18 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ClassifyService } from './classify.service';
-import { CreateClassifyDto } from './dto/create-classify.dto';
-import { UpdateClassifyDto } from './dto/update-classify.dto';
+import { CategoryService } from './category.service';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('分类')
-@Controller('classify')
-export class ClassifyController {
-  constructor(private readonly classifyService: ClassifyService) {}
+@Controller('category')
+export class CategoryController {
+  constructor(private readonly classifyService: CategoryService) {}
 
   @Post()
-  create(@Body() createClassifyDto: CreateClassifyDto) {
+  create(@Body() createClassifyDto: CreateCategoryDto) {
     return this.classifyService.create(createClassifyDto);
   }
 
@@ -35,7 +35,7 @@ export class ClassifyController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateClassifyDto: UpdateClassifyDto,
+    @Body() updateClassifyDto: UpdateCategoryDto,
   ) {
     return this.classifyService.update(+id, updateClassifyDto);
   }
