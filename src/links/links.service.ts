@@ -17,12 +17,12 @@ export class LinksService {
   }
 
   findAll() {
-    console.log(this.linkRepository.find());
-    return this.linkRepository.find();
+    // console.log(this.linkRepository.find());
+    // return this.linkRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} link`;
+    // return this.linkRepository.findOne(id);
   }
 
   update(id: number, updateLinkDto: UpdateLinkDto) {

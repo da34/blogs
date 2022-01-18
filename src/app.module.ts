@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from '../config/configuration';
@@ -13,11 +11,14 @@ import { HistoryModule } from './histories/history.module';
 import { OptionsModule } from './options/options.module';
 import { TagsModule } from './tags/tags.module';
 import { WorksModule } from './works/works.module';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({
-      // isGlobal: true,
+      isGlobal: true, // 全局导入
       load: [configuration],
     }),
     TypeOrmModule.forRootAsync({
@@ -45,8 +46,7 @@ import { WorksModule } from './works/works.module';
     OptionsModule,
     TagsModule,
     WorksModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
