@@ -15,10 +15,10 @@ export class AuthService {
     return user || null;
   }
 
-  async login(user: User) {
+  async signToken(user: User) {
     const payload = { username: user.username, id: user.id, role: user.role };
     return {
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
     };
   }
 }

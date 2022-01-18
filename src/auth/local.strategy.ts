@@ -9,7 +9,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
 
-  async validate(username: string, password: string): Promise<any> {
+  async validate(
+    username: string,
+    password: string,
+  ): Promise<{ token: string }> {
     const user = await this.authService.validateUser(username);
     if (!user) {
       throw new BadRequestException('用户不存在');
@@ -18,6 +21,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     if (user.password !== password) {
       throw new BadRequestException('密码错误');
     }
-    return user;
+    return await this.authService.signToken(user);
   }
 }
