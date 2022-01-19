@@ -22,8 +22,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!existUser) {
       throw new UnauthorizedException('token不正确');
     }
-    // 处理 返回用户不包括密码
-    delete existUser.password;
     return existUser;
   }
 }

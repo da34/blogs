@@ -24,7 +24,6 @@ export class UsersService {
   findOne(username: string): Promise<User> {
     return getRepository(User)
       .createQueryBuilder('user')
-      .addSelect('user.password')
       .where('user.username = :username', { username })
       .getOne();
   }
