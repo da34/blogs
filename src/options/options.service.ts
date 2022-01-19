@@ -1,26 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateOptionDto } from './dto/create-option.dto';
 import { UpdateOptionDto } from './dto/update-option.dto';
+import { Repository } from 'typeorm';
+import { Option } from './entities/option.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class OptionsService {
+  constructor(
+    @InjectRepository(Option)
+    private readonly optionRepository: Repository<Option>,
+  ) {}
+
   create(createOptionDto: CreateOptionDto) {
-    return 'This action adds a new option';
+    const option = this.optionRepository.create(createOptionDto);
+    return this.optionRepository.save(option);
   }
 
-  findAll() {
-    return `This action returns all options`;
+  findOne(key: string) {
+    return this.optionRepository.find({ where: { key } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} option`;
-  }
-
-  update(id: number, updateOptionDto: UpdateOptionDto) {
-    return `This action updates a #${id} option`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} option`;
+  async update(id: string, updateOptionDto: UpdateOptionDto) {
+    const option = await this.optionRepository.findOne(id);
+    if (!option) {
+      throw new HttpException('配置不存在', 401);
+    }
+    // return this.optionRepository.save(option);
   }
 }

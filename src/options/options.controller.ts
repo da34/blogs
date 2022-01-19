@@ -5,14 +5,21 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { OptionsService } from './options.service';
 import { CreateOptionDto } from './dto/create-option.dto';
 import { UpdateOptionDto } from './dto/update-option.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { UserRole } from '../users/entities/user.entity';
+import { Roles } from '../auth/roles/roles.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../auth/roles/roles.guard';
 
 @ApiTags('配置')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@ApiBearerAuth()
+@Roles(UserRole.Admin)
 @Controller('options')
 export class OptionsController {
   constructor(private readonly optionsService: OptionsService) {}
@@ -22,23 +29,13 @@ export class OptionsController {
     return this.optionsService.create(createOptionDto);
   }
 
-  @Get()
-  findAll() {
-    return this.optionsService.findAll();
+  @Get(':key')
+  findOne(@Param('key') key: string) {
+    return this.optionsService.findOne(key);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.optionsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOptionDto: UpdateOptionDto) {
-    return this.optionsService.update(+id, updateOptionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.optionsService.remove(+id);
+  @Patch(':key')
+  update(@Param('key') key: string, @Body() updateOptionDto: UpdateOptionDto) {
+    return this.optionsService.update(key, updateOptionDto);
   }
 }

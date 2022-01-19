@@ -1,18 +1,15 @@
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/interceptor/transform.interceptor';
 import { HttpExceptionFilter } from './common/filter/http-exception-filter.filter';
 import { ValidationPipe } from '@nestjs/common';
-import { RolesGuard } from './auth/roles/roles.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api');
 
-  // // 注册权限守卫
-  // app.useGlobalGuards(new RolesGuard(new Reflector()));
   // 注册响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
 

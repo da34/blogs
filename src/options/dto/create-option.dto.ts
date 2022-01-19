@@ -1,1 +1,4 @@
-export class CreateOptionDto {}
+export class CreateOptionDto {
+  key: string;
+  value: JSON;
+}

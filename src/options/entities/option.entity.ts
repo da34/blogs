@@ -5,11 +5,13 @@ export class Option {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   key: string;
 
   @Column({
     type: 'json',
   })
-  value: string;
+  value: JSON;
 }

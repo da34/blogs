@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateOptionDto } from './create-option.dto';
+import { IsNotEmpty } from 'class-validator';
 
-export class UpdateOptionDto extends PartialType(CreateOptionDto) {}
+export class UpdateOptionDto {
+  @IsNotEmpty()
+  value: JSON;
+}
