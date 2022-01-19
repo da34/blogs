@@ -22,10 +22,14 @@ export class OptionsService {
   }
 
   async update(id: string, updateOptionDto: UpdateOptionDto) {
-    const option = await this.optionRepository.findOne(id);
-    if (!option) {
-      throw new HttpException('配置不存在', 401);
+    const existOption = await this.optionRepository.findOne(id);
+    if (!existOption) {
+      throw new HttpException(`id为${id}配置不存在`, 401);
     }
-    // return this.optionRepository.save(option);
+    const updateOption = this.optionRepository.merge(
+      existOption,
+      updateOptionDto,
+    );
+    return this.optionRepository.save(updateOption);
   }
 }
