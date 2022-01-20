@@ -15,30 +15,31 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('建站日志')
 @Controller('histories')
 export class HistoryController {
-  constructor(private readonly logsService: HistoryService) {}
+  constructor(private readonly historyService: HistoryService) {}
 
   @Post()
   create(@Body() createLogDto: CreateHistoryDto) {
-    return this.logsService.create(createLogDto);
+    console.log(createLogDto, 'createLogDto');
+    return this.historyService.create(createLogDto);
   }
 
   @Get()
   findAll() {
-    return this.logsService.findAll();
+    return this.historyService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.logsService.findOne(+id);
+    return this.historyService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLogDto: UpdateHistoryDto) {
-    return this.logsService.update(+id, updateLogDto);
+    return this.historyService.update(id, updateLogDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.logsService.remove(+id);
+    return this.historyService.remove(id);
   }
 }

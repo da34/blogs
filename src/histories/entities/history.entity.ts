@@ -5,8 +5,10 @@ export class History {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  date: number;
+  @Column({
+    type: 'timestamp',
+  })
+  date: string;
 
   @Column({
     type: 'json',
