@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateWorkDto } from './dto/create-work.dto';
 import { UpdateWorkDto } from './dto/update-work.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Work } from './entities/work.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class WorksService {
+  constructor(
+    @InjectRepository(Work)
+    private workRepository: Repository<Work>,
+  ) {}
   create(createWorkDto: CreateWorkDto) {
-    return 'This action adds a new work';
+    const createWork = this.workRepository.create(createWorkDto);
+    return this.workRepository.save(createWork);
   }
 
   findAll() {
-    return `This action returns all works`;
+    return this.workRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} work`;
+  findOne(id: string) {
+    return this.workRepository.findOne(id);
   }
 
-  update(id: number, updateWorkDto: UpdateWorkDto) {
-    return `This action updates a #${id} work`;
+  async update(id: string, updateWorkDto: UpdateWorkDto) {
+    const existWork = await this.workRepository.findOne(id);
+    if (!existWork) {
+      throw new HttpException(`不存在id为${id}的作品`, 401);
+    }
+    return this.workRepository.merge(existWork, updateWorkDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} work`;
+  remove(id: string) {
+    return this.workRepository.delete(id);
   }
 }
