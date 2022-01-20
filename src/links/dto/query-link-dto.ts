@@ -1,5 +1,4 @@
-export class QueryLinkDto {
-  page: number;
+import { PartialType } from '@nestjs/swagger';
+import { FindLimitDto } from '../../common/dto/find-limit-dto';
 
-  pageSize: number;
-}
+export class QueryLinkDto extends PartialType(FindLimitDto) {}

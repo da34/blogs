@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Tag } from './entities/tag.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TagsService {
+  constructor(
+    @InjectRepository(Tag)
+    private tagRepository: Repository<Tag>,
+  ) {}
   create(createTagDto: CreateTagDto) {
-    return 'This action adds a new tag';
+    const createTag = this.tagRepository.create(createTagDto);
+    return this.tagRepository.save(createTag);
   }
 
   findAll() {
-    return `This action returns all tags`;
+    return this.tagRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  findOne(id: string) {
+    return this.tagRepository.findOne(id);
   }
 
-  update(id: number, updateTagDto: UpdateTagDto) {
-    return `This action updates a #${id} tag`;
+  async update(id: string, updateTagDto: UpdateTagDto) {
+    const exitsTag = await this.tagRepository.findOne(id);
+    if (!exitsTag) {
+      throw new HttpException(`不存在id为${id}的标签`, 401);
+    }
+    return this.tagRepository.merge(exitsTag, updateTagDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  remove(id: string) {
+    return this.tagRepository.delete(id);
   }
 }

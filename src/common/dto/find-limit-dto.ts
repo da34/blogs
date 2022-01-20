@@ -1,9 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class FindLimitDto {
-  @IsNotEmpty()
-  page: number;
+  page?: number = 1;
 
-  @IsNotEmpty()
-  pageSize: number;
+  pageSize?: number = 10;
 }

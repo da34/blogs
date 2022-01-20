@@ -29,5 +29,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(7001);
+  // console.log('api 接口地址: http://127.0.0.1:7001/api/#');
 }
 bootstrap();
