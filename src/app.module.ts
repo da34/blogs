@@ -13,6 +13,7 @@ import { TagsModule } from './tags/tags.module';
 import { WorksModule } from './works/works.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
+import { ExternalModule } from './external/external.module';
 
 @Module({
   controllers: [AppController],
@@ -47,6 +48,7 @@ import { AppController } from './app.controller';
     TagsModule,
     WorksModule,
     AuthModule,
+    ExternalModule,
   ],
 })
 export class AppModule {}
