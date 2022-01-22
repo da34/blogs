@@ -3,7 +3,7 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
-import { Repository } from 'typeorm';
+import { createQueryBuilder, Repository } from 'typeorm';
 import { QueryCommentDto } from './dto/query-comment.dto';
 import { Content } from '../contents/entities/content.entity';
 
@@ -17,32 +17,30 @@ export class CommentsService {
   ) {}
   async create(createCommentDto: CreateCommentDto) {
     const createComment = this.commentRepository.create(createCommentDto);
+    const exitsComment = await this.commentRepository.save(createComment);
 
-    // 查询 父级 回复
-    const exitsComments = await this.commentRepository.findOne(
-      createCommentDto.tierId,
-    );
-
-    // 查询 内容
-    const exitsContent = await this.contentRepository.findOne(
-      createCommentDto.contentId,
-    );
-    createComment.parentComment = exitsComments;
-    createComment.content = exitsContent;
-    return this.commentRepository.save(createComment);
+    await createQueryBuilder()
+      .relation(Comment, 'content')
+      .of(exitsComment.id)
+      .set(createCommentDto.contentId);
   }
 
   async findAll(query: QueryCommentDto) {
-    const { page = 1, pageSize = 10 } = query;
+    const { page = 1, pageSize = 10, contentId } = query;
     const comments = await this.commentRepository.find({
       take: pageSize,
       skip: (page - 1) * pageSize,
       relations: ['childComments'],
       where: {
         parentComment: null,
+        content: contentId,
       },
     });
-    const count = await this.commentRepository.count();
+    // createQueryBuilder().relation(Comment, 'childComments').of(post).loadMany();
+
+    const count = await this.commentRepository.count({
+      where: { content: contentId },
+    });
     return { count, list: comments };
   }
 

@@ -3,8 +3,10 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany, BeforeInsert, BeforeUpdate
-} from "typeorm";
+  OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
+} from 'typeorm';
 import { Content } from '../../contents/entities/content.entity';
 
 export enum StatusComment {
@@ -90,7 +92,9 @@ export class Comment {
   })
   updateTime: number;
 
-  @ManyToOne(() => Content, (content) => content.comments)
+  @ManyToOne(() => Content, (content) => content.comments, {
+    createForeignKeyConstraints: false,
+  })
   content: Content;
 
   @ManyToOne(() => Comment, (comment) => comment.childComments)
