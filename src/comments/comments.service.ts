@@ -23,6 +23,13 @@ export class CommentsService {
       .relation(Comment, 'content')
       .of(exitsComment.id)
       .set(createCommentDto.contentId);
+
+    if (createCommentDto.tierId) {
+      await createQueryBuilder()
+        .relation(Comment, 'parentComment')
+        .of(exitsComment.id)
+        .set(createCommentDto.tierId);
+    }
   }
 
   async findAll(query: QueryCommentDto) {
@@ -35,8 +42,8 @@ export class CommentsService {
         parentComment: null,
         content: contentId,
       },
+      order: { createTime: 'DESC' },
     });
-    // createQueryBuilder().relation(Comment, 'childComments').of(post).loadMany();
 
     const count = await this.commentRepository.count({
       where: { content: contentId },
