@@ -4,9 +4,17 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/interceptor/transform.interceptor';
 import { HttpExceptionFilter } from './common/filter/http-exception-filter.filter';
 import { ValidationPipe } from '@nestjs/common';
+import * as csrf from 'csurf';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const csrfProtection = csrf({
+    cookie: true,
+  });
+  app.use(cookieParser());
+  app.use(csrfProtection);
 
   app.setGlobalPrefix('api');
 

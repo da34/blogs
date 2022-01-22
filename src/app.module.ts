@@ -14,6 +14,7 @@ import { WorksModule } from './works/works.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { ExternalModule } from './external/external.module';
+import { SiteModule } from './site/site.module';
 
 @Module({
   controllers: [AppController],
@@ -50,6 +51,7 @@ import { ExternalModule } from './external/external.module';
     WorksModule,
     AuthModule,
     ExternalModule,
+    SiteModule,
   ],
 })
 export class AppModule {}

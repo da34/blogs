@@ -28,6 +28,9 @@ specifiers:
   cache-manager: ^3.6.0
   class-transformer: ^0.5.1
   class-validator: ^0.13.2
+  cookie-parser: ^1.4.6
+  csurf: ^1.11.0
+  dayjs: ^1.10.7
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
@@ -65,6 +68,9 @@ dependencies:
   cache-manager: registry.npmmirror.com/cache-manager/3.6.0
   class-transformer: registry.npmmirror.com/class-transformer/0.5.1
   class-validator: registry.npmmirror.com/class-validator/0.13.2
+  cookie-parser: registry.npmmirror.com/cookie-parser/1.4.6
+  csurf: registry.npmmirror.com/csurf/1.11.0
+  dayjs: registry.npmmirror.com/dayjs/1.10.7
   husky: registry.npmmirror.com/husky/7.0.4
   mysql2: registry.npmmirror.com/mysql2/2.3.3
   passport: registry.npmmirror.com/passport/0.5.2
@@ -2473,6 +2479,13 @@ packages:
     version: 1.2.3
     dev: true
 
+  registry.nlark.com/random-bytes/1.0.0:
+    resolution: {integrity: sha1-T2ih3Arli9P7lYSMMDJNt11kNgs=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/random-bytes/download/random-bytes-1.0.0.tgz}
+    name: random-bytes
+    version: 1.0.0
+    engines: {node: '>= 0.8'}
+    dev: false
+
   registry.nlark.com/range-parser/1.2.1:
     resolution: {integrity: sha1-PPNwI9GZ4cJNGlW4SADC8+ZGgDE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/range-parser/download/range-parser-1.2.1.tgz}
     name: range-parser
@@ -3045,6 +3058,13 @@ packages:
       typescript: registry.npmmirror.com/typescript/4.5.4
     dev: true
 
+  registry.nlark.com/tsscmp/1.0.6:
+    resolution: {integrity: sha1-hbmVg6w1iexL/vgltQAKqRHWBes=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/tsscmp/download/tsscmp-1.0.6.tgz}
+    name: tsscmp
+    version: 1.0.6
+    engines: {node: '>=0.6.x'}
+    dev: false
+
   registry.nlark.com/tsutils/3.21.0_typescript@4.5.4:
     resolution: {integrity: sha1-tIcX05TOpsHglpg+7Vjp1hcVtiM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/tsutils/download/tsutils-3.21.0.tgz}
     id: registry.nlark.com/tsutils/3.21.0
@@ -3105,6 +3125,15 @@ packages:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/typedarray/download/typedarray-0.0.6.tgz}
     name: typedarray
     version: 0.0.6
+    dev: false
+
+  registry.nlark.com/uid-safe/2.1.5:
+    resolution: {integrity: sha1-Kz1cckDo/C5Y+Komnl7knAhXvTo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/uid-safe/download/uid-safe-2.1.5.tgz}
+    name: uid-safe
+    version: 2.1.5
+    engines: {node: '>= 0.8'}
+    dependencies:
+      random-bytes: registry.nlark.com/random-bytes/1.0.0
     dev: false
 
   registry.nlark.com/universalify/0.1.2:
@@ -5508,10 +5537,27 @@ packages:
       through2: registry.nlark.com/through2/4.0.2
     dev: true
 
+  registry.npmmirror.com/cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cookie-parser/download/cookie-parser-1.4.6.tgz}
+    name: cookie-parser
+    version: 1.4.6
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: registry.npmmirror.com/cookie/0.4.1
+      cookie-signature: registry.nlark.com/cookie-signature/1.0.6
+    dev: false
+
   registry.npmmirror.com/cookie/0.4.0:
     resolution: {integrity: sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cookie/download/cookie-0.4.0.tgz}
     name: cookie
     version: 0.4.0
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  registry.npmmirror.com/cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cookie/download/cookie-0.4.1.tgz}
+    name: cookie
+    version: 0.4.1
     engines: {node: '>= 0.6'}
     dev: false
 
@@ -5550,6 +5596,29 @@ packages:
       - '@swc/wasm'
     dev: true
 
+  registry.npmmirror.com/csrf/3.1.0:
+    resolution: {integrity: sha1-7HXpZW0ATWdLjvW6R7Qfv9bLnDA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csrf/download/csrf-3.1.0.tgz}
+    name: csrf
+    version: 3.1.0
+    engines: {node: '>= 0.8'}
+    dependencies:
+      rndm: registry.npmmirror.com/rndm/1.2.0
+      tsscmp: registry.nlark.com/tsscmp/1.0.6
+      uid-safe: registry.nlark.com/uid-safe/2.1.5
+    dev: false
+
+  registry.npmmirror.com/csurf/1.11.0:
+    resolution: {integrity: sha1-qww8ZjRjQZK9PW9LhhviCADutho=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csurf/download/csurf-1.11.0.tgz}
+    name: csurf
+    version: 1.11.0
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: registry.npmmirror.com/cookie/0.4.0
+      cookie-signature: registry.nlark.com/cookie-signature/1.0.6
+      csrf: registry.npmmirror.com/csrf/3.1.0
+      http-errors: registry.npmmirror.com/http-errors/1.7.3
+    dev: false
+
   registry.npmmirror.com/dargs/7.0.0:
     resolution: {integrity: sha1-BAFcQd4Ly2nshAUPPZvgyvjW1cw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dargs/download/dargs-7.0.0.tgz}
     name: dargs
@@ -5567,6 +5636,12 @@ packages:
       whatwg-mimetype: registry.nlark.com/whatwg-mimetype/2.3.0
       whatwg-url: registry.npmmirror.com/whatwg-url/8.7.0
     dev: true
+
+  registry.npmmirror.com/dayjs/1.10.7:
+    resolution: {integrity: sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dayjs/download/dayjs-1.10.7.tgz}
+    name: dayjs
+    version: 1.10.7
+    dev: false
 
   registry.npmmirror.com/debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/debug/download/debug-2.6.9.tgz}
@@ -7489,6 +7564,12 @@ packages:
     hasBin: true
     dependencies:
       glob: registry.npmmirror.com/glob/7.2.0
+
+  registry.npmmirror.com/rndm/1.2.0:
+    resolution: {integrity: sha1-8z/pz7Urv9UgqhgyO8ZdsRCht2w=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rndm/download/rndm-1.2.0.tgz}
+    name: rndm
+    version: 1.2.0
+    dev: false
 
   registry.npmmirror.com/rxjs/6.6.7:
     resolution: {integrity: sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rxjs/download/rxjs-6.6.7.tgz}
