@@ -14,11 +14,15 @@ export class CreateContentDto {
   @IsUrl()
   firstPicture: string;
 
-  type?: string = 'publish';
+  status?: string = 'publish';
+  type?: string = 'article';
   views?: number = 0;
 
   shareStatement?: boolean = true;
   isCommentOpen?: boolean = true;
   isTop?: boolean = false;
   likeNum?: number = 0;
+
+  categoryId?: string;
+  tagsId?: string[];
 }

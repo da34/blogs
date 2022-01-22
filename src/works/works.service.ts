@@ -29,7 +29,8 @@ export class WorksService {
     if (!existWork) {
       throw new HttpException(`不存在id为${id}的作品`, 401);
     }
-    return this.workRepository.merge(existWork, updateWorkDto);
+    const updateWork = this.workRepository.merge(existWork, updateWorkDto);
+    return this.workRepository.save(updateWork);
   }
 
   remove(id: string) {

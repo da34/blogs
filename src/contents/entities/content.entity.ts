@@ -6,6 +6,9 @@ import {
   OneToOne,
   ManyToMany,
   JoinTable,
+  ManyToOne,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { Comment } from '../../comments/entities/comment.entity';
 import { Category } from '../../categories/entities/category.entity';
@@ -83,19 +86,36 @@ export class Content {
   })
   likeNum: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createTime: Date;
+  @Column({
+    type: 'bigint',
+  })
+  createTime: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  updateTime: Date;
+  @Column({
+    type: 'bigint',
+  })
+  updateTime: number;
 
   @OneToMany(() => Comment, (comment) => comment.content)
   comments: Comment[];
 
-  @OneToOne(() => Category, (_class) => _class.id)
+  @ManyToOne(() => Category, (category) => category.content)
   category: Category;
 
-  @ManyToMany(() => Tag)
+  @ManyToMany(() => Tag, {
+    cascade: true,
+  })
   @JoinTable()
   tags: Tag[];
+
+  @BeforeInsert()
+  createDates() {
+    this.createTime = Date.now();
+    this.updateTime = Date.now();
+  }
+
+  @BeforeUpdate()
+  updateDates() {
+    this.updateTime = Date.now();
+  }
 }

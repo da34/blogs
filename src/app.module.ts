@@ -36,6 +36,7 @@ import { ExternalModule } from './external/external.module';
         synchronize: configService.get<boolean>('DB_SYNCHRONIZE'), //根据实体自动创建数据库表， 生产环境建议关闭
         timezone: '+08:00', //服务器上配置的时区
         autoLoadEntities: true, // 自动导入实体
+        maxQueryExecutionTime: 1000, // 记录超过1秒的查询
       }),
     }),
     UsersModule,

@@ -2,36 +2,61 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getRepository, Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Content } from './entities/content.entity';
 import { QueryContentDto } from './dto/query-content-dto';
-import { Comment } from '../comments/entities/comment.entity';
+import { Tag } from '../tags/entities/tag.entity';
+import { Category } from '../categories/entities/category.entity';
 
 @Injectable()
 export class ContentsService {
   constructor(
     @InjectRepository(Content)
     private contentRepository: Repository<Content>,
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
+    @InjectRepository(Tag)
+    private tagRepository: Repository<Tag>,
   ) {}
-  create(createContentDto: CreateContentDto) {
+
+  async create(createContentDto: CreateContentDto) {
+    // 查询 category
+    const exitsCategory = await this.categoryRepository.findOne(
+      createContentDto.categoryId,
+    );
+    if (!exitsCategory) {
+      throw new HttpException(
+        `不存在id为${createContentDto.categoryId}的分类`,
+        401,
+      );
+    }
+    // 查询tags
+    const exitsTags = await this.tagRepository.find({
+      id: In(createContentDto.tagsId),
+    });
+
     const createContent = this.contentRepository.create(createContentDto);
-    return this.contentRepository.save(createContent);
+    createContent.category = exitsCategory;
+    createContent.tags = exitsTags;
+    await this.contentRepository.save(createContent);
   }
 
   async findAll(query: QueryContentDto) {
     const { page = 1, pageSize = 10 } = query;
-    const dbContent = await getRepository(Content).createQueryBuilder(
-      'content',
-    );
-    const count = await dbContent.getCount();
-    dbContent.limit(pageSize);
-    dbContent.offset((page - 1) * pageSize);
-    const links = await dbContent.getMany();
-    return { count, list: links };
+    const contents = await this.contentRepository.find({
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+      relations: ['tags', 'category'],
+    });
+
+    const count = await this.contentRepository.count();
+    return { count, list: contents };
   }
 
   findOne(id: string) {
-    return this.contentRepository.findOne(id);
+    return this.contentRepository.findOne(id, {
+      relations: ['tags', 'category'],
+    });
   }
 
   async update(id: string, updateContentDto: UpdateContentDto) {
@@ -39,10 +64,36 @@ export class ContentsService {
     if (!exitsContent) {
       throw new HttpException(`不存在id为${id}的内容`, 401);
     }
-    return this.contentRepository.merge(exitsContent, updateContentDto);
+    // 查询 category
+    const exitsCategory = await this.categoryRepository.findOne(
+      updateContentDto.categoryId,
+    );
+    if (!exitsCategory) {
+      throw new HttpException(
+        `不存在id为${updateContentDto.categoryId}的分类`,
+        401,
+      );
+    }
+    // 查询tags
+    const exitsTags = await this.tagRepository.find({
+      id: In(updateContentDto.tagsId),
+    });
+
+    const updateContent = this.contentRepository.merge(
+      exitsContent,
+      updateContentDto,
+    );
+
+    updateContent.category = exitsCategory;
+    updateContent.tags = exitsTags;
+    return this.contentRepository.save(updateContent);
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+    const exitsContent = await this.contentRepository.findOne(id);
+    if (!exitsContent) {
+      throw new HttpException(`不存在id为${id}的内容`, 401);
+    }
     return this.contentRepository.delete(id);
   }
 }

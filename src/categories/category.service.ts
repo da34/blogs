@@ -29,7 +29,12 @@ export class CategoryService {
     if (!exitsCategory) {
       throw new HttpException(`不存在id为${id}的分类`, 401);
     }
-    return this.categoryRepository.merge(exitsCategory, updateCategoryDto);
+    const updateCategory = this.categoryRepository.merge(
+      exitsCategory,
+      updateCategoryDto,
+    );
+
+    return this.categoryRepository.save(updateCategory);
   }
 
   remove(id: string) {

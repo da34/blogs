@@ -30,7 +30,11 @@ export class HistoryService {
     if (!existHistory) {
       throw new HttpException(`不存在id为${id}的建站日志`, 401);
     }
-    return this.historyRepository.merge(existHistory, updateHistoryDto);
+    const updateHistory = this.historyRepository.merge(
+      existHistory,
+      updateHistoryDto,
+    );
+    return this.historyRepository.save(updateHistory);
   }
 
   remove(id: string) {

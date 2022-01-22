@@ -29,7 +29,8 @@ export class TagsService {
     if (!exitsTag) {
       throw new HttpException(`不存在id为${id}的标签`, 401);
     }
-    return this.tagRepository.merge(exitsTag, updateTagDto);
+    const updateTag = this.tagRepository.merge(exitsTag, updateTagDto);
+    return this.tagRepository.save(updateTag);
   }
 
   remove(id: string) {
