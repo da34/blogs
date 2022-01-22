@@ -30,7 +30,7 @@
 
   /*卡片 end*/
   /*tag start*/
-  .tag {
+  .art-tag {
     @apply px-3 py-2 rounded-lg hover:bg-gray-100;
   }
 

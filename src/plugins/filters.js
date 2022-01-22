@@ -10,11 +10,11 @@ dayjs
   .locale('zh-cn')
 
 const formatDate = (date, str) => {
-  return dayjs(date).format(str)
+  return dayjs(+date).format(str)
 }
 
 const convertDate = date => {
-  return dayjs(date).fromNow()
+  return dayjs(+date).fromNow()
 }
 
 // const parseBrowser = ua => {

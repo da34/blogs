@@ -19,7 +19,7 @@
         </p>
         <div class="flex justify-between md:text-base text-sm mt-1 md:mt-0">
           <div class="info-item">
-            {{ item.createdAt | convertDate }}
+            {{ item.createTime | convertDate }}
           </div>
           <div v-if="item.tags.length" class="info-item">
             <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2 tag" :to="'/archive?name=' + tag.name">
@@ -29,17 +29,12 @@
         </div>
       </div>
     </NuxtLink>
-    <Pagination v-model="currentPage" class="pagination-wrap" :total="total" :limit="7" @change="pageChange" />
+    <Pagination v-model="currentPage" class="pagination-wrap" :total="total" :limit="7" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Pagination from '@/components/base/Pagination'
-// let scrollTo
-// if (process.client) {
-//   scrollTo = require('@/utils/scroll-to').scrollTo
-// }
 
 export default {
   name: 'Index',
@@ -59,34 +54,24 @@ export default {
   },
   head () {
     return {
-      title: `首页-${this.site.name}`,
+      title: '首页-玉捷 Code',
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: this.site.name
+          content: '玉捷 Code'
         }
       ]
     }
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
   },
   watch: {
     currentPage: '$fetch'
   },
   methods: {
     async getList () {
-      const params = `page=${this.currentPage}&limit=7`
-      const { result } = await this.$axios.$get(`contents?${params}`)
-      const { rows, count } = result
-      this.list = rows
-      this.total = count
-    },
-    pageChange () {
-      // scrollTo(0)
+      const { data } = await this.$axios.$get('contents')
+      this.list = data.list
+      this.total = data.count
     }
   }
 }

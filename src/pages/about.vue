@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   layout: 'blog',
   transition: 'slide-in',
@@ -17,24 +15,19 @@ export default {
   },
   async fetch () {
     const { data } = await this.$axios.get('contents/about')
-    this.article = data.result
+    this.article = data.data
   },
   head () {
     return {
-      title: `关于-${this.site.name}`,
+      title: '关于-玉捷 Code',
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: this.site.name
+          content: '玉捷 Code'
         }
       ]
     }
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
   }
 }
 </script>

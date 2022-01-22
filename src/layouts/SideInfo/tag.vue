@@ -19,7 +19,6 @@
 <script>
 export default {
   name: 'Tag',
-  // serverCacheKey: () => 'StaticTag',
   data () {
     return {
       list: []
@@ -27,7 +26,7 @@ export default {
   },
   async fetch () {
     const { data } = await this.$axios.get('tags')
-    this.list = data.result
+    this.list = data.data
   }
 }
 </script>

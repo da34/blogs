@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   layout: 'blog',
   transition: 'slide-in',
@@ -41,23 +39,17 @@ export default {
     }
   },
   async fetch () {
-    const { data } = await this.$axios.get('logs')
-    this.logs = data.result
-    // console.log(data)
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
+    const { data } = await this.$axios.get('histories')
+    this.logs = data.data
   },
   head () {
     return {
-      title: `建站日志-${this.site.name}`,
+      title: '建站日志-玉捷 Code',
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: this.site.name
+          content: '玉捷 Code'
         }
       ]
     }

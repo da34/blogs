@@ -10,7 +10,7 @@
         :title="link.name"
         :href="getURL(link.URL)"
         target="_blank"
-        class="hover:scale-105 duration-300 mb-5 rounded-xl bg-white border border-gray-200 border-solid p-4 h-[100px] md:basis-[30%] basis-full flex justify-center items-center"
+        class="md:hover:scale-105 duration-300 mb-5 rounded-xl bg-white border border-gray-200 border-solid p-4 h-[100px] md:basis-[30%] basis-full flex justify-center items-center"
       >
         <img v-lazy="link.avatar" class="h-[70px] w-[70px] rounded-full object-cover">
         <div class="ml-4">
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   layout: 'blog',
   transition: 'slide-in',
@@ -34,22 +32,18 @@ export default {
     }
   },
   async fetch () {
-    const { data } = await this.$axios.get('links')
-    this.list = data.result
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
+    const { data } = await this.$axios.get('links?pageSize=99')
+    // console.log(data)
+    this.list = data.data.list
   },
   head () {
     return {
-      title: `友情链接-${this.site.name}`,
+      title: '友情链接-玉捷 Code',
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: this.site.name
+          content: '玉捷 Code'
         }
       ]
     }

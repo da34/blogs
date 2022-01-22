@@ -4,7 +4,9 @@
       欢迎来到这里<br>你可以吐槽，畅谈<br> <span class="text-blue-950">交换友联</span>
     </h1>
     <div class="my-7 p-5 shadow-inner leading-7">
-      <h1 class="text-xl font-bold">本站链接：</h1>
+      <h1 class="text-xl font-bold">
+        本站链接：
+      </h1>
       <p><span class="font-semibold mr-1"> name: </span>玉捷 Code</p>
       <p><span class="font-semibold mr-1">link:</span> https://blog.lsyboy.cn/</p>
       <p><span class="font-semibold mr-1">avatar:</span> https://resource.lsyboy.cn/blog/avatar.png</p>
@@ -15,27 +17,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   layout: 'blog',
   transition: 'slide-in',
   head () {
     return {
-      title: `留言板-${this.site.name}`,
+      title: '留言板-玉捷 Code',
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: this.site.name
+          content: '玉捷 Code'
         }
       ]
     }
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
   }
 }
 </script>

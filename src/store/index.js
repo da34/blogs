@@ -12,7 +12,7 @@ const store = {
   getters,
   actions: {
     async nuxtServerInit ({ dispatch }, { req }) {
-      await dispatch('modules/front/getConfigs')
+      // await dispatch('modules/front/getConfigs')
     }
   }
 }

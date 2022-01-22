@@ -3,12 +3,11 @@
     <h2 v-if="$route.query.name" class="tag">
       "{{ $route.query.name }}" 下的文章
     </h2>
-    <Timeline :data="list" :total="total" />
+    <Timeline :data="list" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Timeline from '@/components/Timeline'
 export default {
   name: 'Pigeonhole',
@@ -17,8 +16,7 @@ export default {
   transition: 'slide-in',
   data () {
     return {
-      list: [],
-      total: 0
+      list: []
     }
   },
   async fetch () {
@@ -26,20 +24,15 @@ export default {
   },
   head () {
     return {
-      title: `归档-${this.site.name}`,
+      title: '归档-玉捷 Code',
       meta: [
         {
           hid: 'home',
           name: 'description',
-          content: this.site.name
+          content: '玉捷 Code'
         }
       ]
     }
-  },
-  computed: {
-    ...mapGetters([
-      'site'
-    ])
   },
   methods: {
     async getArchiveList () {
@@ -48,10 +41,8 @@ export default {
       if (name) {
         query = '?name=' + encodeURI(name)
       }
-      const { data } = await this.$axios.get('content/archive' + query)
-      const { count, items } = data.result
-      this.list = items
-      this.total = count
+      const { data } = await this.$axios.get('site/archive' + query)
+      this.list = data.data
     }
   }
 }

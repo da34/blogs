@@ -3,7 +3,7 @@ import { getToken, getDiy } from '@/utils/auth'
 
 function csrfSafeMethod (method) {
   // these HTTP methods do not require CSRF protection
-  return (/^(GET|HEAD|OPTIONS|TRACE)$/i.test(method))
+  return (/^(GET|HEAD|OPTIONS)$/i.test(method))
 }
 
 export default function ({
@@ -13,21 +13,15 @@ export default function ({
   // 基本配置
   $axios.defaults.timeout = 10000
   $axios.defaults.withCredentials = true
-  $axios.onRequest(config => {
-    const csrfToken = getDiy('csrfToken')
-    // console.log('测试111')
-    if (process.client && !csrfSafeMethod(config.method)) {
-      const token = getToken()
-      config.headers.Authorization = `Bearer ${token}`
-      // 带上csrfToken
-      config.headers['yu-csrf-token'] = csrfToken
-    }
-  })
-
-  // $axios.onResponse(res => {
-  //   const { data } = res
-  //   // console.log('axios##########data', data)
-  //   return data
+  // $axios.onRequest(config => {
+  //   const csrfToken = getDiy('CSRF-TOKEN')
+  //   // console.log('测试111')
+  //   if (process.client && !csrfSafeMethod(config.method)) {
+  //     // const token = getToken()
+  //     // config.headers.Authorization = `Bearer ${token}`
+  //     // 带上csrfToken
+  //     // config.headers['csrf-token'] = csrfToken
+  //   }
   // })
 
   // 错误的回调

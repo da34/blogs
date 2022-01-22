@@ -15,14 +15,14 @@
       >
         <template #actions>
           <div class="text-gray-400 flex">
-            <span>{{ comment.createdAt | convertDate }}</span>
+            <span>{{ comment.createTime | convertDate }}</span>
             <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, comment.id, comment.nickName)">回复</span>
           </div>
         </template>
         <!--      子级回复开始-->
-        <template v-if="comment.comments.length > 0">
+        <template v-if="comment.childComments.length > 0">
           <CommentList
-            v-for="reply in comment.comments"
+            v-for="reply in comment.childComments"
             :key="reply.id"
             :avatar="reply.avatar"
             class="bg-gray-50 pl-4"
@@ -36,7 +36,7 @@
             </template>
             <template #actions>
               <div class="text-gray-400 flex">
-                <span>{{ reply.createdAt | convertDate }}</span>
+                <span>{{ reply.createTime | convertDate }}</span>
                 <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, reply.id, reply.nickName)">回复</span>
               </div>
             </template>
@@ -114,16 +114,15 @@ export default {
   },
   async fetch () {
     // 获取评论
-    const { data } = await this.$axios.get(`comments?page=${this.page}&limit=${this.limit}&contentId=${this.contentId}`)
-    const { result } = data
-    this.total = result.total
-    this.count = result.comments.count
+    const { data } = await this.$axios.get(`comments?page=${this.page}&contentId=${this.contentId}`)
+    this.total = data.data.count
+    // this.count = data.data.comments.count
     // 是否是翻页, 相同证明不是
     if (this.oldPage === this.page) {
-      this.commentList = result.comments.rows
+      this.commentList = data.data.list
     } else {
       this.oldPage = this.page
-      this.commentList.push(...result.comments.rows)
+      this.commentList.push(...data.data.list)
     }
   },
   watch: {

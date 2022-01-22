@@ -9,7 +9,7 @@
           {{ article.title }}
         </h1>
         <div class="text-gray-400 flex space-x-5 md:mt-5 mt-2">
-          <span>{{ article.createdAt | formatDate('YYYY年MM月DD日') }}</span>
+          <span>{{ article.createTime | formatDate('YYYY年MM月DD日') }}</span>
           <span>阅读：{{ article.views }}</span>
         </div>
       </div>
@@ -21,15 +21,15 @@
     </div>
     <div class="blog-post">
       <Markdown :value="article.content" :is-article="true" />
-      <div class="md:p-10 p-5">
-        <div v-if="article.shareStatement" class="p-6 bg-gray-100 rounded-xl text-center">
+      <div class="md:px-10 px-5">
+        <div v-if="article.isShare" class="p-6 bg-gray-100 rounded-xl text-center">
           本作品采用
           <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
           进行许可
         </div>
         <div class="flex justify-between items-center mt-2">
           <p>
-            最后编辑于：{{ article.updatedAt | formatDate('YYYY年MM月DD日') }}
+            最后编辑于：{{ article.updateTime | formatDate('YYYY年MM月DD日') }}
           </p>
           <div v-if="article.tags.length" class="flex items-center">
             <BaseSvgIcon icon-class="tag" class="mr-2" />
@@ -41,12 +41,12 @@
         </div>
       </div>
     </div>
-    <Comments v-if="article.commentDisabled" class="md:px-10 px-5" :content-id="$route.params.id" />
+    <Comments v-if="article.isCommentOpen" class="md:px-10 px-5 pt-5" :content-id="$route.params.id" />
   </section>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'Content',
@@ -61,11 +61,11 @@ export default {
   async fetch () {
     const { id } = this.$route.params
     const { data } = await this.$axios.get(`contents/${id}`)
-    this.article = data.result
+    this.article = data.data
   },
   head () {
     return {
-      title: `${this.article.title}-${this.site.name}`,
+      title: `${this.article.title}-玉捷 Code`,
       meta: [
         {
           hid: 'content',
@@ -76,9 +76,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'site'
-    ]),
     ...mapState('modules/front', [
       'renderCompToc'
     ])

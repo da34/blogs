@@ -20,9 +20,8 @@ export default {
   },
   methods: {
     async getVerse () {
-      const { data } = await this.$axios.get('outside/verse')
-      // console.log(data)
-      this.verse = data.result
+      const { data } = await this.$axios.get('external/verse')
+      this.verse = data.data
     }
   }
 }
