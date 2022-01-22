@@ -3,14 +3,14 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany,
-} from 'typeorm';
+  OneToMany, BeforeInsert, BeforeUpdate
+} from "typeorm";
 import { Content } from '../../contents/entities/content.entity';
 
 export enum StatusComment {
-  PASS = 'pass',
-  CANNOT = 'cannot',
-  BLOCK = 'block',
+  Pass = 'pass',
+  Block = 'block',
+  Review = 'review',
 }
 
 @Entity()
@@ -40,12 +40,13 @@ export class Comment {
 
   @Column({
     comment: '被评论人名称',
+    nullable: true,
   })
   targetName: string;
 
   @Column({
     type: 'enum',
-    comment: '状态 pass 正常， cannot 不通过, block - 需要人工复查',
+    comment: '状态 pass 正常， block 不通过, review - 需要人工复查',
     enum: StatusComment,
   })
   status: string;
@@ -75,11 +76,19 @@ export class Comment {
 
   @Column({
     comment: '真实评论父级',
+    nullable: true,
   })
   pid: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createTime: Date;
+  @Column({
+    type: 'bigint',
+  })
+  createTime: number;
+
+  @Column({
+    type: 'bigint',
+  })
+  updateTime: number;
 
   @ManyToOne(() => Content, (content) => content.comments)
   content: Content;
@@ -89,4 +98,15 @@ export class Comment {
 
   @OneToMany(() => Comment, (comment) => comment.parentComment)
   childComments: Comment[];
+
+  @BeforeInsert()
+  createDates() {
+    this.createTime = Date.now();
+    this.updateTime = Date.now();
+  }
+
+  @BeforeUpdate()
+  updateDates() {
+    this.updateTime = Date.now();
+  }
 }

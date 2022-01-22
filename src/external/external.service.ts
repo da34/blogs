@@ -1,10 +1,9 @@
 import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
-import { CreateExternalDto } from './dto/create-external.dto';
-import { UpdateExternalDto } from './dto/update-external.dto';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { Cache } from 'cache-manager';
 import { ConfigService } from '@nestjs/config';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class ExternalService {
@@ -14,26 +13,8 @@ export class ExternalService {
     private httpService: HttpService,
     private configService: ConfigService,
   ) {}
-  create(createExternalDto: CreateExternalDto) {
-    return 'This action adds a new external';
-  }
 
-  findAll() {
-    return `This action returns all external`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} external`;
-  }
-
-  update(id: number, updateExternalDto: UpdateExternalDto) {
-    return `This action updates a #${id} external`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} external`;
-  }
-
+  @Cron('59 59 23 * * *')
   async fetchHitokoto() {
     // 先获取缓存里面的
     const hitokoto = await this.cacheManager.get('hitokoto');
@@ -90,5 +71,34 @@ export class ExternalService {
     await this.cacheManager.set('hw_token', token, { ttl: 60 * 60 * 23 });
 
     return token;
+  }
+
+  async checkText(text) {
+    const token = await this.fetchHWToken();
+    const postData = {
+      categories: ['politics', 'porn', 'ad', 'abuse'],
+      items: [
+        {
+          text,
+        },
+      ],
+    };
+
+    const resOb = this.httpService.post(
+      'https://moderation.cn-north-4.myhuaweicloud.com/v1.0/moderation/text',
+      postData,
+      {
+        dataType: 'json',
+        headers: {
+          // @ts-ignore
+          'X-Auth-Token': token,
+        },
+        contentType: 'json',
+        data: postData,
+      },
+    );
+
+    const { data } = await lastValueFrom(resOb);
+    return data;
   }
 }

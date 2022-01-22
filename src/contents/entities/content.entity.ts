@@ -64,10 +64,10 @@ export class Content {
   views: number;
 
   @Column({
-    comment: '版权开启 true - 不开启 , false - 开启',
+    comment: '版权开启 true - 开启 , false - 不开启',
     default: true,
   })
-  shareStatement: boolean;
+  isShare: boolean;
 
   @Column({
     comment: '评论开启 true - 开启 , false - 禁用',
@@ -77,7 +77,7 @@ export class Content {
 
   @Column({
     comment: '是否置顶 true - 置顶 , false - 不置顶',
-    default: true,
+    default: false,
   })
   isTop: boolean;
 

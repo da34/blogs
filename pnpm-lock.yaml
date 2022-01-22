@@ -12,6 +12,7 @@ specifiers:
   '@nestjs/mapped-types': '*'
   '@nestjs/passport': ^8.1.0
   '@nestjs/platform-express': ^8.0.0
+  '@nestjs/schedule': ^1.0.2
   '@nestjs/schematics': ^8.0.0
   '@nestjs/swagger': ^5.1.5
   '@nestjs/testing': ^8.0.0
@@ -63,6 +64,7 @@ dependencies:
   '@nestjs/mapped-types': registry.npmmirror.com/@nestjs/mapped-types/1.0.1_156c8e2af2c7dad431aaf14c3b14437b
   '@nestjs/passport': registry.npmmirror.com/@nestjs/passport/8.1.0_fad574eebf217792c1a96edf566992e9
   '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
+  '@nestjs/schedule': registry.npmmirror.com/@nestjs/schedule/1.0.2_8b618827ffa1784f2e7b042a97d87b6c
   '@nestjs/swagger': registry.npmmirror.com/@nestjs/swagger/5.1.5_53f26b9e3dfc6f35a6f9eba4606ad5ff
   '@nestjs/typeorm': registry.npmmirror.com/@nestjs/typeorm/8.0.3_fa8dda60a9697e2f31bd24497506afa8
   cache-manager: registry.npmmirror.com/cache-manager/3.6.0
@@ -975,6 +977,14 @@ packages:
     name: create-require
     version: 1.1.1
     dev: true
+
+  registry.nlark.com/cron/1.7.2:
+    resolution: {integrity: sha1-LqHzXBOKB+2sKsWvUITtb+5XI9s=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/cron/download/cron-1.7.2.tgz}
+    name: cron
+    version: 1.7.2
+    dependencies:
+      moment-timezone: registry.npmmirror.com/moment-timezone/0.5.34
+    dev: false
 
   registry.nlark.com/cross-spawn/7.0.3:
     resolution: {integrity: sha1-9zqFudXUHQRVUcF34ogtSshXKKY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/cross-spawn/download/cross-spawn-7.0.3.tgz}
@@ -4425,6 +4435,23 @@ packages:
       tslib: registry.npmmirror.com/tslib/2.3.1
     dev: false
 
+  registry.npmmirror.com/@nestjs/schedule/1.0.2_8b618827ffa1784f2e7b042a97d87b6c:
+    resolution: {integrity: sha512-GGRehpSm0nCthYNxAGdTzondPrRvurtKnkQCzIb3Tccqq6PhfS2QiHMwDaCel5/4jhYbR/lZR9UsVr6KSJc2Xg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/schedule/download/@nestjs/schedule-1.0.2.tgz}
+    id: registry.npmmirror.com/@nestjs/schedule/1.0.2
+    name: '@nestjs/schedule'
+    version: 1.0.2
+    peerDependencies:
+      '@nestjs/common': ^6.10.11 || ^7.0.0 || ^8.0.0
+      '@nestjs/core': ^7.0.0 || ^8.0.0
+      reflect-metadata: ^0.1.12
+    dependencies:
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/8.2.5_17d6ce38cc74803538e351a8f2ca91ba
+      '@nestjs/core': registry.npmmirror.com/@nestjs/core/8.2.5_2d391bccf7bae46d184f78881868b795
+      cron: registry.nlark.com/cron/1.7.2
+      reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
+      uuid: registry.npmmirror.com/uuid/8.3.2
+    dev: false
+
   registry.npmmirror.com/@nestjs/schematics/8.0.5_chokidar@3.5.2+typescript@4.5.4:
     resolution: {integrity: sha512-nK1hWQeLNbdhsiJDX/XJXLqq7nC6/xxC8CN+seFTQmly+H3gG2xaFnl6JPHURumuQaYJX8JEpC8m0+4tz+wvOg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/schematics/download/@nestjs/schematics-8.0.5.tgz}
     id: registry.npmmirror.com/@nestjs/schematics/8.0.5
@@ -7177,6 +7204,20 @@ packages:
     version: 1.0.4
     engines: {node: '>=10'}
     hasBin: true
+    dev: false
+
+  registry.npmmirror.com/moment-timezone/0.5.34:
+    resolution: {integrity: sha512-3zAEHh2hKUs3EXLESx/wsgw6IQdusOT8Bxm3D9UrHPQR7zlMmzwybC8zHEM1tQ4LJwP7fcxrWr8tuBg05fFCbg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moment-timezone/download/moment-timezone-0.5.34.tgz}
+    name: moment-timezone
+    version: 0.5.34
+    dependencies:
+      moment: registry.npmmirror.com/moment/2.29.1
+    dev: false
+
+  registry.npmmirror.com/moment/2.29.1:
+    resolution: {integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moment/download/moment-2.29.1.tgz}
+    name: moment
+    version: 2.29.1
     dev: false
 
   registry.npmmirror.com/ms/2.0.0:

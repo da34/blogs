@@ -15,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { ExternalModule } from './external/external.module';
 import { SiteModule } from './site/site.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   controllers: [AppController],
@@ -23,6 +24,7 @@ import { SiteModule } from './site/site.module';
       isGlobal: true, // 全局导入
       load: [configuration],
     }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

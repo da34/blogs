@@ -8,6 +8,8 @@ import {
   Delete,
   UseGuards,
   Query,
+  Ip,
+  Req,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -18,14 +20,45 @@ import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryCommentDto } from './dto/query-comment.dto';
+import { createHash } from 'crypto';
+import { ExternalService } from '../external/external.service';
+const md5 = (str) => createHash('md5').update(str).digest('hex');
 
 @ApiTags('评论')
 @Controller('comments')
 export class CommentsController {
-  constructor(private readonly commentsService: CommentsService) {}
+  constructor(
+    private readonly commentsService: CommentsService,
+    private externalService: ExternalService,
+  ) {}
 
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
+  async create(
+    @Body() createCommentDto: CreateCommentDto,
+    @Ip() ip,
+    @Req() req,
+  ) {
+    createCommentDto.ip = ip;
+    createCommentDto.ua = req.headers['user-agent'];
+    // 把邮箱是qq 替换成qq 头像
+    if (/@qq.com/.test(createCommentDto.email)) {
+      createCommentDto.avatar = `https://q1.qlogo.cn/g?b=qq&nk=${
+        createCommentDto.email.split('@')[0]
+      }&s=100`;
+    } else {
+      createCommentDto.avatar = `https://gravatar.loli.net/avatar/${md5(
+        createCommentDto.email,
+      )}?s=52&d=retro`;
+    }
+
+    // 文本检测
+    const { result } = await this.externalService.checkText(
+      createCommentDto.text,
+    );
+    createCommentDto.status = result.suggestion;
+
+    createCommentDto.suggestion = JSON.stringify(result.detail);
+
     return this.commentsService.create(createCommentDto);
   }
 

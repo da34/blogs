@@ -1,9 +1,7 @@
-import { IsEmail, IsIP, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateCommentDto {
-  @IsIP()
   ip: string;
-
   ua: string;
 
   @IsNotEmpty()
@@ -21,6 +19,13 @@ export class CreateCommentDto {
   targetName?: string;
 
   putTop?: boolean = false;
+  suggestion?: string;
 
   pid?: string;
+  status?: string;
+
+  // 层级id
+  tierId?: string;
+  // 内容id
+  contentId?: string;
 }

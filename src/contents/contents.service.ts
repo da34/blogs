@@ -42,11 +42,20 @@ export class ContentsService {
   }
 
   async findAll(query: QueryContentDto) {
-    const { page = 1, pageSize = 10 } = query;
+    const {
+      page = 1,
+      pageSize = 10,
+      type = 'article',
+      status = 'publish',
+    } = query;
     const contents = await this.contentRepository.find({
       take: pageSize,
       skip: (page - 1) * pageSize,
       relations: ['tags', 'category'],
+      where: {
+        type,
+        status,
+      },
     });
 
     const count = await this.contentRepository.count();

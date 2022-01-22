@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { IsNumber } from 'class-validator';
 
 @Entity()
 export class History {
@@ -6,9 +7,10 @@ export class History {
   id: string;
 
   @Column({
-    type: 'timestamp',
+    type: 'bigint',
   })
-  date: string;
+  @IsNumber()
+  date: number;
 
   @Column({
     type: 'json',

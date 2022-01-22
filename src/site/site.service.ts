@@ -40,7 +40,7 @@ export class SiteService {
     let yearList = [];
     const rowsLen = allContents.length;
     for (let i = 0; i < allContents.length; i++) {
-      yearList.push(dayjs(allContents[i].createTime).format('YYYY'));
+      yearList.push(dayjs(+allContents[i].createTime).format('YYYY'));
     }
     yearList = [...new Set(yearList)];
     // 整理数据返回前端
@@ -49,10 +49,10 @@ export class SiteService {
         year: yearList[i],
         list: [],
       };
-      console.log(yearList[i]);
+      // console.log(yearList[i]);
       for (let j = 0; j < rowsLen; j++) {
         // 年份相同放入一个对象
-        if (yearList[i] === dayjs(allContents[j].createTime).format('YYYY')) {
+        if (yearList[i] === dayjs(+allContents[j].createTime).format('YYYY')) {
           obj.list.push(allContents[j]);
         }
       }

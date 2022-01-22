@@ -12,8 +12,8 @@ export class ExternalController {
     return this.externalService.fetchHitokoto();
   }
 
-  @Get('hw_token')
-  getHWToken() {
-    return this.externalService.fetchHWToken();
-  }
+  // @Get('hw_token')
+  // getHWToken() {
+  //   return this.externalService.fetchHWToken();
+  // }
 }

@@ -6,6 +6,7 @@ import { HttpExceptionFilter } from './common/filter/http-exception-filter.filte
 import { ValidationPipe } from '@nestjs/common';
 import * as csrf from 'csurf';
 import * as cookieParser from 'cookie-parser';
+import { csrfMiddleware } from './common/middleware/csrf.middleware.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,10 +14,14 @@ async function bootstrap() {
   const csrfProtection = csrf({
     cookie: true,
   });
+
+  // 注册csrf
   app.use(cookieParser());
   app.use(csrfProtection);
 
   app.setGlobalPrefix('api');
+  // 注册中间件
+  app.use(csrfMiddleware);
 
   // 注册响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
