@@ -1,3 +1,4 @@
+import Message from '../components/base/Message'
 import { getToken, getDiy } from '@/utils/auth'
 // const debug = process.env.NODE_ENV !== 'production'
 
@@ -23,13 +24,17 @@ export default function ({
   //     // config.headers['csrf-token'] = csrfToken
   //   }
   // })
-
   // 错误的回调
   $axios.onError(error => {
-    const code = parseInt(error.response && error.response.status)
-    if (code === 400) {
-      // message.error(error.message)
-      redirect('/400')
-    }
+    const { data } = error.response
+    Message({
+      text: data.message || error.message,
+      type: 'error'
+    })
+    // const code = parseInt(error.response && error.response.status)
+    // if (code === 400) {
+    //   console.error(error.message)
+    //   redirect('/400')
+    // }
   })
 }
