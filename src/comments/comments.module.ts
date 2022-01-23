@@ -5,9 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
 import { ExternalModule } from '../external/external.module';
 import { Content } from '../contents/entities/content.entity';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Comment, Content]), ExternalModule],
+  imports: [
+    TypeOrmModule.forFeature([Comment, Content]),
+    ExternalModule,
+    HttpModule,
+  ],
   controllers: [CommentsController],
   providers: [CommentsService],
 })
