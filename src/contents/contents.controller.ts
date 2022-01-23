@@ -83,3 +83,28 @@ export class ContentsController {
     return this.contentsService.remove(id);
   }
 }
+
+@Controller('content')
+export class AdminContentsController {
+  constructor(private readonly contentsService: ContentsService) {}
+  @Get('articleTop')
+  articleTop() {
+    const query = { pageSize: 5 };
+    const selectCond = {
+      select: ['title', 'views'],
+      order: { views: 'DESC' },
+      relations: [],
+    };
+    return this.contentsService.findAll(query, selectCond);
+  }
+
+  @Get('new')
+  getByCreateTime() {
+    const query = { pageSize: 5 };
+    const selectCond = {
+      select: ['id', 'title', 'createTime'],
+      relations: [],
+    };
+    return this.contentsService.findAll(query, selectCond);
+  }
+}

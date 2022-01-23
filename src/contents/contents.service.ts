@@ -42,7 +42,7 @@ export class ContentsService {
     await this.contentRepository.save(createContent);
   }
 
-  async findAll(query: QueryContentDto, selectCond?: FindConditions<any>) {
+  async findAll(query?: QueryContentDto, selectCond?: FindConditions<any>) {
     const {
       page = 1,
       pageSize = 10,
@@ -66,6 +66,7 @@ export class ContentsService {
     );
 
     const count = await this.contentRepository.count();
+    // console.log(contents);
     return { count, list: contents };
   }
 
