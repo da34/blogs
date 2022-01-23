@@ -34,12 +34,37 @@ export class ContentsController {
 
   @Get()
   findAll(@Query() query: QueryContentDto) {
-    return this.contentsService.findAll(query);
+    const selectCond = {
+      select: [
+        'id',
+        'title',
+        'contentOutline',
+        'firstPicture',
+        'isTop',
+        'createTime',
+      ],
+      relations: ['tags'],
+    };
+    return this.contentsService.findAll(query, selectCond);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.contentsService.findOne(id);
+    const selectCond = {
+      select: [
+        'id',
+        'title',
+        'content',
+        'firstPicture',
+        'isCommentOpen',
+        'isShare',
+        'likeNum',
+        'createTime',
+        'updateTime',
+        'views',
+      ],
+    };
+    return this.contentsService.findOne(id, selectCond);
   }
 
   @UseGuards(AuthGuard('jwt'), RolesGuard)

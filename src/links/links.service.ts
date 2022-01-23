@@ -3,7 +3,7 @@ import { CreateLinkDto } from './dto/create-link.dto';
 import { UpdateLinkDto } from './dto/update-link.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Link } from './entities/link.entity';
-import { getRepository, Repository } from 'typeorm';
+import { FindConditions, Repository } from 'typeorm';
 import { QueryLinkDto } from './dto/query-link-dto';
 
 @Injectable()
@@ -18,13 +18,18 @@ export class LinksService {
     return this.linkRepository.save(createLink);
   }
 
-  async findAll(query: QueryLinkDto) {
+  async findAll(query: QueryLinkDto, selectCond?: FindConditions<any>) {
     const { page = 1, pageSize = 10 } = query;
-    const dbLink = await getRepository(Link).createQueryBuilder('link');
-    const count = await dbLink.getCount();
-    dbLink.limit(pageSize);
-    dbLink.offset((page - 1) * pageSize);
-    const links = await dbLink.getMany();
+    const links = await this.linkRepository.find(
+      Object.assign(
+        {
+          skip: (page - 1) * pageSize,
+          take: pageSize,
+        },
+        selectCond,
+      ),
+    );
+    const count = await this.linkRepository.count();
     return { count, list: links };
   }
 

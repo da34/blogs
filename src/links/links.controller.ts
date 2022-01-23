@@ -35,7 +35,10 @@ export class LinksController {
 
   @Get()
   findAll(@Query() query: QueryLinkDto) {
-    return this.linksService.findAll(query);
+    const selectCond = {
+      select: ['id', 'avatar', 'outline', 'URL', 'name'],
+    };
+    return this.linksService.findAll(query, selectCond);
   }
 
   @Get(':id')

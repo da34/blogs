@@ -2,11 +2,12 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { FindConditions, In, Repository } from 'typeorm';
 import { Content } from './entities/content.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
+import { Link } from '../links/entities/link.entity';
 
 @Injectable()
 export class ContentsService {
@@ -41,31 +42,43 @@ export class ContentsService {
     await this.contentRepository.save(createContent);
   }
 
-  async findAll(query: QueryContentDto) {
+  async findAll(query: QueryContentDto, selectCond?: FindConditions<any>) {
     const {
       page = 1,
       pageSize = 10,
       type = 'article',
       status = 'publish',
     } = query;
-    const contents = await this.contentRepository.find({
-      take: pageSize,
-      skip: (page - 1) * pageSize,
-      relations: ['tags', 'category'],
-      where: {
-        type,
-        status,
-      },
-    });
+    const contents = await this.contentRepository.find(
+      Object.assign(
+        {
+          take: pageSize,
+          skip: (page - 1) * pageSize,
+          where: {
+            type,
+            status,
+          },
+          relations: ['tags', 'category'],
+          order: { createTime: 'DESC' },
+        },
+        selectCond,
+      ),
+    );
 
     const count = await this.contentRepository.count();
     return { count, list: contents };
   }
 
-  findOne(id: string) {
-    return this.contentRepository.findOne(id, {
-      relations: ['tags', 'category'],
-    });
+  findOne(id: string, selectCond?: FindConditions<any>) {
+    return this.contentRepository.findOne(
+      id,
+      Object.assign(
+        {
+          relations: ['tags', 'category'],
+        },
+        selectCond,
+      ),
+    );
   }
 
   async update(id: string, updateContentDto: UpdateContentDto) {

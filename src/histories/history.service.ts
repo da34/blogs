@@ -18,7 +18,9 @@ export class HistoryService {
   }
 
   findAll() {
-    return this.historyRepository.find();
+    return this.historyRepository.find({
+      order: { date: 'DESC' },
+    });
   }
 
   findOne(id: string) {

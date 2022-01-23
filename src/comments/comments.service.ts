@@ -3,12 +3,13 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment, StatusComment } from './entities/comment.entity';
-import { createQueryBuilder, Repository } from 'typeorm';
+import { createQueryBuilder, FindConditions, Repository } from 'typeorm';
 import { QueryCommentDto } from './dto/query-comment.dto';
 import { Content } from '../contents/entities/content.entity';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
+import { Link } from '../links/entities/link.entity';
 
 @Injectable()
 export class CommentsService {
@@ -44,18 +45,24 @@ export class CommentsService {
     this.noticeEmail(exitsComment);
   }
 
-  async findAll(query: QueryCommentDto) {
+  async findAll(query: QueryCommentDto, selectCond?: FindConditions<any>) {
     const { page = 1, pageSize = 10, contentId } = query;
-    const comments = await this.commentRepository.find({
-      take: pageSize,
-      skip: (page - 1) * pageSize,
-      relations: ['childComments'],
-      where: {
-        parentComment: null,
-        content: contentId,
-      },
-      order: { createTime: 'DESC' },
-    });
+    const comments = await this.commentRepository.find(
+      Object.assign(
+        {
+          take: pageSize,
+          skip: (page - 1) * pageSize,
+          relations: ['childComments'],
+          where: {
+            parentComment: null,
+            content: contentId,
+            status: StatusComment.Pass,
+          },
+          order: { createTime: 'DESC' },
+        },
+        selectCond,
+      ),
+    );
 
     const count = await this.commentRepository.count({
       where: { content: contentId },

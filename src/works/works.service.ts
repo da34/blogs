@@ -17,7 +17,9 @@ export class WorksService {
   }
 
   findAll() {
-    return this.workRepository.find();
+    return this.workRepository.find({
+      order: { priority: 'DESC' },
+    });
   }
 
   findOne(id: string) {

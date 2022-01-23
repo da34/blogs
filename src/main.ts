@@ -11,17 +11,17 @@ import { csrfMiddleware } from './common/middleware/csrf.middleware.middleware';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const csrfProtection = csrf({
-    cookie: true,
-  });
-
-  // 注册csrf
-  app.use(cookieParser());
-  app.use(csrfProtection);
+  // const csrfProtection = csrf({
+  //   cookie: true,
+  // });
+  //
+  // // 注册csrf
+  // app.use(cookieParser());
+  // app.use(csrfProtection);
 
   app.setGlobalPrefix('api');
   // 注册中间件
-  app.use(csrfMiddleware);
+  // app.use(csrfMiddleware);
 
   // 注册响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());

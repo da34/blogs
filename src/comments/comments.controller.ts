@@ -10,6 +10,7 @@ import {
   Query,
   Ip,
   Req,
+  HttpException,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -22,6 +23,7 @@ import { UserRole } from '../users/entities/user.entity';
 import { QueryCommentDto } from './dto/query-comment.dto';
 import { createHash } from 'crypto';
 import { ExternalService } from '../external/external.service';
+import { StatusComment } from './entities/comment.entity';
 const md5 = (str) => createHash('md5').update(str).digest('hex');
 
 @ApiTags('评论')
@@ -59,7 +61,10 @@ export class CommentsController {
 
     createCommentDto.suggestion = JSON.stringify(result.detail);
 
-    return this.commentsService.create(createCommentDto);
+    if (createCommentDto.status !== StatusComment.Pass) {
+      throw new HttpException('评论包含敏感信息，已屏蔽！', 412);
+    }
+    await this.commentsService.create(createCommentDto);
   }
 
   @Get()
