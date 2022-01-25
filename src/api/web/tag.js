@@ -5,7 +5,7 @@ import http from '@/utils/http/request';
  */
 export function getTagRelation() {
   return http.request({
-    url: 'tag/relation',
+    url: 'tags/relation',
     method: 'get',
   });
 }

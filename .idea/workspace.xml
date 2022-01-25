@@ -4,22 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="更新eslint">
-      <change afterPath="$PROJECT_DIR$/src/api/system/log.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/log/CreateDrawer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/log/columns.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/web/log/index.vue" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="完成建站日志">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/useColumns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/useColumns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/naive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/naive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/tailwind.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/tailwind.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/system/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/article.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/tag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Upload/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Upload/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/modules/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/LatelyInfo/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/ArticleTop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/ArticleTop.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/TagArticle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/components/VisiArticle/TagArticle.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/console/console.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/site/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/log/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/log/CreateDrawer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/log/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/log/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/log/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/log/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/web/work/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/work/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/work/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +68,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/api/system" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -135,7 +140,12 @@
       <workItem from="1640833107994" duration="1243000" />
       <workItem from="1640838080875" duration="1152000" />
       <workItem from="1640847131682" duration="3430000" />
-      <workItem from="1640919868238" duration="17244000" />
+      <workItem from="1640919868238" duration="26573000" />
+      <workItem from="1642417694891" duration="2760000" />
+      <workItem from="1642484634941" duration="2411000" />
+      <workItem from="1642571171683" duration="595000" />
+      <workItem from="1642733927532" duration="1052000" />
+      <workItem from="1642947048751" duration="8329000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -144,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640947897624</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="完成建站日志">
+      <created>1641105262132</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1641105262132</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +180,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新eslint" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新eslint" />
+    <MESSAGE value="完成建站日志" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成建站日志" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

@@ -30,7 +30,7 @@ export default defineConfig({
     port: 4001,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:7001/api/admin/',
+        target: 'http://127.0.0.1:7001/api',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },

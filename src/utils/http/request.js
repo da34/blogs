@@ -3,8 +3,9 @@ import httpEnum from './httpType'
 import {useUserStore} from '@/stores/modules/user'
 import {storage} from '@/utils/Storage';
 import {NAxios} from './NAxios'
-import {checkStatus} from "./checkStatus";
+import {checkStatus} from './checkStatus';
 import router from '@/router';
+
 const LOGIN_PAGE_NAME = 'login'
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -33,7 +34,8 @@ const transform = {
     }
 
     //  这里 code，result，message为后台统一的字段，根据项目自定义
-    const {code, result, message} = data;
+    const {code, message} = data;
+    const result = data.data
     // 请求成功
     const hasSuccess = data && code === httpEnum.SUCCESS;
     // 是否显示提示信息
@@ -107,7 +109,7 @@ const transform = {
 
     csrfToken && (config.headers['yu-csrf-token'] = csrfToken)
     // jwt token
-    token && (config.headers['yujie-token'] = token)
+    token && (config.headers['Authorization'] = `Bearer ${token}`)
     return config;
   },
 

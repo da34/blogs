@@ -1,7 +1,7 @@
-import {h} from "vue";
-import {NButton, NSwitch, NTag} from "naive-ui";
-import {formatDate} from "@/utils";
-import {isFunction} from "lodash-es";
+import {h} from 'vue';
+import {NSwitch, NTag} from 'naive-ui';
+import {formatDate} from '@/utils';
+import {isFunction} from 'lodash-es';
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const createColumns = ({stateToggle}) => {
@@ -30,27 +30,27 @@ export const createColumns = ({stateToggle}) => {
         )
       }
     },
-    {
-      title: '类型', key: 'type', align: 'center',
-      render({type}) {
-        const typeMap = {
-          0: 'info',
-          1: 'warning'
-        }
-
-        const typeEnum = {
-          0: 'article',
-          1: 'page'
-        }
-        return h(
-          NTag,
-          {
-            type: typeMap[type]
-          },
-          {default: () => typeEnum[type]}
-        )
-      },
-    },
+    // {
+    //   title: '类型', key: 'type', align: 'center',
+    //   render({type}) {
+    //     const typeMap = {
+    //       0: 'info',
+    //       1: 'warning'
+    //     }
+    //
+    //     const typeEnum = {
+    //       0: 'article',
+    //       1: 'page'
+    //     }
+    //     return h(
+    //       NTag,
+    //       {
+    //         type: typeMap[type]
+    //       },
+    //       {default: () => typeEnum[type]}
+    //     )
+    //   },
+    // },
     {
       title: '状态', key: 'status', align: 'center',
       render({status}) {

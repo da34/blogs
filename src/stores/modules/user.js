@@ -35,11 +35,11 @@ export const useUserStore = defineStore('app-user', {
     async login(userInfo) {
       try {
         const response = await login(userInfo);
-        const {result, code} = response;
+        const {data, code} = response;
         if (code === httpEnum.SUCCESS) {
           const ex = 7 * 24 * 60 * 60 * 1000;
-          storage.set(ACCESS_TOKEN, result.token, ex);
-          this.setToken(result.token);
+          storage.set(ACCESS_TOKEN, data.token, ex);
+          this.setToken(data.token);
         }
         return Promise.resolve(response);
       } catch (e) {
@@ -53,15 +53,15 @@ export const useUserStore = defineStore('app-user', {
       return new Promise((resolve, reject) => {
         getUserInfo()
           .then((res) => {
-            const result = res;
-            const { permissions, avatar, username } = result
-            if (permissions) {
-              that.setPermissions(permissions);
+            const data = res;
+            const {role, username} = data
+            if (role) {
+              that.setPermissions(role);
             } else {
               reject(new Error('getInfo: permissionsList must be a non-null array !'));
             }
             // console.log(permissions, avatar, username)
-            that.setAvatar(avatar);
+            // that.setAvatar(avatar);
             that.setUsername(username);
             resolve(res);
           })

@@ -22,7 +22,7 @@
               <NThing :title="article.title">
                 <template #description>
                   <p class="text-xs text-gray-500">
-                    {{ formatDate(article.createdAt) }}
+                    {{ formatDate(+article.createTime) }}
                   </p>
                 </template>
               </NThing>
@@ -64,7 +64,7 @@
                 :description="comment.text"
               >
                 <p class="text-xs text-gray-500">
-                  {{ formatDate(comment.createdAt) }}
+                  {{ formatDate(+comment.createTime) }}
                 </p>
               </NThing>
             </NListItem>
@@ -77,17 +77,24 @@
 
 <script setup>
 import {ref} from 'vue'
-import {formatDate} from "@/utils";
-import {getArticleNew} from "@/api/web/article";
-import {getCommentNew} from "@/api/web/comment";
+import {formatDate} from '@/utils';
+import {getArticleList} from '@/api/web/article';
+import {getCommentList} from '@/api/web/comment';
 
 const loading = ref(true)
 const comments = ref([])
 const articles = ref([])
 
-Promise.all([getArticleNew(), getCommentNew()]).then(res => {
-  // console.log('Promise', res)
-  [articles.value, comments.value] = res
+Promise.all([
+  getArticleList({pageSize: 5, 'sortBy[createTime]': 'DESC', 'filters[type]': 'article'}),
+  getCommentList({
+    pageSize: 5,
+    'sortBy[createTime]': 'DESC',
+    'filters[status]': 'pass',
+    fields: 'id,nickName,text,createTime,avatar'
+  })]).then(res => {
+  articles.value = res[0].list
+  comments.value = res[1].list
 }).finally(() => loading.value = false)
 
 </script>

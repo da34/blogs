@@ -33,7 +33,11 @@
       >
         <NInput
           v-model:value="formParams.desc"
-          placeholder="请输入描述"
+          :autosize="{
+            minRows: 4
+          }"
+          placeholder="请输入事件，回车分隔"
+          type="textarea"
         />
       </NFormItem>
     </NForm>
@@ -93,6 +97,8 @@ export default defineComponent({
     function formSubmit() {
       formRef.value.validate(async (errors) => {
         if (!errors) {
+          // 以回车分隔
+          state.formParams.desc = state.formParams.desc.split(/[(\r\n)\r\n]+/)
           if (state.formParams.id) {
             await updateLog({...state.formParams})
           } else {

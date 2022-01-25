@@ -6,14 +6,19 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from "vue";
-import {getArticleTop} from "@/api/web/article";
-import {useECharts} from "./useEcharts";
+import {onMounted, ref} from 'vue';
+import {getArticleList} from '@/api/web/article';
+import {useECharts} from './useEcharts';
 
 const chartRef = ref(null)
 const {setOptions} = useECharts(chartRef)
 
-getArticleTop().then(res => {
+getArticleList({
+  pageSize: 5,
+  'sortBy[views]': 'DESC',
+  'filters[type]': 'article',
+  fields: 'id,title,views'
+}).then(res => {
   setOptions({
     series: [
       {
@@ -26,7 +31,7 @@ getArticleTop().then(res => {
           fontSize: 15,
         },
         tooltip: {show: false},
-        data: res.map((item) => {
+        data: res.list.map((item) => {
           return {
             value: 0,
             label: {
@@ -58,7 +63,7 @@ getArticleTop().then(res => {
         itemStyle: {
           barBorderRadius: 4,
         },
-        data: res.map((item, index) => {
+        data: res.list.map((item, index) => {
           let color = COLOR[index % COLOR.length];
           return {
             value: item.views,

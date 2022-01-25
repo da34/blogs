@@ -4,7 +4,7 @@ import {formatDate} from '../../../utils';
 
 export const columns = [
   {
-    title: '日期', key: 'date',
+    title: '日期', key: 'date', width: '200px', align: 'center',
     render({date}) {
       return h(
         'span',
@@ -15,7 +15,30 @@ export const columns = [
       )
     }
   },
-  {title: '描述', key: 'desc'}
+  {
+    title: '事件', key: 'desc', align: 'center',
+    render({desc}) {
+      const result = []
+      desc.forEach(text => {
+        result.push(h(
+          'p',
+          {
+            class: 'm-0'
+          },
+          {
+            default: () => text
+          }
+        ))
+      })
+      return h(
+        'div',
+        {},
+        {
+          default: () => result
+        }
+      )
+    }
+  }
 ]
 
 export const createActionColumn = ({handleDel, handleEdit}) => {
@@ -25,6 +48,7 @@ export const createActionColumn = ({handleDel, handleEdit}) => {
     key: 'action',
     // fixed: 'right',
     // align: 'left',
+    align: 'center',
     render(record) {
       return h(TableAction, {
         style: 'button',

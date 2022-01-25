@@ -6,14 +6,15 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from "vue";
-import {getTagRelation} from "@/api/web/tag";
-import {useECharts} from "./useEcharts";
+import {onMounted, ref} from 'vue';
+import {getTagRelation} from '@/api/web/tag';
+import {useECharts} from './useEcharts';
 
 const chartRef = ref(null)
 const {setOptions} = useECharts(chartRef)
 
 getTagRelation().then(res => {
+  console.log(res)
   setOptions({
     series: [
       {

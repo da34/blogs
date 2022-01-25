@@ -12,7 +12,7 @@
           type="primary"
           @click="addMenu"
         >
-          添加作品
+          添加日志
         </NButton>
       </template>
       <!--表格-->

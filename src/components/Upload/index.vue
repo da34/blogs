@@ -18,7 +18,7 @@
       class="relative"
     >
       <img
-        class="w-52 h-32 img rounded"
+        class="w-52 h-32 img rounded object-contain"
         :src="fileUrl"
       >
       <NIcon
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import {ref, toRef,onMounted} from 'vue'
+import {onMounted, ref, toRef} from 'vue'
 import {qiniuUpload} from '@/utils';
 import {Close} from '@icon-park/vue-next'
 
@@ -87,7 +87,4 @@ async function pullFiles() {
 </script>
 
 <style scoped lang="scss">
-.img {
-  object-fit: cover;
-}
 </style>

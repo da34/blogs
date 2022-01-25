@@ -3,10 +3,10 @@ import TableAction from '@/components/BasicTable/TableAction.vue'
 
 
 export const columns = [
-  {title: '名称', key: 'name'},
-  {title: '描述', key: 'desc'},
+  {title: '名称', key: 'name', align: 'center'},
+  {title: '描述', key: 'desc', align: 'center'},
   {
-    title: '封面', key: 'imgUrl',
+    title: '封面', key: 'imgUrl', align: 'center',
     render({imgUrl}) {
       return h(
         'img',
@@ -18,7 +18,8 @@ export const columns = [
     }
   },
   {
-    title: '预览链接', key: 'linkUrl', render({linkUrl}) {
+    title: '预览链接', key: 'linkUrl', align: 'center',
+    render({linkUrl}) {
       return h(
         'a',
         {
@@ -32,7 +33,8 @@ export const columns = [
     }
   },
   {
-    title: '源码链接', key: 'sourceUrl', render({sourceUrl}) {
+    title: '源码链接', key: 'sourceUrl', align: 'center',
+    render({sourceUrl}) {
       return h(
         'a',
         {
@@ -45,7 +47,7 @@ export const columns = [
       )
     }
   },
-  {title: '排序', key: 'priority'}
+  {title: '排序', key: 'priority', align: 'center'}
 ]
 
 export const createActionColumn = ({handleDel, handleEdit}) => {

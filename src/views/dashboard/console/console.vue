@@ -24,42 +24,13 @@
           >
             <CountTo
               class="text-3xl"
-              :end-val="stateCount.articleCount"
+              :end-val="stateCount.contentCount"
             />
             <NIcon
               color="#69c0ff"
               size="35"
             >
               <AlignTextBothOne />
-            </NIcon>
-          </div>
-        </NCard>
-      </NGi>
-      <NGi>
-        <NCard
-          segmented
-          size="small"
-          :bordered="false"
-          title="标签数"
-        >
-          <NSkeleton
-            v-if="loading"
-            :width="100"
-            size="medium"
-          />
-          <div
-            v-else
-            class="p-1 flex justify-between"
-          >
-            <CountTo
-              class="text-3xl"
-              :end-val="stateCount.tagCount"
-            />
-            <NIcon
-              color="#ff85c0"
-              size="35"
-            >
-              <TagOne />
             </NIcon>
           </div>
         </NCard>
@@ -88,7 +59,7 @@
               color="#5cdbd3"
               size="35"
             >
-              <CommentOne />
+              <CommentOne/>
             </NIcon>
           </div>
         </NCard>
@@ -98,7 +69,7 @@
           segmented
           size="small"
           :bordered="false"
-          title="友联数"
+          title="标签数"
         >
           <NSkeleton
             v-if="loading"
@@ -111,7 +82,36 @@
           >
             <CountTo
               class="text-3xl"
-              :end-val="stateCount.linkCount"
+              :end-val="stateCount.tagCount"
+            />
+            <NIcon
+              color="#ff85c0"
+              size="35"
+            >
+              <TagOne/>
+            </NIcon>
+          </div>
+        </NCard>
+      </NGi>
+      <NGi>
+        <NCard
+          segmented
+          size="small"
+          :bordered="false"
+          title="分类数"
+        >
+          <NSkeleton
+            v-if="loading"
+            :width="100"
+            size="medium"
+          />
+          <div
+            v-else
+            class="p-1 flex justify-between"
+          >
+            <CountTo
+              class="text-3xl"
+              :end-val="stateCount.categoryCount"
             />
             <NIcon
               color="#5cdbd3"
@@ -134,8 +134,8 @@ import {ref} from 'vue'
 import CountTo from '@/components/CountTo/index.vue'
 import VisiArticle from './components/VisiArticle/index.vue'
 import LatelyInfo from './components/LatelyInfo/index.vue'
-import {getDashboardInfo} from "@/api/dashboard";
-import {AlignTextBothOne,TagOne,CommentOne,Peoples} from '@icon-park/vue-next'
+import {getDashboardInfo} from '@/api/dashboard';
+import {AlignTextBothOne, CommentOne, Peoples, TagOne} from '@icon-park/vue-next'
 
 const loading = ref(true)
 const stateCount = ref({})

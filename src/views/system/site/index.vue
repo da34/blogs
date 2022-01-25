@@ -3,13 +3,13 @@
     <NForm
       ref="formRef"
       class="w-2/5 m-auto"
-      :label-width="80"
+      :label-width="100"
       :model="formValue"
       label-placement="left"
       :rules="rules"
     >
       <NFormItem
-        label="LOGO"
+        label="PC LOGO"
         path="logo"
       >
         <MUpload v-model:file-url="formValue.logo">
@@ -17,7 +17,20 @@
             上传图片
           </p>
           <NIcon size="30">
-            <Upload />
+            <Upload/>
+          </NIcon>
+        </MUpload>
+      </NFormItem>
+      <NFormItem
+        label="Mobile LOGO"
+        path="logo"
+      >
+        <MUpload v-model:file-url="formValue.m_logo">
+          <p class="mb-3">
+            上传图片
+          </p>
+          <NIcon size="30">
+            <Upload/>
           </NIcon>
         </MUpload>
       </NFormItem>
@@ -54,11 +67,11 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+import {onMounted, ref} from 'vue'
 import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
 import MUpload from '@/components/Upload/index.vue'
-import {getConfig, updateConfig} from "@/api/system/config";
+import {getConfig, updateConfig} from '@/api/system/config';
 
 
 const key = 'site'
@@ -71,7 +84,8 @@ const formValue = ref({
   name: '',
   internetNumber: '',
   logo: '',
-  url: ''
+  url: '',
+  m_logo: ''
 })
 const rules = {
   name: {
