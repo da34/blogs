@@ -19,6 +19,7 @@ import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { adDataEnum, AdQuery } from '../common/decorator/adQuery.decorator';
+import { checkNullObj } from '../common/utils';
 
 @ApiTags('内容')
 @Controller('contents')
@@ -40,10 +41,17 @@ export class ContentsController {
       order: null,
       where: null,
     };
-    // if (fields.length) {
-    //   selectCond.select = fields;
-    // }
-    console.log(adQuery)
+    const { fields, sortBy, filters } = adQuery;
+    if (fields.length) {
+      selectCond.select = adQuery.fields;
+    }
+    if (!checkNullObj(sortBy)) {
+      selectCond.order = sortBy;
+    }
+    if (!checkNullObj(filters)) {
+      selectCond.where = filters;
+    }
+    console.log(selectCond);
     return this.contentsService.findAll(query, selectCond);
   }
 

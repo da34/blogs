@@ -9,18 +9,17 @@ export enum adDataEnum {
 // sortBy []
 // fields ,
 export const AdQuery = createParamDecorator(
-  (data: adDataEnum, ctx: ExecutionContext) => {
+  (
+    data: adDataEnum,
+    ctx: ExecutionContext,
+  ): { filters?: []; sortBy?: []; fields?: [] } => {
     const request = ctx.switchToHttp().getRequest();
-    if (data) {
-      let query = request.query[data];
-      if (data === adDataEnum.Fields && query) {
-        query = query.split(',');
-      } else {
-        query = [];
-      }
-      return query;
-    }
-    const { sortBy, filters, fields } = request.query;
-    return { sortBy, filters, fields };
+    const query = request.query;
+
+    // fields 因为是以分隔的字符串，所以切割成数组
+    query[adDataEnum.Fields] = query[adDataEnum.Fields]?.split(',') || [];
+
+    // 如果传参，返回指定参数的值
+    return data ? query[data] : query;
   },
 );
