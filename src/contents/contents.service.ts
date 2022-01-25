@@ -56,8 +56,7 @@ export class ContentsService {
       ),
     );
 
-    const count = await this.contentRepository.count();
-    // console.log(contents);
+    const count = await this.contentRepository.count(selectCond.where);
     return { count, list: contents };
   }
 

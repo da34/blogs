@@ -19,6 +19,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
+import { DbOptions } from '../common/decorator/dbOptions.decorator';
 
 @ApiTags('友联')
 @Controller('links')
@@ -34,11 +35,9 @@ export class LinksController {
   }
 
   @Get()
-  findAll(@Query() query: QueryLinkDto) {
-    const selectCond = {
-      select: ['id', 'avatar', 'outline', 'URL', 'name'],
-    };
-    return this.linksService.findAll(query, selectCond);
+  findAll(@Query() query: QueryLinkDto, @DbOptions() dbOptions) {
+    console.log(dbOptions);
+    return this.linksService.findAll(query, dbOptions);
   }
 
   @Get(':id')

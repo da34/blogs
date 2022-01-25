@@ -29,7 +29,7 @@ export class LinksService {
         selectCond,
       ),
     );
-    const count = await this.linkRepository.count();
+    const count = await this.linkRepository.count(selectCond.where);
     return { count, list: links };
   }
 

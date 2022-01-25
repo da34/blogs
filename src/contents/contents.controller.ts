@@ -18,8 +18,7 @@ import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryContentDto } from './dto/query-content-dto';
-import { adDataEnum, AdQuery } from '../common/decorator/adQuery.decorator';
-import { checkNullObj } from '../common/utils';
+import { DbOptions } from '../common/decorator/dbOptions.decorator';
 
 @ApiTags('内容')
 @Controller('contents')
@@ -35,24 +34,8 @@ export class ContentsController {
   }
 
   @Get()
-  findAll(@Query() query: QueryContentDto, @AdQuery() adQuery) {
-    const selectCond = {
-      select: null,
-      order: null,
-      where: null,
-    };
-    const { fields, sortBy, filters } = adQuery;
-    if (fields.length) {
-      selectCond.select = adQuery.fields;
-    }
-    if (!checkNullObj(sortBy)) {
-      selectCond.order = sortBy;
-    }
-    if (!checkNullObj(filters)) {
-      selectCond.where = filters;
-    }
-    console.log(selectCond);
-    return this.contentsService.findAll(query, selectCond);
+  findAll(@Query() query: QueryContentDto, @DbOptions() dbOptions) {
+    return this.contentsService.findAll(query, dbOptions);
   }
 
   // @Get(':id')
