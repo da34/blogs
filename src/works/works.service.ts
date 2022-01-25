@@ -17,7 +17,6 @@ export class WorksService {
   }
 
   findAll(dbOptions) {
-    console.log(dbOptions)
     return this.workRepository.find(
       Object.assign(
         {

@@ -36,7 +36,6 @@ export class LinksController {
 
   @Get()
   findAll(@Query() query: QueryLinkDto, @DbOptions() dbOptions) {
-    console.log(dbOptions);
     return this.linksService.findAll(query, dbOptions);
   }
 

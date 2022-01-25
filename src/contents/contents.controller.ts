@@ -38,24 +38,10 @@ export class ContentsController {
     return this.contentsService.findAll(query, dbOptions);
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   const selectCond = {
-  //     select: [
-  //       'id',
-  //       'title',
-  //       'content',
-  //       'firstPicture',
-  //       'isCommentOpen',
-  //       'isShare',
-  //       'likeNum',
-  //       'createTime',
-  //       'updateTime',
-  //       'views',
-  //     ],
-  //   };
-  //   return this.contentsService.findOne(id, selectCond);
-  // }
+  @Get('detail')
+  findOne(@Query('id') id: string, @DbOptions() dbOptions) {
+    return this.contentsService.findOne(id, dbOptions);
+  }
 
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @ApiBearerAuth()
@@ -71,26 +57,5 @@ export class ContentsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.contentsService.remove(id);
-  }
-
-  @Get('articleTop')
-  articleTop() {
-    const query = { pageSize: 5 };
-    const selectCond = {
-      select: ['title', 'views'],
-      order: { views: 'DESC' },
-      relations: [],
-    };
-    return this.contentsService.findAll(query, selectCond);
-  }
-
-  @Get('new')
-  getByCreateTime() {
-    const query = { pageSize: 5 };
-    const selectCond = {
-      select: ['id', 'title', 'createTime'],
-      relations: [],
-    };
-    return this.contentsService.findAll(query, selectCond);
   }
 }
