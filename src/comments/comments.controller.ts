@@ -24,7 +24,6 @@ import { QueryCommentDto } from './dto/query-comment.dto';
 import { createHash } from 'crypto';
 import { ExternalService } from '../external/external.service';
 import { StatusComment } from './entities/comment.entity';
-import { ContentsService } from '../contents/contents.service';
 const md5 = (str) => createHash('md5').update(str).digest('hex');
 
 @ApiTags('评论')

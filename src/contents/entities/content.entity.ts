@@ -3,7 +3,6 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  OneToOne,
   ManyToMany,
   JoinTable,
   ManyToOne,
@@ -14,9 +13,14 @@ import { Comment } from '../../comments/entities/comment.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { Tag } from '../../tags/entities/tag.entity';
 
-enum TypeContent {
-  ARTICLE = 'article',
-  PAGE = 'page',
+export enum TypeContent {
+  Article = 'article',
+  Page = 'page',
+}
+
+export enum StatusContent {
+  Publish = 'publish',
+  Draft = 'draft',
 }
 
 @Entity()
@@ -46,15 +50,15 @@ export class Content {
   @Column({
     type: 'enum',
     enum: TypeContent,
-    default: TypeContent.ARTICLE,
+    default: TypeContent.Article,
   })
   type: string;
 
   @Column({
     type: 'enum',
-    comment: '内容类型 publish - 发布 ,  draft - 草稿,  del - 删除',
-    enum: ['publish', 'draft', 'del'],
-    default: 'publish',
+    comment: '内容类型 publish - 发布 ,  draft - 草稿',
+    enum: StatusContent,
+    default: StatusContent.Publish,
   })
   status: string;
 

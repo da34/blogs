@@ -5,16 +5,17 @@ import {
   Body,
   Patch,
   Param,
-  Delete, UseGuards
-} from "@nestjs/common";
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { AuthGuard } from "@nestjs/passport";
-import { RolesGuard } from "../auth/roles/roles.guard";
-import { Roles } from "../auth/roles/roles.decorator";
-import { UserRole } from "../users/entities/user.entity";
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../auth/roles/roles.guard';
+import { Roles } from '../auth/roles/roles.decorator';
+import { UserRole } from '../users/entities/user.entity';
 
 @ApiTags('标签')
 @Controller('tags')
@@ -53,5 +54,16 @@ export class TagsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.tagsService.remove(id);
+  }
+}
+
+@ApiTags('标签')
+@Controller('tag')
+export class AdminTagsController {
+  constructor(private readonly tagsService: TagsService) {}
+
+  @Get('relation')
+  getTagRelation() {
+    return this.tagsService.getRelation();
   }
 }

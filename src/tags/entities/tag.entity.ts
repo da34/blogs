@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+import { Content } from '../../contents/entities/content.entity';
 
 @Entity()
 export class Tag {
@@ -14,4 +21,9 @@ export class Tag {
     default: 0,
   })
   views: number;
+
+  @ManyToMany(() => Content, {
+    cascade: true,
+  })
+  contents: Content[];
 }

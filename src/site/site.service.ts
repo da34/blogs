@@ -3,8 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
-import { Content } from '../contents/entities/content.entity';
+import {
+  Content,
+  StatusContent,
+  TypeContent,
+} from '../contents/entities/content.entity';
 import * as dayjs from 'dayjs';
+import { Comment, StatusComment } from '../comments/entities/comment.entity';
 
 @Injectable()
 export class SiteService {
@@ -15,6 +20,8 @@ export class SiteService {
     private tagRep: Repository<Tag>,
     @InjectRepository(Category)
     private categoryRep: Repository<Category>,
+    @InjectRepository(Comment)
+    private commentRep: Repository<Comment>,
   ) {}
   async findAll() {
     const data = {
@@ -24,7 +31,9 @@ export class SiteService {
     };
     data.tagCount = await this.tagRep.count();
     data.categoryCount = await this.categoryRep.count();
-    data.contentCount = await this.contentRep.count();
+    data.contentCount = await this.contentRep.count({
+      where: { status: StatusContent.Publish, type: TypeContent.Article },
+    });
     return data;
   }
   async getArchive() {
@@ -59,6 +68,16 @@ export class SiteService {
       data.push(obj);
     }
 
+    return data;
+  }
+
+  async getInfo() {
+    const data = {
+      commentCount: 0,
+    };
+    data.commentCount = await this.commentRep.count({
+      where: { status: StatusComment.Pass },
+    });
     return data;
   }
 }

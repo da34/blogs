@@ -36,4 +36,10 @@ export class TagsService {
   remove(id: string) {
     return this.tagRepository.delete(id);
   }
+
+  getRelation() {
+    return this.tagRepository.find({
+      relations: ['contents'],
+    });
+  }
 }

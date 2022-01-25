@@ -43,21 +43,12 @@ export class ContentsService {
   }
 
   async findAll(query?: QueryContentDto, selectCond?: FindConditions<any>) {
-    const {
-      page = 1,
-      pageSize = 10,
-      type = 'article',
-      status = 'publish',
-    } = query;
+    const { page = 1, pageSize = 10 } = query;
     const contents = await this.contentRepository.find(
       Object.assign(
         {
           take: pageSize,
           skip: (page - 1) * pageSize,
-          where: {
-            type,
-            status,
-          },
           relations: ['tags', 'category'],
           order: { createTime: 'DESC' },
         },

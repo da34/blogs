@@ -1,13 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UseGuards,
+  Get,
+  Param,
+  Patch,
+  Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ContentsService } from './contents.service';
 import { CreateContentDto } from './dto/create-content.dto';
@@ -18,6 +18,7 @@ import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryContentDto } from './dto/query-content-dto';
+import { adDataEnum, AdQuery } from '../common/decorator/adQuery.decorator';
 
 @ApiTags('内容')
 @Controller('contents')
@@ -33,39 +34,37 @@ export class ContentsController {
   }
 
   @Get()
-  findAll(@Query() query: QueryContentDto) {
+  findAll(@Query() query: QueryContentDto, @AdQuery() adQuery) {
     const selectCond = {
-      select: [
-        'id',
-        'title',
-        'contentOutline',
-        'firstPicture',
-        'isTop',
-        'createTime',
-      ],
-      relations: ['tags'],
+      select: null,
+      order: null,
+      where: null,
     };
+    // if (fields.length) {
+    //   selectCond.select = fields;
+    // }
+    console.log(adQuery)
     return this.contentsService.findAll(query, selectCond);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    const selectCond = {
-      select: [
-        'id',
-        'title',
-        'content',
-        'firstPicture',
-        'isCommentOpen',
-        'isShare',
-        'likeNum',
-        'createTime',
-        'updateTime',
-        'views',
-      ],
-    };
-    return this.contentsService.findOne(id, selectCond);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   const selectCond = {
+  //     select: [
+  //       'id',
+  //       'title',
+  //       'content',
+  //       'firstPicture',
+  //       'isCommentOpen',
+  //       'isShare',
+  //       'likeNum',
+  //       'createTime',
+  //       'updateTime',
+  //       'views',
+  //     ],
+  //   };
+  //   return this.contentsService.findOne(id, selectCond);
+  // }
 
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @ApiBearerAuth()
@@ -82,11 +81,7 @@ export class ContentsController {
   remove(@Param('id') id: string) {
     return this.contentsService.remove(id);
   }
-}
 
-@Controller('content')
-export class AdminContentsController {
-  constructor(private readonly contentsService: ContentsService) {}
   @Get('articleTop')
   articleTop() {
     const query = { pageSize: 5 };
