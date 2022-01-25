@@ -46,27 +46,20 @@ export class CommentsService {
   }
 
   async findAll(query: QueryCommentDto, selectCond?: FindConditions<any>) {
-    const { page = 1, pageSize = 10, contentId } = query;
+    const { page = 1, pageSize = 10 } = query;
     const comments = await this.commentRepository.find(
       Object.assign(
         {
           take: pageSize,
           skip: (page - 1) * pageSize,
           relations: ['childComments'],
-          where: {
-            parentComment: null,
-            content: contentId,
-            status: StatusComment.Pass,
-          },
           order: { createTime: 'DESC' },
         },
         selectCond,
       ),
     );
 
-    const count = await this.commentRepository.count({
-      where: { content: contentId },
-    });
+    const count = await this.commentRepository.count(selectCond.where);
     return { count, list: comments };
   }
 

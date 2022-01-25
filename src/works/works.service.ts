@@ -16,10 +16,16 @@ export class WorksService {
     return this.workRepository.save(createWork);
   }
 
-  findAll() {
-    return this.workRepository.find({
-      order: { priority: 'DESC' },
-    });
+  findAll(dbOptions) {
+    console.log(dbOptions)
+    return this.workRepository.find(
+      Object.assign(
+        {
+          order: { priority: 'DESC' },
+        },
+        dbOptions,
+      ),
+    );
   }
 
   findOne(id: string) {

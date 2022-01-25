@@ -24,6 +24,7 @@ import { QueryCommentDto } from './dto/query-comment.dto';
 import { createHash } from 'crypto';
 import { ExternalService } from '../external/external.service';
 import { StatusComment } from './entities/comment.entity';
+import { DbOptions } from "../common/decorator/dbOptions.decorator";
 const md5 = (str) => createHash('md5').update(str).digest('hex');
 
 @ApiTags('评论')
@@ -68,8 +69,8 @@ export class CommentsController {
   }
 
   @Get()
-  findAll(@Query() query: QueryCommentDto) {
-    return this.commentsService.findAll(query);
+  findAll(@Query() query: QueryCommentDto, @DbOptions() dbOptions) {
+    return this.commentsService.findAll(query, dbOptions);
   }
 
   @Get(':id')

@@ -16,6 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
+import { DbOptions } from '../common/decorator/dbOptions.decorator';
 
 @ApiTags('作品')
 @Controller('works')
@@ -31,8 +32,8 @@ export class WorksController {
   }
 
   @Get()
-  findAll() {
-    return this.worksService.findAll();
+  findAll(@DbOptions() dbOptions) {
+    return this.worksService.findAll(dbOptions);
   }
 
   @Get(':id')

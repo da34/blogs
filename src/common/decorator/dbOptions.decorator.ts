@@ -6,18 +6,17 @@ export enum adDataEnum {
   SortBy = 'sortBy',
   Fields = 'fields',
 }
-// filters []
-// sortBy []
-// fields ,
+
+interface ValueObject {
+  where?: object;
+  select?: string[];
+  order?: object;
+}
 export const DbOptions = createParamDecorator(
   (data: adDataEnum, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
     const query = request.query;
-    const selectCond = {
-      select: null,
-      order: null,
-      where: null,
-    };
+    const selectCond: ValueObject = {};
 
     // fields 因为是以分隔的字符串，所以切割成数组
     query[adDataEnum.Fields] = query[adDataEnum.Fields]?.split(',') || [];
@@ -35,7 +34,6 @@ export const DbOptions = createParamDecorator(
     if (!checkNullObj(filters)) {
       selectCond.where = filters;
     }
-    console.log(selectCond);
     return selectCond;
   },
 );
