@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsUrl } from 'class-validator';
+import { IsNotEmpty, IsUrl, ValidateIf } from 'class-validator';
 
 export class CreateContentDto {
   @IsNotEmpty()
@@ -10,9 +10,9 @@ export class CreateContentDto {
   @IsNotEmpty()
   contentOutline: string;
 
-  @IsNotEmpty()
+  @ValidateIf((o) => o.firstPicture !== '')
   @IsUrl()
-  firstPicture: string;
+  firstPicture?: string;
 
   status?: string = 'publish';
   type?: string = 'article';

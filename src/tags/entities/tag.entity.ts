@@ -22,8 +22,6 @@ export class Tag {
   })
   views: number;
 
-  @ManyToMany(() => Content, {
-    cascade: true,
-  })
+  @ManyToMany(() => Content, (content) => content.tags)
   contents: Content[];
 }

@@ -38,8 +38,8 @@ export class ContentsController {
     return this.contentsService.findAll(query, dbOptions);
   }
 
-  @Get('detail')
-  findOne(@Query('id') id: string, @DbOptions() dbOptions) {
+  @Get('detail/:id')
+  findOne(@Param('id') id: string, @DbOptions() dbOptions) {
     return this.contentsService.findOne(id, dbOptions);
   }
 

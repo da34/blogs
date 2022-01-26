@@ -3,7 +3,7 @@ import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './entities/tag.entity';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 @Injectable()
 export class TagsService {
@@ -37,9 +37,16 @@ export class TagsService {
     return this.tagRepository.delete(id);
   }
 
-  getRelation() {
-    return this.tagRepository.find({
-      relations: ['contents'],
+  async getRelation() {
+    const tags = await getRepository(Tag)
+      .createQueryBuilder('tags')
+      .leftJoinAndSelect('tags.contents', 'contents')
+      .select(['contents.id', 'tags.name', 'tags.id'])
+      .getMany();
+    return tags.map((tag) => {
+      tag['value'] = tag.contents.length;
+      delete tag['contents'];
+      return tag;
     });
   }
 }

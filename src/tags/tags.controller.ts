@@ -35,10 +35,10 @@ export class TagsController {
     return this.tagsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tagsService.findOne(id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.tagsService.findOne(id);
+  // }
 
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @ApiBearerAuth()
@@ -55,12 +55,6 @@ export class TagsController {
   remove(@Param('id') id: string) {
     return this.tagsService.remove(id);
   }
-}
-
-@ApiTags('标签')
-@Controller('tag')
-export class AdminTagsController {
-  constructor(private readonly tagsService: TagsService) {}
 
   @Get('relation')
   getTagRelation() {

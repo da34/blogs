@@ -106,7 +106,7 @@ export class Content {
   @ManyToOne(() => Category, (category) => category.content)
   category: Category;
 
-  @ManyToMany(() => Tag, {
+  @ManyToMany(() => Tag, (tag) => tag.contents, {
     cascade: true,
   })
   @JoinTable()
