@@ -26,23 +26,15 @@
         label="类型"
       >
         <NSelect
-          v-model:value="formValue.type"
+          v-model:value="formValue['filters[type]']"
           class="w-40"
           placeholder="请选择类型"
           :options="typeOptions"
         />
       </NFormItem>
-      <NFormItem label="状态">
-        <NSelect
-          v-model:value="formValue.status"
-          class="w-40"
-          placeholder="请选择状态"
-          :options="statusOptions"
-        />
-      </NFormItem>
       <NFormItem label="标题">
         <NInput
-          v-model:value="formValue.title"
+          v-model:value="formValue['filters[title]']"
           placeholder="输入标题"
         />
       </NFormItem>
@@ -82,11 +74,11 @@ import {changeArticleState, getArticleList} from '@/api/web/article';
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
+import {updateArticle} from '../../../../api/web/article';
 
 const defaultVla = () => ({
-  title: null,
-  type: null,
-  status: null
+  'filters[title]': null,
+  'filters[type]': null,
 })
 
 const router = useRouter()
@@ -109,19 +101,12 @@ const pagination = reactive({
 
 // 表格列
 const actionColumn = createActionColumn({handleDel, handleEdit})
-const column = createColumns({stateToggle})
+const column = createColumns({updateArticle})
 
-// 表单
-const statusOptions = ['public', 'draft', 'delete'].map(
-    (v, i) => ({
-      label: v,
-      value: i
-    })
-)
 const typeOptions = ['article', 'page'].map(
-    (v, i) => ({
+    (v) => ({
       label: v,
-      value: i
+      value: v
     })
 )
 

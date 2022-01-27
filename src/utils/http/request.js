@@ -5,6 +5,7 @@ import {storage} from '@/utils/Storage';
 import {NAxios} from './NAxios'
 import {checkStatus} from './checkStatus';
 import router from '@/router';
+import {filterObjNull} from '../index';
 
 const LOGIN_PAGE_NAME = 'login'
 /**
@@ -106,6 +107,11 @@ const transform = {
     const userStore = useUserStore();
     const token = userStore.getToken;
     const csrfToken = storage.getCookie('csrfToken')
+
+    // 如果是post，把data为null的清空
+    if (config.method === 'post') {
+      config.data = filterObjNull(config.data)
+    }
 
     csrfToken && (config.headers['yu-csrf-token'] = csrfToken)
     // jwt token

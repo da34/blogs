@@ -42,7 +42,7 @@ export function createLink(data) {
 export function editLink(data) {
   return http.request({
     url: 'links/' + data.id,
-    method: 'put',
+    method: 'patch',
     data
   },{
     isShowSuccessMessage: true

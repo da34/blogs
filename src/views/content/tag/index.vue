@@ -104,9 +104,8 @@
 import {h, ref,reactive, onMounted} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import TableAction from '@/components/BasicTable/TableAction.vue'
-import {getTagList, delTag, createTag, editTag} from "@/api/web/tag";
-import {formatDate} from "@/utils";
-import {useDialog} from "naive-ui";
+import {getTagList, delTag, createTag, editTag} from '@/api/web/tag';
+import {useDialog} from 'naive-ui';
 
 const pagination = reactive({
   page: 1,
@@ -152,28 +151,14 @@ function reload() {
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      tableRef.value.fetchState({page: 1, name: formValue.value.name})
+      tableRef.value.fetchState({page: 1, 'filters[name]': formValue.value.name})
     }
   })
 }
 
 const createColumns = [
   {title: '标签名', key: 'name', ellipsis: true, align: 'center',},
-  {title: '浏览量', key: 'views', align: 'center',},
-  {
-    title: '创建时间',
-    key: 'createdAt',
-    align: 'center',
-    render(row) {
-      return h(
-          'span',
-          null,
-          {
-            default: () => row.createdAt && formatDate(row.createdAt)
-          }
-      )
-    }
-  }
+  {title: '浏览量', key: 'views', align: 'center',}
 ]
 
 const actionColumn = {
@@ -210,8 +195,8 @@ function handleDel(record) {
     content: '你确定删除吗？',
     positiveText: '确定',
     negativeText: '取消',
-    onPositiveClick: () => {
-      delTag(record.id)
+    onPositiveClick: async () => {
+      await delTag(record.id)
       tableRef.value.reload()
     }
   })

@@ -1,18 +1,19 @@
-import {ref, unref, watch} from "vue";
+import {ref, unref, watch} from 'vue';
 import { useRouter } from 'vue-router'
-import {createArticle, updateArticle} from "@/api/web/article";
+import {createArticle, updateArticle} from '@/api/web/article';
 
 export function usePublic(show) {
   const defaultVal = () => ({
     title: '',
     content: '',
-    type: 0,
-    commentDisabled: true,
-    shareStatement: true,
+    type: 'article',
+    isCommentOpen: true,
+    isShare: true,
     contentOutline: '',
     firstPicture: '',
     isTop: false,
-    tags: [],
+    tagsId: [],
+    categoryId:null,
   })
   // 初始化文章
   const article = ref(defaultVal())

@@ -52,19 +52,9 @@ export function createTag(data) {
 export function editTag(data) {
   return http.request({
     url: 'tags/' + data.id,
-    method: 'put',
+    method: 'patch',
     data
   },{
     isShowSuccessMessage: true
-  });
-}
-
-/**
- * @description: 获取全部标签
- */
-export function allTag() {
-  return http.request({
-    url: 'tag/all',
-    method: 'get',
   });
 }

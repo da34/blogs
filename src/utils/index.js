@@ -2,7 +2,7 @@ import {h} from 'vue';
 import {NIcon} from 'naive-ui';
 import dayjs from 'dayjs'
 import * as qiniu from 'qiniu-js'
-import {getQiNiuToken} from "@/api/system/config";
+import {getQiNiuToken} from '@/api/system/config';
 
 /**
  * render 图标
@@ -122,5 +122,14 @@ export function getTreeItem(data, key) {
       }
     }
   })
+  return result
+}
+
+
+export function filterObjNull(obj) {
+  const result = {}
+  for (const [key, value] of Object.entries(obj)) {
+    if (value != null) result[key] = value
+  }
   return result
 }

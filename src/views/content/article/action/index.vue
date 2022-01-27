@@ -64,10 +64,20 @@
             </NFormItemGi>
             <NFormItemGi
               :span="2"
+              label="添加分类"
+            >
+              <NSelect
+                v-model:value="article.categoryId"
+                placeholder="请选择分类"
+                :options="categoryOption"
+              />
+            </NFormItemGi>
+            <NFormItemGi
+              :span="2"
               label="添加标签"
             >
               <NSelect
-                v-model:value="article.tags"
+                v-model:value="article.tagsId"
                 multiple
                 placeholder="请选择标签"
                 :options="tagsOption"
@@ -76,10 +86,10 @@
             <NFormItemGi label="文章类型">
               <NRadioGroup v-model:value="article.type">
                 <NSpace>
-                  <NRadioButton :value="0">
+                  <NRadioButton value="article">
                     article
                   </NRadioButton>
-                  <NRadioButton :value="1">
+                  <NRadioButton value="page">
                     page
                   </NRadioButton>
                 </NSpace>
@@ -90,10 +100,10 @@
             </NFormItemGi>
 
             <NFormItemGi label="评论">
-              <NSwitch v-model:value="article.commentDisabled" />
+              <NSwitch v-model:value="article.isCommentOpen" />
             </NFormItemGi>
             <NFormItemGi label="版权">
-              <NSwitch v-model:value="article.shareStatement" />
+              <NSwitch v-model:value="article.isShare" />
             </NFormItemGi>
           </NGrid>
         </NForm>
@@ -122,25 +132,31 @@ import {useRoute} from 'vue-router'
 import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
 import Markdown from '@/components/Markdown/index.vue'
-import {allTag} from "@/api/web/tag";
-import {getArticleById} from "@/api/web/article";
+import {getTagList} from '@/api/web/tag';
+import {getArticleById} from '@/api/web/article';
 import MUpload from '@/components/Upload/index.vue'
-import {usePublic} from "./composables/usePubilc";
+import {usePublic} from './composables/usePubilc';
+import { getCategories } from '@/api/web/category';
 
 const message = useMessage()
 const route = useRoute()
 const tagsOption = ref()
+const categoryOption = ref()
 const show = ref(false)
 const { id } = route.params
 
 // 发布逻辑
 const {article, submitCallback, cancelCallback, setArticle} = usePublic(show)
 
-// 获取标签
+// 获取标签和分类
 const fetchState = async() => {
-  const data = await allTag()
-  tagsOption.value = data.map(tag => {
+  const tags = await getTagList()
+  const categories = await getCategories()
+  tagsOption.value = tags.map(tag => {
     return {label: tag.name, value: tag.id}
+  })
+  categoryOption.value = categories.map(cate => {
+    return {label: cate.name, value: cate.id}
   })
 }
 
@@ -154,6 +170,8 @@ onMounted(async () => {
 
 async function getArticle(id) {
   const data = await getArticleById(id)
+  data.tagsId = data.tags.map(tag => tag.id)
+  data.categoryId = data.category?.id
   setArticle(data)
 }
 
@@ -167,6 +185,10 @@ function publicClick() {
     return
   }
   show.value = true
+}
+
+function formatTags(tags) {
+  return tags.map(tag => tag.name)
 }
 
 </script>

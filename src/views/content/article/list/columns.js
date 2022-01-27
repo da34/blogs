@@ -1,10 +1,10 @@
 import {h} from 'vue';
-import {NSwitch, NTag} from 'naive-ui';
+import {NSwitch, NTag, NSpace} from 'naive-ui';
 import {formatDate} from '@/utils';
 import {isFunction} from 'lodash-es';
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
-export const createColumns = ({stateToggle}) => {
+export const createColumns = ({updateArticle}) => {
   return [
     {
       title: '标题',
@@ -13,8 +13,8 @@ export const createColumns = ({stateToggle}) => {
       align: 'center'
     },
     {
-      title: '创建时间',
-      key: 'createdAt',
+      title: '发布时间',
+      key: 'createTime',
       align: 'center',
       // sorter (rowA, rowB) {
       //   console.log(rowA, rowB)
@@ -25,95 +25,107 @@ export const createColumns = ({stateToggle}) => {
           'span',
           null,
           {
-            default: () => row.createdAt && formatDate(row.createdAt)
+            default: () => row.createTime && formatDate(+row.createTime)
           }
         )
       }
     },
-    // {
-    //   title: '类型', key: 'type', align: 'center',
-    //   render({type}) {
-    //     const typeMap = {
-    //       0: 'info',
-    //       1: 'warning'
-    //     }
-    //
-    //     const typeEnum = {
-    //       0: 'article',
-    //       1: 'page'
-    //     }
-    //     return h(
-    //       NTag,
-    //       {
-    //         type: typeMap[type]
-    //       },
-    //       {default: () => typeEnum[type]}
-    //     )
-    //   },
-    // },
     {
-      title: '状态', key: 'status', align: 'center',
-      render({status}) {
-        const statusMap = {
-          0: 'success',
-          1: 'default',
-          2: 'error',
-        }
-
-        const statusEnum = {
-          0: 'publish',
-          1: 'draft',
-          2: 'delete',
+      title: '分类',
+      key: 'category',
+      align: 'center',
+      width: '150px',
+      render({category}) {
+        return category?.name && h(
+          NTag,
+          {
+            type: 'success'
+          },
+          {default: () => category?.name}
+        )
+      }
+    },
+    {
+      title: '标签',
+      key: 'tags',
+      align: 'center',
+      render({tags}) {
+        const rTags = tags.map((tag, i) => {
+          return h(
+            NTag,
+            {
+              type: [ 'primary' ,'info' , 'success' , 'warning' , 'error'][i % 5]
+            },
+            {default: () => tag.name}
+          )
+        })
+        return h(
+          NSpace,
+          {
+            justify: 'center'
+          },
+          { default: () => rTags }
+        )
+      }
+    },
+    {
+      title: '类型', key: 'type', align: 'center', width: '150px',
+      render({type}) {
+        const typeMap = {
+          'article': 'info',
+          'page': 'warning'
         }
         return h(
           NTag,
           {
-            type: statusMap[status]
+            type: typeMap[type]
           },
-          {default: () => statusEnum[status]}
+          {default: () => type}
         )
       },
     },
-    {title: '浏览量', key: 'views', align: 'center'},
-    {title: '点赞数', key: 'likeNum', align: 'center'},
+    {title: '浏览量', key: 'views', align: 'center', width: '150px'},
     {
       title: '置顶',
       key: 'isTop',
       align: 'center',
+      width: '150px',
       render(row) {
         return h(
           NSwitch,
           {
             defaultValue: row.isTop,
-            'on-update:value': value => isFunction(stateToggle) && stateToggle('isTop', row.id, value / 1)
+            'on-update:value': value => isFunction(updateArticle) && updateArticle(Object.assign(row, { isTop: value  }))
           }
         )
       }
     },
     {
       title: '评论',
-      key: 'commentDisabled',
+      key: 'isCommentOpen',
       align: 'center',
+      width: '150px',
       render(row) {
         return h(
           NSwitch,
           {
-            defaultValue: row.commentDisabled,
-            'on-update:value': value => isFunction(stateToggle) && stateToggle('commentDisabled', row.id, value)
+            defaultValue: row.isCommentOpen,
+            'on-update:value': value => isFunction(updateArticle) && updateArticle(Object.assign(row, { isCommentOpen: value  }))
           }
         )
       }
     },
     {
       title: '版权',
-      key: 'shareStatement',
+      key: 'isShare',
       align: 'center',
+      width: '150px',
       render(row) {
         return h(
           NSwitch,
           {
-            defaultValue: row.shareStatement,
-            'on-update:value': value => isFunction(stateToggle) && stateToggle('shareStatement', row.id, value)
+            defaultValue: row.isShare,
+            'on-update:value': value => isFunction(updateArticle) && updateArticle(Object.assign(row, { isShare: value  }))
           }
         )
       }

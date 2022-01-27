@@ -1,8 +1,8 @@
-import {h} from "vue";
-import {NAvatar, NSwitch} from "naive-ui";
-import {formatDate} from "@/utils";
+import {h} from 'vue';
+import {NAvatar, NSwitch} from 'naive-ui';
+import {formatDate} from '@/utils';
 import TableAction from '@/components/BasicTable/TableAction.vue'
-import {isFunction } from "lodash-es";
+import {isFunction } from 'lodash-es';
 
 
 export const columns = ({handleUpdate}) => {
@@ -41,14 +41,14 @@ export const columns = ({handleUpdate}) => {
     },
     {
       title: '创建时间',
-      key: 'createdAt',
+      key: 'createTime',
       align: 'center',
       render(row) {
         return h(
           'span',
           null,
           {
-            default: () => row.createdAt && formatDate(row.createdAt)
+            default: () => row.createTime && formatDate(+row.createTime)
           }
         )
       }

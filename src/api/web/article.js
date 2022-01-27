@@ -42,10 +42,9 @@ export function createArticle(data) {
  * @description: 更新文章
  */
 export function updateArticle(data) {
-  // console.log(data, 'data')
   return http.request({
     url: 'contents/' + data.id,
-    method: 'put',
+    method: 'patch',
     data
   },{
     isShowSuccessMessage: true
@@ -57,7 +56,7 @@ export function updateArticle(data) {
  */
 export function getArticleById(id) {
   return http.request({
-    url: 'contents/' + id,
+    url: 'contents/detail/' + id,
     method: 'get'
   });
 }

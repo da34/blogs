@@ -130,9 +130,9 @@
 <script setup>
 import {reactive, ref} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import {getLinks, delLink, createLink, editLink, statusToggle} from "@/api/web/link";
+import {getLinks, delLink, createLink, editLink, statusToggle} from '@/api/web/link';
 import {columns, createActionColumn} from './columns'
-import {useDialog} from "naive-ui";
+import {useDialog} from 'naive-ui';
 
 const pagination = reactive({
   page: 1,
@@ -191,7 +191,7 @@ function reload() {
 function handleValidateClick(e) {
   formRef.value.validate((errors) => {
     if (!errors) {
-      tableRef.value.fetchState({page: 1, name: formValue.value.name})
+      tableRef.value.fetchState({page: 1, 'filters[name]': formValue.value.name})
     }
   })
 }
