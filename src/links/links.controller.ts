@@ -41,7 +41,7 @@ export class LinksController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Link> {
-    return this.linksService.findOne(+id);
+    return this.linksService.findOne(id);
   }
 
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -49,7 +49,7 @@ export class LinksController {
   @ApiBearerAuth()
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLinkDto: UpdateLinkDto) {
-    return this.linksService.update(+id, updateLinkDto);
+    return this.linksService.update(id, updateLinkDto);
   }
 
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -57,6 +57,6 @@ export class LinksController {
   @ApiBearerAuth()
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.linksService.remove(+id);
+    return this.linksService.remove(id);
   }
 }

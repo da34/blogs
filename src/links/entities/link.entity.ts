@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from "typeorm";
 
 @Entity()
 export class Link {
@@ -23,9 +23,24 @@ export class Link {
   })
   isValid: boolean;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createTime: Date;
+  @Column({
+    type: 'bigint',
+  })
+  createTime: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  updateTime: Date;
+  @Column({
+    type: 'bigint',
+  })
+  updateTime: number;
+
+  @BeforeInsert()
+  createDates() {
+    this.createTime = Date.now();
+    this.updateTime = Date.now();
+  }
+
+  @BeforeUpdate()
+  updateDates() {
+    this.updateTime = Date.now();
+  }
 }

@@ -47,8 +47,10 @@ export class TagsService {
     return this.tagRepository.save(updateTag);
   }
 
-  remove(id: string) {
-    return this.tagRepository.delete(id);
+  async remove(id: string) {
+    const tag = await this.tagRepository.findOne(id);
+    tag.contents = [];
+    return this.tagRepository.remove(tag);
   }
 
   async getRelation() {

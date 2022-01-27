@@ -33,11 +33,11 @@ export class LinksService {
     return { count, list: links };
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.linkRepository.findOne(id);
   }
 
-  async update(id: number, updateLinkDto: UpdateLinkDto) {
+  async update(id: string, updateLinkDto: UpdateLinkDto) {
     const existLink = await this.linkRepository.findOne(id);
     if (!existLink) {
       throw new HttpException(`id为${id}的友联不存在`, 401);
@@ -46,7 +46,7 @@ export class LinksService {
     return this.linkRepository.save(updateLink);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const existLink = await this.linkRepository.findOne(id);
     if (!existLink) {
       throw new HttpException(`id为${id}的友联不存在`, 401);
