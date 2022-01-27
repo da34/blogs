@@ -2,7 +2,13 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, In, Repository } from 'typeorm';
+import {
+  createQueryBuilder,
+  FindConditions,
+  getRepository,
+  In,
+  Repository,
+} from 'typeorm';
 import { Content } from './entities/content.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { Tag } from '../tags/entities/tag.entity';
@@ -74,26 +80,23 @@ export class ContentsService {
   async update(id: string, updateContentDto: UpdateContentDto) {
     const { tagsId, categoryId } = updateContentDto;
     const exitsContent = await this.contentRepository.findOne(id);
+
+    if (!exitsContent) {
+      throw new HttpException(`不存在id为${id}的内容`, 401);
+    }
     const updateContent = this.contentRepository.merge(
       exitsContent,
       updateContentDto,
     );
-    if (!exitsContent) {
-      throw new HttpException(`不存在id为${id}的内容`, 401);
-    }
 
     // 查询 category
-    if (categoryId) {
-      updateContent.category = await this.categoryRepository.findOne(
-        categoryId,
-      );
-    }
-    // 查询tags
-    if (tagsId) {
-      updateContent.tags = await this.tagRepository.find({
-        id: In(tagsId),
-      });
-    }
+    // if (categoryId) {
+    updateContent.category =
+      (categoryId && (await this.categoryRepository.findOne(categoryId))) ||
+      null;
+    updateContent.tags = await this.tagRepository.find({
+      id: In(tagsId),
+    });
 
     return this.contentRepository.save(updateContent);
   }

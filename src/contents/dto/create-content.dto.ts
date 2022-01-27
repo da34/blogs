@@ -18,7 +18,7 @@ export class CreateContentDto {
   type?: string = 'article';
   views?: number = 0;
 
-  shareStatement?: boolean = true;
+  isShare?: boolean = true;
   isCommentOpen?: boolean = true;
   isTop?: boolean = false;
   likeNum?: number = 0;
