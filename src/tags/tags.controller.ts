@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
@@ -16,6 +17,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
+import { DbOptions } from '../common/decorator/dbOptions.decorator';
+import { QueryContentDto } from '../contents/dto/query-content-dto';
 
 @ApiTags('标签')
 @Controller('tags')
@@ -31,8 +34,8 @@ export class TagsController {
   }
 
   @Get()
-  findAll() {
-    return this.tagsService.findAll();
+  findAll(@Query() query: QueryContentDto, @DbOptions() dbOptions) {
+    return this.tagsService.findAll(query, dbOptions);
   }
 
   // @Get(':id')

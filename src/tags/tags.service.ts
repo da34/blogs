@@ -16,8 +16,22 @@ export class TagsService {
     return this.tagRepository.save(createTag);
   }
 
-  findAll() {
-    return this.tagRepository.find();
+  async findAll(query, selectCond) {
+    const { page = 1, pageSize = 10 } = query;
+    const tags = await this.tagRepository.find(
+      Object.assign(
+        {
+          take: pageSize,
+          skip: (page - 1) * pageSize,
+        },
+        selectCond,
+      ),
+    );
+    const count = await this.tagRepository.count(selectCond.where);
+    return {
+      count,
+      list: tags,
+    };
   }
 
   findOne(id: string) {
