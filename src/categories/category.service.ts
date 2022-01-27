@@ -16,8 +16,22 @@ export class CategoryService {
     return this.categoryRepository.save(createCategory);
   }
 
-  findAll() {
-    return this.categoryRepository.find();
+  async findAll(query, selectCond) {
+    const { page = 1, pageSize = 10 } = query;
+    const categories = await this.categoryRepository.find(
+      Object.assign(
+        {
+          take: pageSize,
+          skip: (page - 1) * pageSize,
+        },
+        selectCond,
+      ),
+    );
+    const count = await this.categoryRepository.count(selectCond.where);
+    return {
+      count,
+      list: categories,
+    };
   }
 
   findOne(id: string) {

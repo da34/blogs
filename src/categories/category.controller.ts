@@ -6,8 +6,8 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
-} from '@nestjs/common';
+  UseGuards, Query
+} from "@nestjs/common";
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -16,6 +16,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
+import { QueryContentDto } from "../contents/dto/query-content-dto";
+import { DbOptions } from "../common/decorator/dbOptions.decorator";
 
 @ApiTags('分类')
 @Controller('category')
@@ -31,8 +33,8 @@ export class CategoryController {
   }
 
   @Get()
-  findAll() {
-    return this.classifyService.findAll();
+  findAll(@Query() query: QueryContentDto, @DbOptions() dbOptions) {
+    return this.classifyService.findAll(query, dbOptions);
   }
 
   @Get(':id')
