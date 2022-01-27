@@ -130,7 +130,7 @@
 <script setup>
 import {reactive, ref} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import {getLinks, delLink, createLink, editLink, statusToggle} from '@/api/web/link';
+import {getLinks, delLink, createLink, editLink} from '@/api/web/link';
 import {columns, createActionColumn} from './columns'
 import {useDialog} from 'naive-ui';
 
@@ -238,8 +238,8 @@ function handleAction() {
   })
 }
 
-async function handleUpdate(row, status) {
-  await statusToggle({id: row.id, status})
+async function handleUpdate(row) {
+  await editLink(row)
 }
 
 </script>

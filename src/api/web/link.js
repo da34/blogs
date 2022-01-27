@@ -48,17 +48,3 @@ export function editLink(data) {
     isShowSuccessMessage: true
   });
 }
-
-
-/**
- * @description: 更改友联状态
- */
-export function statusToggle(data) {
-  return http.request({
-    url: 'link/statusToggle',
-    method: 'put',
-    data
-  },{
-    isShowSuccessMessage: true
-  });
-}

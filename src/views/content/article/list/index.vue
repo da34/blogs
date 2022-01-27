@@ -74,7 +74,7 @@ import {changeArticleState, getArticleList} from '@/api/web/article';
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
-import {updateArticle} from '../../../../api/web/article';
+import {delArticle, updateArticle} from '../../../../api/web/article';
 
 const defaultVla = () => ({
   'filters[title]': null,
@@ -126,7 +126,7 @@ function handleDel({id}) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      changeArticleState({field: 'status', id, value: 2})
+      delArticle(id)
       handleSearch()
     }
   })

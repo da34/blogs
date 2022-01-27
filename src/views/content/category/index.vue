@@ -11,7 +11,7 @@
       <NFormItem path="name">
         <NInput
           v-model:value="formValue.name"
-          placeholder="请输入标签名"
+          placeholder="请输入分类名"
         />
       </NFormItem>
       <NFormItem>
@@ -46,7 +46,7 @@
       :columns="createColumns"
       :action-column="actionColumn"
       :pagination="pagination"
-      :request="getTagList"
+      :request="getCategories"
       :single-line="false"
     />
     <!--编辑、新建标签-->
@@ -60,7 +60,7 @@
     >
       <template #header>
         <div class="border-b-1 border-gray-200">
-          {{ titleType === 'new' ? '新建' : '编辑' }}标签
+          {{ titleType === 'new' ? '新建' : '编辑' }}分类
         </div>
       </template>
       <NForm
@@ -71,12 +71,12 @@
         :rules="rules"
       >
         <NFormItem
-          label="标签名"
+          label="分类名"
           path="name"
         >
           <NInput
             v-model:value="formData.name"
-            placeholder="请输入标签名"
+            placeholder="请输入分类名"
           />
         </NFormItem>
       </NForm>
@@ -104,8 +104,8 @@
 import {h, ref,reactive} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import TableAction from '@/components/BasicTable/TableAction.vue'
-import {getTagList, delTag, createTag, editTag} from '@/api/web/tag';
 import {useDialog} from 'naive-ui';
+import { getCategories, delCategory, createCategory, editCategory } from '@/api/web/category';
 
 const pagination = reactive({
   page: 1,
@@ -138,7 +138,7 @@ const dialog = useDialog()
 const rules = {
   name: {
     required: true,
-    message: '请输入标签名',
+    message: '请输入分类名',
     trigger: ['input']
   }
 }
@@ -157,7 +157,7 @@ function handleValidateClick(e) {
 }
 
 const createColumns = [
-  {title: '标签名', key: 'name', ellipsis: true, align: 'center',},
+  {title: '分类名', key: 'name', ellipsis: true, align: 'center',},
   {title: '浏览量', key: 'views', align: 'center',}
 ]
 
@@ -196,7 +196,7 @@ function handleDel(record) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: async () => {
-      await delTag(record.id)
+      await delCategory(record.id)
       tableRef.value.reload()
     }
   })
@@ -223,7 +223,7 @@ function handleAction() {
   }
   formDataRef.value.validate(async (errors) => {
     if (!errors) {
-      formData.value.id ? await editTag(data) : await createTag(data)
+      formData.value.id ? await editCategory(data) : await createCategory(data)
       tableRef.value.reload()
       useShowModal.value = false
     }

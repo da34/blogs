@@ -60,3 +60,15 @@ export function getArticleById(id) {
     method: 'get'
   });
 }
+
+/**
+ * @description: 删除文章
+ */
+export function delArticle(id) {
+  return http.request({
+    url: 'contents/' + id,
+    method: 'delete'
+  },{
+    isShowSuccessMessage: true
+  });
+}

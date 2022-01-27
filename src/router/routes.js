@@ -130,6 +130,12 @@ const asyncRoutes = [
         meta: {title: '标签列表', keepAlive: true}
       },
       {
+        path: 'category/list',
+        name: `${ContentName}_category_list`,
+        component: () => import('@/views/content/category/index.vue'),
+        meta: {title: '分类列表', keepAlive: true}
+      },
+      {
         path: 'link/list',
         name: `${ContentName}_link_list`,
         component: () => import('@/views/content/link/index.vue'),

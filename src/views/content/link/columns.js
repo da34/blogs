@@ -24,13 +24,13 @@ export const columns = ({handleUpdate}) => {
     {title: '名称', key: 'name', ellipsis: true, align: 'center',},
     {title: '简述', key: 'outline', ellipsis: true, align: 'center',},
     {
-      title: '状态', key: 'status',align: 'center',
+      title: '状态', key: 'isValid',align: 'center',
       render(row) {
         return h(
           NSwitch,
           {
-            defaultValue: row.status === '正常',
-            onUpdateValue: (val) => isFunction(handleUpdate) && handleUpdate(row, val)
+            defaultValue: row.isValid === true,
+            onUpdateValue: (val) => isFunction(handleUpdate) && handleUpdate(Object.assign(row, { isValid: !row.isValid  }))
           },
           {
             checked: () => '正常',

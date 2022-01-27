@@ -152,10 +152,10 @@ const {article, submitCallback, cancelCallback, setArticle} = usePublic(show)
 const fetchState = async() => {
   const tags = await getTagList()
   const categories = await getCategories()
-  tagsOption.value = tags.map(tag => {
+  tagsOption.value = tags.list.map(tag => {
     return {label: tag.name, value: tag.id}
   })
-  categoryOption.value = categories.map(cate => {
+  categoryOption.value = categories.list.map(cate => {
     return {label: cate.name, value: cate.id}
   })
 }

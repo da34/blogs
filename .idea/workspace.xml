@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="chore: 修改首页的接口">
-      <change afterPath="$PROJECT_DIR$/src/api/web/category.js" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="chore: 新增过滤对象 值为val的方法">
+      <change afterPath="$PROJECT_DIR$/src/views/content/category/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/web/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/article.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/web/link.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/link.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/tag.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/checkStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/checkStatus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/link/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
@@ -64,7 +58,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/api/web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/content" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -78,11 +72,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\files\backups\blog\blog-admin\src\views\content" />
       <recent name="E:\files\backups\blog\blog-admin\src\api\web" />
       <recent name="E:\文件\备份\blog\blog-admin\src\api\system" />
       <recent name="E:\文件\备份\blog\blog-admin\src\views\web" />
       <recent name="E:\文件\备份\blog\blog-admin\src\components" />
-      <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\check" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\list" />
@@ -141,7 +135,7 @@
       <workItem from="1642484634941" duration="2411000" />
       <workItem from="1642571171683" duration="595000" />
       <workItem from="1642733927532" duration="1052000" />
-      <workItem from="1642947048751" duration="18853000" />
+      <workItem from="1642947048751" duration="20485000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -164,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643123235851</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="chore: 新增过滤对象 值为val的方法">
+      <created>1643293517183</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1643293517183</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +188,8 @@
     <MESSAGE value="更新eslint" />
     <MESSAGE value="完成建站日志" />
     <MESSAGE value="chore: 修改首页的接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: 修改首页的接口" />
+    <MESSAGE value="chore: 新增过滤对象 值为val的方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: 新增过滤对象 值为val的方法" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
