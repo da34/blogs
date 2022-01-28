@@ -15,11 +15,10 @@ import { UserRole } from '../users/entities/user.entity';
 import { Roles } from '../auth/roles/roles.decorator';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles/roles.guard';
+import { Auth } from "../common/decorator/auth.decorator";
 
 @ApiTags('配置')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@ApiBearerAuth()
-@Roles(UserRole.Admin)
+@Auth([UserRole.Admin])
 @Controller('options')
 export class OptionsController {
   constructor(private readonly optionsService: OptionsService) {}

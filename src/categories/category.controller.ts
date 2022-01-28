@@ -6,27 +6,23 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards, Query
-} from "@nestjs/common";
+  Query,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../auth/roles/roles.guard';
-import { Roles } from '../auth/roles/roles.decorator';
+import { ApiTags } from '@nestjs/swagger';
 import { UserRole } from '../users/entities/user.entity';
-import { QueryContentDto } from "../contents/dto/query-content-dto";
-import { DbOptions } from "../common/decorator/dbOptions.decorator";
+import { QueryContentDto } from '../contents/dto/query-content-dto';
+import { DbOptions } from '../common/decorator/dbOptions.decorator';
+import { Auth } from '../common/decorator/auth.decorator';
 
 @ApiTags('分类')
 @Controller('category')
 export class CategoryController {
   constructor(private readonly classifyService: CategoryService) {}
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Post()
   create(@Body() createClassifyDto: CreateCategoryDto) {
     return this.classifyService.create(createClassifyDto);
@@ -42,9 +38,7 @@ export class CategoryController {
     return this.classifyService.findOne(id);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -53,9 +47,7 @@ export class CategoryController {
     return this.classifyService.update(id, updateClassifyDto);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.classifyService.remove(id);

@@ -17,7 +17,7 @@ const PREFIX = 'api';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const csrfProtection = csrf();
+  // const csrfProtection = csrf();
   //
   // // 注册csrf
   // app.use(cookieParser());
@@ -33,6 +33,7 @@ async function bootstrap() {
   // 防止跨站脚本攻击
   app.use(helmet());
 
+  // 请求限制
   app.use(
     rateLimit({
       windowMs: 60 * 1000, // 1分钟

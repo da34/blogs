@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Ip } from '@nestjs/common';
 
-@Controller()
-export class AppController {}
+@Controller('app')
+export class AppController {
+  @Get('ip')
+  ip(@Ip() ip) {
+    return ip;
+  }
+}

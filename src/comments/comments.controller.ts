@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
   Query,
   Ip,
   Req,
@@ -15,10 +14,7 @@ import {
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../auth/roles/roles.guard';
-import { Roles } from '../auth/roles/roles.decorator';
+import { ApiTags } from '@nestjs/swagger';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryCommentDto } from './dto/query-comment.dto';
 import { ExternalService } from '../external/external.service';
@@ -26,6 +22,7 @@ import { StatusComment } from './entities/comment.entity';
 import { DbOptions } from '../common/decorator/dbOptions.decorator';
 import xss from 'xss';
 import { md5 } from '../common/utils';
+import { Auth } from '../common/decorator/auth.decorator';
 
 @ApiTags('评论')
 @Controller('comments')
@@ -81,37 +78,15 @@ export class CommentsController {
     return this.commentsService.findOne(id);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
     return this.commentsService.update(id, updateCommentDto);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.commentsService.remove(id);
-  }
-}
-
-@Controller('comment')
-export class AdminCommentsController {
-  constructor(private readonly commentsService: CommentsService) {}
-
-  @Get('new')
-  getByCreateTime() {
-    const query = { pageSize: 5 };
-    const selectCond = {
-      select: ['id', 'text', 'createTime', 'avatar', 'nickName'],
-      relations: [],
-      where: {
-        status: StatusComment.Pass,
-      },
-    };
-    return this.commentsService.findAll(query, selectCond);
   }
 }

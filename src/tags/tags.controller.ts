@@ -6,28 +6,23 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
   Query,
 } from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../auth/roles/roles.guard';
-import { Roles } from '../auth/roles/roles.decorator';
+import { ApiTags } from '@nestjs/swagger';
 import { UserRole } from '../users/entities/user.entity';
 import { DbOptions } from '../common/decorator/dbOptions.decorator';
 import { QueryContentDto } from '../contents/dto/query-content-dto';
+import { Auth } from '../common/decorator/auth.decorator';
 
 @ApiTags('标签')
 @Controller('tags')
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Post()
   create(@Body() createTagDto: CreateTagDto) {
     return this.tagsService.create(createTagDto);
@@ -43,17 +38,13 @@ export class TagsController {
   //   return this.tagsService.findOne(id);
   // }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
     return this.tagsService.update(id, updateTagDto);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @ApiBearerAuth()
-  @Roles(UserRole.Admin)
+  @Auth([UserRole.Admin])
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.tagsService.remove(id);
