@@ -60,7 +60,7 @@ export const useUserStore = defineStore('app-user', {
             } else {
               reject(new Error('getInfo: permissionsList must be a non-null array !'));
             }
-            // console.log(permissions, avatar, username)
+            // console.history(permissions, avatar, username)
             // that.setAvatar(avatar);
             that.setUsername(username);
             resolve(res);

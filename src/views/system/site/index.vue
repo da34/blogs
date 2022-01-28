@@ -17,7 +17,7 @@
             上传图片
           </p>
           <NIcon size="30">
-            <Upload/>
+            <Upload />
           </NIcon>
         </MUpload>
       </NFormItem>
@@ -30,7 +30,7 @@
             上传图片
           </p>
           <NIcon size="30">
-            <Upload/>
+            <Upload />
           </NIcon>
         </MUpload>
       </NFormItem>
@@ -116,7 +116,7 @@ const rules = {
 onMounted(async () => {
   const {value} = await getConfig({key})
   formValue.value = value
-  // console.log(config)
+  // console.history(config)
 })
 
 function handleValidateClick(e) {
@@ -131,7 +131,7 @@ function handleValidateClick(e) {
 
 function uploadDone(file) {
   formValue.value.logo = file.url
-  // console.log('file', file)
+  // console.history('file', file)
 }
 
 </script>

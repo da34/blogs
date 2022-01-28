@@ -46,7 +46,7 @@
 
 <script>
 import {defineComponent, reactive, ref, toRefs} from 'vue';
-import {createLog, updateLog} from '@/api/system/log';
+import {createHistory, updateHistory} from '@/api/system/history';
 import {useMessage} from 'naive-ui';
 
 const rules = {
@@ -100,9 +100,9 @@ export default defineComponent({
           // 以回车分隔
           state.formParams.desc = state.formParams.desc.split(/[(\r\n)\r\n]+/)
           if (state.formParams.id) {
-            await updateLog({...state.formParams})
+            await updateHistory({...state.formParams})
           } else {
-            await createLog({...state.formParams})
+            await createHistory({...state.formParams})
           }
           handleReset();
           closeDrawer();

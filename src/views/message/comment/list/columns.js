@@ -15,7 +15,7 @@ export const columns = [
       const parser = new UAParser(ua);
       const browser = parser.getBrowser()
       const os = parser.getOS()
-      // console.log(parser.getResult());
+      // console.history(parser.getResult());
       const browserDom = h(NTag,
         {
           type: 'info',

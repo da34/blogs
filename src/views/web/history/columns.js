@@ -10,7 +10,7 @@ export const columns = [
         'span',
         {},
         {
-          default: () => formatDate(date, 'YYYY-MM-DD')
+          default: () => formatDate(+date, 'YYYY-MM-DD')
         }
       )
     }

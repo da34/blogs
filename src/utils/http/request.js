@@ -29,7 +29,7 @@ const transform = {
     const reject = Promise.reject.bind(Promise);
 
     const {data} = res;
-    // console.log(data, 111111)
+    // console.history(data, 111111)
     if (!data) {
       return reject(data);
     }
@@ -135,7 +135,7 @@ const transform = {
     // }
     // 请求是否被取消
     const isCancel = axios.isCancel(error);
-    // console.log(window)
+    // console.history(window)
     if (!isCancel) {
       checkStatus(error.response?.status, msg, $message);
     } else {

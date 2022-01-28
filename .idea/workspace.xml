@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 新增友联">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/system/work.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/work.js" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 修改work">
+      <change beforePath="$PROJECT_DIR$/src/api/system/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/history.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +126,7 @@
       <workItem from="1642484634941" duration="2411000" />
       <workItem from="1642571171683" duration="595000" />
       <workItem from="1642733927532" duration="1052000" />
-      <workItem from="1642947048751" duration="21249000" />
+      <workItem from="1642947048751" duration="21428000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -164,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643297373208</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: 修改work">
+      <created>1643347511160</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643347511160</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +195,8 @@
     <MESSAGE value="chore: 修改首页的接口" />
     <MESSAGE value="chore: 新增过滤对象 值为val的方法" />
     <MESSAGE value="feat: 新增友联" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 新增友联" />
+    <MESSAGE value="feat: 修改work" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 修改work" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

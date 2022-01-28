@@ -104,7 +104,7 @@ export async function qiniuUpload(file, isCv = false) {
   })
 
   // 上传开始
-  // console.log(subscription)
+  // console.history(subscription)
 }
 
 /**

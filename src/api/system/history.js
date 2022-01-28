@@ -3,9 +3,9 @@ import http from '@/utils/http/request';
 /**
  * @description: 获取全部日志
  */
-export function getLogs() {
+export function getHistories() {
   return http.request({
-    url: 'logs',
+    url: 'histories',
     method: 'get',
   });
 }
@@ -13,9 +13,9 @@ export function getLogs() {
 /**
  * @description: 创建日志
  */
-export function createLog(data) {
+export function createHistory(data) {
   return http.request({
-    url: 'logs',
+    url: 'histories',
     method: 'post',
     data
   }, {
@@ -26,10 +26,10 @@ export function createLog(data) {
 /**
  * @description: 修改日志
  */
-export function updateLog(data) {
+export function updateHistory(data) {
   return http.request({
-    url: 'logs/' + data.id,
-    method: 'put',
+    url: 'histories/' + data.id,
+    method: 'patch',
     data
   }, {
     isShowSuccessMessage: true
@@ -39,9 +39,9 @@ export function updateLog(data) {
 /**
  * @description: 删除日志
  */
-export function delLog(id) {
+export function delHistory(id) {
   return http.request({
-    url: 'logs/' + id,
+    url: 'histories/' + id,
     method: 'delete'
   }, {
     isShowSuccessMessage: true

@@ -38,7 +38,7 @@
 <script setup>
 import {reactive, ref, toRaw} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';
-import {getLogs} from '@/api/system/log';
+import {getHistories, delHistory} from '@/api/system/history';
 import {columns, createActionColumn} from './columns'
 import BasicTable from '@/components/BasicTable/index.vue'
 import CreateDrawer from './CreateDrawer.vue'
@@ -68,8 +68,8 @@ function handleDel(row) {
     content: '你确定删除吗？',
     positiveText: '确定',
     negativeText: '取消',
-    onPositiveClick: () => {
-      delWork(row.id)
+    onPositiveClick: async () => {
+      await delHistory(row.id)
       reload()
     }
   })
@@ -98,7 +98,7 @@ function handleEdit(row) {
 
 
 async function fetch() {
-  return await getLogs()
+  return await getHistories()
 }
 
 

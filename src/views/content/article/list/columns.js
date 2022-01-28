@@ -17,7 +17,7 @@ export const createColumns = ({updateArticle}) => {
       key: 'createTime',
       align: 'center',
       // sorter (rowA, rowB) {
-      //   console.log(rowA, rowB)
+      //   console.history(rowA, rowB)
       //   return rowA.createdAt - rowB.createdAt
       // },
       render(row) {

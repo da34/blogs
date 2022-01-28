@@ -217,10 +217,10 @@ const asyncRoutes = [
         meta: {title: '作品管理', keepAlive: true}
       },
       {
-        path: 'log',
-        name: `${WebName}_log`,
-        component: () => import('@/views/web/log/index.vue'),
-        meta: {title: '建站管理', keepAlive: true}
+        path: 'history',
+        name: `${WebName}_history`,
+        component: () => import('@/views/web/history/index.vue'),
+        meta: {title: '建站日志', keepAlive: true}
       }
     ]
   },
