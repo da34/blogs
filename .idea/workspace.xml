@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 修改work">
-      <change beforePath="$PROJECT_DIR$/src/api/system/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/history.js" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 修改history">
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/config/email.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/config/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/menu/columns.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/menu/index.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +133,7 @@
       <workItem from="1642484634941" duration="2411000" />
       <workItem from="1642571171683" duration="595000" />
       <workItem from="1642733927532" duration="1052000" />
-      <workItem from="1642947048751" duration="21428000" />
+      <workItem from="1642947048751" duration="21747000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -170,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643347511160</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: 修改history">
+      <created>1643347852332</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1643347852332</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +210,8 @@
     <MESSAGE value="chore: 新增过滤对象 值为val的方法" />
     <MESSAGE value="feat: 新增友联" />
     <MESSAGE value="feat: 修改work" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 修改work" />
+    <MESSAGE value="feat: 修改history" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 修改history" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

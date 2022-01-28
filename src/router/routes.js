@@ -168,32 +168,32 @@ const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/system',
-    name: SystemName,
-    component: Layout,
-    meta: {
-      alwaysShow: true,
-      title: '系统管理',
-      icon: renderIcon(System),
-      // sort: 2,
-    },
-    // redirect: '/message/site',
-    children: [
-      {
-        path: 'site',
-        name: `${SystemName}_site`,
-        component: () => import('@/views/system/site/index.vue'),
-        meta: {title: '网站配置', keepAlive: true}
-      },
-      {
-        path: 'system_config',
-        name: `${SystemName}_system_config`,
-        component: () => import('@/views/system/config/index.vue'),
-        meta: {title: '系统配置', keepAlive: true, permissions: ['super_admin']}
-      }
-    ]
-  },
+  // {
+  //   path: '/system',
+  //   name: SystemName,
+  //   component: Layout,
+  //   meta: {
+  //     alwaysShow: true,
+  //     title: '系统管理',
+  //     icon: renderIcon(System),
+  //     // sort: 2,
+  //   },
+  //   // redirect: '/message/site',
+  //   children: [
+  //     {
+  //       path: 'site',
+  //       name: `${SystemName}_site`,
+  //       component: () => import('@/views/system/site/index.vue'),
+  //       meta: {title: '网站配置', keepAlive: true}
+  //     },
+  //     {
+  //       path: 'system_config',
+  //       name: `${SystemName}_system_config`,
+  //       component: () => import('@/views/system/config/index.vue'),
+  //       meta: {title: '系统配置', keepAlive: true, permissions: ['super_admin']}
+  //     }
+  //   ]
+  // },
   {
     path: '/web',
     name: WebName,
@@ -204,12 +204,12 @@ const asyncRoutes = [
       icon: renderIcon(Page),
     },
     children: [
-      {
-        path: 'menu',
-        name: `${WebName}_menu`,
-        component: () => import('@/views/web/menu/index.vue'),
-        meta: {title: '菜单管理', keepAlive: true}
-      },
+      // {
+      //   path: 'menu',
+      //   name: `${WebName}_menu`,
+      //   component: () => import('@/views/web/menu/index.vue'),
+      //   meta: {title: '菜单管理', keepAlive: true}
+      // },
       {
         path: 'work',
         name: `${WebName}_work`,
