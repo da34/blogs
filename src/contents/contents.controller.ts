@@ -19,6 +19,7 @@ import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { DbOptions } from '../common/decorator/dbOptions.decorator';
+import xss from 'xss';
 
 @ApiTags('内容')
 @Controller('contents')
@@ -30,6 +31,10 @@ export class ContentsController {
   @Roles(UserRole.Admin)
   @Post()
   create(@Body() createContentDto: CreateContentDto) {
+    // xss
+    createContentDto.title = xss(createContentDto.title);
+    createContentDto.content = xss(createContentDto.content);
+    createContentDto.contentOutline = xss(createContentDto.contentOutline);
     return this.contentsService.create(createContentDto);
   }
 

@@ -61,6 +61,8 @@ export class CommentsController {
     createCommentDto.status = result.suggestion;
     // xss过滤
     createCommentDto.text = xss(createCommentDto.text);
+    createCommentDto.nickName = xss(createCommentDto.nickName);
+    createCommentDto.targetName = xss(createCommentDto.targetName);
     createCommentDto.suggestion = JSON.stringify(result.detail);
 
     if (createCommentDto.status !== StatusComment.Pass) {
