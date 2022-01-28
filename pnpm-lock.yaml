@@ -35,6 +35,7 @@ specifiers:
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
+  helmet: ^5.0.2
   husky: ^7.0.4
   jest: ^27.2.5
   mysql2: ^2.3.3
@@ -75,6 +76,7 @@ dependencies:
   cookie-parser: registry.npmmirror.com/cookie-parser/1.4.6
   csurf: registry.npmmirror.com/csurf/1.11.0
   dayjs: registry.npmmirror.com/dayjs/1.10.7
+  helmet: registry.npmmirror.com/helmet/5.0.2
   husky: registry.npmmirror.com/husky/7.0.4
   mysql2: registry.npmmirror.com/mysql2/2.3.3
   passport: registry.npmmirror.com/passport/0.5.2
@@ -6470,6 +6472,13 @@ packages:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/graceful-fs/download/graceful-fs-4.2.9.tgz}
     name: graceful-fs
     version: 4.2.9
+
+  registry.npmmirror.com/helmet/5.0.2:
+    resolution: {integrity: sha512-QWlwUZZ8BtlvwYVTSDTBChGf8EOcQ2LkGMnQJxSzD1mUu8CCjXJZq/BXP8eWw4kikRnzlhtYo3lCk0ucmYA3Vg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/helmet/download/helmet-5.0.2.tgz}
+    name: helmet
+    version: 5.0.2
+    engines: {node: '>=12.0.0'}
+    dev: false
 
   registry.npmmirror.com/hexoid/1.0.0:
     resolution: {integrity: sha1-rRDGVz+5B94j2exjpxEmfZ3JvBg=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hexoid/download/hexoid-1.0.0.tgz}

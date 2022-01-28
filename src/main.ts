@@ -7,9 +7,11 @@ import { ValidationPipe } from '@nestjs/common';
 import * as csrf from 'csurf';
 import * as cookieParser from 'cookie-parser';
 import { csrfMiddleware } from './common/middleware/csrf.middleware.middleware';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import helmet from 'helmet';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   // const csrfProtection = csrf({
   //   cookie: true,
@@ -22,6 +24,12 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   // 注册中间件
   // app.use(csrfMiddleware);
+
+  // 添加代理，以获得正确的ip
+  app.set('trust proxy', 1);
+
+  // somewhere in your initialization file
+  app.use(helmet());
 
   // 注册响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
