@@ -3,33 +3,42 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/interceptor/transform.interceptor';
 import { HttpExceptionFilter } from './common/filter/http-exception-filter.filter';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import * as csrf from 'csurf';
 import * as cookieParser from 'cookie-parser';
 import { csrfMiddleware } from './common/middleware/csrf.middleware.middleware';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+
+const PORT = process.env.PORT || 7001;
+const PREFIX = 'api';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // const csrfProtection = csrf({
-  //   cookie: true,
-  // });
+  const csrfProtection = csrf();
   //
   // // 注册csrf
   // app.use(cookieParser());
   // app.use(csrfProtection);
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix(PREFIX);
   // 注册中间件
   // app.use(csrfMiddleware);
 
   // 添加代理，以获得正确的ip
   app.set('trust proxy', 1);
 
-  // somewhere in your initialization file
+  // 防止跨站脚本攻击
   app.use(helmet());
+
+  app.use(
+    rateLimit({
+      windowMs: 60 * 1000, // 1分钟
+      max: 10, // 限制每个IP每个窗口10个请求
+    }),
+  );
 
   // 注册响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
@@ -47,9 +56,12 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup(PREFIX, app, document);
 
-  await app.listen(7001);
-  // console.log('api 接口地址: http://127.0.0.1:7001/api/#');
+  await app.listen(PORT, () => {
+    Logger.log(
+      `服务已经启动,接口请访问:http://wwww.localhost:${PORT}/${PREFIX}`,
+    );
+  });
 }
 bootstrap();
