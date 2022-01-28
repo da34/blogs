@@ -2,10 +2,15 @@ import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { enPassword } from '../common/utils';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private configService: ConfigService,
+  ) {
     super();
   }
 
@@ -18,7 +23,9 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new BadRequestException('用户不存在');
     }
 
-    if (user.password !== password) {
+    const secretKey = this.configService.get('USER_SECRET_KEY');
+    console.log(enPassword(password, secretKey));
+    if (user.password !== enPassword(password, secretKey)) {
       throw new BadRequestException('密码错误');
     }
     return await this.authService.signToken(user);

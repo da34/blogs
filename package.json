@@ -48,7 +48,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.3.0",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.41",
+    "xss": "^1.0.10"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.2",

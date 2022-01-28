@@ -21,11 +21,11 @@ import { RolesGuard } from '../auth/roles/roles.guard';
 import { Roles } from '../auth/roles/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryCommentDto } from './dto/query-comment.dto';
-import { createHash } from 'crypto';
 import { ExternalService } from '../external/external.service';
 import { StatusComment } from './entities/comment.entity';
-import { DbOptions } from "../common/decorator/dbOptions.decorator";
-const md5 = (str) => createHash('md5').update(str).digest('hex');
+import { DbOptions } from '../common/decorator/dbOptions.decorator';
+import xss from 'xss';
+import { md5 } from '../common/utils';
 
 @ApiTags('评论')
 @Controller('comments')
@@ -59,7 +59,8 @@ export class CommentsController {
       createCommentDto.text,
     );
     createCommentDto.status = result.suggestion;
-
+    // xss过滤
+    createCommentDto.text = xss(createCommentDto.text);
     createCommentDto.suggestion = JSON.stringify(result.detail);
 
     if (createCommentDto.status !== StatusComment.Pass) {

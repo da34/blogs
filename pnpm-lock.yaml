@@ -55,6 +55,7 @@ specifiers:
   tsconfig-paths: ^3.10.1
   typeorm: ^0.2.41
   typescript: ^4.3.5
+  xss: ^1.0.10
 
 dependencies:
   '@nestjs/axios': registry.npmmirror.com/@nestjs/axios/0.0.4_4d34bcc4311a780925020c9f901d5309
@@ -85,6 +86,7 @@ dependencies:
   rxjs: registry.npmmirror.com/rxjs/7.5.2
   swagger-ui-express: registry.npmmirror.com/swagger-ui-express/4.3.0
   typeorm: registry.npmmirror.com/typeorm/0.2.41_mysql2@2.3.3
+  xss: registry.npmmirror.com/xss/1.0.10
 
 devDependencies:
   '@commitlint/cli': registry.npmmirror.com/@commitlint/cli/16.0.2_@types+node@16.11.21
@@ -1009,6 +1011,12 @@ packages:
       shebang-command: registry.nlark.com/shebang-command/2.0.0
       which: registry.nlark.com/which/2.0.2
     dev: true
+
+  registry.nlark.com/cssfilter/0.0.10:
+    resolution: {integrity: sha1-xtJnJjKi5cg+AT5oZKQs6N79IK4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/cssfilter/download/cssfilter-0.0.10.tgz}
+    name: cssfilter
+    version: 0.0.10
+    dev: false
 
   registry.nlark.com/cssom/0.3.8:
     resolution: {integrity: sha1-nxJ29bK0Y/IRTT8sdSUK+MGjb0o=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/cssom/download/cssom-0.3.8.tgz}
@@ -5717,7 +5725,6 @@ packages:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/download/commander-2.20.3.tgz}
     name: commander
     version: 2.20.3
-    dev: true
 
   registry.npmmirror.com/commander/4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/download/commander-4.1.1.tgz}
@@ -8762,6 +8769,17 @@ packages:
     resolution: {integrity: sha512-xl/50/Cf32VsGq/1R8jJE5ajH1yMCQkpmoS10QbFZWl2Oor4H0Me64Pu2yxvsRWK3m6soJbmGfzSR7BYmDcWAA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/xregexp/download/xregexp-2.0.0.tgz}
     name: xregexp
     version: 2.0.0
+    dev: false
+
+  registry.npmmirror.com/xss/1.0.10:
+    resolution: {integrity: sha1-XNY6mxR6dVoUywRVx9uIZhIOtNI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/xss/download/xss-1.0.10.tgz}
+    name: xss
+    version: 1.0.10
+    engines: {node: '>= 0.10.0'}
+    hasBin: true
+    dependencies:
+      commander: registry.npmmirror.com/commander/2.20.3
+      cssfilter: registry.nlark.com/cssfilter/0.0.10
     dev: false
 
   registry.npmmirror.com/yaml/1.10.2:
