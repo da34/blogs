@@ -26,7 +26,6 @@ export class CreateCommentDto {
 
   // 层级id
   tierId?: string;
-  // 内容id
-  @IsNotEmpty()
-  contentId: string;
+
+  contentId?: string;
 }

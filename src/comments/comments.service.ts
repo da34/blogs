@@ -72,7 +72,15 @@ export class CommentsService {
     if (!exitsComment) {
       throw new HttpException(`不存在id为${id}的评论`, 401);
     }
-    return this.commentRepository.merge(exitsComment, updateCommentDto);
+    const updateComment = this.commentRepository.merge(
+      exitsComment,
+      updateCommentDto,
+    );
+    // 评论通过，并且有父级
+    if (updateComment.status === StatusComment.Pass && updateComment.pid) {
+      this.sendEmail(updateComment);
+    }
+    return this.commentRepository.save(updateComment);
   }
 
   remove(id: string) {
