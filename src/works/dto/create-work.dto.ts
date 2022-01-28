@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsUrl } from 'class-validator';
+import { IsNotEmpty, IsUrl, ValidateIf } from "class-validator";
 
 export class CreateWorkDto {
   @IsUrl()
@@ -13,9 +13,11 @@ export class CreateWorkDto {
 
   priority?: number = 0;
 
+  @ValidateIf((o) => o.linkUrl !== '')
   @IsUrl()
   linkUrl?: string;
 
+  @ValidateIf((o) => o.sourceUrl !== '')
   @IsUrl()
   sourceUrl?: string;
 }

@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { Cache } from 'cache-manager';
 import { ConfigService } from '@nestjs/config';
 import { Cron } from '@nestjs/schedule';
+import * as qiniu from 'qiniu';
 
 @Injectable()
 export class ExternalService {
@@ -100,5 +101,19 @@ export class ExternalService {
 
     const { data } = await lastValueFrom(resOb);
     return data;
+  }
+
+  async fetchQNToken() {
+    const url = this.configService.get('QINIU_URL');
+    const area = this.configService.get('QINIU_AREA');
+    const publicKey = this.configService.get('QINIU_PUBLIC_KEY');
+    const privateKey = this.configService.get('QINIU_PRIVATE_KEY');
+    const mac = new qiniu.auth.digest.Mac(publicKey, privateKey);
+    const options = {
+      scope: area,
+      returnBody: `{"url":"${url}/$(key)","hash":"$(etag)", "fileName":"$(key)"}`,
+    };
+    const putPolicy = new qiniu.rs.PutPolicy(options);
+    return putPolicy.uploadToken(mac);
   }
 }
