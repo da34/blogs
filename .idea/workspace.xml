@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 修改history">
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/email.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/config/qiniu.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/site/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/CreateDrawer.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/columns.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/menu/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +65,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="ts.external.directory.path" value="F:\WebStorm 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -133,7 +133,7 @@
       <workItem from="1642484634941" duration="2411000" />
       <workItem from="1642571171683" duration="595000" />
       <workItem from="1642733927532" duration="1052000" />
-      <workItem from="1642947048751" duration="21747000" />
+      <workItem from="1642947048751" duration="23223000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -184,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643347852332</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块">
+      <created>1643348011003</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1643348011003</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +218,8 @@
     <MESSAGE value="feat: 新增友联" />
     <MESSAGE value="feat: 修改work" />
     <MESSAGE value="feat: 修改history" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 修改history" />
+    <MESSAGE value="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

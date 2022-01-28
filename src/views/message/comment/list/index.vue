@@ -8,19 +8,19 @@
     >
       <NFormItem>
         <NInput
-          v-model:value="formValue.nickName"
+          v-model:value="formValue['filters[name]']"
           placeholder="请输入评论人"
         />
       </NFormItem>
       <NFormItem>
         <NInput
-          v-model:value="formValue.ip"
+          v-model:value="formValue['filters[ip]']"
           placeholder="请输入ip地址"
         />
       </NFormItem>
       <NFormItem>
         <NSelect
-          v-model:value="formValue.status"
+          v-model:value="formValue['filters[status]']"
           style="width: 180px;"
           placeholder="请选择状态"
           :options="options"
@@ -37,6 +37,7 @@
         <NButton
           class="ml-3"
           attr-type="button"
+          @click="handleReset"
         >
           重置
         </NButton>
@@ -58,20 +59,20 @@
 <script setup>
 import {reactive, ref, toRaw} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import {getCommentList, delComment} from "@/api/web/comment";
+import {getCommentList, delComment} from '@/api/web/comment';
 import {createActionColumn, columns} from './columns'
-import {useDialog} from "naive-ui";
+import {useDialog} from 'naive-ui';
 
 const options = [
-  {label: '正常', value: 0},
-  {label: '不通过', value: 1},
-  {label: '需要人工复查', value: 2}
+  {label: '正常', value: 'pass'},
+  {label: '不通过', value: 'block'},
+  {label: '需要人工复查', value: 'review'}
 ]
 
 const formValue = ref({
-  name: null,
-  ip: null,
-  status: null
+  'filters[name]': null,
+  'filters[ip]': null,
+  'filters[status]': null
 })
 const tableRef = ref(null)
 
@@ -91,12 +92,22 @@ const pagination = reactive({
 const dialog = useDialog()
 
 const actionColumn = createActionColumn({handleDel})
-
+const defaultVla = () => ({
+  'filters[name]': null,
+  'filters[ip]': null,
+  'filters[status]': null
+})
 
 async function queryComments() {
   const opt = toRaw(formValue.value)
-  tableRef.value.fetchState(opt)
+  await tableRef.value.fetchState(opt)
 }
+
+function handleReset() {
+  formValue.value = defaultVla()
+  tableRef.value.reload()
+}
+
 
 function handleDel(record) {
   dialog.warning({

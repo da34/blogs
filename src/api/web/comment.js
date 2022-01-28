@@ -29,7 +29,7 @@ export function delComment(id) {
 export function editComment(data) {
   return http.request({
     url: 'comments/' + data.id,
-    method: 'put',
+    method: 'patch',
     data
   },{
     isShowSuccessMessage: true

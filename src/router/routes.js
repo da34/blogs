@@ -80,21 +80,21 @@ const asyncRoutes = [
     },
     children: [
       {
-        path: 'super_admin',
-        name: 'super_admin',
+        path: 'admin',
+        name: 'admin',
         component: () => import('@/views/jurisdiction/super_admin.vue'),
         meta: {
-          title: 'super_admin 测试',
-          permissions: ['super_admin'],
+          title: 'admin 测试',
+          permissions: ['admin'],
         },
       },
       {
-        path: 'admin',
-        name: 'admin',
+        path: 'user',
+        name: 'user',
         component: () => import('@/views/jurisdiction/admin.vue'),
         meta: {
-          title: 'admin,super_admin 测试',
-          permissions: ['admin', 'super_admin'],
+          title: 'user,admin 测试',
+          permissions: ['user', 'admin'],
         },
       },
     ],

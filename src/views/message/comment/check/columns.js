@@ -52,10 +52,9 @@ export const columns = [
     title: '状态', key: 'status', width: 50, align: 'center',
     render({status}) {
       const typeMap = {
-        '删除': 'error',
-        '正常': 'success',
-        '不通过': 'warning',
-        '需要人工复查': 'info',
+        'pass': 'success',
+        'block': 'warning',
+        'review': 'info',
       }
 
       return h(
@@ -79,7 +78,7 @@ export const columns = [
         'span',
         null,
         {
-          default: () => row.createdAt && formatDate(row.createdAt)
+          default: () => row.createTime && formatDate(+row.createTime)
         }
       )
     }

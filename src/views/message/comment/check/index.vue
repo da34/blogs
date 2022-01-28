@@ -16,9 +16,9 @@
 <script setup>
 import {reactive, ref} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import {getCommentList, editComment} from "@/api/web/comment";
+import {getCommentList, editComment} from '@/api/web/comment';
 import {createActionColumn, columns} from './columns'
-import {useDialog} from "naive-ui";
+import {useDialog} from 'naive-ui';
 
 const formValue = ref({
   name: null,
@@ -45,12 +45,9 @@ const dialog = useDialog()
 const actionColumn = createActionColumn({handleNoPass, handlePass})
 
 
-function handlePass(record) {
-  const data = {
-    id: record.id,
-    status: 0
-  }
-  editComment(data)
+async function handlePass(record) {
+  record.status = 'pass'
+  await editComment(record)
   tableRef.value.reload()
 }
 
@@ -60,12 +57,9 @@ function handleNoPass(record) {
     content: '你确定不通过吗？',
     positiveText: '确定',
     negativeText: '取消',
-    onPositiveClick: () => {
-      const data = {
-        id: record.id,
-        status: 1
-      }
-      editComment(data)
+    onPositiveClick: async () => {
+      record.status = 'block'
+      await editComment(record)
       tableRef.value.reload()
     }
   })
@@ -73,7 +67,7 @@ function handleNoPass(record) {
 
 function getCommentCheckList () {
   return new Promise(async (resolve, reject) => {
-    const result = await getCommentList({ status: 2 })
+    const result = await getCommentList({ 'filters[status]': 'review'})
     resolve(result)
   })
 }
