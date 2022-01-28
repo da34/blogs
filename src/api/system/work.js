@@ -29,7 +29,7 @@ export function createWork(data) {
 export function updateWork(data) {
   return http.request({
     url: 'works/' + data.id,
-    method: 'put',
+    method: 'patch',
     data
   }, {
     isShowSuccessMessage: true

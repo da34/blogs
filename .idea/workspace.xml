@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="chore: 新增过滤对象 值为val的方法">
-      <change afterPath="$PROJECT_DIR$/src/views/content/category/index.vue" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 新增友联">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/link.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/link.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/link/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/tag/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/tag/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/system/work.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/system/work.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +127,7 @@
       <workItem from="1642484634941" duration="2411000" />
       <workItem from="1642571171683" duration="595000" />
       <workItem from="1642733927532" duration="1052000" />
-      <workItem from="1642947048751" duration="20485000" />
+      <workItem from="1642947048751" duration="21249000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -165,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643293517183</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: 新增友联">
+      <created>1643297373208</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1643297373208</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +188,8 @@
     <MESSAGE value="完成建站日志" />
     <MESSAGE value="chore: 修改首页的接口" />
     <MESSAGE value="chore: 新增过滤对象 值为val的方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: 新增过滤对象 值为val的方法" />
+    <MESSAGE value="feat: 新增友联" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 新增友联" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -29,7 +29,7 @@ export function updateConfig(data) {
  */
 export function getQiNiuToken() {
   return http.request({
-    url: 'system/qiniu/token',
+    url: 'external/qn-token',
     method: 'get'
   });
 }
