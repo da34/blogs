@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-white p-7">
+  <div class="bg-white md:p-7">
     <h1 class="text-3xl font-bold mb-2">
       小作品
     </h1>
-    <div class="flex flex-wrap justify-between">
+    <div class="flex flex-wrap justify-between flex-col md:flex-row">
       <div
         v-for="work in works"
         :key="work.id"
-        class="card w-[26rem] h-[13rem] rounded-lg p-5 mt-7 text-center flex items-end text-white relative overflow-hidden"
+        class="card md:w-[48%] w-full h-[13rem] rounded-lg p-5 mt-5 text-center flex items-end text-white relative overflow-hidden"
       >
         <div class="card-before" :style="{ backgroundImage: `url(${work.imgUrl})` }" />
         <div class="content relative z-10 space-y-5  w-full">
