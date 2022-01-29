@@ -12,11 +12,6 @@ export class SiteController {
     return this.siteService.findAll();
   }
 
-  @Get('archive')
-  getArchive() {
-    return this.siteService.getArchive();
-  }
-
   @Get('info')
   async getInfo() {
     const { tagCount, contentCount, categoryCount } =

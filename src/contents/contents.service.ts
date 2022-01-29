@@ -9,10 +9,11 @@ import {
   In,
   Repository,
 } from 'typeorm';
-import { Content } from './entities/content.entity';
+import { Content, StatusContent, TypeContent } from './entities/content.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class ContentsService {
@@ -108,4 +109,62 @@ export class ContentsService {
     }
     return this.contentRepository.delete(id);
   }
+
+  async updateViewsById(id: string) {
+    const oldArticle = await this.contentRepository.findOne(id);
+    const updatedArticle = await this.contentRepository.merge(oldArticle, {
+      views: oldArticle.views + 1,
+    });
+    return this.contentRepository.save(updatedArticle);
+  }
+  async getArchive(tagName?: string) {
+    // const allContents = await this.contentRepository.find({
+    //   select: ['id', 'title', 'createTime'],
+    //   order: { createTime: 'DESC' },
+    //   where: {
+    //     status: 'publish',
+    //     type: 'article',
+    //   },
+    // });
+    const query = getRepository(Content)
+      .createQueryBuilder('content')
+      .where('content.status = :status', { status: StatusContent.Publish })
+      .andWhere('content.type = :type', { type: TypeContent.Article })
+      .orderBy('content.createTime', 'DESC')
+      .select(['content.id', 'content.title', 'content.createTime'])
+      .leftJoinAndSelect('content.tags', 'tags');
+
+    if (tagName) {
+      query.andWhere('tags.name =:name ', { name: tagName });
+    }
+
+    const allContents = await query.getMany();
+
+    const data = [];
+    let yearList = [];
+    const rowsLen = allContents.length;
+    for (let i = 0; i < allContents.length; i++) {
+      yearList.push(dayjs(+allContents[i].createTime).format('YYYY'));
+    }
+    yearList = [...new Set(yearList)];
+    // 整理数据返回前端
+    for (let i = 0; i < yearList.length; i++) {
+      const obj = {
+        year: yearList[i],
+        list: [],
+      };
+      // console.log(yearList[i]);
+      for (let j = 0; j < rowsLen; j++) {
+        // 年份相同放入一个对象
+        if (yearList[i] === dayjs(+allContents[j].createTime).format('YYYY')) {
+          obj.list.push(allContents[j]);
+        }
+      }
+      data.push(obj);
+    }
+
+    return data;
+  }
+
+  findByTag(tagId: string) {}
 }

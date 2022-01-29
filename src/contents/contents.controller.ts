@@ -56,4 +56,19 @@ export class ContentsController {
   remove(@Param('id') id: string) {
     return this.contentsService.remove(id);
   }
+
+  @Post(':id/views')
+  updateViewsById(@Param('id') id) {
+    return this.contentsService.updateViewsById(id);
+  }
+
+  @Get('/tag/:name')
+  findArticlesByTag(@Param('name') tagName) {
+    return this.contentsService.findByTag(tagName);
+  }
+
+  @Get('archive')
+  getArchive(@Query('tag') tag: string) {
+    return this.contentsService.getArchive(tag);
+  }
 }
