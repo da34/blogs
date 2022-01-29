@@ -30,6 +30,7 @@ specifiers:
   class-transformer: ^0.5.1
   class-validator: ^0.13.2
   cookie-parser: ^1.4.6
+  cross-env: ^7.0.3
   csurf: ^1.11.0
   dayjs: ^1.10.7
   eslint: ^8.0.1
@@ -75,6 +76,7 @@ dependencies:
   class-transformer: registry.npmmirror.com/class-transformer/0.5.1
   class-validator: registry.npmmirror.com/class-validator/0.13.2
   cookie-parser: registry.npmmirror.com/cookie-parser/1.4.6
+  cross-env: registry.npmmirror.com/cross-env/7.0.3
   csurf: registry.npmmirror.com/csurf/1.11.0
   dayjs: registry.npmmirror.com/dayjs/1.10.7
   express-rate-limit: registry.npmmirror.com/express-rate-limit/6.2.0
@@ -1011,10 +1013,9 @@ packages:
     version: 7.0.3
     engines: {node: '>= 8'}
     dependencies:
-      path-key: registry.npmmirror.com/path-key/3.1.1
+      path-key: registry.nlark.com/path-key/3.1.1
       shebang-command: registry.nlark.com/shebang-command/2.0.0
       which: registry.nlark.com/which/2.0.2
-    dev: true
 
   registry.nlark.com/cssfilter/0.0.10:
     resolution: {integrity: sha1-xtJnJjKi5cg+AT5oZKQs6N79IK4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/cssfilter/download/cssfilter-0.0.10.tgz}
@@ -1892,10 +1893,9 @@ packages:
     dev: true
 
   registry.nlark.com/isexe/2.0.0:
-    resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/isexe/download/isexe-2.0.0.tgz}
+    resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/isexe/download/isexe-2.0.0.tgz?cache=0&sync_timestamp=1631509552476&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fisexe%2Fdownload%2Fisexe-2.0.0.tgz}
     name: isexe
     version: 2.0.0
-    dev: true
 
   registry.nlark.com/istanbul-lib-report/3.0.0:
     resolution: {integrity: sha1-dRj+UupE3jcvRgp2tezan/tz2KY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/istanbul-lib-report/download/istanbul-lib-report-3.0.0.tgz}
@@ -2514,6 +2514,12 @@ packages:
     version: 1.0.1
     engines: {node: '>=0.10.0'}
 
+  registry.nlark.com/path-key/3.1.1:
+    resolution: {integrity: sha1-WB9q3mWMu6ZaDTOA3ndTKVBU83U=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/path-key/download/path-key-3.1.1.tgz}
+    name: path-key
+    version: 3.1.1
+    engines: {node: '>=8'}
+
   registry.nlark.com/path-parse/1.0.7:
     resolution: {integrity: sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/path-parse/download/path-parse-1.0.7.tgz}
     name: path-parse
@@ -2891,14 +2897,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       shebang-regex: registry.nlark.com/shebang-regex/3.0.0
-    dev: true
 
   registry.nlark.com/shebang-regex/3.0.0:
     resolution: {integrity: sha1-rhbxZE2HPsrYQ7AwexQzYtTEIXI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/shebang-regex/download/shebang-regex-3.0.0.tgz}
     name: shebang-regex
     version: 3.0.0
     engines: {node: '>=8'}
-    dev: true
 
   registry.nlark.com/side-channel/1.0.4:
     resolution: {integrity: sha1-785cj9wQTudRslxY1CkAEfpeos8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/side-channel/download/side-channel-1.0.4.tgz}
@@ -3441,14 +3445,13 @@ packages:
     dev: true
 
   registry.nlark.com/which/2.0.2:
-    resolution: {integrity: sha1-fGqN0KY2oDJ+ELWckobu6T8/UbE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/which/download/which-2.0.2.tgz}
+    resolution: {integrity: sha1-fGqN0KY2oDJ+ELWckobu6T8/UbE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/which/download/which-2.0.2.tgz?cache=0&sync_timestamp=1631509556835&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwhich%2Fdownload%2Fwhich-2.0.2.tgz}
     name: which
     version: 2.0.2
     engines: {node: '>= 8'}
     hasBin: true
     dependencies:
       isexe: registry.nlark.com/isexe/2.0.0
-    dev: true
 
   registry.nlark.com/word-wrap/1.2.3:
     resolution: {integrity: sha1-YQY29rH3A4kb00dxzLF/uTtHB5w=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/word-wrap/download/word-wrap-1.2.3.tgz}
@@ -5839,6 +5842,16 @@ packages:
     hasBin: true
     dev: false
 
+  registry.npmmirror.com/cross-env/7.0.3:
+    resolution: {integrity: sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cross-env/download/cross-env-7.0.3.tgz}
+    name: cross-env
+    version: 7.0.3
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: registry.nlark.com/cross-spawn/7.0.3
+    dev: false
+
   registry.npmmirror.com/csrf/3.1.0:
     resolution: {integrity: sha1-7HXpZW0ATWdLjvW6R7Qfv9bLnDA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csrf/download/csrf-3.1.0.tgz}
     name: csrf
@@ -7625,7 +7638,7 @@ packages:
     version: 4.0.1
     engines: {node: '>=8'}
     dependencies:
-      path-key: registry.npmmirror.com/path-key/3.1.1
+      path-key: registry.nlark.com/path-key/3.1.1
     dev: true
 
   registry.npmmirror.com/object-inspect/1.12.0:
@@ -7732,13 +7745,6 @@ packages:
       passport-strategy: registry.npmmirror.com/passport-strategy/1.0.0
       pause: registry.npmmirror.com/pause/0.0.1
     dev: false
-
-  registry.npmmirror.com/path-key/3.1.1:
-    resolution: {integrity: sha1-WB9q3mWMu6ZaDTOA3ndTKVBU83U=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/path-key/download/path-key-3.1.1.tgz}
-    name: path-key
-    version: 3.1.1
-    engines: {node: '>=8'}
-    dev: true
 
   registry.npmmirror.com/path-to-regexp/0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/path-to-regexp/download/path-to-regexp-0.1.7.tgz}
