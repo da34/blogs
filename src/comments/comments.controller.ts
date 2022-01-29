@@ -63,10 +63,10 @@ export class CommentsController {
     createCommentDto.targetName = filterXSS(createCommentDto.targetName);
     createCommentDto.suggestion = JSON.stringify(result.detail);
 
+    this.commentsService.create(createCommentDto);
     if (createCommentDto.status !== StatusComment.Pass) {
       throw new HttpException('评论包含敏感信息，已屏蔽！', 412);
     }
-    await this.commentsService.create(createCommentDto);
   }
 
   @Get()

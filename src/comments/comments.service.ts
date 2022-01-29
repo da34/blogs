@@ -1,4 +1,4 @@
-import { HttpException, Injectable, Ip } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,7 +9,6 @@ import { Content } from '../contents/entities/content.entity';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
-import { Link } from '../links/entities/link.entity';
 
 @Injectable()
 export class CommentsService {
