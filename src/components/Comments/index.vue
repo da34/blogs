@@ -114,7 +114,7 @@ export default {
   },
   async fetch () {
     // 获取评论
-    const { data } = await this.$axios.get(`comments?page=${this.page}&contentId=${this.contentId}`)
+    const { data } = await this.$axios.get(`comments?page=${this.page}&filters[content]=${this.contentId}&filters[status]=pass`)
     this.total = data.data.count
     // this.count = data.data.comments.count
     // 是否是翻页, 相同证明不是

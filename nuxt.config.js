@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   },
   server: { // 部署到线上nginx配置
     host: '0.0.0.0',
-    port: 3000
+    port: 5000
   },
   globals: {
     id: '__YuJie_Blog__'
@@ -167,7 +167,7 @@ export default defineNuxtConfig({
         ]
       ]
     },
-    publicPath: 'https://resource.lsyboy.cn/blog',
+    publicPath: 'https://resource.lsyboy.cn/blog/static',
     // transpile: ['tailwindcss', '@kangc/v-md-editor'],
     extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件

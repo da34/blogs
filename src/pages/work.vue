@@ -41,7 +41,7 @@ export default {
     }
   },
   async fetch () {
-    const { data } = await this.$axios.get('works')
+    const { data } = await this.$axios.get('works?order[priority]=DESC')
     this.works = data.data
   },
   head () {

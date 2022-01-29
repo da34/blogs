@@ -1,5 +1,5 @@
 <template>
-  <section class="box-card toc-wrap" :style="styleObj">
+  <section class="box-card toc-wrap shadow-none" :style="styleObj">
     <div class="box-title">
       <span>文章目录</span>
     </div>

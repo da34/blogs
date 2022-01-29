@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-auto md:ml-0">
+  <div class="ml-1 md:ml-0">
     <div class="hidden md:flex">
       <NuxtLink
         v-for="menu in defaultMenus"

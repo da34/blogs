@@ -32,7 +32,7 @@ export default {
     }
   },
   async fetch () {
-    const { data } = await this.$axios.get('links?pageSize=99')
+    const { data } = await this.$axios.get('links?pageSize=99&filters[isValid]=1')
     // console.log(data)
     this.list = data.data.list
   },

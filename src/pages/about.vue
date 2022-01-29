@@ -14,7 +14,7 @@ export default {
     }
   },
   async fetch () {
-    const { data } = await this.$axios.get('contents/about')
+    const { data } = await this.$axios.get('contents/detail/about')
     this.article = data.data
   },
   head () {

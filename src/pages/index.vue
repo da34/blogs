@@ -5,28 +5,26 @@
       :key="item.id"
       tag="section"
       :to="`/content/${item.id}`"
-      class="md:duration-300 hover:scale-[1.02] md:flex rounded-2xl bg-white mb-5 md:h-[190px] cursor-pointer overflow-hidden"
+      class="md:duration-300 md:hover:scale-[1.02] md:flex shadow-3xl min-h-[160px] rounded-xl bg-white mb-5 cursor-pointer overflow-hidden"
     >
-      <div v-if="item.firstPicture" class="md:basis-1/3 flex items-center justify-center">
-        <img v-lazy="item.firstPicture" class="md:h-[160px] md:w-11/12 h-32 w-full object-cover">
-      </div>
-      <div :class="['md:py-6', 'px-5', 'p-4', 'basis-2/3', 'flex', 'flex-col', 'justify-between', { 'basis-full': !item.firstPicture }]">
-        <h2 class="md:text-2xl duration-150 text-lg title">
-          {{ item.title }}
-        </h2>
-        <p class="text-gray-500 desc overflow-hidden text-base mt-1 md:mt-0">
-          {{ item.contentOutline }}
-        </p>
-        <div class="flex justify-between md:text-base text-sm mt-1 md:mt-0">
+      <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="md:basis-1/3 md:pl-30 md:pt-0 pt-[60%] bg-cover bg-center" />
+      <div :class="[ 'px-5', 'p-4', 'basis-2/3', 'flex', 'flex-col', { 'basis-full': !item.firstPicture }]">
+        <div class="flex text-gray-500 text-xs md:mt-0">
           <div class="info-item">
-            {{ item.createTime | convertDate }}
+            {{ item.createTime | formatDate('YYYY年MM月DD日') }}
           </div>
           <div v-if="item.tags.length" class="info-item">
-            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2 tag" :to="'/archive?name=' + tag.name">
+            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2 art-tag" :to="'/archive?name=' + tag.name">
               {{ tag.name }}
             </NuxtLink>
           </div>
         </div>
+        <h2 class="md:text-2xl duration-150 font-bold my-3 text-xl title">
+          {{ item.title }}
+        </h2>
+        <p class="text-gray-500 desc overflow-hidden text-sm leading-5">
+          {{ item.contentOutline }}
+        </p>
       </div>
     </NuxtLink>
     <Pagination v-model="currentPage" class="pagination-wrap" :total="total" :limit="7" />
@@ -69,7 +67,7 @@ export default {
   },
   methods: {
     async getList () {
-      const { data } = await this.$axios.$get('contents')
+      const { data } = await this.$axios.$get('contents?sortBy[createTime]=DESC&filters[status]=publish&filters[type]=article&fields=id,title,contentOutline,isTop,createTime,firstPicture')
       this.list = data.list
       this.total = data.count
     }
@@ -79,11 +77,7 @@ export default {
 
 <style scoped lang="stylus">
   .desc
-    text-omit(2)
+    text-omit(3)
   .title
     text-omit(2)
-
-@media (min-width: 768px)
-  .desc
-    text-omit(3)
 </style>

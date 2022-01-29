@@ -2,7 +2,7 @@
   <!--  <client-only placeholder="Loading...">-->
   <!-- 组件只会在客户端被渲染 -->
   <div class="relative">
-    <user-card />
+    <user-card v-show="$route.name !== 'content-id'" />
     <dayWord v-show="$route.name !== 'content-id'" />
     <articleInfo v-show="$route.name !== 'content-id'" />
     <Tag v-show="$route.name !== 'content-id'" />

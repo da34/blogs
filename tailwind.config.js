@@ -13,6 +13,9 @@ module.exports = {
           950: '#07beff'
           // 950: '#2F89FC'
         }
+      },
+      boxShadow: {
+        '3xl': '30px 30px 64px rgb(0 0 0 / 5%)'
       }
     }
   },

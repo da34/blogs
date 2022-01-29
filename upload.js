@@ -18,7 +18,7 @@ config.useHttpsDomain = true
 
 // 封装上传方法
 const doUpload = (key, file) => {
-  key = 'blog/' + key
+  key = 'blog/static/' + key
   const options = {
     scope: bucket + ':' + key
   }

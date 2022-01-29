@@ -7,7 +7,7 @@
       <nuxt-link
         v-for="item in list"
         :key="item.id"
-        class="tag"
+        class="art-tag"
         :to="'/archive?name=' + item.name"
       >
         {{ item.name }}
@@ -26,7 +26,7 @@ export default {
   },
   async fetch () {
     const { data } = await this.$axios.get('tags')
-    this.list = data.data
+    this.list = data.data.list
   }
 }
 </script>

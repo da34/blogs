@@ -3,14 +3,14 @@
     <!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
   </div>
   <section v-else class="bg-white">
-    <div class="md:p-8 pb-0 p-5">
-      <div class="">
+    <div class="md:px-10">
+      <div>
         <h1 class="md:text-4xl text-xl title font-bold">
           {{ article.title }}
         </h1>
         <div class="text-gray-400 flex space-x-5 md:mt-5 mt-2">
           <span>{{ article.createTime | formatDate('YYYY年MM月DD日') }}</span>
-          <span>阅读：{{ article.views }}</span>
+<!--          <span>阅读：{{ article.views }}</span>-->
         </div>
       </div>
       <img
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <Comments v-if="article.isCommentOpen" class="md:px-10 px-5 pt-5" :content-id="$route.params.id" />
+    <Comments v-if="article.isCommentOpen" class="md:px-10  pt-5" :content-id="$route.params.id" />
   </section>
 </template>
 
@@ -60,7 +60,7 @@ export default {
   },
   async fetch () {
     const { id } = this.$route.params
-    const { data } = await this.$axios.get(`contents/${id}`)
+    const { data } = await this.$axios.get(`contents/detail/${id}`)
     this.article = data.data
   },
   head () {
@@ -107,12 +107,16 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
-.desc
-  text-omit(2)
 .title
   text-omit(2)
 
-@media (min-width: 768px)
-  .desc
-    text-omit(3)
+@media (max-width: 419px) {
+  .blog-post {
+    >>>.vuepress-markdown-body:not(.custom) {
+      padding: 0;
+      padding-top 1rem
+    }
+  }
+
+}
 </style>
