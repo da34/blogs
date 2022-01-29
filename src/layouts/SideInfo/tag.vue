@@ -8,7 +8,7 @@
         v-for="item in list"
         :key="item.id"
         class="art-tag"
-        :to="'/archive?name=' + item.name"
+        :to="'/archive?tag=' + item.name"
       >
         {{ item.name }}
       </nuxt-link>

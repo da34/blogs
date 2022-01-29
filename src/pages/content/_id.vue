@@ -2,7 +2,7 @@
   <div v-if="$fetchState.pending" class="content-wrap flex">
     <!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
   </div>
-  <section v-else class="bg-white">
+  <section v-else class="bg-white rounded-lg">
     <div class="md:px-10">
       <div>
         <h1 class="md:text-4xl text-xl title font-bold">
@@ -10,7 +10,7 @@
         </h1>
         <div class="text-gray-400 flex space-x-5 md:mt-5 mt-2">
           <span>{{ article.createTime | formatDate('YYYY年MM月DD日') }}</span>
-<!--          <span>阅读：{{ article.views }}</span>-->
+          <span>阅读：{{ article.views }}</span>
         </div>
       </div>
       <img
@@ -98,6 +98,10 @@ export default {
   },
   deactivated () {
     this.setRenderCompToc('')
+  },
+  mounted () {
+    const { id } = this.$route.params
+    this.$axios.post(`contents/${id}/views`)
   },
   methods: {
     ...mapMutations('modules/front', [

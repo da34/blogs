@@ -10,8 +10,8 @@ module.exports = {
     extend: {
       colors: {
         blue: {
-          950: '#07beff'
-          // 950: '#2F89FC'
+          // 950: '#07beff'
+          950: '#2F89FC'
         }
       },
       boxShadow: {

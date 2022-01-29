@@ -1,8 +1,8 @@
 <template>
   <div class="time-line-wrapper bg-white">
-    <h2 v-if="$route.query.name" class="tag">
-      "{{ $route.query.name }}" 下的文章
-    </h2>
+    <div v-if="$route.query.tag" class="text-center pt-5">
+      与<span class="text-blue-950 text-2xl">{{ $route.query.tag }}</span>标签有关的文章
+    </div>
     <Timeline :data="list" />
   </div>
 </template>
@@ -34,14 +34,17 @@ export default {
       ]
     }
   },
+  watch: {
+    '$route.query': '$fetch'
+  },
   methods: {
     async getArchiveList () {
-      const name = this.$route.query.name
+      const tag = this.$route.query.tag
       let query = ''
-      if (name) {
-        query = '?name=' + encodeURI(name)
+      if (tag) {
+        query = '?tag=' + encodeURI(tag)
       }
-      const { data } = await this.$axios.get('site/archive' + query)
+      const { data } = await this.$axios.get('contents/archive' + query)
       this.list = data.data
     }
   }
