@@ -15,7 +15,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { UserRole } from '../users/entities/user.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { DbOptions } from '../common/decorator/dbOptions.decorator';
-import xss from 'xss';
+import { filterXSS } from 'xss';
 import { Auth } from '../common/decorator/auth.decorator';
 
 @ApiTags('内容')
@@ -27,9 +27,11 @@ export class ContentsController {
   @Post()
   create(@Body() createContentDto: CreateContentDto) {
     // xss
-    createContentDto.title = xss(createContentDto.title);
-    createContentDto.content = xss(createContentDto.content);
-    createContentDto.contentOutline = xss(createContentDto.contentOutline);
+    createContentDto.title = filterXSS(createContentDto.title);
+    createContentDto.content = filterXSS(createContentDto.content);
+    createContentDto.contentOutline = filterXSS(
+      createContentDto.contentOutline,
+    );
     return this.contentsService.create(createContentDto);
   }
 

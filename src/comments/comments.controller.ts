@@ -20,7 +20,7 @@ import { QueryCommentDto } from './dto/query-comment.dto';
 import { ExternalService } from '../external/external.service';
 import { StatusComment } from './entities/comment.entity';
 import { DbOptions } from '../common/decorator/dbOptions.decorator';
-import xss from 'xss';
+import { filterXSS } from 'xss';
 import { md5 } from '../common/utils';
 import { Auth } from '../common/decorator/auth.decorator';
 
@@ -57,9 +57,10 @@ export class CommentsController {
     );
     createCommentDto.status = result.suggestion;
     // xss过滤
-    createCommentDto.text = xss(createCommentDto.text);
-    createCommentDto.nickName = xss(createCommentDto.nickName);
-    createCommentDto.targetName = xss(createCommentDto.targetName);
+    // console.log(filterXSS)
+    createCommentDto.text = filterXSS(createCommentDto.text);
+    createCommentDto.nickName = filterXSS(createCommentDto.nickName);
+    createCommentDto.targetName = filterXSS(createCommentDto.targetName);
     createCommentDto.suggestion = JSON.stringify(result.detail);
 
     if (createCommentDto.status !== StatusComment.Pass) {
