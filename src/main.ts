@@ -36,8 +36,8 @@ async function bootstrap() {
   // 请求限制
   app.use(
     rateLimit({
-      windowMs: 15 * 60 * 1000, // 15分钟
-      max: 100, // 限制每个IP每个窗口100个请求
+      windowMs: 60 * 1000, // 1分钟
+      max: 20, // 限制每个IP每个窗口20个请求
     }),
   );
 
@@ -60,10 +60,8 @@ async function bootstrap() {
   SwaggerModule.setup(PREFIX, app, document);
 
   await app.listen(PORT, () => {
-    console.log(process.env.NODE_ENV, 'process.env.NODE_ENV');
-    Logger.log(
-      `服务已经启动,接口请访问:http://wwww.localhost:${PORT}/${PREFIX}`,
-    );
+    // console.log(process.env.NODE_ENV, 'process.env.NODE_ENV');
+    Logger.log(`服务已经启动,接口请访问:http://localhost:${PORT}/${PREFIX}`);
   });
 }
 bootstrap();
