@@ -37,7 +37,6 @@
     "class-validator": "^0.13.2",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
-    "csurf": "^1.11.0",
     "dayjs": "^1.10.7",
     "express-rate-limit": "^6.2.0",
     "helmet": "^5.0.2",

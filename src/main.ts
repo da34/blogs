@@ -1,12 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { TransformInterceptor } from './common/interceptor/transform.interceptor';
-import { HttpExceptionFilter } from './common/filter/http-exception-filter.filter';
+import { TransformInterceptor } from './interceptor/transform.interceptor';
+import { HttpExceptionFilter } from './filter/http-exception-filter.filter';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import * as csrf from 'csurf';
-import * as cookieParser from 'cookie-parser';
-import { csrfMiddleware } from './common/middleware/csrf.middleware.middleware';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -17,15 +14,7 @@ const PREFIX = 'api';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // const csrfProtection = csrf();
-  //
-  // // 注册csrf
-  // app.use(cookieParser());
-  // app.use(csrfProtection);
-
   app.setGlobalPrefix(PREFIX);
-  // 注册中间件
-  // app.use(csrfMiddleware);
 
   // 添加代理，以获得正确的ip
   app.set('trust proxy', 1);
@@ -37,7 +26,7 @@ async function bootstrap() {
   app.use(
     rateLimit({
       windowMs: 60 * 1000, // 1分钟
-      max: 20, // 限制每个IP每个窗口20个请求
+      max: 30, // 限制每个IP每个窗口30个请求
     }),
   );
 
