@@ -1,8 +1,8 @@
 <template>
-  <div class="border border-gray-100 border-solid p-5 pt-0 md:pt-5 rounded">
+  <div class="border border-gray-100 border-solid p-5 pt-0 md:pt-5 rounded relative overflow-hidden">
     <div>
       <div class="flex flex-col md:flex-row">
-        <input v-model="formVal.nickName" class="w-64 p-3 pl-0" placeholder="昵称">
+        <input v-model="formVal.name" class="w-64 p-3 pl-0" placeholder="昵称" @focusout="handleLogin" @keydown.enter="handleLogin">
         <input v-model="formVal.email" class="w-64 p-3 pl-0" placeholder="邮箱">
       </div>
       <textarea v-model="formVal.text" rows="5" placeholder="发条友善的评论... （填写邮箱可以收到回复）" class="bg-[length:50%] md:bg-[length:30%] w-full mt-5 " />
@@ -23,17 +23,19 @@
         </div>
       </div>
     </div>
+    <Login :visible="loginShow" @cancel="handleCancelLogin" />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 import Message from '../../base/Message'
+import Login from './login'
 const EMAIL_REG = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
 
 export default {
   name: 'Edit',
-  components: {},
+  components: { Login },
   inject: ['submitComment'], // 注入评论事件
   props: {
     close: {
@@ -44,11 +46,11 @@ export default {
   data () {
     return {
       formVal: {
-        nickName: '',
+        name: '',
         email: '',
         text: ''
       },
-      loading: false
+      loginShow: false
     }
   },
   computed: {
@@ -60,13 +62,22 @@ export default {
     // 初始化，从缓存中去用户信息
     this.initUser()
     const userInfo = this.userInfo
-    this.formVal.nickName = userInfo.nickName
+    this.formVal.name = userInfo.name
     this.formVal.email = userInfo.email
   },
   methods: {
+    handleLogin () {
+      if (this.formVal.name === 'admin') {
+        this.loginShow = true
+      }
+    },
+    handleCancelLogin (flag) {
+      if (!flag) { this.formVal.name = '' }
+      this.loginShow = false
+    },
     handleSubmit (e) {
       e.preventDefault()
-      if (!this.formVal.nickName) {
+      if (!this.formVal.name) {
         Message({
           text: '请输入昵称',
           type: 'info'
@@ -97,12 +108,8 @@ export default {
       const values = {
         ...this.formVal
       }
-      // this.loading = true
       this.submitComment(values)
       this.formVal.text = ''
-      // this.loading = false
-      // 评论完成关闭二级 编辑器
-      // this.$parent.$parent.onClose()
     },
     onClose () {
       this.$emit('onClose')

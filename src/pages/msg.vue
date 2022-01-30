@@ -12,7 +12,7 @@
       <p><span class="font-semibold mr-1">avatar:</span> https://resource.lsyboy.cn/blog/avatar.png</p>
       <p><span class="font-semibold mr-1">desc:</span> 闭上眼睛，你会看到更多。</p>
     </div>
-    <Comments content-id="msg" />
+    <Comments postId="msg" />
   </div>
 </template>
 

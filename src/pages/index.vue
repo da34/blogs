@@ -14,7 +14,7 @@
             {{ item.createTime | formatDate('YYYY年MM月DD日') }}
           </div>
           <div v-if="item.tags.length" class="info-item">
-            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2 art-tag" :to="'/archive?name=' + tag.name">
+            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="ml-2 art-tag" :to="'/archive?tag=' + tag.name">
               {{ tag.name }}
             </NuxtLink>
           </div>

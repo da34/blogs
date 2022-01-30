@@ -1,5 +1,5 @@
 <template>
-  <v-md-preview class="w-full" :text="value" />
+  <v-md-preview :text="value" />
 </template>
 <script>
 

@@ -11,33 +11,33 @@
         :key="comment.id"
         :avatar="comment.avatar"
         :content="comment.text"
-        :author="{ nickName: comment.nickName, os: parseOS(comment.ua), browser: parseBrowser(comment.ua) }"
+        :author="{ name: comment.name, isAdmin: comment.isAdmin, os: parseOS(comment.ua), browser: parseBrowser(comment.ua) }"
       >
         <template #actions>
           <div class="text-gray-400 flex">
             <span>{{ comment.createTime | convertDate }}</span>
-            <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, comment.id, comment.nickName)">回复</span>
+            <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, comment.name, comment.email)">回复</span>
           </div>
         </template>
         <!--      子级回复开始-->
-        <template v-if="comment.childComments.length > 0">
+        <template v-if="comment.children.length > 0">
           <CommentList
-            v-for="reply in comment.childComments"
+            v-for="reply in comment.children"
             :key="reply.id"
             :avatar="reply.avatar"
             class="bg-gray-50 pl-4"
-            :author="{ nickName: reply.nickName, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
+            :author="{ name: reply.name, isAdmin: reply.isAdmin, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
           >
             <template #content>
-              <div>
-                <span class="text-red-400">@{{ reply.targetName }}</span>
-                <Markdown class="bg-transparent inline-block" :value="reply.text" />
+              <div class="">
+                <span class="text-red-400 whitespace-nowrap leading-6">@{{ reply.name }}</span>
+                <Markdown class="bg-transparent inline-block ml-2" :value="reply.text" />
               </div>
             </template>
             <template #actions>
               <div class="text-gray-400 flex">
                 <span>{{ reply.createTime | convertDate }}</span>
-                <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, reply.id, reply.nickName)">回复</span>
+                <span class="ml-5 text-red-400 cursor-pointer" @click="onReply(comment.id, reply.name, reply.email)">回复</span>
               </div>
             </template>
           </CommentList>
@@ -65,9 +65,9 @@
     <transition name="slide-in-right">
       <div v-show="replyShow" class="w-[1000px] bg-white z-[100] fixed top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] rounded">
         <h1 class="bg-white p-3">
-          回复 <span class="underline decoration-red-400 decoration-4">{{ commentInfo.targetName }}</span> ：
+          回复 <span class="underline decoration-red-400 decoration-4">{{ commentInfo.replyName }}</span> ：
         </h1>
-        <Edit :close="true" @onClose="replyShow = false" />
+        <Edit :close="true" @onClose="onClose" />
       </div>
     </transition>
   </div>
@@ -91,7 +91,7 @@ export default {
     }
   },
   props: {
-    contentId: {
+    postId: {
       type: [Number, String],
       default: null
     }
@@ -106,15 +106,15 @@ export default {
       count: 0,
       replyShow: false,
       commentInfo: {
-        tierId: '',
-        pid: '',
-        targetName: ''
+        parentId: null,
+        replyName: '',
+        replyEmail: ''
       }
     }
   },
   async fetch () {
     // 获取评论
-    const { data } = await this.$axios.get(`comments?page=${this.page}&filters[content]=${this.contentId}&filters[status]=pass`)
+    const { data } = await this.$axios.get(`comments/content/${this.postId}?page=${this.page}`)
     this.total = data.data.count
     // this.count = data.data.comments.count
     // 是否是翻页, 相同证明不是
@@ -137,7 +137,7 @@ export default {
     // 提交评论
     async onSubmit (comment) {
       const query = {
-        contentId: this.contentId,
+        postId: this.postId,
         anchor: this.$route.path
       }
       comment = Object.assign(query, comment, this.commentInfo)
@@ -150,13 +150,16 @@ export default {
       this.onClose()
       await this.$fetch()
     },
-    onReply (tierId, pid, targetName) {
+    onReply (parentId, replyName, replyEmail) {
       this.commentInfo = {
-        tierId, pid, targetName
+        parentId, replyName, replyEmail
       }
       this.replyShow = true
     },
     onClose () {
+      // 关闭回复框清空
+      this.commentInfo = {}
+      console.log(this.commentInfo)
       this.replyShow = false
     },
     moreComment () { // 加载更多评论

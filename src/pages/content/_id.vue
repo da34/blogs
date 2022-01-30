@@ -41,12 +41,12 @@
         </div>
       </div>
     </div>
-    <Comments v-if="article.isCommentOpen" class="md:px-10  pt-5" :content-id="$route.params.id" />
+    <Comments v-if="article.isCommentOpen" class="md:px-10  pt-5" :postId="$route.params.id" />
   </section>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Content',
@@ -74,11 +74,6 @@ export default {
         }
       ]
     }
-  },
-  computed: {
-    ...mapState('modules/front', [
-      'renderCompToc'
-    ])
   },
   watch: {
     '$fetchState.pending' (oldVal, newVal) {
