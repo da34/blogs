@@ -34,7 +34,6 @@ export const createColumns = ({updateArticle}) => {
       title: '分类',
       key: 'category',
       align: 'center',
-      width: '150px',
       render({category}) {
         return category?.name && h(
           NTag,

@@ -91,7 +91,7 @@ Promise.all([
     pageSize: 5,
     'sortBy[createTime]': 'DESC',
     'filters[status]': 'pass',
-    fields: 'id,nickName,text,createTime,avatar'
+    fields: 'id,name,text,createTime,avatar'
   })]).then(res => {
   articles.value = res[0].list
   comments.value = res[1].list

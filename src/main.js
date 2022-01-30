@@ -1,9 +1,9 @@
 import {createApp} from 'vue'
 import App from './App.vue'
 import {setupRouter} from './router'
-import {setupStore} from "./stores";
-import {setupNaive} from "./plugins/naive";
-import {setupMark} from "./plugins/markdown";
+import {setupStore} from './stores';
+import {setupNaive} from './plugins/naive';
+import {setupMark} from './plugins/markdown';
 import AppProvider from '@/components/Application/Application.vue';
 // 导入全局样式
 import '@/styles/index.scss'

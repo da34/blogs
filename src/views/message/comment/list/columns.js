@@ -5,7 +5,7 @@ import UAParser from 'ua-parser-js'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const columns = [
-  {title: '评论人', key: 'nickName', width: 100, align: 'center',},
+  {title: '评论人', key: 'name', width: 100, align: 'center',},
   // {title: '被评论人', key: 'targetName', width: 100,},
   {title: '评论内容', key: 'text', align: 'center',},
   {

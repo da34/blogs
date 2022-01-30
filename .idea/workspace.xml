@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块">
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 修改评论模块">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +50,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/content" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -133,7 +128,9 @@
       <workItem from="1642484634941" duration="2411000" />
       <workItem from="1642571171683" duration="595000" />
       <workItem from="1642733927532" duration="1052000" />
-      <workItem from="1642947048751" duration="23223000" />
+      <workItem from="1642947048751" duration="25366000" />
+      <workItem from="1643371467825" duration="2572000" />
+      <workItem from="1643453891316" duration="1242000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -191,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643348011003</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: 修改评论模块">
+      <created>1643349468795</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1643349468795</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +223,8 @@
     <MESSAGE value="feat: 修改work" />
     <MESSAGE value="feat: 修改history" />
     <MESSAGE value="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块" />
+    <MESSAGE value="feat: 修改评论模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 修改评论模块" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
