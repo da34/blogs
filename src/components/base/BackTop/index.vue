@@ -2,9 +2,9 @@
   <!--  <transition name="scroll">-->
   <div>
     <transition name="scroll">
-      <div v-if="visible" class="back-wrapper hidden md:block" @click="handleTo" />
+      <div v-show="visible" class="back-wrapper hidden md:block" @click="handleTo" />
     </transition>
-    <div v-if="visible" class="cursor-pointer fixed right-4 bottom-8 w-10 h-10 bg-white text-center rounded-full md:hidden" @click="handleTo">
+    <div v-show="visible" class="cursor-pointer fixed right-4 bottom-8 w-10 h-10 bg-white text-center rounded-full md:hidden" @click="handleTo">
       <span class="relative -top-1 border-8 border-solid border-x-transparent border-t-transparent border-b-black" />
     </div>
   </div>

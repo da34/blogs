@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 md:p-7 bg-white">
+  <div class="md:p-7 bg-white">
     <h1 class="text-3xl font-bold mb-7">
       网站更新日志
     </h1>

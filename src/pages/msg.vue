@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-5">
+  <div class="bg-white">
     <h1 class="text-2xl text-center leading-9 font-bold">
       欢迎来到这里<br>你可以吐槽，畅谈<br> <span class="text-blue-950">交换友联</span>
     </h1>

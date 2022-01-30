@@ -21,8 +21,8 @@
     </div>
     <div class="blog-post">
       <Markdown :value="article.content" :is-article="true" />
-      <div class="md:px-10 px-5">
-        <div v-if="article.isShare" class="p-6 bg-gray-100 rounded-xl text-center">
+      <div class="md:px-10 mt-5 md:mt-0">
+        <div v-if="article.isShare" class="p-6 bg-gray-100 rounded-lg text-center">
           本作品采用
           <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a>
           进行许可
@@ -121,6 +121,5 @@ export default {
       padding-top 1rem
     }
   }
-
 }
 </style>

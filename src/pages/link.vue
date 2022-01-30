@@ -1,5 +1,5 @@
 <template>
-  <div class="link-wrapper bg-white p-5">
+  <div class="link-wrapper bg-white">
     <h1 class="text-3xl font-bold mb-7">
       以下排名不分先后
     </h1>

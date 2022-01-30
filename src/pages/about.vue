@@ -32,6 +32,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+@media (max-width: 419px) {
+  .bg-white {
+  >>>.vuepress-markdown-body:not(.custom) {
+    padding: 0;
+    padding-top 1rem
+  }
+}
+}
 </style>

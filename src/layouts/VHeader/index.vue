@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <transition name="fade">
-      <div v-show="visible" class="fixed px-4 py-1 md:px-0 inset-0 md:h-[65px] h-[60px] text-slate-900 bg-white shadow duration-300 z-50 backdrop-blur-md">
+      <div v-show="visible" class="fixed w-full px-4 py-1 md:px-0 inset-0 md:h-[65px] h-[60px] text-slate-900 bg-white shadow duration-300 z-50 backdrop-blur-md">
         <header class="flex m-auto h-full items-center xl:max-w-screen-xl w-full">
           <Logo class="order-3 ml-3 md:m-0 md:order-1" />
           <Navbar class="order-2" />

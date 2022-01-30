@@ -1,5 +1,5 @@
 <template>
-  <v-md-preview :text="value" />
+  <v-md-preview class="w-full" :text="value" />
 </template>
 <script>
 
@@ -47,9 +47,16 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="stylus">
 .vuepress-markdown-body p {
   margin: 10px 0!important;
 }
 
+@media (max-width: 419px) {
+  .vuepress-markdown-body div[class*=v-md-pre-wrapper-] {
+    /* margin: 0.85rem -1.5rem; */
+    margin 0 !important
+    border-radius: 0;
+  }
+}
 </style>

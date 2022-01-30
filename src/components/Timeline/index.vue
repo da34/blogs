@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5">
+  <div class="">
     <!--      <div class="content-total">-->
     <!--        目前一共<span class="emphasis">{{ total }}</span>篇文章,加油!-->
     <!--      </div>-->
