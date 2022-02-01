@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center py-5">
     <img :src="imgUrl" :style="imageStyle" alt="empty" class="mx-auto">
     <span class="text-gray-400">{{ description }}</span>
     <slot></slot>
@@ -19,9 +19,6 @@ export default {
     },
     imageStyle: {
       type: [Object, String]
-      // default () {
-      //   return { message: 'hello' }
-      // }
     }
   }
 }

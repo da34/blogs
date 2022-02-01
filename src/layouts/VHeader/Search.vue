@@ -1,47 +1,31 @@
 <template>
-  <div class="site-search">
-    <!--    <svg-icon name="search" style="margin-right: 15px" />-->
-    <!--    <el-autocomplete-->
-    <!--      v-model="state"-->
-    <!--      class="search"-->
-    <!--      :debounce="500"-->
-    <!--      size="small"-->
-    <!--      suffix-icon="el-icon-search"-->
-    <!--      :fetch-suggestions="querySearchAsync"-->
-    <!--      placeholder="搜索本站"-->
-    <!--      @select="handleSelect"-->
-    <!--    />-->
+  <div class="relative flex items-center">
+    <input v-model="keyword" placeholder="搜索文章" class="px-2 py-1.5 bg-gray-100 rounded pr-8 border border-solid focus:border-blue-950" @keydown.enter="handleSearch">
+    <BaseSvgIcon icon-class="search" class="absolute text-gray-500 right-2" @click="handleSearch" />
   </div>
 </template>
 
 <script>
-// import { getSearchArticle } from '@/api/content'
-// import { errno } from '@/config'
+import Message from '../../components/base/Message'
+
 export default {
   name: 'Search',
   data () {
     return {
-      state: ''
+      keyword: ''
     }
   },
   methods: {
-    async querySearchAsync (queryString, callback) {
-      // if (queryString) {
-      //   const { data, code, message } = await this.$axios.$get(`content/search?title=${queryString}`)
-      //   if (code === 0) {
-      //     data.map(item => {
-      //       item.value = item.title
-      //     })
-      //     callback(data)
-      //   } else {
-      //     this.$message(message)
-      //   }
-      // }
-    },
-    handleSelect ({ id }) {
-      this.state = ''
-      // replace到新的路由，并且不存储记录
-      this.$router.replace(`/article/${id}`)
+    handleSearch () {
+      const keyword = this.keyword
+      if (keyword) {
+        this.$router.replace(`/search?keyword=${this.keyword}`)
+      } else {
+        Message({
+          type: 'info',
+          text: '请输入搜索内容'
+        })
+      }
     }
   }
 }

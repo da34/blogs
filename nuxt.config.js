@@ -1,8 +1,5 @@
 import { resolve } from 'path'
-import { defineNuxtConfig } from '@nuxt/bridge'
-
-export default defineNuxtConfig({
-  bridge: false,
+export default {
   // 开启打包分析
   analyze: true,
   alias: {
@@ -200,4 +197,4 @@ export default defineNuxtConfig({
       })
     }
   }
-})
+}
