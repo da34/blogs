@@ -20,6 +20,7 @@ export default {
       const keyword = this.keyword
       if (keyword) {
         this.$router.replace(`/search?keyword=${this.keyword}`)
+        this.keyword = ''
       } else {
         Message({
           type: 'info',

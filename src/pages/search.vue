@@ -34,7 +34,7 @@
     </div>
     <div>
       <ArticleList v-if="articleList.length" :article-list="articleList" />
-      <BaseEmpty v-else class="bg-white" :image-style="{ width: '30%' }" description="没有搜索到文章" />
+      <BaseEmpty v-else class="bg-white" :image-style="{ width: '30%' }" description="博主正在努力更文中~" />
     </div>
   </div>
 </template>
@@ -54,7 +54,6 @@ export default {
   },
   watch: {
     '$route.query.keyword' () {
-      console.log(1111111111)
       this.searchContent()
     }
   },

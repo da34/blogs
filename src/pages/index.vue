@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async getList () {
-      const { data } = await this.$axios.$get('contents?sortBy[createTime]=DESC&filters[status]=publish&filters[type]=article')
+      const { data } = await this.$axios.$get('contents?sortBy[createTime]=DESC&filters[status]=publish')
       this.list = data.list
       this.total = data.count
     }

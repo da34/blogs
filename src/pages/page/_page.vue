@@ -15,7 +15,7 @@ export default {
   },
   async fetch () {
     const { page } = this.$route.params
-    const { data } = await this.$axios.get(`contents/page/${page}`)
+    const { data } = await this.$axios.get(`page/${page}`)
     this.article = data.data
   },
   head () {

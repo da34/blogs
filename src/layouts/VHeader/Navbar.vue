@@ -10,12 +10,21 @@
       >
         {{ menu.name }}
       </NuxtLink>
+      <NuxtLink
+        v-for="menu in pageMenus"
+        :key="menu.id"
+        :to="`/page/${menu.path}`"
+        class="break-all lg:ml-14 ml-8 font-semibold h-full text-lg"
+        :exact="menu.exact"
+      >
+        {{ menu.name }}
+      </NuxtLink>
     </div>
     <div class="md:hidden block">
       <BaseSvgIcon v-show="!isMobileNav" icon-class="menu" @click="isMobileNav = true" />
       <BaseSvgIcon v-show="isMobileNav" icon-class="close-2" @click="isMobileNav = false" />
     </div>
-    <MobileNav :menus="defaultMenus" :visible="isMobileNav" @close="onClose" />
+    <MobileNav :menus="defaultMenus" :pages="pageMenus" :visible="isMobileNav" @close="onClose" />
   </div>
 </template>
 
@@ -29,14 +38,14 @@ export default {
       isMobileNav: false,
       activeName: '/',
       defaultMenus: [
-        { name: '首页', url: '/', exact: true, icon: 'article' },
-        { name: '归档', url: '/archive', icon: 'archive' },
-        { name: '友联', url: '/link', icon: 'link' },
-        { name: '留言', url: '/msg', icon: 'link' },
-        { name: '作品', url: '/work', icon: 'link' },
-        { name: '建站', url: '/log', icon: 'link' },
-        { name: '关于', url: '/about', icon: 'link' }
-      ]
+        { name: '首页', url: '/', exact: true },
+        { name: '归档', url: '/archive' },
+        { name: '友联', url: '/link' },
+        // { name: '留言', url: '/msg', icon: 'link' },
+        { name: '作品', url: '/work' },
+        { name: '建站', url: '/log' }
+      ],
+      pageMenus: []
     }
   },
   watch: {
@@ -44,9 +53,16 @@ export default {
       this.activeName = to.path
     }
   },
+  mounted () {
+    this.getPage()
+  },
   methods: {
     onClose () {
       this.isMobileNav = false
+    },
+    async getPage () {
+      const { data } = await this.$axios('page?filters[status]=publish&sortBy[order]=DESC')
+      this.pageMenus = data.data.list
     }
   }
 }
