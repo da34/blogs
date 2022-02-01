@@ -15,7 +15,6 @@ export class CreateContentDto {
   firstPicture?: string;
 
   status?: string = 'publish';
-  type?: string = 'article';
   views?: number = 0;
 
   isShare?: boolean = true;

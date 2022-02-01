@@ -12,11 +12,6 @@ import { Category } from '../../categories/entities/category.entity';
 import { Tag } from '../../tags/entities/tag.entity';
 import { Exclude } from 'class-transformer';
 
-export enum TypeContent {
-  Article = 'article',
-  Page = 'page',
-}
-
 export enum StatusContent {
   Publish = 'publish',
   Draft = 'draft',
@@ -48,13 +43,6 @@ export class Content {
     nullable: true,
   })
   firstPicture: string;
-
-  @Column({
-    type: 'enum',
-    enum: TypeContent,
-    default: TypeContent.Article,
-  })
-  type: string;
 
   @Column({
     type: 'enum',

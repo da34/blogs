@@ -15,6 +15,7 @@ import { AppController } from './app.controller';
 import { ExternalModule } from './modules/external/external.module';
 import { SiteModule } from './modules/site/site.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { PageModule } from './modules/page/page.module';
 
 @Module({
   controllers: [AppController],
@@ -56,6 +57,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     AuthModule,
     ExternalModule,
     SiteModule,
+    PageModule,
   ],
 })
 export class AppModule {}

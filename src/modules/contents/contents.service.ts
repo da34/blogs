@@ -1,8 +1,6 @@
 import {
-  ClassSerializerInterceptor,
   HttpException,
   Injectable,
-  UseInterceptors,
 } from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
@@ -14,7 +12,7 @@ import {
   In,
   Repository,
 } from 'typeorm';
-import { Content, StatusContent, TypeContent } from './entities/content.entity';
+import { Content, StatusContent } from './entities/content.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
@@ -122,18 +120,12 @@ export class ContentsService {
     });
     return this.contentRepository.save(updatedArticle);
   }
-  async getArchive(tagName?: string) {
+  async getArchive() {
     const query = getRepository(Content)
       .createQueryBuilder('content')
       .where('content.status = :status', { status: StatusContent.Publish })
-      .andWhere('content.type = :type', { type: TypeContent.Article })
       .orderBy('content.createTime', 'DESC')
-      .select(['content.id', 'content.title', 'content.createTime'])
-      .leftJoinAndSelect('content.tags', 'tags');
-
-    if (tagName) {
-      query.andWhere('tags.name =:name ', { name: tagName });
-    }
+      .select(['content.id', 'content.title', 'content.createTime']);
 
     const allContents = await query.getMany();
 
@@ -164,9 +156,7 @@ export class ContentsService {
   }
 
   search(keyword?: string, tagName?: string[], categoryName?: string) {
-    const query = this.contentRepository
-      .createQueryBuilder('content')
-      .where('content.type = :type', { type: TypeContent.Article });
+    const query = this.contentRepository.createQueryBuilder('content');
 
     // 根据关键字查询标题和内容
     if (keyword) {

@@ -73,7 +73,7 @@ export class ContentsController {
   }
 
   @Get('archive')
-  getArchive(@Query('tag') tag: string) {
-    return this.contentsService.getArchive(tag);
+  getArchive() {
+    return this.contentsService.getArchive();
   }
 }
