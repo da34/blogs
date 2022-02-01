@@ -55,10 +55,19 @@ export default {
   watch: {
     '$route.query.keyword' () {
       this.searchContent()
+    },
+    '$route.params.tagName' (newVal) {
+      // console.log(newVal)
+      newVal && this.onTagClick(newVal)
     }
   },
   mounted () {
+    const { tagName } = this.$route.params
+    tagName && this.selectTags.push(tagName)
     Promise.all([this.getTags(), this.getCategories(), this.searchContent()])
+  },
+  deactivated () {
+    this.selectTags = []
   },
   methods: {
     async getTags () {

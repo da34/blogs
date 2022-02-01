@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded p-5 md:p-0">
-    <Markdown :value="article.content" />
+    <Markdown :value="pageInfo.content" />
   </div>
 </template>
 
@@ -10,13 +10,14 @@ export default {
   transition: 'slide-in',
   data () {
     return {
-      article: {}
+      pageInfo: {}
     }
   },
   async fetch () {
     const { page } = this.$route.params
     const { data } = await this.$axios.get(`page/${page}`)
-    this.article = data.data
+    this.pageInfo = data.data
+    this.$axios.post(`page/${this.pageInfo.id}/views`)
   },
   head () {
     return {
