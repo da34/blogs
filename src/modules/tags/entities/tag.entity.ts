@@ -23,5 +23,5 @@ export class Tag {
   views: number;
 
   @ManyToMany(() => Content, (content) => content.tags)
-  contents: Content[];
+  contents: Array<Content>;
 }

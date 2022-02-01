@@ -1,9 +1,14 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  HttpException,
+  Injectable,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
-  createQueryBuilder,
+  Brackets,
   FindConditions,
   getRepository,
   In,
@@ -118,14 +123,6 @@ export class ContentsService {
     return this.contentRepository.save(updatedArticle);
   }
   async getArchive(tagName?: string) {
-    // const allContents = await this.contentRepository.find({
-    //   select: ['id', 'title', 'createTime'],
-    //   order: { createTime: 'DESC' },
-    //   where: {
-    //     status: 'publish',
-    //     type: 'article',
-    //   },
-    // });
     const query = getRepository(Content)
       .createQueryBuilder('content')
       .where('content.status = :status', { status: StatusContent.Publish })
@@ -166,5 +163,47 @@ export class ContentsService {
     return data;
   }
 
-  findByTag(tagId: string) {}
+  search(keyword?: string, tagName?: string[], categoryName?: string) {
+    const query = this.contentRepository
+      .createQueryBuilder('content')
+      .where('content.type = :type', { type: TypeContent.Article });
+
+    // 根据关键字查询标题和内容
+    if (keyword) {
+      query
+        .andWhere(
+          new Brackets((qb) => {
+            qb.where('content.title LIKE :keyword').orWhere(
+              'content.content LIKE :keyword',
+            );
+          }),
+        )
+        .setParameter('keyword', `%${keyword}%`);
+    }
+    // 根据标签查询
+    if (tagName.length) {
+      query.innerJoinAndSelect(
+        'content.tags',
+        'tags',
+        'tags.name in (:tagName)',
+        { tagName },
+      );
+    } else {
+      query.leftJoinAndSelect('content.tags', 'tags');
+    }
+
+    // 根据分类查询
+    if (categoryName) {
+      query.innerJoinAndSelect(
+        'content.category',
+        'category',
+        'category.name = :categoryName',
+        { categoryName },
+      );
+    } else {
+      query.leftJoinAndSelect('content.category', 'category');
+    }
+    // console.log(query.getSql())
+    return query.getMany();
+  }
 }

@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -7,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ContentsService } from './contents.service';
 import { CreateContentDto } from './dto/create-content.dto';
@@ -62,9 +64,12 @@ export class ContentsController {
     return this.contentsService.updateViewsById(id);
   }
 
-  @Get('/tag/:name')
-  findArticlesByTag(@Param('name') tagName) {
-    return this.contentsService.findByTag(tagName);
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/search')
+  searchArticles(@Query() query) {
+    const { keyword = '', tagName = [], categoryName = '' } = query;
+    // console.log(keyword, tagName, categoryName);
+    return this.contentsService.search(keyword, tagName, categoryName);
   }
 
   @Get('archive')

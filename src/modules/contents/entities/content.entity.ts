@@ -2,16 +2,15 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
   ManyToMany,
   JoinTable,
   ManyToOne,
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
-import { Comment } from '../../comments/entities/comment.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { Tag } from '../../tags/entities/tag.entity';
+import { Exclude } from 'class-transformer';
 
 export enum TypeContent {
   Article = 'article',
@@ -28,9 +27,12 @@ export class Content {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   title: string;
 
+  @Exclude()
   @Column({
     type: 'text',
   })
