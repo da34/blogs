@@ -5,7 +5,7 @@
         <header class="flex m-auto h-full items-center xl:max-w-screen-xl w-full">
           <Logo class="order-3 ml-3 md:m-0 md:order-1" />
           <Navbar class="order-2" />
-          <Search class="order-3 ml-32" />
+          <Search class="order-3 ml-auto" />
         </header>
       </div>
     </transition>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white md:p-7">
+  <div class="bg-white mx-5 md:mx-0 rounded p-5 md:p-7">
     <h1 class="text-3xl font-bold mb-2">
       小作品
     </h1>

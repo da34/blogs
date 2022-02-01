@@ -2,10 +2,10 @@
   <div v-if="$fetchState.pending" class="content-wrap flex">
     <!--    <a-skeleton active :title="false" :paragraph="{ rows: 4, width: '100%' }"/>-->
   </div>
-  <section v-else class="bg-white rounded-lg">
+  <section v-else class="bg-white rounded-lg md:p-0 p-5">
     <div class="md:px-10">
       <div>
-        <h1 class="md:text-4xl text-xl title font-bold">
+        <h1 class="md:text-4xl text-xl title font-bold md:pt-5">
           {{ article.title }}
         </h1>
         <div class="text-gray-400 flex space-x-5 md:mt-5 mt-2">

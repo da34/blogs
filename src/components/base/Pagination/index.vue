@@ -1,5 +1,5 @@
 <template>
-  <ul class="pagination md:py-5">
+  <ul class="pagination md:py-5 md:mx-0 mx-5">
     <li class="pagination-item" title="上一页" @click="onAction(stateCurrent-1)">
       <BaseSvgIcon icon-class="arrow_left" />
     </li>

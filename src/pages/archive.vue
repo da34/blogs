@@ -1,17 +1,12 @@
 <template>
-  <div class="time-line-wrapper bg-white">
-    <div v-if="$route.query.tag" class="text-center pt-5">
-      与<span class="text-blue-950 text-2xl">{{ $route.query.tag }}</span>标签有关的文章
-    </div>
+  <div class="time-line-wrapper bg-white p-5 md:p-7 rounded">
     <Timeline :data="list" />
   </div>
 </template>
 
 <script>
-import Timeline from '@/components/Timeline'
 export default {
   name: 'Pigeonhole',
-  components: { Timeline },
   layout: 'blog',
   transition: 'slide-in',
   data () {
@@ -34,17 +29,9 @@ export default {
       ]
     }
   },
-  watch: {
-    '$route.query': '$fetch'
-  },
   methods: {
     async getArchiveList () {
-      const tag = this.$route.query.tag
-      let query = ''
-      if (tag) {
-        query = '?tag=' + encodeURI(tag)
-      }
-      const { data } = await this.$axios.get('contents/archive' + query)
+      const { data } = await this.$axios.get('contents/archive')
       this.list = data.data
     }
   }

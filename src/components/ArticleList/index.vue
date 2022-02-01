@@ -5,7 +5,7 @@
       :key="item.id"
       tag="section"
       :to="`/content/${item.id}`"
-      class="md:duration-300 md:hover:scale-[1.02] md:flex min-h-[160px] shadow-3xl rounded-lg bg-white mb-5 cursor-pointer overflow-hidden"
+      class="md:duration-300 md:hover:scale-[1.02] md:flex mx-3 md:mx-0 min-h-[160px] shadow-3xl rounded-lg bg-white mb-5 cursor-pointer overflow-hidden"
     >
       <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="md:basis-1/3 md:pl-30 md:pt-0 pt-[60%] bg-cover bg-center" />
       <div :class="[ 'px-5', 'p-4', 'basis-2/3', 'flex', 'flex-col', { 'basis-full': !item.firstPicture }]">
