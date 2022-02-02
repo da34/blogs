@@ -16,7 +16,6 @@ const {setOptions} = useECharts(chartRef)
 getArticleList({
   pageSize: 5,
   'sortBy[views]': 'DESC',
-  'filters[type]': 'article',
   fields: 'id,title,views'
 }).then(res => {
   setOptions({

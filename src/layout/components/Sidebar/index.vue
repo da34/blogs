@@ -27,8 +27,8 @@
 import {NMenu} from 'naive-ui'
 import {ref, watch,defineProps} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
-import {useAsyncRouteStore} from "@/stores/modules/asyncRoute";
-import {generatorMenu} from "@/utils";
+import {useAsyncRouteStore} from '@/stores/modules/asyncRoute';
+import {generatorMenu} from '@/utils';
 
 const router = useRouter()
 const currentRoute = useRoute() // 当前路由

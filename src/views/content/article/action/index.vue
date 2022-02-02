@@ -83,27 +83,11 @@
                 :options="tagsOption"
               />
             </NFormItemGi>
-            <NFormItemGi label="文章类型">
-              <NRadioGroup v-model:value="article.type">
-                <NSpace>
-                  <NRadioButton value="article">
-                    article
-                  </NRadioButton>
-                  <NRadioButton value="page">
-                    page
-                  </NRadioButton>
-                </NSpace>
-              </NRadioGroup>
-            </NFormItemGi>
             <NFormItemGi label="置顶">
               <NSwitch v-model:value="article.isTop" />
             </NFormItemGi>
-
             <NFormItemGi label="评论">
               <NSwitch v-model:value="article.isCommentOpen" />
-            </NFormItemGi>
-            <NFormItemGi label="版权">
-              <NSwitch v-model:value="article.isShare" />
             </NFormItemGi>
           </NGrid>
         </NForm>

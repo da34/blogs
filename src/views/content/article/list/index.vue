@@ -62,7 +62,6 @@
       :action-column="actionColumn"
       :request="getArticleList"
       :row-key="row => row.id"
-      :single-line="false"
     />
   </NCard>
 </template>

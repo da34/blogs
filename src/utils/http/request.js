@@ -70,7 +70,7 @@ const transform = {
 
     // 这里逻辑可以根据项目进行修改
     // if (!hasSuccess) {
-    //   return reject(new Error(message));
+    //   return reject(new Error(comment));
     // }
     // 登录超时
     if (code === httpEnum.TIMEOUT) {

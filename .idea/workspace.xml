@@ -4,9 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="feat: 修改评论模块">
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="fix: 修复后端改评论字段引起的bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/link/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/history/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/CreateDrawer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/history/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/history/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/CreateDrawer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/work/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/web/work/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +69,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/project" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -65,18 +84,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\files\backups\blog\blog-admin\src\views\dashboard" />
+      <recent name="E:\files\backups\blog\blog-admin\src\views\project" />
+      <recent name="E:\files\backups\blog\blog-admin\src\views\message" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\content" />
       <recent name="E:\files\backups\blog\blog-admin\src\api\web" />
-      <recent name="E:\文件\备份\blog\blog-admin\src\api\system" />
-      <recent name="E:\文件\备份\blog\blog-admin\src\views\web" />
-      <recent name="E:\文件\备份\blog\blog-admin\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\files\backups\blog\blog-admin\src\views" />
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\list" />
       <recent name="H:\github\blog\blog-admin\src\views\system\systemConfig" />
       <recent name="H:\github\blog\blog-admin\src\views\content\article\action" />
       <recent name="H:\github\blog\blog-admin\src\views\content\article\list" />
-      <recent name="H:\github\blog\blog-admin\src\views\content\article" />
     </key>
   </component>
   <component name="RunManager">
@@ -131,6 +150,8 @@
       <workItem from="1642947048751" duration="25366000" />
       <workItem from="1643371467825" duration="2572000" />
       <workItem from="1643453891316" duration="1242000" />
+      <workItem from="1643550183255" duration="1281000" />
+      <workItem from="1643728308062" duration="3939000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -195,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643349468795</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix: 修复后端改评论字段引起的bug">
+      <created>1643550448665</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1643550448665</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +252,8 @@
     <MESSAGE value="feat: 修改history" />
     <MESSAGE value="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块" />
     <MESSAGE value="feat: 修改评论模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 修改评论模块" />
+    <MESSAGE value="fix: 修复后端改评论字段引起的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修复后端改评论字段引起的bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

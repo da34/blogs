@@ -1,5 +1,5 @@
 import {renderIcon} from '@/utils'
-import {DashboardOne, FileWord, MessageOne, Page, PageTemplate, Permissions, System} from '@icon-park/vue-next'
+import {DashboardOne, FileWord, MessageOne, Page, PageTemplate, Permissions,Link, ApplicationOne, CalendarDot} from '@icon-park/vue-next'
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -15,9 +15,10 @@ import Layout from '@/layout/index.vue'
 const routeName = 'dashboard';
 const RedirectName = 'redirect';
 const ContentName = 'content';
-const MessageName = 'message';
-const SystemName = 'system';
-const WebName = 'web';
+const CommentName = 'comment';
+const LinkName = 'link';
+const ProjectName = 'project';
+const HistoryName = 'history';
 
 const constantRouters = [
   {
@@ -54,7 +55,7 @@ const asyncRoutes = [
     component: Layout,
     meta: {
       title: 'Dashboard',
-      alwaysShow: true,
+      alwaysShow: false,
       icon: renderIcon(DashboardOne),
       // permissions: ['super_admin', 'admin'],
       sort: 0,
@@ -64,8 +65,10 @@ const asyncRoutes = [
       {
         path: 'dashboard',
         name: `${routeName}_dashboard`,
-        component: () => import('@/views/dashboard/console/console.vue'),
-        meta: {title: '控制台', keepAlive: true}
+        icon: renderIcon(DashboardOne),
+        component: () => import('@/views/dashboard/index.vue'),
+        meta: {title: '控制台', keepAlive: true},
+        sort: 0,
       }
     ]
   },
@@ -104,7 +107,7 @@ const asyncRoutes = [
     name: ContentName,
     component: Layout,
     meta: {
-      title: '内容管理',
+      title: '文章管理',
       icon: renderIcon(FileWord),
       // sort: 1,
     },
@@ -134,93 +137,71 @@ const asyncRoutes = [
         name: `${ContentName}_category_list`,
         component: () => import('@/views/content/category/index.vue'),
         meta: {title: '分类列表', keepAlive: true}
-      },
-      {
-        path: 'link/list',
-        name: `${ContentName}_link_list`,
-        component: () => import('@/views/content/link/index.vue'),
-        meta: {title: '友联列表', keepAlive: true}
       }
     ]
   },
   {
-    path: '/message',
-    name: MessageName,
+    path: '/comments',
+    name: CommentName,
     component: Layout,
     meta: {
-      alwaysShow: true,
-      title: '消息管理',
-      icon: renderIcon(MessageOne),
-      // sort: 2,
+      alwaysShow: false,
     },
     children: [
       {
-        path: 'comment',
-        name: `${MessageName}_comment`,
-        component: () => import('@/views/message/comment/list/index.vue'),
-        meta: {title: '评论管理', keepAlive: true}
+        path: '',
+        name: `${CommentName}_list`,
+        component: () => import('@/views/comment/index.vue'),
+        meta: {title: '评论管理', keepAlive: true},
+        icon: renderIcon(MessageOne),
       },
+    ]
+  },
+  {
+    path: '/links',
+    name: LinkName,
+    component: Layout,
+    children: [
       {
-        path: 'comment/check',
-        name: `${MessageName}_comment_check`,
-        component: () => import('@/views/message/comment/check/index.vue'),
-        meta: {title: '评论审核', keepAlive: true}
+        path: '',
+        name: `${LinkName}_list`,
+        component: () => import('@/views/link/index.vue'),
+        meta: {title: '友联管理', keepAlive: true},
+        icon: renderIcon(Link),
       }
     ]
   },
-  // {
-  //   path: '/system',
-  //   name: SystemName,
-  //   component: Layout,
-  //   meta: {
-  //     alwaysShow: true,
-  //     title: '系统管理',
-  //     icon: renderIcon(System),
-  //     // sort: 2,
-  //   },
-  //   // redirect: '/message/site',
-  //   children: [
-  //     {
-  //       path: 'site',
-  //       name: `${SystemName}_site`,
-  //       component: () => import('@/views/system/site/index.vue'),
-  //       meta: {title: '网站配置', keepAlive: true}
-  //     },
-  //     {
-  //       path: 'system_config',
-  //       name: `${SystemName}_system_config`,
-  //       component: () => import('@/views/system/config/index.vue'),
-  //       meta: {title: '系统配置', keepAlive: true, permissions: ['super_admin']}
-  //     }
-  //   ]
-  // },
   {
-    path: '/web',
-    name: WebName,
+    path: '/projects',
+    name: ProjectName,
     component: Layout,
     meta: {
-      alwaysShow: true,
-      title: '门户管理',
-      icon: renderIcon(Page),
+      alwaysShow: false
     },
     children: [
-      // {
-      //   path: 'menu',
-      //   name: `${WebName}_menu`,
-      //   component: () => import('@/views/web/menu/index.vue'),
-      //   meta: {title: '菜单管理', keepAlive: true}
-      // },
       {
-        path: 'work',
-        name: `${WebName}_work`,
-        component: () => import('@/views/web/work/index.vue'),
-        meta: {title: '作品管理', keepAlive: true}
+        path: '',
+        name: `${ProjectName}_list`,
+        component: () => import('@/views/project/index.vue'),
+        meta: {title: '作品管理', keepAlive: true},
+        icon: renderIcon(ApplicationOne)
       },
+    ]
+  },
+  {
+    path: '/histories',
+    name: HistoryName,
+    component: Layout,
+    meta: {
+      alwaysShow: false,
+    },
+    children: [
       {
-        path: 'history',
-        name: `${WebName}_history`,
-        component: () => import('@/views/web/history/index.vue'),
-        meta: {title: '建站日志', keepAlive: true}
+        path: '',
+        name: `${HistoryName}_list`,
+        component: () => import('@/views/history/index.vue'),
+        meta: {title: '建站日志', keepAlive: true},
+        icon: renderIcon(CalendarDot)
       }
     ]
   },

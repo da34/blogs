@@ -1,6 +1,6 @@
 import {h} from 'vue';
 import TableAction from '@/components/BasicTable/TableAction.vue'
-import {formatDate} from '../../../utils';
+import {formatDate} from '../../utils';
 
 export const columns = [
   {

@@ -86,7 +86,7 @@ const comments = ref([])
 const articles = ref([])
 
 Promise.all([
-  getArticleList({pageSize: 5, 'sortBy[createTime]': 'DESC', 'filters[type]': 'article'}),
+  getArticleList({pageSize: 5, 'sortBy[createTime]': 'DESC'}),
   getCommentList({
     pageSize: 5,
     'sortBy[createTime]': 'DESC',
@@ -100,7 +100,7 @@ Promise.all([
 </script>
 
 <style scoped lang="scss">
-:deep .n-thing-main__content {
+:deep(.n-thing-main__content) {
   margin-top: 5px!important;
 }
 </style>
