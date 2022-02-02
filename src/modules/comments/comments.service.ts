@@ -35,15 +35,23 @@ export class CommentsService {
   }
 
   async findAll(query: QueryCommentDto) {
-    const { page = 1, pageSize = 10, status, ...otherQuery } = query;
+    const { page = 1, pageSize = 10, status, sortBy, ...otherQuery } = query;
     const commentQuery = await this.commentRepository
       .createQueryBuilder('comment')
       .take(pageSize)
-      .skip((page - 1) * pageSize)
-      .orderBy('comment.createTime', 'DESC');
+      .skip((page - 1) * pageSize);
+    // .orderBy('comment.createTime', 'DESC');
 
     if (status) {
       commentQuery.andWhere('comment.status=:status', { status });
+    }
+
+    if (sortBy) {
+      Object.keys(sortBy).forEach((key) =>
+        commentQuery.orderBy(`comment.${key}`, sortBy[key]),
+      );
+    } else {
+      commentQuery.orderBy('comment.createTime', 'DESC');
     }
 
     if (otherQuery) {

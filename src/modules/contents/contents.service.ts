@@ -49,17 +49,24 @@ export class ContentsService {
   }
 
   async findAll(query?: QueryContentDto) {
-    const { page = 1, pageSize = 10, status, ...otherQuery } = query;
+    const { page = 1, pageSize = 10, status, sortBy, ...otherQuery } = query;
     const contentQuery = await this.contentRepository
       .createQueryBuilder('content')
       .take(pageSize)
       .skip((page - 1) * pageSize)
-      .orderBy('content.createTime', 'DESC')
       .leftJoinAndSelect('content.tags', 'tags')
       .leftJoinAndSelect('content.category', 'category');
 
     if (status) {
       contentQuery.andWhere('content.status=:status', { status });
+    }
+
+    if (sortBy) {
+      Object.keys(sortBy).forEach((key) =>
+        contentQuery.orderBy(`content.${key}`, sortBy[key]),
+      );
+    } else {
+      contentQuery.orderBy('content.createTime', 'DESC');
     }
 
     // console.log(otherQuery)

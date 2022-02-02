@@ -6,4 +6,5 @@ export class QueryCommentDto extends PartialType(FindLimitDto) {
   ip?: string;
   name?: string;
   status?: string;
+  sortBy?: object;
 }
