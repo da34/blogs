@@ -4,28 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="fix: 修复后端改评论字段引起的bug">
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="chore: 文件结构重新整理">
+      <change afterPath="$PROJECT_DIR$/src/api/external.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/page/action/composables/usePubilc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/page/action/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/page/list/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/page/list/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Sidebar/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/system/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/system/menu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/columns.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/check/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/message/comment/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/history/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/history/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/history/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/work/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/work/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/web/work/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
         <option value="SCSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -69,7 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/page" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -84,11 +77,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\files\backups\blog\blog-admin\src\views\page" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\dashboard" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\project" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\message" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\content" />
-      <recent name="E:\files\backups\blog\blog-admin\src\api\web" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\files\backups\blog\blog-admin\src\views" />
@@ -151,7 +144,7 @@
       <workItem from="1643371467825" duration="2572000" />
       <workItem from="1643453891316" duration="1242000" />
       <workItem from="1643550183255" duration="1281000" />
-      <workItem from="1643728308062" duration="3939000" />
+      <workItem from="1643728308062" duration="8276000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -223,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643550448665</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="chore: 文件结构重新整理">
+      <created>1643773093435</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1643773093435</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +232,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="24fe1ee8-b328-4c13-8693-38c6469c2089">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:E:/files/backups/blog/blog-admin/src/api/system" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -253,7 +278,8 @@
     <MESSAGE value="revert: 删除 菜单模块&#10;revert: 删除 系统配置模块" />
     <MESSAGE value="feat: 修改评论模块" />
     <MESSAGE value="fix: 修复后端改评论字段引起的bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 修复后端改评论字段引起的bug" />
+    <MESSAGE value="chore: 文件结构重新整理" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: 文件结构重新整理" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

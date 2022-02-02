@@ -52,7 +52,8 @@ import {MenuFold, MenuUnfold} from '@icon-park/vue-next'
 import {NIcon, NBreadcrumb, NBreadcrumbItem, NDropdown, NAvatar, useDialog, useMessage} from 'naive-ui'
 import {defineProps, computed} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-import {useUserStore} from "@/stores/modules/user";
+import {useUserStore} from '@/stores/modules/user';
+import {filterRouter, isRootRouter} from '../../../utils';
 
 const route = useRoute()
 const router = useRouter()
@@ -70,14 +71,18 @@ defineEmits(['update:collapsed'])
 
 // 面包屑
 const generator = (routeMap) => {
-  return routeMap
-      .filter(item => !item.hidden)
+  return filterRouter(routeMap)
+      .filter(item => {
+        const { alwaysShow } = item?.meta
+        return typeof alwaysShow === 'boolean' ? alwaysShow : true
+      })
       .map(item => {
         const currentMenu = {
           ...item,
           label: item.meta.title,
           key: item.name
         };
+        // console.log(item)
         if (item.children?.length > 0) {
           currentMenu.children = generator(item.children);
         }

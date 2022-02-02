@@ -2,7 +2,7 @@ import {h} from 'vue';
 import {NIcon} from 'naive-ui';
 import dayjs from 'dayjs'
 import * as qiniu from 'qiniu-js'
-import {getQiNiuToken} from '@/api/system/config';
+import {getQiNiuToken} from '@/api/external';
 
 /**
  * render 图标

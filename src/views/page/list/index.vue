@@ -11,7 +11,7 @@
             type="primary"
             @click="handleAction"
           >
-            新建文章
+            新建页面
           </NButton>
           <!--          <NButton-->
           <!--            type="error"-->
@@ -20,6 +20,17 @@
           <!--            批量删除-->
           <!--          </NButton>-->
         </NSpace>
+      </NFormItem>
+      <NFormItem
+        class="ml-auto"
+        label="类型"
+      >
+        <NSelect
+          v-model:value="formValue['filters[type]']"
+          class="w-40"
+          placeholder="请选择类型"
+          :options="typeOptions"
+        />
       </NFormItem>
       <NFormItem label="标题">
         <NInput
@@ -49,7 +60,7 @@
       :pagination="pagination"
       :columns="column"
       :action-column="actionColumn"
-      :request="getArticleList"
+      :request="getPages"
       :row-key="row => row.id"
     />
   </NCard>
@@ -58,14 +69,14 @@
 <script setup>
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {changeArticleState, getArticleList} from '@/api/web/article';
+// import {changeArticleState, getArticleList} from '@/api/web/article';
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
-import {delArticle, updateArticle} from '@/api/web/article';
+import {delPage, updatePage, getPages} from '@/api/page';
 
 const defaultVla = () => ({
-  'filters[title]': null,
+  'filters[title]': null
 })
 
 const router = useRouter()
@@ -88,14 +99,14 @@ const pagination = reactive({
 
 // 表格列
 const actionColumn = createActionColumn({handleDel, handleEdit})
-const column = createColumns({updateArticle})
+const column = createColumns({updatePage})
 
-// const typeOptions = ['article', 'page'].map(
-//     (v) => ({
-//       label: v,
-//       value: v
-//     })
-// )
+const typeOptions = ['article', 'page'].map(
+    (v) => ({
+      label: v,
+      value: v
+    })
+)
 
 function handleReset() {
   formValue.value = defaultVla()
@@ -113,24 +124,24 @@ function handleDel({id}) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      delArticle(id)
+      delPage(id)
       handleSearch()
     }
   })
 }
 
 function handleEdit({id}) {
-  router.push({name: 'content_action', params: {id}})
+  router.push({name: 'page_action', params: {id}})
 }
 
 async function stateToggle(field, id, value) {
   value /= 1
-  await changeArticleState({field, id, value})
+  await updatePage({field, id, value})
   tableRef.value.reload()
 }
 
 function handleAction() {
-  router.push({name: 'content_action'})
+  router.push({name: 'page_action'})
 }
 </script>
 

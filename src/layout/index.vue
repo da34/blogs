@@ -17,7 +17,7 @@
     </NLayoutSider>
     <NLayout>
       <NLayoutHeader bordered>
-        <PageHeader v-model="collapsed" />
+        <PageHeader v-model:collapsed="collapsed" />
       </NLayoutHeader>
       <NLayoutContent
         position="absolute"
@@ -30,8 +30,8 @@
 </template>
 <script setup>
 import PageSidebar from './components/Sidebar/index.vue'
-import PageMainView from "./components/MainView.vue";
-import PageHeader from "./components/Header/index.vue";
+import PageMainView from './components/MainView.vue';
+import PageHeader from './components/Header/index.vue';
 import {ref} from 'vue'
 
 const collapsed = ref(false)
