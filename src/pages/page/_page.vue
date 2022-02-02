@@ -1,6 +1,7 @@
 <template>
   <div class="bg-white rounded p-5 md:p-0">
     <Markdown :value="pageInfo.content" />
+    <Comments v-if="pageInfo.isCommentOpen" class="md:px-10  pt-5" :postId="$route.params.page" />
   </div>
 </template>
 

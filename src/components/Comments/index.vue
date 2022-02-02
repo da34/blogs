@@ -115,7 +115,8 @@ export default {
   async fetch () {
     // 获取评论
     const { data } = await this.$axios.get(`comments/content/${this.postId}?page=${this.page}`)
-    this.total = data.data.count
+    this.total = data.data.total
+    this.count = data.data.count
     // this.count = data.data.comments.count
     // 是否是翻页, 相同证明不是
     if (this.oldPage === this.page) {

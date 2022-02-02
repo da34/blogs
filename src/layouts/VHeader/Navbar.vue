@@ -61,7 +61,7 @@ export default {
       this.isMobileNav = false
     },
     async getPage () {
-      const { data } = await this.$axios('page?filters[status]=publish&sortBy[order]=DESC')
+      const { data } = await this.$axios('page?status=publish')
       this.pageMenus = data.data.list
     }
   }

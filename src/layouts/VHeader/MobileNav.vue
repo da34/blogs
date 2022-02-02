@@ -1,4 +1,5 @@
 <template>
+<!--  fixed top-[60px] w-11/12 bg-white-->
   <div class="mobile-header">
     <transition
       name="fade"
@@ -16,7 +17,15 @@
           @click="onClose"
         >
           {{ menu.name }}
-<!--          <svg-icon :icon-class="menu.icon || 'others'" />{{ menu.name }}-->
+        </NuxtLink>
+        <NuxtLink
+          v-for="menu in pages"
+          :key="menu.id"
+          :to="`/page/${menu.path}`"
+          class="menu-item"
+          @click="onClose"
+        >
+          {{ menu.name }}
         </NuxtLink>
         <div ref="mobile-header-backdrop" class="mobile-header-backdrop" @click="onClose" />
       </div>
@@ -31,6 +40,10 @@ export default {
   mixins: [appendBody],
   props: {
     menus: {
+      type: Array,
+      default: () => []
+    },
+    pages: {
       type: Array,
       default: () => []
     },
@@ -82,7 +95,7 @@ export default {
     transition: height .3s ease-in-out;
     overflow: hidden;
     .menu-item
-      height 56px
+      height 46px
       display flex
       padding 0 20px
       align-items center

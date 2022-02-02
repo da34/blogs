@@ -1,30 +1,30 @@
 <template>
   <div class="space-y-4">
     <div class="box-card">
-      <div class="flex md:space-x-8 space-x-5 items-center">
+      <div class="flex md:space-x-5 space-x-3">
         <h1 class="text-gray-500 whitespace-nowrap leading-7">
           分类：
         </h1>
-        <div class="flex flex-wrap space-x-3">
+        <div class="flex flex-wrap">
           <div
             v-for="category in categories"
             :key="category.id"
-            :class="['cursor-pointer hover:text-blue-950 px-2 py-1 rounded', selectCategory === category.name && 'bg-blue-950 text-white']"
+            :class="['cursor-pointer md:hover:text-blue-950 px-2 py-1 ml-3 mb-2 rounded', selectCategory === category.name && 'bg-blue-950 text-white']"
             @click="onCategoryClick(category.name)"
           >
             {{ category.name }}
           </div>
         </div>
       </div>
-      <div class="mt-3 flex md:space-x-8 space-x-5">
+      <div class="mt-3 flex md:space-x-5 space-x-3">
         <h1 class="text-gray-500 whitespace-nowrap leading-7">
           标签：
         </h1>
-        <div class="flex flex-wrap space-x-3">
+        <div class="flex flex-wrap">
           <div
             v-for="tag in tags"
             :key="tag.id"
-            :class="['cursor-pointer hover:text-blue-95 px-2 py-1 rounded', selectTags.includes(tag.name) && 'bg-blue-950 text-white']"
+            :class="['cursor-pointer md:hover:text-blue-950 px-2 py-1 ml-3 mb-2 rounded', selectTags.includes(tag.name) && 'bg-blue-950 text-white']"
             @click="onTagClick(tag.name)"
           >
             {{ tag.name }}
