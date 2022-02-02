@@ -73,7 +73,11 @@ export class CommentsService {
     const query = this.commentRepository
       .createQueryBuilder('comment')
       .where('comment.postId=:postId', { postId })
-      .andWhere('comment.status=:status', { status: StatusComment.Pass })
+      .andWhere('comment.status=:status', { status: StatusComment.Pass });
+
+    const total = await query.getCount();
+
+    query
       .andWhere('comment.parentId is NULL')
       .orderBy('comment.createTime', 'DESC');
 
@@ -95,7 +99,7 @@ export class CommentsService {
       Object.assign(item, { children: subComments });
     }
 
-    return { count, list: data };
+    return { count, list: data, total };
   }
 
   findOne(id: string) {
