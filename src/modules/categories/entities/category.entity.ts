@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
+} from 'typeorm';
 import { Content } from '../../contents/entities/content.entity';
 
 @Entity()
@@ -12,9 +19,25 @@ export class Category {
   name: string;
 
   @Column({
-    default: 0,
+    type: 'bigint',
   })
-  views: number;
+  createTime: number;
+
+  @Column({
+    type: 'bigint',
+  })
+  updateTime: number;
+
+  @BeforeInsert()
+  createDates() {
+    this.createTime = Date.now();
+    this.updateTime = Date.now();
+  }
+
+  @BeforeUpdate()
+  updateDates() {
+    this.updateTime = Date.now();
+  }
 
   @OneToMany(() => Content, (content) => content.category, {
     createForeignKeyConstraints: false,

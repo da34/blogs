@@ -82,8 +82,8 @@ export class CommentsController {
   }
 
   @Get()
-  findAll(@Query() query: QueryCommentDto, @DbOptions() dbOptions) {
-    return this.commentsService.findAll(query, dbOptions);
+  findAll(@Query() query: QueryCommentDto) {
+    return this.commentsService.findAll(query);
   }
 
   @Get(':id')

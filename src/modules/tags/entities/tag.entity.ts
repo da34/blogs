@@ -4,6 +4,8 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { Content } from '../../contents/entities/content.entity';
 
@@ -18,9 +20,25 @@ export class Tag {
   name: string;
 
   @Column({
-    default: 0,
+    type: 'bigint',
   })
-  views: number;
+  createTime: number;
+
+  @Column({
+    type: 'bigint',
+  })
+  updateTime: number;
+
+  @BeforeInsert()
+  createDates() {
+    this.createTime = Date.now();
+    this.updateTime = Date.now();
+  }
+
+  @BeforeUpdate()
+  updateDates() {
+    this.updateTime = Date.now();
+  }
 
   @ManyToMany(() => Content, (content) => content.tags)
   contents: Array<Content>;

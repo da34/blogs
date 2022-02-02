@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreatePageDto } from './dto/create-page.dto';
 import { UpdatePageDto } from './dto/update-page.dto';
-import { FindConditions, Repository } from "typeorm";
+import { FindConditions, Repository } from 'typeorm';
 import { Page } from './entities/page.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QueryLinkDto } from "../links/dto/query-link-dto";
+import { QueryLinkDto } from '../links/dto/query-link-dto';
 
 @Injectable()
 export class PageService {
@@ -12,6 +12,7 @@ export class PageService {
     @InjectRepository(Page)
     private pageRepository: Repository<Page>,
   ) {}
+
   async create(createPageDto: CreatePageDto) {
     const { path } = createPageDto;
     const exist = await this.pageRepository.findOne({ where: { path } });
@@ -25,19 +26,32 @@ export class PageService {
     return createPage;
   }
 
-  async findAll(query: QueryLinkDto, selectCond?: FindConditions<any>) {
-    const { page = 1, pageSize = 10 } = query;
-    const links = await this.pageRepository.find(
-      Object.assign(
-        {
-          skip: (page - 1) * pageSize,
-          take: pageSize,
-        },
-        selectCond,
-      ),
-    );
-    const count = await this.pageRepository.count(selectCond.where);
-    return { count, list: links };
+  async findAll(query: QueryLinkDto) {
+    const { page = 1, pageSize = 10, status, ...otherQuery } = query;
+
+    const linkQuery = await this.pageRepository
+      .createQueryBuilder('page')
+      .take(pageSize)
+      .skip((page - 1) * pageSize)
+      .orderBy('page.order', 'DESC');
+
+    if (status) {
+      linkQuery.andWhere('page.status=:status', { status });
+    }
+
+    if (otherQuery) {
+      Object.keys(otherQuery).forEach((q) =>
+        linkQuery.andWhere(`page.${q} LIKE :${q}`, {
+          [`${q}`]: `%${otherQuery[q]}%`,
+        }),
+      );
+    }
+
+    const count = await linkQuery.getCount();
+    return {
+      count,
+      list: await linkQuery.getMany(),
+    };
   }
 
   findOne(id: string) {

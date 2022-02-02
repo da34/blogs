@@ -1,7 +1,4 @@
-import {
-  HttpException,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -51,22 +48,34 @@ export class ContentsService {
     await this.contentRepository.save(createContent);
   }
 
-  async findAll(query?: QueryContentDto, selectCond?: FindConditions<any>) {
-    const { page = 1, pageSize = 10 } = query;
-    const contents = await this.contentRepository.find(
-      Object.assign(
-        {
-          take: pageSize,
-          skip: (page - 1) * pageSize,
-          relations: ['tags', 'category'],
-          order: { createTime: 'DESC' },
-        },
-        selectCond,
-      ),
-    );
+  async findAll(query?: QueryContentDto) {
+    const { page = 1, pageSize = 10, status, ...otherQuery } = query;
+    const contentQuery = await this.contentRepository
+      .createQueryBuilder('content')
+      .take(pageSize)
+      .skip((page - 1) * pageSize)
+      .orderBy('content.createTime', 'DESC')
+      .leftJoinAndSelect('content.tags', 'tags')
+      .leftJoinAndSelect('content.category', 'category');
 
-    const count = await this.contentRepository.count(selectCond.where);
-    return { count, list: contents };
+    if (status) {
+      contentQuery.andWhere('content.status=:status', { status });
+    }
+
+    // console.log(otherQuery)
+    if (otherQuery) {
+      Object.keys(otherQuery).forEach((q) =>
+        contentQuery.andWhere(`content.${q} LIKE :${q}`, {
+          [`${q}`]: `%${otherQuery[q]}%`,
+        }),
+      );
+    }
+
+    const count = await contentQuery.getCount();
+    return {
+      count,
+      list: await contentQuery.getMany(),
+    };
   }
 
   findOne(id: string, selectCond?: FindConditions<any>) {

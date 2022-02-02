@@ -28,8 +28,8 @@ export class PageController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  findAll(@Query() query, @DbOptions() selectCond) {
-    return this.pageService.findAll(query, selectCond);
+  findAll(@Query() query) {
+    return this.pageService.findAll(query);
   }
 
   @Get(':id')

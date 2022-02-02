@@ -6,7 +6,7 @@ import {
   BeforeUpdate,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from "class-transformer";
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Page {
@@ -25,6 +25,12 @@ export class Page {
 
   @Column({ type: 'int', default: 0 })
   order: number; // 排序
+
+  @Column({
+    comment: '评论开启 true - 开启 , false - 禁用',
+    default: true,
+  })
+  isCommentOpen: boolean;
 
   @Exclude()
   @Column({ type: 'text', default: null })

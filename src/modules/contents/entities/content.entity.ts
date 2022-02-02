@@ -58,12 +58,6 @@ export class Content {
   views: number;
 
   @Column({
-    comment: '版权开启 true - 开启 , false - 不开启',
-    default: true,
-  })
-  isShare: boolean;
-
-  @Column({
     comment: '评论开启 true - 开启 , false - 禁用',
     default: true,
   })

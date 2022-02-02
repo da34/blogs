@@ -37,9 +37,10 @@ export class ContentsController {
     return this.contentsService.create(createContentDto);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  findAll(@Query() query: QueryContentDto, @DbOptions() dbOptions) {
-    return this.contentsService.findAll(query, dbOptions);
+  findAll(@Query() query: QueryContentDto) {
+    return this.contentsService.findAll(query);
   }
 
   @Get('detail/:id')

@@ -34,21 +34,31 @@ export class CommentsService {
     this.noticeEmail(exitsComment);
   }
 
-  async findAll(query: QueryCommentDto, selectCond?: FindConditions<any>) {
-    const { page = 1, pageSize = 10 } = query;
-    const comments = await this.commentRepository.find(
-      Object.assign(
-        {
-          take: pageSize,
-          skip: (page - 1) * pageSize,
-          order: { createTime: 'DESC' },
-        },
-        selectCond,
-      ),
-    );
+  async findAll(query: QueryCommentDto) {
+    const { page = 1, pageSize = 10, status, ...otherQuery } = query;
+    const commentQuery = await this.commentRepository
+      .createQueryBuilder('comment')
+      .take(pageSize)
+      .skip((page - 1) * pageSize)
+      .orderBy('comment.createTime', 'DESC');
 
-    const count = await this.commentRepository.count(selectCond.where);
-    return { count, list: comments };
+    if (status) {
+      commentQuery.andWhere('comment.status=:status', { status });
+    }
+
+    if (otherQuery) {
+      Object.keys(otherQuery).forEach((q) =>
+        commentQuery.andWhere(`comment.${q} LIKE :${q}`, {
+          [`${q}`]: `%${otherQuery[q]}%`,
+        }),
+      );
+    }
+
+    const count = await commentQuery.getCount();
+    return {
+      count,
+      list: await commentQuery.getMany(),
+    };
   }
 
   async getCommentsByPost(postId, queryParams) {
