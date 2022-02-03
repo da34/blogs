@@ -63,7 +63,7 @@
             :span="12"
             label="排序"
           >
-            <NInputNumber v-model:value="formParams.priority"/>
+            <NInputNumber v-model:value="formParams.priority" />
           </NFormItemGi>
           <NFormItemGi
             :span="12"
@@ -93,7 +93,7 @@
 
 <script>
 import {defineComponent, reactive, ref, toRefs} from 'vue';
-import {createWork, updateWork} from '@/api/system/work';
+import {createWork, updateWork} from '@/api/work';
 import {useMessage} from 'naive-ui';
 import Upload from '@/components/Upload/index.vue'
 

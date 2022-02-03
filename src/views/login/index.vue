@@ -79,9 +79,7 @@ import {useRoute, useRouter} from 'vue-router';
 import {useUserStore} from '@/stores/modules/user';
 import {useLoadingBar, useMessage} from 'naive-ui';
 import httpEnum from '@/utils/http/httpType'
-// import { AccountCircleFilled, LockOutlined } from '@vicons/material'
 import {User, Lock} from '@icon-park/vue-next'
-import {touLogin} from '@/api/system/user';
 
 const formRef = ref(null);
 const messagePro = useMessage();

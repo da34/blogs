@@ -40,7 +40,7 @@ export default { name: 'ProjectList' }
 <script setup>
 import {ref, toRaw} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';
-import {delWork, getWorks} from '@/api/system/work';
+import {delWork, getWorks} from '@/api/work';
 import {columns, createActionColumn} from './columns'
 import BasicTable from '@/components/BasicTable/index.vue'
 import CreateDrawer from './CreateDrawer.vue'

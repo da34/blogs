@@ -7,7 +7,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import {getTagRelation} from '@/api/web/tag';
+import {getTagRelation} from '@/api/tag';
 import {useECharts} from './useEcharts';
 
 const chartRef = ref(null)

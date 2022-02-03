@@ -46,7 +46,7 @@
 
 <script>
 import {defineComponent, reactive, ref, toRefs} from 'vue';
-import {createHistory, updateHistory} from '@/api/system/history';
+import {createHistory, updateHistory} from '@/api/history';
 import {useMessage} from 'naive-ui';
 
 const rules = {

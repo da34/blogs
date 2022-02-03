@@ -40,7 +40,7 @@ export default { name: 'HistoryList' }
 <script setup>
 import {reactive, ref, toRaw} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';
-import {getHistories, delHistory} from '@/api/system/history';
+import {getHistories, delHistory} from '@/api/history';
 import {columns, createActionColumn} from './columns'
 import BasicTable from '@/components/BasicTable/index.vue'
 import CreateDrawer from './CreateDrawer.vue'

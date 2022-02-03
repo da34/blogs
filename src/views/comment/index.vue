@@ -62,7 +62,7 @@ export default { name: 'CommentList' }
 <script setup>
 import {reactive, ref, toRaw} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import {getCommentList, delComment} from '@/api/web/comment';
+import {getCommentList, delComment} from '@/api/comment';
 import {createActionColumn, columns} from './columns'
 import {useDialog} from 'naive-ui';
 

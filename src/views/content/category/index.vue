@@ -76,7 +76,7 @@ export default {name: 'ContentCategoryList'}
 </script>
 <script setup>
 import {ref, onMounted} from 'vue'
-import {getCategories, delCategory, createCategory, editCategory} from '@/api/web/category';
+import {getCategories, delCategory, createCategory, editCategory} from '@/api/category';
 import {useDialog} from 'naive-ui';
 
 const defaultVal = () => ({

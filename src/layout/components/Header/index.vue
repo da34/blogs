@@ -53,7 +53,7 @@ import {NIcon, NBreadcrumb, NBreadcrumbItem, NDropdown, NAvatar, useDialog, useM
 import {defineProps, computed} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import {useUserStore} from '@/stores/modules/user';
-import {filterRouter, isRootRouter} from '../../../utils';
+import {filterRouter} from '@/utils';
 
 const route = useRoute()
 const router = useRouter()

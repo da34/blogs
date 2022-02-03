@@ -1,6 +1,6 @@
 import {ref, unref, watch} from 'vue';
 import { useRouter } from 'vue-router'
-import {createArticle, updateArticle} from '@/api/web/article';
+import {createArticle, updateArticle} from '@/api/article';
 
 export function usePublic(show) {
   const defaultVal = () => ({

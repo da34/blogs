@@ -4,43 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="fix: 修复面包屑">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/web/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/web/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasicTable/TableAction.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/MainView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/MainView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/naive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/naive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/router-guards.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/router-guards.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/modules/asyncRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/modules/asyncRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/checkStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/checkStatus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/http/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http/request.js" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="style: 整理api文件结构">
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Sidebar/Menu.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/category/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/category/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/tag/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/tag/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/dashboard/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/components/LatelyInfo/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/ArticleTop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/ArticleTop.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/TagArticle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/TagArticle.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/history/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/history/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/columns.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/history/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/jurisdiction/admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/jurisdiction/admin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/jurisdiction/super_admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/jurisdiction/user.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/page/action/composables/usePubilc.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/page/action/composables/usePubilc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/page/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/page/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/page/list/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/page/list/columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/page/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/page/list/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/project/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/CreateDrawer.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/project/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/redirect/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/redirect/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,11 +85,11 @@
       <recent name="E:\files\backups\blog\blog-admin\src\views\content" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\files\backups\blog\blog-admin\src\api" />
       <recent name="E:\files\backups\blog\blog-admin\src\views" />
       <recent name="E:\新建文件夹\备份\blog\blog-admin\src\views\message\comment\list" />
       <recent name="H:\github\blog\blog-admin\src\views\system\systemConfig" />
       <recent name="H:\github\blog\blog-admin\src\views\content\article\action" />
-      <recent name="H:\github\blog\blog-admin\src\views\content\article\list" />
     </key>
   </component>
   <component name="RunManager">
@@ -167,7 +146,7 @@
       <workItem from="1643453891316" duration="1242000" />
       <workItem from="1643550183255" duration="1281000" />
       <workItem from="1643728308062" duration="20281000" />
-      <workItem from="1643857792410" duration="13520000" />
+      <workItem from="1643857792410" duration="14071000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -253,7 +232,21 @@
       <option name="project" value="LOCAL" />
       <updated>1643777736918</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix: 修复keep-alive不生效问题&#10;refactor: 重构标签和分类组件">
+      <created>1643883740903</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1643883740903</updated>
+    </task>
+    <task id="LOCAL-00014" summary="style: 整理api文件结构">
+      <created>1643883861047</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1643883861047</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,7 +303,9 @@
     <MESSAGE value="fix: 修复后端改评论字段引起的bug" />
     <MESSAGE value="chore: 文件结构重新整理" />
     <MESSAGE value="fix: 修复面包屑" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 修复面包屑" />
+    <MESSAGE value="fix: 修复keep-alive不生效问题&#10;refactor: 重构标签和分类组件" />
+    <MESSAGE value="style: 整理api文件结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="style: 整理api文件结构" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

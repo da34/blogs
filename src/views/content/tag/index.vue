@@ -76,7 +76,7 @@ export default {name: 'ContentTagList'}
 </script>
 <script setup>
 import {ref, onMounted} from 'vue'
-import {getTagList, delTag, createTag, editTag} from '@/api/web/tag';
+import {getTagList, delTag, createTag, editTag} from '@/api/tag';
 import {useDialog} from 'naive-ui';
 
 const defaultVal = () => ({

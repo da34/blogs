@@ -7,7 +7,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import {getArticleList} from '@/api/web/article';
+import {getArticleList} from '@/api/article';
 import {useECharts} from './useEcharts';
 
 const chartRef = ref(null)

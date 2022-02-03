@@ -116,11 +116,11 @@ import {useRoute} from 'vue-router'
 import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
 import Markdown from '@/components/Markdown/index.vue'
-import {getTagList} from '@/api/web/tag';
-import {getArticleById} from '@/api/web/article';
+import {getTagList} from '@/api/tag';
+import {getArticleById} from '@/api/article';
 import MUpload from '@/components/Upload/index.vue'
 import {usePublic} from './composables/usePubilc';
-import { getCategories } from '@/api/web/category';
+import { getCategories } from '@/api/category';
 
 const message = useMessage()
 const route = useRoute()

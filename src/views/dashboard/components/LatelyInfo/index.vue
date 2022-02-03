@@ -78,8 +78,8 @@
 <script setup>
 import {ref} from 'vue'
 import {formatDate} from '@/utils';
-import {getArticleList} from '@/api/web/article';
-import {getCommentList} from '@/api/web/comment';
+import {getArticleList} from '@/api/article';
+import {getCommentList} from '@/api/comment';
 
 const loading = ref(true)
 const comments = ref([])

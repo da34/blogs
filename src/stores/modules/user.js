@@ -2,7 +2,7 @@ import {defineStore} from 'pinia';
 import {storage} from '@/utils/Storage';
 import {store} from '@/stores';
 import {ACCESS_TOKEN} from '@/stores/mutation-types';
-import {getUserInfo, login} from '@/api/system/user';
+import {getUserInfo, login} from '@/api/user';
 import httpEnum from '@/utils/http/httpType'
 
 // const Storage = createStorage();

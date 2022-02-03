@@ -73,11 +73,10 @@ export default { name: 'ContentList' }
 <script setup>
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {changeArticleState, getArticleList} from '@/api/web/article';
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
-import {delArticle, updateArticle} from '@/api/web/article';
+import {delArticle, updateArticle,changeArticleState, getArticleList} from '@/api/article';
 
 const defaultVla = () => ({
   title: null,
