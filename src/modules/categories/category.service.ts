@@ -3,7 +3,8 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { createQueryBuilder, Repository } from 'typeorm';
+import { Content } from '../contents/entities/content.entity';
 
 @Injectable()
 export class CategoryService {
@@ -51,7 +52,12 @@ export class CategoryService {
     return this.categoryRepository.save(updateCategory);
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+    await createQueryBuilder()
+      .update(Content)
+      .where('categoryId = :id', { id })
+      .set({ category: null })
+      .execute();
     return this.categoryRepository.delete(id);
   }
 }
