@@ -1,7 +1,7 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import {resolve} from 'path'
-import { visualizer } from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // console.history(import.meta.env)
 // const prod = import.meta.env.PROD
@@ -36,18 +36,12 @@ export default defineConfig({
       },
     }
   },
-  // build: {
-  //   target: 'es2015',
-  //   terserOptions: {
-  //     compress: {
-  //       keep_infinity: true,
-  //       drop_console: true,
-  //     },
-  //   },
-  //   brotliSize: false,
-  //   chunkSizeWarningLimit: 2000,
-  //   rollupOptions: {
-  //     plugins: [visualizer()],
-  //   },
-  // },
+  build: {
+    target: 'es2020',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+    }
+  },
 })

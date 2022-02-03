@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="style: 整理api文件结构">
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Header/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/components/Sidebar/Menu.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/composables/usePubilc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/action/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/action/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/content/article/list/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/content/article/list/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/components/LatelyInfo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/components/LatelyInfo/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/ArticleTop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/ArticleTop.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/TagArticle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/components/VisiArticle/TagArticle.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/history/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/history/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/history/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/project/CreateDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/CreateDrawer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/project/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/project/index.vue" afterDir="false" />
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="style: 修改api接口路径">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,10 +81,18 @@
       <recent name="H:\github\blog\blog-admin\src\views\content\article\action" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript 调试.stats.html">
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/blog-admin/dist/index.html?_ij_reload" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="stats.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/blog-admin/stats.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript 调试.stats.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -146,7 +143,7 @@
       <workItem from="1643453891316" duration="1242000" />
       <workItem from="1643550183255" duration="1281000" />
       <workItem from="1643728308062" duration="20281000" />
-      <workItem from="1643857792410" duration="14071000" />
+      <workItem from="1643857792410" duration="15607000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -246,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643883861047</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="style: 修改api接口路径">
+      <created>1643884282050</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1643884282050</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,7 +309,8 @@
     <MESSAGE value="fix: 修复面包屑" />
     <MESSAGE value="fix: 修复keep-alive不生效问题&#10;refactor: 重构标签和分类组件" />
     <MESSAGE value="style: 整理api文件结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: 整理api文件结构" />
+    <MESSAGE value="style: 修改api接口路径" />
+    <option name="LAST_COMMIT_MESSAGE" value="style: 修改api接口路径" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
