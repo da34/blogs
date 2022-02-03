@@ -21,7 +21,7 @@ export const createColumns = ({updateArticle}) => {
         return h(
           NTag,
           {
-            type:  status === 'publish' ? 'success' : 'primary'
+            type: status === 'publish' ? 'success' : 'warning'
           },
           {default: () => status}
         )
@@ -43,7 +43,7 @@ export const createColumns = ({updateArticle}) => {
   ]
 }
 
-export const createActionColumn = ({handleDel, handleEdit}) => {
+export const createActionColumn = ({handleDel, handleEdit, handleReview, handleIsDown}) => {
   return {
     title: '操作',
     key: 'action',
@@ -51,13 +51,13 @@ export const createActionColumn = ({handleDel, handleEdit}) => {
     render(record) {
       return h(TableAction, {
         style: 'button',
-        actions: createActions(record, handleDel, handleEdit),
+        actions: createActions(record, handleDel, handleEdit, handleReview, handleIsDown),
       });
     }
   }
 }
 
-function createActions(record, handleDel, handleEdit) {
+function createActions(record, handleDel, handleEdit, handleReview, handleIsDown) {
   return [
     {
       label: '编辑',
@@ -65,11 +65,17 @@ function createActions(record, handleDel, handleEdit) {
     },
     {
       label: '查看',
-      onClick: () => handleEdit(record),
+      onClick: () => handleReview(record),
     },
     {
       label: '下线',
-      onClick: () => handleDel(record),
+      class: record.status !== 'publish' ? 'hidden' : 'block',
+      onClick: () => handleIsDown(record, 'draft'),
+    },
+    {
+      label: '发布',
+      class: record.status === 'publish' ? 'hidden' : 'block',
+      onClick: () => handleIsDown(record, 'publish'),
     },
     {
       label: '删除',

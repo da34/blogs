@@ -40,6 +40,7 @@ import {
   NText,
   NThing,
   NTooltip,
+  NTag,
 } from 'naive-ui';
 
 const naive = create({
@@ -84,6 +85,7 @@ const naive = create({
     NImage,
     NRadioButton,
     NDatePicker,
+    NTag,
   ],
 });
 

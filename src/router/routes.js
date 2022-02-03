@@ -24,14 +24,14 @@ import {
  * */
 import Layout from '@/layout/index.vue'
 
-const routeName = 'dashboard';
-const RedirectName = 'redirect';
-const ContentName = 'content';
-const CommentName = 'comment';
-const LinkName = 'link';
-const ProjectName = 'project';
-const HistoryName = 'history';
-const PageName = 'page';
+const routeName = 'Dashboard';
+const RedirectName = 'Redirect';
+const ContentName = 'Content';
+const CommentName = 'Comment';
+const LinkName = 'Link';
+const ProjectName = 'Project';
+const HistoryName = 'History';
+const PageName = 'Page';
 
 const constantRouters = [
   {
@@ -50,11 +50,12 @@ const constantRouters = [
     hidden: true,
     children: [
       {
-        path: '/redirect/:path(.*)',
-        name: RedirectName,
+        // path: '/redirect/:path(.*)',
+        path: '',
+        name: RedirectName + 'Con',
         component: () => import('@/views/redirect/index.vue'),
         meta: {
-          title: RedirectName,
+          title: RedirectName + 'Con',
         },
       },
     ],
@@ -64,7 +65,7 @@ const constantRouters = [
 const asyncRoutes = [
   {
     path: '/',
-    name: routeName,
+    // name: routeName,
     component: Layout,
     meta: {
       title: 'Dashboard',
@@ -77,7 +78,7 @@ const asyncRoutes = [
     children: [
       {
         path: 'dashboard',
-        name: `${routeName}_dashboard`,
+        name: `${routeName}`,
         icon: renderIcon(DashboardOne),
         component: () => import('@/views/dashboard/index.vue'),
         meta: {title: '控制台', keepAlive: true},
@@ -92,13 +93,14 @@ const asyncRoutes = [
     meta: {
       title: 'Test',
       icon: renderIcon(Permissions),
+      alwaysShow: true,
       sort: 99,
     },
     children: [
       {
         path: 'admin',
         name: 'admin',
-        component: () => import('@/views/jurisdiction/super_admin.vue'),
+        component: () => import('@/views/jurisdiction/admin.vue'),
         meta: {
           title: 'admin 测试',
           permissions: ['admin'],
@@ -107,7 +109,7 @@ const asyncRoutes = [
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/views/jurisdiction/admin.vue'),
+        component: () => import('@/views/jurisdiction/user.vue'),
         meta: {
           title: 'user,admin 测试',
           permissions: ['user', 'admin'],
@@ -128,26 +130,27 @@ const asyncRoutes = [
     children: [
       {
         path: 'list',
-        name: `${ContentName}_list`,
+        name: `${ContentName}List`,
+        // name: 'ContentList',
         component: () => import('@/views/content/article/list/index.vue'),
         meta: {title: '文章列表', keepAlive: true}
       },
       {
         path: 'action',
-        name: `${ContentName}_action`,
+        name: `${ContentName}Action`,
         component: () => import('@/views/content/article/action/index.vue'),
         hidden: true,
         meta: {title: '文章操作'}
       },
       {
         path: 'tag/list',
-        name: `${ContentName}_tag_list`,
+        name: `${ContentName}TagList`,
         component: () => import('@/views/content/tag/index.vue'),
         meta: {title: '标签列表', keepAlive: true}
       },
       {
         path: 'category/list',
-        name: `${ContentName}_category_list`,
+        name: `${ContentName}CategoryList`,
         component: () => import('@/views/content/category/index.vue'),
         meta: {title: '分类列表', keepAlive: true}
       }
@@ -166,14 +169,14 @@ const asyncRoutes = [
     children: [
       {
         path: '',
-        name: `${PageName}_list`,
+        name: `${PageName}List`,
         component: () => import('@/views/page/list/index.vue'),
         meta: {title: '页面管理', keepAlive: true},
         icon: renderIcon(Page),
       },
       {
         path: 'action',
-        name: `${PageName}_action`,
+        name: `${PageName}Action`,
         component: () => import('@/views/page/action/index.vue'),
         hidden: true,
         meta: {title: '页面操作'}
@@ -190,7 +193,7 @@ const asyncRoutes = [
     children: [
       {
         path: '',
-        name: `${CommentName}_list`,
+        name: `${CommentName}List`,
         component: () => import('@/views/comment/index.vue'),
         meta: {title: '评论管理', keepAlive: true},
         icon: renderIcon(MessageOne),
@@ -205,7 +208,7 @@ const asyncRoutes = [
     children: [
       {
         path: '',
-        name: `${LinkName}_list`,
+        name: `${LinkName}List`,
         component: () => import('@/views/link/index.vue'),
         meta: {title: '友联管理', keepAlive: true},
         icon: renderIcon(Link),
@@ -222,7 +225,7 @@ const asyncRoutes = [
     children: [
       {
         path: '',
-        name: `${ProjectName}_list`,
+        name: `${ProjectName}List`,
         component: () => import('@/views/project/index.vue'),
         meta: {title: '作品管理', keepAlive: true},
         icon: renderIcon(ApplicationOne)
@@ -239,7 +242,7 @@ const asyncRoutes = [
     children: [
       {
         path: '',
-        name: `${HistoryName}_list`,
+        name: `${HistoryName}List`,
         component: () => import('@/views/history/index.vue'),
         meta: {title: '建站日志', keepAlive: true},
         icon: renderIcon(CalendarDot)

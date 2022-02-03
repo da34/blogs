@@ -1,140 +1,94 @@
 <template>
-  <NCard>
-    <!--搜索工具-->
-    <NForm
-      ref="formRef"
-      inline
-      label-placement="left"
-      :model="formValue"
-      :rules="rules"
-    >
-      <NFormItem path="name">
-        <NInput
-          v-model:value="formValue.name"
-          placeholder="请输入分类名"
-        />
-      </NFormItem>
-      <NFormItem>
-        <NButton
-          attr-type="button"
-          type="primary"
-          @click="handleValidateClick"
-        >
-          查询
-        </NButton>
-        <NButton
-          class="ml-3"
-          attr-type="button"
-          @click="reload"
-        >
-          重置
-        </NButton>
-      </NFormItem>
-      <NFormItem>
-        <NButton
-          type="primary"
-          @click="handleNew"
-        >
-          新建标签
-        </NButton>
-      </NFormItem>
-    </NForm>
-    <!--表格-->
-    <BasicTable
-      ref="tableRef"
-      :row-key="row => row.id"
-      :columns="createColumns"
-      :action-column="actionColumn"
-      :pagination="pagination"
-      :request="getCategories"
-      :single-line="false"
-    />
-    <!--编辑、新建标签-->
-    <NModal
-      v-model:show="useShowModal"
-      preset="card"
-      :show-icon="false"
-      :closable="false"
-      class="w-1/3"
-      :segmented="{content: 'hard', action: 'hard'}"
-    >
-      <template #header>
-        <div class="border-b-1 border-gray-200">
-          {{ titleType === 'new' ? '新建' : '编辑' }}分类
-        </div>
-      </template>
-      <NForm
-        ref="formDataRef"
-        class="mt-5"
-        label-placement="left"
-        :model="formData"
-        :rules="rules"
+  <NGrid
+    x-gap="24"
+    :cols="6"
+  >
+    <NGi :span="2">
+      <NCard
+        title="管理分类"
       >
-        <NFormItem
-          label="分类名"
-          path="name"
+        <NForm
+          ref="formDataRef"
+          class="mt-5"
+          label-placement="left"
+          :model="formData"
+          :rules="rules"
         >
-          <NInput
-            v-model:value="formData.name"
-            placeholder="请输入分类名"
-          />
-        </NFormItem>
-      </NForm>
-      <template #action>
-        <div class="flex justify-end">
-          <NButton
-            class="mr-4"
-            @click="useShowModal = false"
+          <NFormItem
+            label="分类名"
+            path="name"
           >
-            取消
-          </NButton>
-          <NButton
-            type="primary"
-            @click="handleAction"
+            <NInput
+              v-model:value="formData.name"
+              placeholder="请输入分类名"
+            />
+          </NFormItem>
+          <NFormItem>
+            <NSpace>
+              <NButton
+                v-if="formData.id == null"
+                type="primary"
+                @click="handleAction"
+              >
+                保存
+              </NButton>
+              <NButton
+                v-if="formData.id !== null"
+                type="primary"
+                @click="handleAction"
+              >
+                更新
+              </NButton>
+              <NButton
+                v-if="formData.id !== null"
+                dashed
+                @click="handleDef"
+              >
+                返回添加
+              </NButton>
+            </NSpace>
+          </NFormItem>
+        </NForm>
+      </NCard>
+    </NGi>
+    <NGi :span="4">
+      <NCard
+        title="所有分类"
+      >
+        <NSpace>
+          <NTag
+            v-for="category in categories"
+            :key="category.id"
+            class="cursor-pointer"
+            closable
+            @click="handleClick(category)"
+            @close.stop="handleClose(category)"
           >
-            确定
-          </NButton>
-        </div>
-      </template>
-    </NModal>
-  </NCard>
+            {{ category.name }}
+          </NTag>
+        </NSpace>
+      </NCard>
+    </NGi>
+  </NGrid>
 </template>
-
+<script>
+export default {name: 'ContentCategoryList'}
+</script>
 <script setup>
-import {h, ref,reactive} from 'vue'
-import BasicTable from '@/components/BasicTable/index.vue'
-import TableAction from '@/components/BasicTable/TableAction.vue'
+import {ref, onMounted} from 'vue'
+import {getCategories, delCategory, createCategory, editCategory} from '@/api/web/category';
 import {useDialog} from 'naive-ui';
-import { getCategories, delCategory, createCategory, editCategory } from '@/api/web/category';
 
-const pagination = reactive({
-  page: 1,
-  pageCount: 1,
-  pageSize: 10,
-  itemCount: 0,
-  prefix ({ itemCount }) {
-    return `共 ${itemCount} 项`
-  },
-  onChange: (page) => {
-    pagination.page = page
-  }
-})
-
-const formValue = ref({
-  name: null,
-})
-const formRef = ref(null)
-const tableRef = ref(null)
-const formDataRef = ref(null)
-const useShowModal = ref(false)
-const formData = ref({
+const defaultVal = () => ({
   name: null,
   id: null
 })
-const titleType = ref('new')
+
+const categories = ref([])
+const formDataRef = ref(null)
+const formData = ref(defaultVal())
 const dialog = useDialog()
 
-//表格
 const rules = {
   name: {
     required: true,
@@ -143,77 +97,34 @@ const rules = {
   }
 }
 
-function reload() {
-  formValue.value.name = null
-  tableRef.value.reload()
+onMounted(async () => {
+  fetchCategories()
+})
+
+async function fetchCategories() {
+  const {list} = await getCategories({pageSize: 99})
+  categories.value = list
 }
 
-function handleValidateClick(e) {
-  formRef.value.validate((errors) => {
-    if (!errors) {
-      tableRef.value.fetchState({page: 1, 'filters[name]': formValue.value.name})
-    }
-  })
-}
-
-const createColumns = [
-  {title: '分类名', key: 'name', ellipsis: true, align: 'center',},
-  {title: '浏览量', key: 'views', align: 'center',}
-]
-
-const actionColumn = {
-  width: 150,
-  title: '操作',
-  key: 'action',
-  fixed: 'right',
-  align: 'center',
-  render(record) {
-    return h(TableAction, {
-      style: 'button',
-      actions: createActions(record),
-    });
-  }
-}
-
-
-function createActions(record) {
-  return [
-    {
-      label: '编辑',
-      onClick: () => handleEdit(record),
-    },
-    {
-      label: '删除',
-      onClick: handleDel.bind(null, record),
-    }
-  ]
-}
-
-function handleDel(record) {
+function handleClose(category) {
   dialog.warning({
     title: '警告',
     content: '你确定删除吗？',
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: async () => {
-      await delCategory(record.id)
-      tableRef.value.reload()
+      await delCategory(category.id)
+      fetchCategories()
     }
   })
 }
 
-function handleEdit(record) {
-  titleType.value = 'edit'
-  formData.value.name = record.name
-  formData.value.id = record.id
-  useShowModal.value = true
+function handleClick(category) {
+  formData.value = category
 }
 
-function handleNew() {
-  titleType.value = 'new'
-  formData.value.name = null
-  formData.value.id = null
-  useShowModal.value = true
+function handleDef() {
+  formData.value = defaultVal()
 }
 
 function handleAction() {
@@ -224,8 +135,8 @@ function handleAction() {
   formDataRef.value.validate(async (errors) => {
     if (!errors) {
       formData.value.id ? await editCategory(data) : await createCategory(data)
-      tableRef.value.reload()
-      useShowModal.value = false
+      handleDef()
+      await fetchCategories()
     }
   })
 }

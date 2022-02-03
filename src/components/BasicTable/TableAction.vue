@@ -29,12 +29,7 @@ const props = defineProps({
   style: {
     type: String,
     default: 'button',
-  },
-  select: {
-    type: Function,
-    default: () => {
-    }
-  },
+  }
 })
 
 const actionType =

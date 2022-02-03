@@ -8,19 +8,19 @@
     >
       <NFormItem>
         <NInput
-          v-model:value="formValue['filters[name]']"
+          v-model:value="formValue.name"
           placeholder="请输入评论人"
         />
       </NFormItem>
       <NFormItem>
         <NInput
-          v-model:value="formValue['filters[ip]']"
+          v-model:value="formValue.ip"
           placeholder="请输入ip地址"
         />
       </NFormItem>
       <NFormItem>
         <NSelect
-          v-model:value="formValue['filters[status]']"
+          v-model:value="formValue.status"
           style="width: 180px;"
           placeholder="请选择状态"
           :options="options"
@@ -55,6 +55,9 @@
     />
   </NCard>
 </template>
+<script>
+export default { name: 'CommentList' }
+</script>
 
 <script setup>
 import {reactive, ref, toRaw} from 'vue'
@@ -64,16 +67,18 @@ import {createActionColumn, columns} from './columns'
 import {useDialog} from 'naive-ui';
 
 const options = [
-  {label: '正常', value: 'pass'},
-  {label: '不通过', value: 'block'},
-  {label: '需要人工复查', value: 'review'}
+  {label: 'pass', value: 'pass'},
+  {label: 'block', value: 'block'},
+  {label: 'review', value: 'review'}
 ]
 
-const formValue = ref({
-  'filters[name]': null,
-  'filters[ip]': null,
-  'filters[status]': null
+const defaultVla = () => ({
+  name: null,
+  ip: null,
+  status: null
 })
+
+const formValue = ref(defaultVla())
 const tableRef = ref(null)
 
 const pagination = reactive({
@@ -81,7 +86,7 @@ const pagination = reactive({
   pageCount: 1,
   pageSize: 10,
   itemCount: 0,
-  prefix ({ itemCount }) {
+  prefix({itemCount}) {
     return `共 ${itemCount} 项`
   },
   onChange: (page) => {
@@ -92,11 +97,7 @@ const pagination = reactive({
 const dialog = useDialog()
 
 const actionColumn = createActionColumn({handleDel})
-const defaultVla = () => ({
-  'filters[name]': null,
-  'filters[ip]': null,
-  'filters[status]': null
-})
+
 
 async function queryComments() {
   const opt = toRaw(formValue.value)

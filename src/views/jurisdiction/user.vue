@@ -1,12 +1,12 @@
 <template>
   <h1 class="text-lg">
-    super_admin
+    user,admin
   </h1>
 </template>
 
 <script>
 export default {
-  name: "SuperAdmin"
+  name: 'Admin'
 }
 </script>
 

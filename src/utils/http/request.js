@@ -29,7 +29,7 @@ const transform = {
     const reject = Promise.reject.bind(Promise);
 
     const {data} = res;
-    // console.history(data, 111111)
+    // console.log(data, 111111)
     if (!data) {
       return reject(data);
     }
@@ -70,31 +70,32 @@ const transform = {
 
     // 这里逻辑可以根据项目进行修改
     // if (!hasSuccess) {
+
     //   return reject(new Error(comment));
     // }
     // 登录超时
-    if (code === httpEnum.TIMEOUT) {
-      if (router.currentRoute.value.name === LOGIN_PAGE_NAME) return;
-      // 到登录页
-      const timeoutMsg = '登录超时,请重新登录!';
-      $dialog.warning({
-        title: '提示',
-        content: '登录身份已失效，请重新登录!',
-        positiveText: '确定',
-        negativeText: '取消',
-        onPositiveClick: () => {
-          storage.clear();
-          router.replace({
-            name: LOGIN_PAGE_NAME,
-            query: {
-              redirect: router.currentRoute.value.fullPath,
-            },
-          });
-        },
-        onNegativeClick: () => {},
-      });
-      return reject(new Error(timeoutMsg));
-    }
+    // if (code === httpEnum.TIMEOUT) {
+    //   if (router.currentRoute.value.name === LOGIN_PAGE_NAME) return;
+    //   // 到登录页
+    //   const timeoutMsg = '登录超时,请重新登录!';
+    //   $dialog.warning({
+    //     title: '提示',
+    //     content: '登录身份已失效，请重新登录!',
+    //     positiveText: '确定',
+    //     negativeText: '取消',
+    //     onPositiveClick: () => {
+    //       storage.clear();
+    //       router.replace({
+    //         name: LOGIN_PAGE_NAME,
+    //         query: {
+    //           redirect: router.currentRoute.value.fullPath,
+    //         },
+    //       });
+    //     },
+    //     onNegativeClick: () => {},
+    //   });
+    //   return reject(new Error(timeoutMsg));
+    // }
 
     return data;
   },
@@ -138,6 +139,16 @@ const transform = {
     // console.history(window)
     if (!isCancel) {
       checkStatus(error.response?.status, msg, $message);
+      // 401 权限不足，可能是token过期，或者没有token
+      if (error.response?.status === 401) {
+        storage.clear();
+        router.replace({
+          name: LOGIN_PAGE_NAME,
+          query: {
+            redirect: router.currentRoute.value.fullPath,
+          },
+        });
+      }
     } else {
       console.warn(error, '请求被取消！');
     }

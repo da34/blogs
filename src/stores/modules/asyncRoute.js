@@ -10,7 +10,6 @@ function filter(tree, func) {
       .filter((node) => {
         node['children'] = node['children'] && listFilter(node['children']);
         return func(node) || (node['children'] && node['children'].length);
-        // return func(node);
       });
   }
 
@@ -55,7 +54,7 @@ export const useAsyncRouteStore = defineStore('async-route', {
         const {meta} = route;
         const {permissions} = meta || {};
         if (!permissions) return true;
-        return permissions.includes(data.permissions);
+        return permissions.includes(data.role);
       };
 
       try {

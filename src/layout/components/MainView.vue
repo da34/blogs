@@ -7,20 +7,19 @@
           mode="out-in"
           appear
         >
-          <keep-alive
-            v-if="keepAliveComponents"
-            :include="keepAliveComponents"
-          >
+          <!--          v-if="keepAliveComponents.length"-->
+
+          <keep-alive :include="keepAliveComponents">
             <component
               :is="Component"
               :key="route.fullPath"
             />
           </keep-alive>
-          <component
-            :is="Component"
-            v-else
-            :key="route.fullPath"
-          />
+          <!--          <component-->
+          <!--            :is="Component"-->
+          <!--            v-else-->
+          <!--            :key="route.fullPath"-->
+          <!--          />-->
         </transition>
       </template>
     </RouterView>
@@ -34,6 +33,7 @@ import {useAsyncRouteStore} from '@/stores/modules/asyncRoute';
 const asyncRouteStore = useAsyncRouteStore();
 // 需要缓存的路由组件
 const keepAliveComponents = computed(() => asyncRouteStore.keepAliveComponents);
+// console.log(keepAliveComponents)
 </script>
 <style scoped lang="scss">
 // zoom-fade

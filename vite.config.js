@@ -1,7 +1,7 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import {resolve} from 'path'
-// import { visualizer } from 'rollup-plugin-visualizer'
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // console.history(import.meta.env)
 // const prod = import.meta.env.PROD
@@ -12,7 +12,7 @@ export default defineConfig({
   // base: './',
   plugins: [
     vue(),
-    // viteESLint()
+    visualizer()
   ],
   resolve: {
     alias: {

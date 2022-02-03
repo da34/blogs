@@ -21,7 +21,6 @@
           ref="tableRef"
           :action-column="actionColumn"
           :columns="columns"
-          :pagination="pagination"
           :request="fetch"
           :row-key="(row) => row.id"
         />
@@ -35,6 +34,9 @@
     />
   </div>
 </template>
+<script>
+export default { name: 'HistoryList' }
+</script>
 <script setup>
 import {reactive, ref, toRaw} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';
@@ -49,18 +51,18 @@ const message = useMessage();
 const dialog = useDialog();
 const createTitle = ref('添加日志');
 const actionColumn = createActionColumn({handleDel, handleEdit})
-const pagination = reactive({
-  page: 1,
-  pageCount: 1,
-  pageSize: 10,
-  itemCount: 0,
-  prefix({itemCount}) {
-    return `共 ${itemCount} 项`
-  },
-  onChange: (page) => {
-    pagination.page = page
-  }
-})
+// const pagination = reactive({
+//   page: 1,
+//   pageCount: 1,
+//   pageSize: 10,
+//   itemCount: 0,
+//   prefix({itemCount}) {
+//     return `共 ${itemCount} 项`
+//   },
+//   onChange: (page) => {
+//     pagination.page = page
+//   }
+// })
 
 function handleDel(row) {
   dialog.warning({
@@ -93,6 +95,8 @@ function addMenu() {
 function handleEdit(row) {
   openCreateDrawer()
   createTitle.value = '编辑日志'
+  row.date *= 1
+  row.desc = row.desc.join('\r\n')
   createDrawerRef.value.formParams = {...toRaw(row)}
 }
 

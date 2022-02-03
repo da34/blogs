@@ -27,10 +27,11 @@ export function usePublic(show) {
     })
 
   async function submitCallback() {
+
     await article.value.id ? updateArticle(unref(article)) : createArticle(unref(article))
     resetData()
     show.value = false
-    router.back()
+    await router.push({name: 'RedirectCon', params: { path: 'content/list', toComName: 'ContentList' }})
   }
 
   function resetData() {

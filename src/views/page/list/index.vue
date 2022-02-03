@@ -13,29 +13,30 @@
           >
             新建页面
           </NButton>
-          <!--          <NButton-->
-          <!--            type="error"-->
-          <!--            @click="handleDel"-->
-          <!--          >-->
-          <!--            批量删除-->
-          <!--          </NButton>-->
         </NSpace>
       </NFormItem>
       <NFormItem
+        label="名称"
         class="ml-auto"
-        label="类型"
       >
-        <NSelect
-          v-model:value="formValue['filters[type]']"
-          class="w-40"
-          placeholder="请选择类型"
-          :options="typeOptions"
+        <NInput
+          v-model:value="formValue.name"
+          placeholder="输入名称"
         />
       </NFormItem>
-      <NFormItem label="标题">
+      <NFormItem label="路径">
         <NInput
-          v-model:value="formValue['filters[title]']"
-          placeholder="输入标题"
+          v-model:value="formValue.path"
+          placeholder="输入路径"
+        />
+      </NFormItem>
+      <NFormItem
+        label="状态"
+      >
+        <NSelect
+          v-model:value="formValue.status"
+          class="w-40"
+          :options="statusOptions"
         />
       </NFormItem>
       <NFormItem>
@@ -65,18 +66,21 @@
     />
   </NCard>
 </template>
-
+<script>
+export default { name: 'PageList' }
+</script>
 <script setup>
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
-// import {changeArticleState, getArticleList} from '@/api/web/article';
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
 import {delPage, updatePage, getPages} from '@/api/page';
 
 const defaultVla = () => ({
-  'filters[title]': null
+  name: '',
+  path: '',
+  status: ''
 })
 
 const router = useRouter()
@@ -98,14 +102,14 @@ const pagination = reactive({
 })
 
 // 表格列
-const actionColumn = createActionColumn({handleDel, handleEdit})
+const actionColumn = createActionColumn({handleDel, handleEdit, handleReview, handleIsDown})
 const column = createColumns({updatePage})
 
-const typeOptions = ['article', 'page'].map(
-    (v) => ({
-      label: v,
-      value: v
-    })
+const statusOptions = ['publish', 'draft'].map(
+  (v) => ({
+    label: v,
+    value: v
+  })
 )
 
 function handleReset() {
@@ -117,21 +121,31 @@ function handleSearch() {
   tableRef.value.fetchState(formValue.value)
 }
 
+function handleReview() {
+  tableRef.value.fetchState(formValue.value)
+}
+
+async function handleIsDown(pageInfo, status) {
+  pageInfo.status = status
+  await updatePage(pageInfo)
+  handleReset()
+}
+
 function handleDel({id}) {
   dialog.warning({
     title: '警告',
     content: '你确定删除吗？',
     positiveText: '确定',
     negativeText: '取消',
-    onPositiveClick: () => {
-      delPage(id)
+    onPositiveClick: async () => {
+      await delPage(id)
       handleSearch()
     }
   })
 }
 
 function handleEdit({id}) {
-  router.push({name: 'page_action', params: {id}})
+  router.push({name: 'PageAction', params: {id}})
 }
 
 async function stateToggle(field, id, value) {
@@ -141,7 +155,7 @@ async function stateToggle(field, id, value) {
 }
 
 function handleAction() {
-  router.push({name: 'page_action'})
+  router.push({name: 'PageAction'})
 }
 </script>
 

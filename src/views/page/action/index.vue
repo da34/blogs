@@ -3,11 +3,11 @@
     <NGrid class="flex items-center">
       <NGi span="18">
         <NInput
-          v-model:value="article.title"
+          v-model:value="page.name"
           class="w-screen"
           size="large"
           type="text"
-          placeholder="输入文章标题"
+          placeholder="输入页面名称"
         />
       </NGi>
       <NGi
@@ -24,70 +24,37 @@
     </NGrid>
 
     <!--markdown-->
-    <Markdown v-model:text="article.content" />
+    <Markdown v-model:text="page.content" />
 
     <!--发布NDrawer-->
     <NDrawer
       v-model:show="show"
-      width="45%"
+      width="25%"
       placement="right"
     >
-      <NDrawerContent title="发布文章">
+      <NDrawerContent title="发布页面">
         <NForm
           class="mt-5"
           label-placement="left"
-          :model="article"
+          :model="page"
         >
           <NGrid
-            :cols="2"
+            :cols="1"
             :x-gap="30"
           >
-            <NFormItemGi label="文章封面">
-              <MUpload v-model:file-url="article.firstPicture">
-                <NIcon size="30">
-                  <Upload />
-                </NIcon>
-                <p class="mt-3">
-                  上传图片
-                </p>
-              </MUpload>
-            </NFormItemGi>
-            <NFormItemGi label="编辑摘要">
+            <NFormItemGi label="路径">
               <NInput
-                v-model:value="article.contentOutline"
-                type="textarea"
-                show-count
-                :rows="5"
-                maxlength="80"
-                minlength="30"
+                v-model:value="page.path"
+                type="text"
               />
             </NFormItemGi>
-            <NFormItemGi
-              :span="2"
-              label="添加分类"
-            >
-              <NSelect
-                v-model:value="article.categoryId"
-                placeholder="请选择分类"
-                :options="categoryOption"
+            <NFormItemGi label="排序">
+              <n-input-number
+                v-model:value="page.order"
               />
             </NFormItemGi>
-            <NFormItemGi
-              :span="2"
-              label="添加标签"
-            >
-              <NSelect
-                v-model:value="article.tagsId"
-                multiple
-                placeholder="请选择标签"
-                :options="tagsOption"
-              />
-            </NFormItemGi>
-            <NFormItemGi label="置顶">
-              <NSwitch v-model:value="article.isTop" />
-            </NFormItemGi>
-            <NFormItemGi label="评论">
-              <NSwitch v-model:value="article.isCommentOpen" />
+            <NFormItemGi label="开启评论">
+              <NSwitch v-model:value="page.isCommentOpen" />
             </NFormItemGi>
           </NGrid>
         </NForm>
@@ -114,71 +81,46 @@
 import {ref, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
 import {useMessage} from 'naive-ui'
-import {Upload} from '@icon-park/vue-next'
 import Markdown from '@/components/Markdown/index.vue'
-import {getTagList} from '@/api/web/tag';
-import {getArticleById} from '@/api/web/article';
-import MUpload from '@/components/Upload/index.vue'
+import {getPage} from '@/api/page';
 import {usePublic} from './composables/usePubilc';
-import { getCategories } from '@/api/web/category';
 
 const message = useMessage()
 const route = useRoute()
-const tagsOption = ref()
-const categoryOption = ref()
 const show = ref(false)
 const { id } = route.params
 
 // 发布逻辑
-const {article, submitCallback, cancelCallback, setArticle} = usePublic(show)
-
-// 获取标签和分类
-const fetchState = async() => {
-  const tags = await getTagList()
-  const categories = await getCategories()
-  tagsOption.value = tags.list.map(tag => {
-    return {label: tag.name, value: tag.id}
-  })
-  categoryOption.value = categories.list.map(cate => {
-    return {label: cate.name, value: cate.id}
-  })
-}
+const {page, submitCallback, cancelCallback, setArticle} = usePublic(show)
 
 onMounted(async () => {
   // 有id 才获取文章
   if (id) {
-    await getArticle(id)
+    await getPageById(id)
   }
-  await fetchState()
 })
 
-async function getArticle(id) {
-  const data = await getArticleById(id)
-  data.tagsId = data.tags.map(tag => tag.id)
-  data.categoryId = data.category?.id
+async function getPageById(id) {
+  const data = await getPage(id)
   setArticle(data)
 }
 
 function publicClick() {
-  if (!article.value.title) {
-    message.warning('标题不能为空')
+  if (!page.value.name) {
+    message.warning('名称不能为空')
     return
   }
-  if (!article.value.content) {
+  if (!page.value.content) {
     message.warning('内容不能为空')
     return
   }
   show.value = true
 }
 
-function formatTags(tags) {
-  return tags.map(tag => tag.name)
-}
-
 </script>
 
 <style scoped lang="scss">
-:deep .n-dialog.n-modal {
+:deep(.n-dialog.n-modal) {
   width: 600px !important;
 }
 </style>

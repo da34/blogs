@@ -21,10 +21,22 @@
           <!--          </NButton>-->
         </NSpace>
       </NFormItem>
-      <NFormItem label="标题">
+      <NFormItem
+        label="标题"
+        class="ml-auto"
+      >
         <NInput
-          v-model:value="formValue['filters[title]']"
+          v-model:value="formValue.title"
           placeholder="输入标题"
+        />
+      </NFormItem>
+      <NFormItem
+        label="状态"
+      >
+        <NSelect
+          v-model:value="formValue.status"
+          class="w-40"
+          :options="statusOptions"
         />
       </NFormItem>
       <NFormItem>
@@ -55,6 +67,9 @@
   </NCard>
 </template>
 
+<script>
+export default { name: 'ContentList' }
+</script>
 <script setup>
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
@@ -65,7 +80,8 @@ import {useDialog} from 'naive-ui'
 import {delArticle, updateArticle} from '@/api/web/article';
 
 const defaultVla = () => ({
-  'filters[title]': null,
+  title: null,
+  status: null,
 })
 
 const router = useRouter()
@@ -90,12 +106,12 @@ const pagination = reactive({
 const actionColumn = createActionColumn({handleDel, handleEdit})
 const column = createColumns({updateArticle})
 
-// const typeOptions = ['article', 'page'].map(
-//     (v) => ({
-//       label: v,
-//       value: v
-//     })
-// )
+const statusOptions = ['publish', 'draft'].map(
+    (v) => ({
+      label: v,
+      value: v
+    })
+)
 
 function handleReset() {
   formValue.value = defaultVla()
@@ -120,7 +136,7 @@ function handleDel({id}) {
 }
 
 function handleEdit({id}) {
-  router.push({name: 'content_action', params: {id}})
+  router.push({name: 'ContentAction', params: {id}})
 }
 
 async function stateToggle(field, id, value) {
@@ -130,7 +146,7 @@ async function stateToggle(field, id, value) {
 }
 
 function handleAction() {
-  router.push({name: 'content_action'})
+  router.push({name: 'ContentAction'})
 }
 </script>
 

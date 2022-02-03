@@ -34,6 +34,9 @@
     />
   </div>
 </template>
+<script>
+export default { name: 'ProjectList' }
+</script>
 <script setup>
 import {ref, toRaw} from 'vue';
 import {useDialog, useMessage} from 'naive-ui';

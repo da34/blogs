@@ -127,6 +127,9 @@
   </NCard>
 </template>
 
+<script>
+export default { name: 'LinkList' }
+</script>
 <script setup>
 import {reactive, ref} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'

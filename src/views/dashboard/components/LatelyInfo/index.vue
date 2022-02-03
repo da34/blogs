@@ -90,8 +90,7 @@ Promise.all([
   getCommentList({
     pageSize: 5,
     'sortBy[createTime]': 'DESC',
-    'filters[status]': 'pass',
-    fields: 'id,name,text,createTime,avatar'
+    'status': 'pass',
   })]).then(res => {
   articles.value = res[0].list
   comments.value = res[1].list

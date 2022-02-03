@@ -18,23 +18,11 @@ export const columns = [
   {
     title: '事件', key: 'desc', align: 'center',
     render({desc}) {
-      const result = []
-      desc.forEach(text => {
-        result.push(h(
-          'p',
-          {
-            class: 'm-0'
-          },
-          {
-            default: () => text
-          }
-        ))
-      })
       return h(
-        'div',
-        {},
+        'pre',
+        null,
         {
-          default: () => result
+          default: () => desc.join('\r\n')
         }
       )
     }

@@ -98,7 +98,7 @@ export default defineComponent({
       formRef.value.validate(async (errors) => {
         if (!errors) {
           // 以回车分隔
-          state.formParams.desc = state.formParams.desc.split(/[(\r\n)\r\n]+/)
+          state.formParams.desc = state.formParams?.desc?.split(/[(\r\n)\r\n]+/)
           if (state.formParams.id) {
             await updateHistory({...state.formParams})
           } else {

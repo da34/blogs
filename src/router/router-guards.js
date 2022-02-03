@@ -1,7 +1,7 @@
-import {useUserStoreOut} from "@/stores/modules/user";
+import {useUserStoreOut} from '@/stores/modules/user';
 import {useAsyncRouteStoreOut} from '@/stores/modules/asyncRoute'
-import {storage} from "@/utils/Storage";
-import {ACCESS_TOKEN} from "../stores/mutation-types";
+import {storage} from '@/utils/Storage';
+import {ACCESS_TOKEN} from '../stores/mutation-types';
 
 const LOGIN_PAGE_NAME = 'login'
 const whitePathList = [LOGIN_PAGE_NAME]  // 路由白名单
@@ -60,13 +60,19 @@ const createRouterGuards = router => {
     if (currentComName && !keepAliveComponents.includes(currentComName) && to.meta?.keepAlive) {
       // 需要缓存的组件
       keepAliveComponents.push(currentComName);
-    } else if (!to.meta?.keepAlive || to.name === 'Redirect') {
-      // 不需要缓存的组件
+    } else if (!to.meta?.keepAlive || to.name === 'RedirectCon') {
+      const toComName = to.params.toComName
+      // 不需要缓存的组件 or 重定向的需要刷新
       const index = asyncRouteStore.keepAliveComponents.findIndex((name) => name === currentComName);
+      const toIndex = asyncRouteStore.keepAliveComponents.findIndex((name) => name === toComName);
       if (index !== -1) {
         keepAliveComponents.splice(index, 1);
       }
+      if (toIndex !== -1) {
+        keepAliveComponents.splice(toIndex, 1);
+      }
     }
+    // console.log(keepAliveComponents, currentComName)
     asyncRouteStore.setKeepAliveComponents(keepAliveComponents);
     const loading = window.$loading || null
     loading && loading.finish()

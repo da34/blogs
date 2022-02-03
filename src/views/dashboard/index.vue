@@ -59,7 +59,7 @@
               color="#5cdbd3"
               size="35"
             >
-              <CommentOne/>
+              <CommentOne />
             </NIcon>
           </div>
         </NCard>
@@ -88,7 +88,7 @@
               color="#ff85c0"
               size="35"
             >
-              <TagOne/>
+              <TagOne />
             </NIcon>
           </div>
         </NCard>
@@ -129,6 +129,9 @@
     <LatelyInfo />
   </div>
 </template>
+<script>
+export default { name: 'Dashboard' }
+</script>
 <script setup>
 import {ref} from 'vue'
 import CountTo from '@/components/CountTo/index.vue'

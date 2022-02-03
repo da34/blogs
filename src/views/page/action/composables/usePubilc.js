@@ -1,40 +1,35 @@
-import {ref, unref, watch} from 'vue';
+import {ref, unref} from 'vue';
 import { useRouter } from 'vue-router'
-import {createArticle, updateArticle} from '@/api/web/article';
+import { useMessage } from 'naive-ui';
+import {createPage, updatePage} from '@/api/page';
 
 export function usePublic(show) {
   const defaultVal = () => ({
-    title: '',
+    name: '',
     content: '',
-    type: 'article',
     isCommentOpen: true,
-    isShare: true,
-    contentOutline: '',
-    firstPicture: '',
-    isTop: false,
-    tagsId: [],
-    categoryId:null,
+    path: '',
+    order: 0,
+    status: 'publish'
   })
-  // 初始化文章
-  const article = ref(defaultVal())
+  // 初始化页面信息
+  const page = ref(defaultVal())
   const router = useRouter()
-
-  // 内容变化，更改描述
-  watch(
-    () => article.value.content,
-    () => {
-      article.value.contentOutline = article.value.content.slice(0, 80)
-    })
+  const message = useMessage()
 
   async function submitCallback() {
-    await article.value.id ? updateArticle(unref(article)) : createArticle(unref(article))
+    if (!page.value.path) {
+      message.info('路径不能为空')
+      return
+    }
+    await page.value?.id ? updatePage(unref(page)) : createPage(unref(page))
     resetData()
     show.value = false
-    router.back()
+    await router.push({name: 'RedirectCon', params: { path: 'page', toComName: 'PageList' }})
   }
 
   function resetData() {
-    article.value = defaultVal()
+    page.value = defaultVal()
   }
 
   function cancelCallback() {
@@ -42,11 +37,11 @@ export function usePublic(show) {
   }
 
   function setArticle(data) {
-    article.value = data
+    page.value = data
   }
 
   return {
-    article,
+    page,
     submitCallback,
     cancelCallback,
     setArticle,

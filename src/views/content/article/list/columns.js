@@ -64,6 +64,20 @@ export const createColumns = ({updateArticle}) => {
       }
     },
     {
+      title: '状态',
+      key: 'status',
+      width: '150px',
+      render({status}) {
+        return h(
+          NTag,
+          {
+            type: status === 'publish' ? 'success' : 'warning'
+          },
+          {default: () => status}
+        )
+      }
+    },
+    {
       title: '发布时间',
       key: 'createTime',
       render(row) {

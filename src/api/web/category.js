@@ -43,7 +43,7 @@ export function createCategory(data) {
 export function editCategory(data) {
   return http.request({
     url: 'category/' + data.id,
-    method: 'put',
+    method: 'patch',
     data
   },{
     isShowSuccessMessage: true

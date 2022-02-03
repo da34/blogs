@@ -81,7 +81,7 @@ import {useLoadingBar, useMessage} from 'naive-ui';
 import httpEnum from '@/utils/http/httpType'
 // import { AccountCircleFilled, LockOutlined } from '@vicons/material'
 import {User, Lock} from '@icon-park/vue-next'
-import {touLogin} from "@/api/system/user";
+import {touLogin} from '@/api/system/user';
 
 const formRef = ref(null);
 const messagePro = useMessage();
@@ -119,15 +119,17 @@ const handleTourist = async () => {
 }
 
 const handleLogin = async (params) => {
-  messagePro.loading('登录中...');
+  // messagePro.loading('登录中...');
   loading.value = true;
-  const {code, message} = await userStore.login(params);
-  console.log(code, message)
-  if (code === httpEnum.SUCCESS) {
+  try {
+    const {code, message} = await userStore.login(params);
+    if (code === httpEnum.SUCCESS) {
+      loginSucceed()
+    } else {
+      messagePro.info(message || '登录失败');
+    }
+  } finally {
     loading.value = false
-    loginSucceed()
-  } else {
-    messagePro.info(message || '登录失败');
   }
 }
 
