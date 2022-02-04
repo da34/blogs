@@ -148,7 +148,7 @@ export class CommentsService {
       .createQueryBuilder('comment')
       .andWhere('comment.status=:status', { status: StatusComment.Pass })
       .andWhere('comment.parentId=:parentId')
-      .orderBy('comment.createTime', 'ASC');
+      .orderBy('comment.createTime', 'DESC');
 
     const { page = 1, pageSize = 10 } = queryParams;
     query.skip((page - 1) * pageSize);
