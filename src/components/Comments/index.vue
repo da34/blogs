@@ -75,6 +75,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import md5 from 'md5'
 import Message from '../base/Message'
 import Edit from './components/Edit'
 import CommentList from './components/CommentList'
@@ -143,6 +144,9 @@ export default {
       }
       comment = Object.assign(query, comment, this.commentInfo)
       await this.actionUser(comment)
+
+      // 处理头像
+      comment.avatar = this.handleAvatar(comment.email)
       const { data } = await this.$axios.post('comments', comment)
       Message({
         text: data.message,
@@ -160,11 +164,17 @@ export default {
     onClose () {
       // 关闭回复框清空
       this.commentInfo = {}
-      console.log(this.commentInfo)
       this.replyShow = false
     },
     moreComment () { // 加载更多评论
       this.page++
+    },
+    handleAvatar (email) {
+      if (/@qq.com/.test(email)) {
+        return `https://q1.qlogo.cn/g?b=qq&nk=${email.split('@')[0]}&s=100`
+      } else {
+        return `https://gravatar.loli.net/avatar/${md5(email)}?s=52&d=retro`
+      }
     }
   }
 }
