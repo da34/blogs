@@ -16,6 +16,7 @@ import { ExternalModule } from './modules/external/external.module';
 import { SiteModule } from './modules/site/site.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PageModule } from './modules/page/page.module';
+import { SmtpModule } from './modules/smtp/smtp.module';
 
 @Module({
   controllers: [AppController],
@@ -58,6 +59,7 @@ import { PageModule } from './modules/page/page.module';
     ExternalModule,
     SiteModule,
     PageModule,
+    SmtpModule,
   ],
 })
 export class AppModule {}

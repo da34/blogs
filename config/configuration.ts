@@ -21,6 +21,7 @@ export default () => ({
     name: process.env.SITE_NAME || '个人博客',
     url: process.env.SITE_URL,
     email: process.env.SITE_EMAIL,
+    isNotice: process.env.SITE_COMMENT_NOTICE || true,
   },
   qiniu: {
     url: process.env.QINIU_URL,
@@ -31,5 +32,11 @@ export default () => ({
   },
   util: {
     enPwdSecretKey: process.env.USER_SECRET_KEY,
+  },
+  smtp: {
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 });
