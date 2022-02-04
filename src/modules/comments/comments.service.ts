@@ -1,19 +1,19 @@
-import {
-  BadRequestException,
-  HttpException,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment, StatusComment } from './entities/comment.entity';
-import { FindConditions, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { QueryCommentDto } from './dto/query-comment.dto';
 import { Content } from '../contents/entities/content.entity';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
+import { SmtpService } from '../smtp/smtp.service';
+import { User, UserRole } from '../users/entities/user.entity';
+import { filterXSS } from 'xss';
+import { JwtService } from '@nestjs/jwt';
+import { ExternalService } from '../external/external.service';
 
 @Injectable()
 export class CommentsService {
@@ -24,8 +24,25 @@ export class CommentsService {
     private contentRepository: Repository<Content>,
     private configService: ConfigService,
     private httpService: HttpService,
+    private smtpService: SmtpService,
+    private jwtService: JwtService,
+    private externalService: ExternalService,
   ) {}
-  async create(createCommentDto: CreateCommentDto) {
+  async create(ip, ua, token, createCommentDto: CreateCommentDto) {
+    // console.log(res.render, 'res.render');
+    createCommentDto.ip = ip;
+    createCommentDto.ua = ua;
+    createCommentDto.isAdmin = false; // 统一false，防止前端直接传值
+    if (token) {
+      const { role, username } = this.jwtService.decode(token) as User;
+      createCommentDto.isAdmin = role === UserRole.Admin;
+      createCommentDto.name = username;
+    }
+
+    // xss过滤
+    createCommentDto.text = filterXSS(createCommentDto.text);
+    createCommentDto.name = filterXSS(createCommentDto.name);
+
     // 判断评论所属资源是否开启评论
     const exitsContent = await this.contentRepository.findOne(
       createCommentDto.postId,
@@ -33,15 +50,48 @@ export class CommentsService {
     if (exitsContent && !exitsContent.isCommentOpen) {
       throw new HttpException('非法评论', HttpStatus.FORBIDDEN);
     }
+
+    // 文本检测
+    const { result } = await this.externalService.checkText(
+      createCommentDto.text,
+    );
+    createCommentDto.status = result?.suggestion;
+    createCommentDto.suggestion = JSON.stringify(result?.detail);
+
+    // 保存到数据库
     const createComment = this.commentRepository.create(createCommentDto);
     const exitsComment = await this.commentRepository.save(createComment);
-
+    if (StatusComment.Pass !== exitsComment.status) {
+      throw new HttpException(
+        '评论包含敏感信息，已屏蔽！',
+        HttpStatus.PRECONDITION_FAILED,
+      );
+    }
     // 评论通过，并且有父级
     if (exitsComment.status === StatusComment.Pass && exitsComment.parentId) {
-      this.sendEmail(exitsComment);
+      const smtpConfig = this.configService.get('smtp');
+      const siteConfig = this.configService.get('site');
+      const mailOptions = {
+        from: smtpConfig.from,
+        to: exitsComment.replyEmail,
+        subject: `「 ${siteConfig.name} 」回复通知`,
+        template: '/replyTemp',
+        context: {
+          // Data to be sent to template engine.
+          siteName: siteConfig.name,
+          siteUrl: siteConfig.url,
+          replyName: exitsComment.replyName,
+          reviewUrl: siteConfig.url + exitsComment.anchor,
+        },
+      };
+      this.smtpService.create(mailOptions).catch((_) => {
+        console.log('评论成功，发送邮件失败');
+      });
     }
-    // 发送通知站长
-    this.noticeEmail(exitsComment);
+    // // 发送通知站长
+    // this.noticeEmail(exitsComment);
+    // console.log(exitsComment, 'exitsComment')
+    return exitsComment;
   }
 
   async findAll(query: QueryCommentDto) {

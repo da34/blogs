@@ -100,6 +100,7 @@ export class ExternalService {
     );
 
     const { data } = await lastValueFrom(resOb);
+    // console.log(data);
     return data;
   }
 

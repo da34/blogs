@@ -7,6 +7,7 @@ import { ExternalModule } from '../external/external.module';
 import { Content } from '../contents/entities/content.entity';
 import { HttpModule } from '@nestjs/axios';
 import { AuthModule } from '../auth/auth.module';
+import { SmtpModule } from '../smtp/smtp.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthModule } from '../auth/auth.module';
     ExternalModule,
     HttpModule,
     AuthModule,
+    SmtpModule,
   ],
   controllers: [CommentsController],
   providers: [CommentsService],

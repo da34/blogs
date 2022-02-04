@@ -4,26 +4,26 @@ import { SMTP } from './entities/smtp.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import { sendEmail } from './meail.util';
+// import { sendEmail } from './meail.util';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { MailerService } from '@nestjs-modules/mailer';
 
 export class SmtpService {
   constructor(
     @InjectRepository(SMTP)
     private smtpRepository: Repository<SMTP>,
     private configService: ConfigService,
+    private mailerService: MailerService,
   ) {}
-  async create(createSmtpDto: CreateSmtpDto) {
-    const { host, port, user, pass } = this.configService.get('smtp');
-    const { to, form, text } = createSmtpDto;
-    await sendEmail(createSmtpDto, {
-      host,
-      port,
-      user,
-      pass,
-    }).catch(() => {
-      throw new HttpException('邮件发送失败', HttpStatus.BAD_REQUEST);
-    });
+  async create(createSmtpDto: Partial<CreateSmtpDto>) {
+    this.mailerService
+      .sendMail(createSmtpDto)
+      .then((success) => {
+        console.log(success);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     const newSMTP = await this.smtpRepository.create(createSmtpDto);
     await this.smtpRepository.save(newSMTP);
     return newSMTP;

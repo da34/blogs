@@ -17,6 +17,8 @@ import { SiteModule } from './modules/site/site.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PageModule } from './modules/page/page.module';
 import { SmtpModule } from './modules/smtp/smtp.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   controllers: [AppController],
@@ -44,6 +46,34 @@ import { SmtpModule } from './modules/smtp/smtp.module';
           timezone: '+08:00', //服务器上配置的时区
           autoLoadEntities: true, // 自动导入实体
           maxQueryExecutionTime: 1000, // 记录超过1秒的查询
+        };
+      },
+    }),
+    MailerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const smtp = configService.get('smtp');
+        return {
+          transport: {
+            host: smtp.host,
+            port: smtp.port,
+            secure: true, // upgrade later with STARTTLS
+            auth: {
+              user: smtp.user,
+              pass: smtp.pass,
+            },
+          },
+          defaults: {
+            from: smtp.from,
+          },
+          template: {
+            dir: process.cwd() + '/email-templates/',
+            adapter: new HandlebarsAdapter(), // or new PugAdapter() or new EjsAdapter()
+            options: {
+              strict: true,
+            },
+          },
         };
       },
     }),

@@ -9,5 +9,6 @@ import { ConfigModule } from '@nestjs/config';
   imports: [TypeOrmModule.forFeature([SMTP]), ConfigModule],
   controllers: [SmtpController],
   providers: [SmtpService],
+  exports: [SmtpService],
 })
 export class SmtpModule {}

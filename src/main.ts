@@ -7,8 +7,9 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { join } from 'path';
 
-const PORT = process.env.PORT || 7001;
+const PORT = process.env.APP_PORT || 7001;
 const PREFIX = 'api';
 
 async function bootstrap() {
