@@ -5,7 +5,7 @@
         v-for="menu in defaultMenus"
         :key="menu.url"
         :to="menu.url"
-        class="break-all lg:ml-14 ml-8 font-semibold h-full text-lg"
+        class="break-all lg:ml-12 ml-8 font-semibold h-full text-lg"
         :exact="menu.exact"
       >
         {{ menu.name }}
@@ -14,7 +14,7 @@
         v-for="menu in pageMenus"
         :key="menu.id"
         :to="`/page/${menu.path}`"
-        class="break-all lg:ml-14 ml-8 font-semibold h-full text-lg"
+        class="break-all lg:ml-12 ml-8 font-semibold h-full text-lg"
         :exact="menu.exact"
       >
         {{ menu.name }}

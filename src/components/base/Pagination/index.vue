@@ -34,8 +34,12 @@
 </template>
 
 <script>
-// import { scrollTo } from '@/utils/scroll-to'
 import { padLocation } from '../../../utils'
+let scrollTo
+if (process.client) {
+  // eslint-disable-next-line no-unused-vars
+  scrollTo = require('@/utils/scroll-to').scrollTo
+}
 
 const calculatePage = (p, max) => {
   if (p < 1) { return 1 }
@@ -77,6 +81,7 @@ export default {
   watch: {
     stateCurrent (val) {
       this.$emit('change', val)
+      scrollTo(0)
       this.initPage(val)
     },
     maxPage () {
