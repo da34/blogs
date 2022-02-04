@@ -28,15 +28,18 @@ export class ContentsService {
 
   async create(createContentDto: CreateContentDto) {
     // 查询 category
-    const exitsCategory = await this.categoryRepository.findOne(
-      createContentDto.categoryId,
-    );
-    if (!exitsCategory) {
-      throw new HttpException(
-        `不存在id为${createContentDto.categoryId}的分类`,
-        401,
+    let exitsCategory;
+    if (createContentDto.categoryId) {
+      exitsCategory = await this.categoryRepository.findOne(
+        createContentDto.categoryId,
       );
     }
+    // if (!exitsCategory) {
+    //   throw new HttpException(
+    //     `不存在id为${createContentDto.categoryId}的分类`,
+    //     401,
+    //   );
+    // }
     // 查询tags
     const exitsTags = await this.tagRepository.find({
       id: In(createContentDto.tagsId),

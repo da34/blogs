@@ -1,4 +1,9 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,10 +26,15 @@ export class CommentsService {
     private httpService: HttpService,
   ) {}
   async create(createCommentDto: CreateCommentDto) {
+    // 判断评论所属资源是否开启评论
+    const exitsContent = await this.contentRepository.findOne(
+      createCommentDto.postId,
+    );
+    if (exitsContent && !exitsContent.isCommentOpen) {
+      throw new HttpException('非法评论', HttpStatus.FORBIDDEN);
+    }
     const createComment = this.commentRepository.create(createCommentDto);
     const exitsComment = await this.commentRepository.save(createComment);
-
-    // console.log(exitsComment);
 
     // 评论通过，并且有父级
     if (exitsComment.status === StatusComment.Pass && exitsComment.parentId) {
