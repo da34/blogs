@@ -11,4 +11,5 @@ export class CreateSmtpDto {
   text: string;
 
   subject?: string;
+  isSuccess?: boolean;
 }

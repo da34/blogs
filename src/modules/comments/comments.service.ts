@@ -14,6 +14,7 @@ import { User, UserRole } from '../users/entities/user.entity';
 import { filterXSS } from 'xss';
 import { JwtService } from '@nestjs/jwt';
 import { ExternalService } from '../external/external.service';
+import { join } from 'path';
 
 @Injectable()
 export class CommentsService {
@@ -75,7 +76,7 @@ export class CommentsService {
         from: smtpConfig.from,
         to: exitsComment.replyEmail,
         subject: `「 ${siteConfig.name} 」回复通知`,
-        template: '/replyTemp',
+        template: join(__dirname, './templates', 'replyTemp'),
         context: {
           // Data to be sent to template engine.
           siteName: siteConfig.name,
@@ -83,6 +84,8 @@ export class CommentsService {
           replyName: exitsComment.replyName,
           reviewUrl: siteConfig.url + exitsComment.anchor,
         },
+        //  多余字段。给smtp存储的
+        text: exitsComment.text,
       };
       this.smtpService.create(mailOptions).catch((_) => {
         console.log('评论成功，发送邮件失败');

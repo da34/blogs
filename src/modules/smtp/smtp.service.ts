@@ -4,8 +4,6 @@ import { SMTP } from './entities/smtp.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-// import { sendEmail } from './meail.util';
-import { HttpException, HttpStatus } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 export class SmtpService {
@@ -16,14 +14,11 @@ export class SmtpService {
     private mailerService: MailerService,
   ) {}
   async create(createSmtpDto: Partial<CreateSmtpDto>) {
-    this.mailerService
-      .sendMail(createSmtpDto)
-      .then((success) => {
-        console.log(success);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    createSmtpDto.isSuccess = true;
+    await this.mailerService.sendMail(createSmtpDto).catch((err) => {
+      createSmtpDto.isSuccess = false;
+    });
+
     const newSMTP = await this.smtpRepository.create(createSmtpDto);
     await this.smtpRepository.save(newSMTP);
     return newSMTP;

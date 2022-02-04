@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class SMTP {
@@ -14,6 +15,7 @@ export class SMTP {
   @Column({ type: 'text', default: null })
   subject: string;
 
+  @Exclude()
   @Column({ type: 'text', default: null })
   text: string;
 
