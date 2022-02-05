@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from "typeorm";
 import { Exclude } from 'class-transformer';
 
 export enum UserRole {
@@ -25,4 +25,10 @@ export class User {
     default: UserRole.User,
   })
   role: string;
+
+  @BeforeInsert()
+  createDates() {
+    // 插入之前更改默认。防止直接请求
+    this.role = UserRole.User;
+  }
 }
