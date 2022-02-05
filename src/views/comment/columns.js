@@ -5,11 +5,11 @@ import UAParser from 'ua-parser-js'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const columns = [
-  {title: '评论人', key: 'name', width: 100, align: 'center',},
+  {title: '评论人', key: 'name'},
   // {title: '被评论人', key: 'targetName', width: 100,},
-  {title: '评论内容', key: 'text', align: 'center',},
+  {title: '评论内容', key: 'text'},
   {
-    title: 'ua', key: 'ua', width: 280, align: 'center',
+    title: 'ua', key: 'ua',
     render({ua}) {
 
       const parser = new UAParser(ua);
@@ -38,7 +38,6 @@ export const columns = [
       return h(
         NSpace,
         {
-          justify: 'center'
         },
         {
           default: () => [osDom, browserDom]
@@ -46,10 +45,10 @@ export const columns = [
       )
     }
   },
-  {title: 'ip', key: 'ip', width: 150, align: 'center',},
-  {title: '来源', key: 'anchor', width: 150, align: 'center',},
+  {title: 'ip', key: 'ip'},
+  {title: '来源', key: 'anchor'},
   {
-    title: '状态', key: 'status', width: 50, align: 'center',
+    title: '状态', key: 'status',
     render({status}) {
       const typeMap = {
         'pass': 'success',
@@ -72,7 +71,6 @@ export const columns = [
     title: '创建时间',
     key: 'createdAt',
     width: 200,
-    align: 'center',
     render(row) {
       return h(
         'span',

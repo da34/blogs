@@ -47,7 +47,6 @@
       :columns="createColumn"
       :pagination="pagination"
       :action-column="actionColumn"
-      :single-line="false"
     />
 
     <!--编辑、新建标签-->

@@ -8,7 +8,8 @@ import {
   Permissions,
   Link,
   ApplicationOne,
-  CalendarDot
+  CalendarDot,
+  EmailSecurity
 } from '@icon-park/vue-next'
 /**
  * @param name 路由名称, 必须设置,且不能重名
@@ -32,6 +33,7 @@ const LinkName = 'Link';
 const ProjectName = 'Project';
 const HistoryName = 'History';
 const PageName = 'Page';
+const EmailName = 'Email';
 
 const constantRouters = [
   {
@@ -39,6 +41,12 @@ const constantRouters = [
     name: 'login',
     hidden: true,
     component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    hidden: true,
+    component: () => import('@/views/register/index.vue')
   },
   {
     path: '/redirect',
@@ -229,6 +237,23 @@ const asyncRoutes = [
         component: () => import('@/views/project/index.vue'),
         meta: {title: '作品管理', keepAlive: true},
         icon: renderIcon(ApplicationOne)
+      },
+    ]
+  },
+  {
+    path: '/email',
+    name: EmailName,
+    component: Layout,
+    meta: {
+      alwaysShow: false
+    },
+    children: [
+      {
+        path: '',
+        name: `${EmailName}List`,
+        component: () => import('@/views/email/index.vue'),
+        meta: {title: '邮件管理', keepAlive: true},
+        icon: renderIcon(EmailSecurity)
       },
     ]
   },

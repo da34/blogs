@@ -26,25 +26,27 @@ export function login(data) {
   );
 }
 
-/**
- * @description: 游客登录
- */
-export function touLogin() {
-  return http.request(
-    {
-      url: 'touLogin',
-      method: 'POST'
-    }
-  );
-}
 
 /**
  * @description: 用户登出
  */
-export function logout(params) {
+// export function logout(params) {
+//   return http.request({
+//     url: 'login/logout',
+//     method: 'POST',
+//     params,
+//   });
+// }
+
+/**
+ * @description: 用户注册
+ */
+export function register(data) {
   return http.request({
-    url: 'login/logout',
+    url: '/users',
     method: 'POST',
-    params,
+    data,
+  }, {
+    isTransformResponse: false,
   });
 }

@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="style: 修改api接口路径">
+    <list default="true" id="253b6959-a0ca-4d66-bd58-98bb3e8e2ccf" name="Default Changelist" comment="ci: 添加打包分析插件">
+      <change afterPath="$PROJECT_DIR$/src/api/email.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/email/columns.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/email/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/register/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/router-guards.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/router-guards.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/comment/columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/columns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/comment/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/comment/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/link/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/link/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +27,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Single File Component" />
         <option value="SCSS File" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -52,7 +61,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/page" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/api" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -67,11 +76,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\files\backups\blog\blog-admin\src\api" />
+      <recent name="E:\files\backups\blog\blog-admin\src\views" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\page" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\dashboard" />
       <recent name="E:\files\backups\blog\blog-admin\src\views\project" />
-      <recent name="E:\files\backups\blog\blog-admin\src\views\message" />
-      <recent name="E:\files\backups\blog\blog-admin\src\views\content" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\files\backups\blog\blog-admin\src\api" />
@@ -143,7 +152,8 @@
       <workItem from="1643453891316" duration="1242000" />
       <workItem from="1643550183255" duration="1281000" />
       <workItem from="1643728308062" duration="20281000" />
-      <workItem from="1643857792410" duration="15607000" />
+      <workItem from="1643857792410" duration="15899000" />
+      <workItem from="1644043840837" duration="4959000" />
     </task>
     <task id="LOCAL-00001" summary="更新eslint">
       <created>1640947897624</created>
@@ -250,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643884282050</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ci: 添加打包分析插件">
+      <created>1643886030128</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1643886030128</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,7 +327,8 @@
     <MESSAGE value="fix: 修复keep-alive不生效问题&#10;refactor: 重构标签和分类组件" />
     <MESSAGE value="style: 整理api文件结构" />
     <MESSAGE value="style: 修改api接口路径" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: 修改api接口路径" />
+    <MESSAGE value="ci: 添加打包分析插件" />
+    <option name="LAST_COMMIT_MESSAGE" value="ci: 添加打包分析插件" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

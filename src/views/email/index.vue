@@ -8,19 +8,19 @@
     >
       <NFormItem>
         <NInput
-          v-model:value="formValue.name"
-          placeholder="请输入评论人"
+          v-model:value="formValue.from"
+          placeholder="请输入发件人"
         />
       </NFormItem>
       <NFormItem>
         <NInput
-          v-model:value="formValue.ip"
-          placeholder="请输入ip地址"
+          v-model:value="formValue.to"
+          placeholder="请输入收件人"
         />
       </NFormItem>
       <NFormItem>
         <NSelect
-          v-model:value="formValue.status"
+          v-model:value="formValue.isSuccess"
           style="width: 180px;"
           placeholder="请选择状态"
           :options="options"
@@ -50,31 +50,30 @@
       :columns="columns"
       :pagination="pagination"
       :action-column="actionColumn"
-      :request="getCommentList"
+      :request="getEmails"
     />
   </NCard>
 </template>
 <script>
-export default { name: 'CommentList' }
+export default { name: 'EmailList' }
 </script>
 
 <script setup>
 import {reactive, ref, toRaw} from 'vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import {getCommentList, delComment} from '@/api/comment';
 import {createActionColumn, columns} from './columns'
 import {useDialog} from 'naive-ui';
+import {getEmails, delEmail} from '@/api/email';
 
 const options = [
-  {label: 'pass', value: 'pass'},
-  {label: 'block', value: 'block'},
-  {label: 'review', value: 'review'}
+  {label: '成功', value: 1},
+  {label: '失败', value: 0},
 ]
 
 const defaultVla = () => ({
-  name: null,
-  ip: null,
-  status: null
+  from: null,
+  to: null,
+  isSuccess: null
 })
 
 const formValue = ref(defaultVla())
@@ -116,7 +115,7 @@ function handleDel(record) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: async () => {
-      await delComment(record.id)
+      await delEmail(record.id)
       tableRef.value.reload()
     }
   })

@@ -4,7 +4,7 @@
     <div class="view-account-container">
       <div class="view-account-top">
         <div class="view-account-top-title">
-          博客后台登录
+          博客后台注册
         </div>
       </div>
       <div class="view-account-form">
@@ -46,6 +46,22 @@
               </template>
             </n-input>
           </n-form-item>
+          <n-form-item path="confirmPwd">
+            <n-input
+              v-model:value="formInline.confirmPwd"
+              type="password"
+              placeholder="请输入确认密码"
+            >
+              <template #prefix>
+                <n-icon
+                  size="18"
+                  color="#808695"
+                >
+                  <Lock />
+                </n-icon>
+              </template>
+            </n-input>
+          </n-form-item>
           <n-form-item>
             <n-button
               type="primary"
@@ -54,14 +70,14 @@
               block
               @click="handleSubmit"
             >
-              登录
+              注册
             </n-button>
           </n-form-item>
           <span
             class="cursor-pointer"
-            @click="handleRegister"
+            @click="handleLogin"
           >
-            Or 注册
+            Or 登录
           </span>
         </n-form>
       </div>
@@ -72,7 +88,7 @@
 <script setup>
 import {ref} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
-import {useUserStore} from '@/stores/modules/user';
+import {register} from '@/api/user';
 import {useMessage} from 'naive-ui';
 import httpEnum from '@/utils/http/httpType'
 import {User, Lock} from '@icon-park/vue-next'
@@ -82,15 +98,44 @@ const messagePro = useMessage();
 const formInline = ref({
   username: '',
   password: '',
+  confirmPwd: ''
 })
 const loading = ref(false)
 
 const rules = {
   username: {required: true, message: '请输入用户名', trigger: 'blur'},
-  password: {required: true, message: '请输入密码', trigger: 'blur'},
+  password: {required: true, message: '请输入密码'},
+  confirmPwd: [
+    {
+      required: true,
+      message: '请再次输入密码',
+      trigger: ['input', 'blur']
+    },
+    {
+      validator: validatePasswordStartWith,
+      message: '两次密码输入不一致',
+      trigger: 'input'
+    },
+    {
+      validator: validatePasswordSame,
+      message: '两次密码输入不一致',
+      trigger: ['blur', 'password-input']
+    }
+  ],
 };
 
-const userStore = useUserStore();
+// 校验两次密码
+function validatePasswordStartWith (rule, value) {
+  return (
+    formInline.value.password &&
+    formInline.value.password.startsWith(value) &&
+    formInline.value.password.length >= value.length
+  )
+}
+function validatePasswordSame (rule, value) {
+  return value === formInline.value.password
+}
+
 const router = useRouter();
 const route = useRoute();
 
@@ -98,47 +143,34 @@ const handleSubmit = (e) => {
   e.preventDefault();
   formRef.value.validate(async (errors) => {
     if (!errors) {
-      handleLogin(formInline.value)
+      await handleRegister(formInline.value)
     }
+    console.log(errors)
   });
 };
 
-const handleLogin = async (params) => {
-  // messagePro.loading('登录中...');
+const handleRegister = async (params) => {
   loading.value = true;
   try {
-    const {code, message} = await userStore.login(params);
+    const {code, message} = await register(params);
     if (code === httpEnum.SUCCESS) {
-      loginSucceed()
+      registerSucceed()
     } else {
-      messagePro.info(message || '登录失败');
+      messagePro.info(message || '注册失败');
     }
   } finally {
     loading.value = false
   }
 }
 
-const loginSucceed = () => {
-  const toPath = decodeURIComponent((route.query?.redirect || '/'))
-  messagePro.success('登录成功！');
-  router.replace(toPath).then((_) => {
-    if (route.name === 'login') {
-      router.replace('/');
-    }
-  });
+const registerSucceed = () => {
+  messagePro.success('注册成功，即将返回登录');
+  handleLogin()
 }
 
-function handleRegister() {
-  console.log(1111111)
-  router.push('/register')
+function handleLogin() {
+  router.push('/login')
 }
-
-
-// onMounted(() => {
-//   //挂载在 window 方便与在js中使用
-//   window.$loading = useLoadingBar();
-//   window.$message = useMessage();
-// });
 
 </script>
 

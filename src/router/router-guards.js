@@ -4,7 +4,8 @@ import {storage} from '@/utils/Storage';
 import {ACCESS_TOKEN} from '../stores/mutation-types';
 
 const LOGIN_PAGE_NAME = 'login'
-const whitePathList = [LOGIN_PAGE_NAME]  // 路由白名单
+const REGISTER_PAGE_NAME = 'register'
+const whitePathList = [LOGIN_PAGE_NAME, REGISTER_PAGE_NAME]  // 路由白名单
 
 const userStore = useUserStoreOut()
 const asyncRouteStore = useAsyncRouteStoreOut()
