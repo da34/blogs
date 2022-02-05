@@ -9,7 +9,7 @@
           <div
             v-for="category in categories"
             :key="category.id"
-            :class="['cursor-pointer md:hover:text-blue-950 px-2 py-1 ml-3 mb-2 rounded', selectCategory === category.name && 'bg-blue-950 text-white']"
+            :class="['cursor-pointer md:hover:bg-blue-950 md:hover:text-white px-2 py-1 ml-3 mb-2 rounded', selectCategory === category.name && 'bg-blue-950 text-white']"
             @click="onCategoryClick(category.name)"
           >
             {{ category.name }}
@@ -24,7 +24,7 @@
           <div
             v-for="tag in tags"
             :key="tag.id"
-            :class="['cursor-pointer md:hover:text-blue-950 px-2 py-1 ml-3 mb-2 rounded', selectTags.includes(tag.name) && 'bg-blue-950 text-white']"
+            :class="['cursor-pointer md:hover:bg-blue-950 md:hover:text-white px-2 py-1 ml-3 mb-2 rounded', selectTags.includes(tag.name) && 'bg-blue-950 text-white']"
             @click="onTagClick(tag.name)"
           >
             {{ tag.name }}

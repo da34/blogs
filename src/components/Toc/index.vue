@@ -11,7 +11,7 @@
           </li>
         </ul>
       </div>
-      <div v-else style="text-align: center;padding: 30px;">
+      <div v-else class="text-center w-full py-3">
         此文章没有目录
       </div>
     </div>
@@ -59,7 +59,8 @@ export default {
   methods: {
     // 获取文章标题
     getArticleTitle () {
-      this.articleToc = document.querySelector('.v-md-editor-preview').querySelectorAll(LEVEL)
+      return
+      this.articleToc = document.querySelector('.v-md-editor-preview')?.querySelectorAll(LEVEL)
       let titles = Array.from(this.articleToc).filter(title => !!title.textContent.trim())
       if (!titles.length) {
         titles = []
@@ -78,10 +79,11 @@ export default {
       })
     },
     initHandle () {
+      if (!this.$refs?.listRef) { return }
       this.articleTocHeight = [] // 文章标题距离顶部高度
       this.linkList = [] // 文章目录
-
-      this.linkList = this.$refs.listRef.querySelectorAll('.item')
+      // console.log(this.$refs?.listRef)
+      this.linkList = this.$refs?.listRef?.querySelectorAll('.item')
       this.articleToc.forEach($to => {
         this.articleTocHeight.push($to.offsetTop - 50)
       })
