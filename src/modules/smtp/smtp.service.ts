@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
+import { HttpException } from "@nestjs/common";
 
 export class SmtpService {
   constructor(
@@ -25,19 +26,44 @@ export class SmtpService {
     return newSMTP;
   }
 
-  findAll() {
-    return `This action returns all smtp`;
+  async findAll(query) {
+    const { page = 1, pageSize = 10, isSuccess, ...otherQuery } = query;
+    const smtpQuery = await this.smtpRepository
+      .createQueryBuilder('smtp')
+      .take(pageSize)
+      .skip((page - 1) * pageSize)
+
+    if (isSuccess) {
+      smtpQuery.andWhere('smtp.isSuccess=:isSuccess', { isSuccess });
+    }
+
+    if (otherQuery) {
+      Object.keys(otherQuery).forEach((q) =>
+        smtpQuery.andWhere(`smtp.${q} LIKE :${q}`, {
+          [`${q}`]: `%${otherQuery[q]}%`,
+        }),
+      );
+    }
+    const count = await smtpQuery.getCount();
+    return {
+      count,
+      list: await smtpQuery.getMany(),
+    };
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} smtp`;
   }
 
-  update(id: number, updateSmtpDto: UpdateSmtpDto) {
+  update(id: string, updateSmtpDto: UpdateSmtpDto) {
     return `This action updates a #${id} smtp`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} smtp`;
+  async remove(id: string) {
+    const exitsContent = await this.smtpRepository.findOne(id);
+    if (!exitsContent) {
+      throw new HttpException(`不存在id为${id}的邮件`, 401);
+    }
+    return this.smtpRepository.delete(id);
   }
 }
