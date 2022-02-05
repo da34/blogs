@@ -84,5 +84,10 @@
 安装好依赖后，需要把后端的`prod.env.example`和`dev.env.example`这两个配置文件，去掉后面的`.example`
 然后再把里面的配置补全
 
+**前端**
+如果打包的静态资源不上传cdn，需要把`nuxt.config.js`里的`publicPath`删除
+上传到七牛云cdn就需要配置，把`upload.example.js`配置写上，然后把`.example`删除，
+然后执行`npm run upload`
+
 
 
