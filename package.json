@@ -40,7 +40,6 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.10.7",
     "express-rate-limit": "^6.2.0",
-    "hbs": "^4.2.0",
     "helmet": "^5.0.2",
     "husky": "^7.0.4",
     "mysql2": "^2.3.3",

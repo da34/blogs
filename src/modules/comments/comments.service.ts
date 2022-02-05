@@ -68,15 +68,16 @@ export class CommentsService {
         HttpStatus.PRECONDITION_FAILED,
       );
     }
-    // 评论通过，并且有父级
-    if (exitsComment.status === StatusComment.Pass && exitsComment.parentId) {
-      const smtpConfig = this.configService.get('smtp');
-      const siteConfig = this.configService.get('site');
+
+    const siteConfig = this.configService.get('site');
+    const smtpConfig = this.configService.get('smtp');
+    // 评论通过
+    if (exitsComment.status === StatusComment.Pass) {
       const mailOptions = {
         from: smtpConfig.from,
         to: exitsComment.replyEmail,
         subject: `「 ${siteConfig.name} 」回复通知`,
-        template: join(__dirname, './templates', 'replyTemp'),
+        template: '/replyTemp',
         context: {
           // Data to be sent to template engine.
           siteName: siteConfig.name,
@@ -87,13 +88,27 @@ export class CommentsService {
         //  多余字段。给smtp存储的
         text: exitsComment.text,
       };
-      this.smtpService.create(mailOptions).catch((_) => {
-        console.log('评论成功，发送邮件失败');
-      });
+      // 是回复他人，发送邮件通知
+      if (exitsComment.parentId) {
+        this.smtpService.create(mailOptions).catch((_) => {
+          console.log('评论成功，发送邮件失败');
+        });
+      }
+      // 通知站长
+      if (!exitsComment.isAdmin) {
+        const siteMailOption = Object.assign(mailOptions, {
+          to: siteConfig.email,
+          subject: `「 ${siteConfig.name} 」评论通知`,
+          template: '/noticeTemp',
+          context: {
+            text: exitsComment.text,
+          },
+        });
+        this.smtpService.create(siteMailOption).catch((_) => {
+          console.log('通知站长，评论成功，发送邮件失败');
+        });
+      }
     }
-    // // 发送通知站长
-    // this.noticeEmail(exitsComment);
-    // console.log(exitsComment, 'exitsComment')
     return exitsComment;
   }
 

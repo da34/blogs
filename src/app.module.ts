@@ -19,7 +19,7 @@ import { PageModule } from './modules/page/page.module';
 import { SmtpModule } from './modules/smtp/smtp.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { join } from 'path';
+import { resolve } from 'path';
 
 @Module({
   controllers: [AppController],
@@ -67,6 +67,10 @@ import { join } from 'path';
           },
           defaults: {
             from: smtp.from,
+          },
+          template: {
+            dir: resolve(__dirname, 'templates'),
+            adapter: new HandlebarsAdapter(),
           },
         };
       },

@@ -16,6 +16,7 @@ export class SmtpService {
   async create(createSmtpDto: Partial<CreateSmtpDto>) {
     createSmtpDto.isSuccess = true;
     await this.mailerService.sendMail(createSmtpDto).catch((err) => {
+      console.log(err);
       createSmtpDto.isSuccess = false;
     });
 
