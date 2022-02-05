@@ -18,4 +18,8 @@ export class UsersService {
       .where('user.username = :username', { username })
       .getOne();
   }
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = await this.userRepository.create(createUserDto);
+    return this.userRepository.save(newUser);
+  }
 }
