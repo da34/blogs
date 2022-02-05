@@ -104,6 +104,7 @@ export class Comment {
   createDates() {
     this.createTime = Date.now();
     this.updateTime = Date.now();
+    this.putTop = false;
   }
 
   @BeforeUpdate()
