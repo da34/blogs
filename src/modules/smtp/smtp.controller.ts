@@ -5,8 +5,9 @@ import {
   Body,
   Patch,
   Param,
-  Delete, Query
-} from "@nestjs/common";
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { SmtpService } from './smtp.service';
 import { CreateSmtpDto } from './dto/create-smtp.dto';
 import { UpdateSmtpDto } from './dto/update-smtp.dto';

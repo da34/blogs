@@ -30,7 +30,7 @@ export class ContentsController {
   create(@Body() createContentDto: CreateContentDto) {
     // xss
     createContentDto.title = filterXSS(createContentDto.title);
-    createContentDto.content = filterXSS(createContentDto.content);
+    // createContentDto.content = filterXSS(createContentDto.content);
     createContentDto.contentOutline = filterXSS(
       createContentDto.contentOutline,
     );
