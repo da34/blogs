@@ -33,10 +33,9 @@
           </p>
           <div v-if="article.tags.length" class="flex items-center">
             <BaseSvgIcon icon-class="tag" class="mr-2" />
-            <span v-for="(tag) in article.tags" :key="tag.name" class="tag">
-              <!--            <a-divider v-if="i !== 0" type="vertical"/>-->
+            <NuxtLink v-for="tag in article.tags" :key="tag.id" class="art-tag" :to="{ name: 'search', params: { tagName: tag.name } }">
               {{ tag.name }}
-            </span>
+            </NuxtLink>
           </div>
         </div>
       </div>

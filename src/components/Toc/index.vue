@@ -59,7 +59,6 @@ export default {
   methods: {
     // 获取文章标题
     getArticleTitle () {
-      return
       this.articleToc = document.querySelector('.v-md-editor-preview')?.querySelectorAll(LEVEL)
       let titles = Array.from(this.articleToc).filter(title => !!title.textContent.trim())
       if (!titles.length) {
@@ -93,7 +92,7 @@ export default {
     },
     titleHandleScroll () {
       const offsetTop = window.pageYOffset || document.documentElement.scrollTop
-      this.articleTocHeight.forEach((top, index) => {
+      this.articleTocHeight && this.articleTocHeight.forEach((top, index) => {
         if (offsetTop > top) {
           this.linkList.forEach($item => $item && $item.classList.remove('active'))
           this.linkList[index].classList.add('active')
