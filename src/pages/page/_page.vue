@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white rounded p-5 md:p-0">
     <Markdown :value="pageInfo.content" />
-    <Comments v-if="pageInfo.isCommentOpen" class="md:px-10  pt-5" :postId="$route.params.page" />
+    <Comments v-if="pageInfo.isCommentOpen" class="md:px-10  pt-5" :post-id="$route.params.page" />
   </div>
 </template>
 
@@ -18,7 +18,6 @@ export default {
     const { page } = this.$route.params
     const { data } = await this.$axios.get(`page/${page}`)
     this.pageInfo = data.data
-    this.$axios.post(`page/${this.pageInfo.id}/views`)
   },
   head () {
     return {
@@ -31,6 +30,10 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    const { page } = this.$route.params
+    this.$axios.post(`page/${page}/views`)
   }
 }
 </script>
