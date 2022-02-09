@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
-import { HttpException } from "@nestjs/common";
+import { HttpException } from '@nestjs/common';
 
 export class SmtpService {
   constructor(
@@ -17,7 +17,7 @@ export class SmtpService {
   async create(createSmtpDto: Partial<CreateSmtpDto>) {
     createSmtpDto.isSuccess = true;
     await this.mailerService.sendMail(createSmtpDto).catch((err) => {
-      console.log(err);
+      // console.log(err);
       createSmtpDto.isSuccess = false;
     });
 
@@ -31,7 +31,7 @@ export class SmtpService {
     const smtpQuery = await this.smtpRepository
       .createQueryBuilder('smtp')
       .take(pageSize)
-      .skip((page - 1) * pageSize)
+      .skip((page - 1) * pageSize);
 
     if (isSuccess) {
       smtpQuery.andWhere('smtp.isSuccess=:isSuccess', { isSuccess });

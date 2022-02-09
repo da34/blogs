@@ -80,6 +80,7 @@ export class CommentsService {
         template: '/replyTemp',
         context: {
           // Data to be sent to template engine.
+          text: exitsComment.text,
           siteName: siteConfig.name,
           siteUrl: siteConfig.url,
           replyName: exitsComment.replyName,
@@ -87,6 +88,8 @@ export class CommentsService {
         },
         //  多余字段。给smtp存储的
         text: exitsComment.text,
+        fromEmail: exitsComment.replyEmail, // 这里回复的人邮箱
+        toEmail: exitsComment.email, // 这里接受人的邮箱
       };
       // 是回复他人，发送邮件通知
       if (exitsComment.parentId) {
@@ -100,9 +103,6 @@ export class CommentsService {
           to: siteConfig.email,
           subject: `「 ${siteConfig.name} 」评论通知`,
           template: '/noticeTemp',
-          context: {
-            text: exitsComment.text,
-          },
         });
         this.smtpService.create(siteMailOption).catch((_) => {
           console.log('通知站长，评论成功，发送邮件失败');
@@ -193,58 +193,14 @@ export class CommentsService {
       exitsComment,
       updateCommentDto,
     );
-    // 评论通过，并且有父级
+
+    // todo 更新评论，发送通知
     if (updateComment.status === StatusComment.Pass && updateComment.parentId) {
-      this.sendEmail(updateComment);
     }
     return this.commentRepository.save(updateComment);
   }
 
   remove(id: string) {
     return this.commentRepository.delete(id);
-  }
-  async sendEmail(comment) {
-    const pid = comment.pid;
-    // 查询父级
-    const parentComment = await this.commentRepository.findOne({
-      where: { id: pid },
-    });
-    const sendParams = {
-      siteName: this.configService.get('SITE_NAME'),
-      siteUrl: this.configService.get('SITE_URL'),
-      pName: parentComment.name,
-      pText: parentComment.text,
-      name: comment.replayName,
-      text: comment.text,
-      toEmail: parentComment.email,
-      isSend: true,
-      reviewUrl: `${this.configService.get('SITE_URL')}${
-        parentComment.anchor
-      }#${parentComment.id}`,
-    };
-    const dataOb = await this.httpService.post(
-      'https://qc6hsn.api.cloudendpoint.cn/hello',
-      sendParams,
-    );
-    await lastValueFrom(dataOb);
-  }
-
-  async noticeEmail(comment) {
-    const sendParams = {
-      siteName: this.configService.get('SITE_NAME'),
-      name: comment.nickName,
-      text: comment.text,
-      toEmail: this.configService.get('SITE_EMAIL'),
-      isSend: false,
-      subject: `有人在${this.configService.get('SITE_NAME')}评论了`,
-      reviewUrl: `${this.configService.get('SITE_URL')}${comment.anchor}#${
-        comment.id
-      }`,
-    };
-    const dataOb = await this.httpService.post(
-      'https://qc6hsn.api.cloudendpoint.cn/hello',
-      sendParams,
-    );
-    await lastValueFrom(dataOb);
   }
 }

@@ -7,10 +7,10 @@ export class SMTP {
   id: string;
 
   @Column()
-  from: string;
+  fromEmail: string;
 
   @Column()
-  to: string;
+  toEmail: string;
 
   @Column({ type: 'text', default: null })
   subject: string;

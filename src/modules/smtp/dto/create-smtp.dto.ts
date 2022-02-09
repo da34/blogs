@@ -2,10 +2,10 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateSmtpDto {
   @IsNotEmpty()
-  to: string;
+  toEmail: string;
 
   @IsNotEmpty()
-  form: string;
+  fromEmail: string;
 
   @IsNotEmpty()
   text: string;
