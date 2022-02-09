@@ -47,8 +47,8 @@ export class PageController {
     return this.pageService.remove(id);
   }
 
-  @Post(':id/views')
-  updateViewsById(@Param('id') id) {
-    return this.pageService.updateViewsById(id);
+  @Post(':path/views')
+  updateViewsById(@Param('path') path) {
+    return this.pageService.updateViewsByPath(path);
   }
 }

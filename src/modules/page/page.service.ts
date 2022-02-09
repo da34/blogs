@@ -78,8 +78,11 @@ export class PageService {
     return this.pageRepository.save(updatedPage);
   }
 
-  async updateViewsById(id: string): Promise<Page> {
-    const old = await this.pageRepository.findOne(id);
+  async updateViewsByPath(path: string): Promise<Page> {
+    const old = await this.pageRepository
+      .createQueryBuilder()
+      .where(' path = :path ', { path })
+      .getOne();
     const newData = await this.pageRepository.merge(old, {
       views: old.views + 1,
     });
