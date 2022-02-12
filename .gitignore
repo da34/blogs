@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> old_service/main
 # compiled output
 /dist
 /node_modules
@@ -42,17 +37,7 @@ lerna-debug.log*
 
 #env config
 dev.env
-<<<<<<< HEAD
 prod.env
-=======
-# Created by .ignore support plugin (hsz.mobi)
-### Node template
-# Logs
-/logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Runtime data
 pids
@@ -131,20 +116,11 @@ dist
 # Service worker
 sw.*
 
-# macOS
-.DS_Store
 
 # Vim swap files
 *.sw
 
 upload.js
-=======
 node_modules
-.DS_Store
-dist
 dist-ssr
 *.local
->>>>>>> old_admin/main
-=======
-prod.env
->>>>>>> old_service/main
