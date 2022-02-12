@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> old_service/main
 # compiled output
 /dist
 /node_modules
@@ -39,6 +42,7 @@ lerna-debug.log*
 
 #env config
 dev.env
+<<<<<<< HEAD
 prod.env
 =======
 # Created by .ignore support plugin (hsz.mobi)
@@ -141,3 +145,6 @@ dist
 dist-ssr
 *.local
 >>>>>>> old_admin/main
+=======
+prod.env
+>>>>>>> old_service/main
