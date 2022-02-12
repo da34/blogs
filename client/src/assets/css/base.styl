@@ -1,0 +1,91 @@
+// 路由active
+.active-line
+  position relative
+  color $color-focus
+  &:hover
+    font-weight bold
+  &:after
+    content ' '
+    position absolute
+    top 100%
+    left 50%
+    transform translate3d(-50%, 0, 0)
+    display block
+    width 50%
+    height 2px
+    background-color $color-focus
+    z-index -1
+//
+//.inline-block
+//  display inline-block!important
+
+.solid-circle
+  position relative
+  &:after
+    position: absolute;
+    top: 0
+    right: 5px
+    display: block;
+    width: 8px;
+    height: 8px;
+    content: ' ';
+    background: #548CFF;
+    //background: #e94328;
+    border-radius: 50%;
+    z-index: -1;
+
+
+
+
+
+
+// 路由动画
+.slide-out-enter-active,
+.slide-out-leave-active,
+.slide-in-enter-active,
+.slide-in-leave-active {
+  transition all  .3s ease
+}
+
+.slide-out-enter {
+  opacity .2
+  //transform: translate3d(-50px, 0, 0);
+}
+
+.slide-out-leave-active
+  opacity .2
+  //transform: translate3d(50px, 0, 0);
+
+
+.slide-in-enter
+  opacity .2
+  //transform translate3d(50px, 0, 0)
+
+
+
+.slide-in-leave-active
+  opacity .2
+  //transform translate3d(-50px, 0, 0)
+
+
+
+.text-popup
+  position absolute
+  z-index 99999
+  user-select none
+  white-space nowrap
+  font-weight bold
+  animation moveOut 1.5s forwards
+// 点击特效
+@keyframes moveOut
+  0%, 100% {
+    opacity 0
+  }
+  5% {
+    opacity 1
+  }
+  100%{
+    opacity: 0;
+    transform translate3d(0,-150px,0)
+  }
+

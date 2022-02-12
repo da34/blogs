@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  /*卡片 start*/
+  .box-card {
+    @apply relative rounded bg-white p-5;
+  }
+
+  .box-card .box-title {
+    @apply font-bold py-1 text-sm text-gray-500;
+  }
+
+  .box-card .box-title span {
+    @apply relative
+  }
+
+  .box-card .box-title span:before {
+    content: '';
+    height: 2px;
+    top: -8px;
+    @apply absolute w-full bg-gray-500;
+  }
+
+  .box-card .box-content {
+    @apply relative text-gray-700 mt-2 flex;
+  }
+
+  /*卡片 end*/
+  /*tag start*/
+  .art-tag {
+    @apply px-3 py-2 rounded-lg hover:bg-gray-100;
+  }
+
+  /*tag end*/
+
+}
