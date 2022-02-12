@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # compiled output
 /dist
 /node_modules
@@ -133,5 +133,3 @@ sw.*
 *.sw
 
 upload.js
-
->>>>>>> old_client/master
