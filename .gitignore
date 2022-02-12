@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # compiled output
 /dist
@@ -133,3 +134,10 @@ sw.*
 *.sw
 
 upload.js
+=======
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+>>>>>>> old_admin/main
