@@ -83,12 +83,13 @@ export class CommentsService {
           text: exitsComment.text,
           siteName: siteConfig.name,
           siteUrl: siteConfig.url,
+          name: exitsComment.name,
           replyName: exitsComment.replyName,
           reviewUrl: siteConfig.url + exitsComment.anchor,
         },
         //  多余字段。给smtp存储的
         text: exitsComment.text,
-        fromEmail: exitsComment.replyEmail, // 这里回复的人邮箱
+        fromEmail: exitsComment.replyEmail || smtpConfig.from, // 这里回复的人邮箱
         toEmail: exitsComment.email, // 这里接受人的邮箱
       };
       // 是回复他人，发送邮件通知

@@ -4,8 +4,8 @@ import {NTag} from 'naive-ui'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const columns = [
-  {title: '发件人', key: 'from',  },
-  {title: '收件人', key: 'to', },
+  {title: '发件人', key: 'fromEmail',  },
+  {title: '收件人', key: 'toEmail', },
   {title: '主题', key: 'subject', width: 300, },
   {
     title: '状态', key: 'isSuccess', width: 100,

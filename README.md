@@ -103,7 +103,7 @@ Github: [https://github.com/da34/blogs.git](https://github.com/da34/blogs.git)
 - [x] 页面管理
 - [x] 邮件管理
 
-### 安装
+### 运行
 
 
 **注意事项**
@@ -121,6 +121,6 @@ Github: [https://github.com/da34/blogs.git](https://github.com/da34/blogs.git)
 ### 最后
 由于水平有限，会在自己技术不断进步下，继续将此博客继续完善。欢迎大家多多提建议
 
-觉得不错希望大家给个`start` ⭐，有什么问题可直接`issuse`
+您的`start` ⭐是我坚持的动力，感谢大家的支持，欢迎提交`pr`共同改进项目。
 
 
