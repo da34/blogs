@@ -1,13 +1,10 @@
 <template>
-  <div class="logo flex justify-center items-center py-3 overflow-hidden ">
+  <div :class="['logo flex justify-center items-center overflow-hidden', collapsed && 'py-4' ]">
     <img
       src="@/assets/images/logo.png"
       class="w-auto"
     >
-    <h2
-      v-show="!collapsed"
-      class=""
-    >
+    <h2 v-show="!collapsed">
       博客管理后台
     </h2>
   </div>
