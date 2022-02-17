@@ -10,8 +10,7 @@
     "upload": "node upload.js",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "npm run lint:js",
-    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
-    "prepare": "husky install"
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
     "@kangc/v-md-editor": "^1.7.7",
@@ -25,8 +24,6 @@
     "vue-lazyload": "^1.3.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.0.2",
-    "@commitlint/config-conventional": "^16.0.0",
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/style-resources": "^1.2.0",
     "autoprefixer": "^10.4.0",
@@ -34,7 +31,6 @@
     "babel-plugin-prismjs": "^2.1.0",
     "eslint": "^7.18.0",
     "eslint-plugin-nuxt": "^3.1.0",
-    "husky": "^7.0.4",
     "postcss": "^8.4.5",
     "stylus": "^0.56.0",
     "stylus-loader": "^3.0.2",

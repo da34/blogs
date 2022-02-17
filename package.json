@@ -1,0 +1,24 @@
+{
+  "name": "blogs",
+  "version": "1.0.0",
+  "description": "<p align=\"center\"><a href=\"https://blog.lsyboy.cn\" target=\"_blank\"><img width=\"200\"src=\"https://resource.lsyboy.cn/blog/static/img/logo.cd9bb43.png\"></a></p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/da34/blogs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/da34/blogs/issues"
+  },
+  "homepage": "https://github.com/da34/blogs#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "husky": "^7.0.4"
+  }
+}
