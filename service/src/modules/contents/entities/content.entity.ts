@@ -98,9 +98,4 @@ export class Content {
     this.createTime = Date.now();
     this.updateTime = Date.now();
   }
-
-  @BeforeUpdate()
-  updateDates() {
-    this.updateTime = Date.now();
-  }
 }

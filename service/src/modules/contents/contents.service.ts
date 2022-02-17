@@ -110,6 +110,9 @@ export class ContentsService {
     const updateContent = this.contentRepository.merge(
       exitsContent,
       updateContentDto,
+      {
+        updateTime: Date.now(),
+      },
     );
 
     // 查询 category
