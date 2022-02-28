@@ -1,4 +1,5 @@
 import { resolve } from 'path'
+import CompressionPlugin from 'compression-webpack-plugin'
 export default {
   // 开启打包分析
   analyze: true,
@@ -57,7 +58,7 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: 'https://resource.lsyboy.cn/blog/option/favicon.ico'
+        href: 'https://resource.lsyboy.cn/blog/static/favicon.ico'
       }
     ]
   },
@@ -69,7 +70,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/axios',
-    '@/plugins/components',
+    // '@/plugins/components',
     '@/plugins/svg-icon',
     '@/plugins/filters',
     '@/plugins/vue-lazy-load.client.js',
@@ -89,7 +90,6 @@ export default {
   styleResources: {
     // your settings here
     stylus: [
-      './assets/css/components.styl',
       './assets/css/vars.styl'
     ]
   },
@@ -148,6 +148,14 @@ export default {
   loading: { color: 'pink' },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    plugins: [
+      new CompressionPlugin({
+        // filename: '[path].gz',
+        test: /\.(js|css|html|svg)$/
+        // deleteOriginalAssets: true
+        // minRatio: 0.8
+      })
+    ],
     postcss: {
       plugins: {
         tailwindcss: {},
@@ -165,8 +173,7 @@ export default {
       ]
     },
     publicPath: 'https://resource.lsyboy.cn/blog/static',
-    // transpile: ['tailwindcss', '@kangc/v-md-editor'],
-    extractCSS: true, // 单独提取css为文件
+    // extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件
       splitChunks: {
         cacheGroups: {

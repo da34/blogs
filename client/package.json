@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "start": "nuxt preview",
+    "start": "nuxt start",
     "generate": "nuxt generate",
     "upload": "node upload.js",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
@@ -29,6 +29,7 @@
     "autoprefixer": "^10.4.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-prismjs": "^2.1.0",
+    "compression-webpack-plugin": "5.0.1",
     "eslint": "^7.18.0",
     "eslint-plugin-nuxt": "^3.1.0",
     "postcss": "^8.4.5",

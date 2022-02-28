@@ -23,7 +23,7 @@
           {{ item.title }}
         </h2>
         <p class="text-gray-500 desc overflow-hidden text-sm leading-5">
-          {{ item.contentOutline.replace(/[# | * | ~ | > | - | + | `]/g, '') }}
+          {{ item.contentOutline.replace(/[# | * | ~ | > | - | + | ` | :]/g, '') }}
         </p>
       </div>
     </NuxtLink>
