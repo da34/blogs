@@ -9,7 +9,7 @@ export const columns = [
   // {title: '被评论人', key: 'targetName', width: 100,},
   {title: '评论内容', key: 'text'},
   {
-    title: 'ua', key: 'ua', width: 300,
+    title: 'ua', key: 'ua',
     render({ua}) {
 
       const parser = new UAParser(ua);
@@ -46,15 +46,9 @@ export const columns = [
     }
   },
   {title: 'ip', key: 'ip', width: 150,},
-  {title: '来源', key: 'anchor',
-    // render({anchor}) {
-    //   return h('a', {
-    //     href: anchor
-    //   });
-    // }
-  },
+  // {title: '来源', key: 'anchor', width: 150,},
   {
-    title: '状态', key: 'status', width: 150,
+    title: '状态', key: 'status',
     render({status}) {
       const typeMap = {
         'pass': 'success',
@@ -76,7 +70,7 @@ export const columns = [
   {
     title: '创建时间',
     key: 'createdAt',
-    width: 200,
+    width: 150,
     render(row) {
       return h(
         'span',

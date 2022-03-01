@@ -56,7 +56,7 @@
                 <NAvatar
                   circle
                   :size="40"
-                  :src="`https://gravatar.loli.net/avatar/${ comment.avatar}?s=40&d=retro`"
+                  :src="comment.avatar"
                 />
               </template>
               <NThing
