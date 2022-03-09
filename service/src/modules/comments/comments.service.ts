@@ -89,10 +89,10 @@ export class CommentsService {
         },
         //  多余字段。给smtp存储的
         text: exitsComment.text,
-        fromEmail: exitsComment.replyEmail || smtpConfig.from, // 这里回复的人邮箱
-        toEmail: exitsComment.email, // 这里接受人的邮箱
+        fromEmail: exitsComment.email || smtpConfig.from, // 这里发送人邮箱
+        toEmail: exitsComment.replyEmail, // 这里收件人的邮箱
       };
-      // 是回复他人，发送邮件通知
+      // 回复他人，发送邮件通知
       if (exitsComment.parentId) {
         this.smtpService.create(mailOptions).catch((_) => {
           console.log('评论成功，发送邮件失败');
@@ -104,6 +104,7 @@ export class CommentsService {
           to: siteConfig.email,
           subject: `「 ${siteConfig.name} 」评论通知`,
           template: '/noticeTemp',
+          toEmail: siteConfig.email, // 配置的站长邮箱
         });
         this.smtpService.create(siteMailOption).catch((_) => {
           console.log('通知站长，评论成功，发送邮件失败');
