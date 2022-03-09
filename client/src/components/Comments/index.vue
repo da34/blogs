@@ -30,7 +30,7 @@
           >
             <template #content>
               <div class="">
-                <span class="text-red-400 whitespace-nowrap leading-6">@{{ reply.name }}</span>
+                <span class="text-red-400 whitespace-nowrap leading-6">@{{ reply.replyName }}</span>
                 <Markdown class="bg-transparent inline-block ml-2" :value="reply.text" />
               </div>
             </template>
