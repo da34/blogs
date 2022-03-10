@@ -9,7 +9,7 @@
         :key="work.id"
         class="card md:w-[48%] w-full h-[13rem] rounded-lg p-5 mt-5 text-center flex items-end text-white relative overflow-hidden"
       >
-        <div class="card-before" :style="{ backgroundImage: `url(${work.imgUrl})` }" />
+        <div v-lazy:background-image="work.imgUrl" class="card-before" />
         <div class="content relative z-10 space-y-5  w-full">
           <h2 class="title text-xl font-bold leading-7">
             {{ work.name }}

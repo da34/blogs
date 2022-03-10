@@ -30,6 +30,7 @@ export class SmtpService {
     const { page = 1, pageSize = 10, isSuccess, ...otherQuery } = query;
     const smtpQuery = await this.smtpRepository
       .createQueryBuilder('smtp')
+      .orderBy('smtp.createTime', 'DESC')
       .take(pageSize)
       .skip((page - 1) * pageSize);
 

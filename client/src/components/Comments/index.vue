@@ -29,7 +29,7 @@
             :author="{ name: reply.name, isAdmin: reply.isAdmin, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
           >
             <template #content>
-              <div class="">
+              <div class="flex">
                 <span class="text-red-400 whitespace-nowrap leading-6">@{{ reply.replyName }}</span>
                 <Markdown class="bg-transparent inline-block ml-2" :value="reply.text" />
               </div>
