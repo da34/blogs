@@ -9,18 +9,12 @@
     >
       <div v-if="item.firstPicture" v-lazy:background-image="item.firstPicture" class="md:basis-1/3 md:pl-30 md:pt-0 pt-[60%] bg-cover bg-center" />
       <div :class="[ 'px-5', 'p-4', 'basis-2/3', 'flex', 'flex-col', { 'basis-full': !item.firstPicture }]">
-        <div class="flex text-gray-500 text-xs md:mt-0">
+        <div class="flex text-gray-500 text-xs items-center">
           <div class="whitespace-nowrap">
             {{ item.createTime | formatDate('YYYY年MM月DD日') }}
           </div>
-          <div v-if="item.tags.length" class="tags">
+          <div class="tags">
             <NuxtLink v-for="tag in item.tags" :key="tag.id" class="art-tag first:ml-2" :to="{ name: 'search', params: { tagName: tag.name } }">
-              {{ tag.name }}
-            </NuxtLink>
-            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="art-tag" :to="{ name: 'search', params: { tagName: tag.name } }">
-              {{ tag.name }}
-            </NuxtLink>
-            <NuxtLink v-for="tag in item.tags" :key="tag.id" class="art-tag" :to="{ name: 'search', params: { tagName: tag.name } }">
               {{ tag.name }}
             </NuxtLink>
           </div>

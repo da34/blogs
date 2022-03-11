@@ -1,8 +1,8 @@
 <template>
   <div class="pt-4">
-    <div class="flex">
+    <div class="flex overflow-hidden">
       <img v-lazy="avatar" class="rounded-full w-[52px] h-[52px]">
-      <div class="ml-3 w-full">
+      <div class="ml-3 flex-1 overflow-auto">
         <div class="space-x-4 text-gray-400 leading-6">
           <span class="text-red-400 text-base font-medium">
             {{ author.name }}

@@ -25,7 +25,7 @@
             v-for="reply in comment.children"
             :key="reply.id"
             :avatar="reply.avatar"
-            class="bg-gray-50 pl-4"
+            class="bg-gray-50 px-2 md:px-4"
             :author="{ name: reply.name, isAdmin: reply.isAdmin, os: parseOS(reply.ua), browser: parseBrowser(reply.ua) }"
           >
             <template #content>
