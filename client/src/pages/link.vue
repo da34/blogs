@@ -10,7 +10,7 @@
         :title="link.name"
         :href="getURL(link.URL)"
         target="_blank"
-        class="md:hover:scale-105 duration-300 mb-5 rounded-xl bg-white border border-gray-200 border-solid p-4 h-[100px] md:basis-[30%] basis-full flex justify-center items-center"
+        class="md:hover:scale-105 duration-300 mb-5 rounded-xl bg-white border border-gray-200 border-solid p-4 h-[100px] md:basis-[30%] basis-full flex items-center"
       >
         <img v-lazy="link.avatar" class="h-[70px] w-[70px] rounded-full object-cover">
         <div class="ml-4">
