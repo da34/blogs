@@ -7,6 +7,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import * as compression from 'compression';
 
 const PORT = process.env.APP_PORT || 7001;
 const PREFIX = 'api';
@@ -22,11 +23,14 @@ async function bootstrap() {
   // 防止跨站脚本攻击
   app.use(helmet());
 
+  // 压缩
+  app.use(compression());
+
   // 请求限制
   app.use(
     rateLimit({
       windowMs: 60 * 1000, // 1分钟
-      max: 30, // 限制每个IP每个窗口30个请求
+      max: 100, // 限制每个IP每个窗口100个请求
     }),
   );
 

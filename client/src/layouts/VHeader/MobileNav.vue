@@ -1,5 +1,5 @@
 <template>
-<!--  fixed top-[60px] w-11/12 bg-white-->
+  <!--  fixed top-[60px] w-11/12 bg-white-->
   <div class="mobile-header">
     <transition
       name="fade"
@@ -14,15 +14,6 @@
           class="menu-item"
           :exact="menu.exact"
           :target="menu.target || '_self'"
-          @click="onClose"
-        >
-          {{ menu.name }}
-        </NuxtLink>
-        <NuxtLink
-          v-for="menu in pages"
-          :key="menu.id"
-          :to="`/page/${menu.path}`"
-          class="menu-item"
           @click="onClose"
         >
           {{ menu.name }}
@@ -43,13 +34,14 @@ export default {
       type: Array,
       default: () => []
     },
-    pages: {
-      type: Array,
-      default: () => []
-    },
     visible: {
       type: Boolean,
       default: false
+    }
+  },
+  data () {
+    return {
+      height: 0
     }
   },
   watch: {
@@ -60,18 +52,17 @@ export default {
   methods: {
     enter (el) {
       this.$refs['mobile-header-backdrop'].style.opacity = 0
-      const height = el.clientHeight
+      this.height = Math.max(el.clientHeight, this.height)
       el.style.height = 0
+      // 强制发生 reflow
       // eslint-disable-next-line no-unused-expressions
       el.clientHeight
-      el.style.height = height + 'px'
+      el.style.height = this.height + 'px'
       this.$refs['mobile-header-backdrop'].style.opacity = 1
     },
     leave (el) {
       this.$refs['mobile-header-backdrop'].style.opacity = 0
       el.style.height = el.clientHeight + 'px'
-      // eslint-disable-next-line no-unused-expressions
-      el.clientHeight
       el.style.height = 0
     },
     onClose () {

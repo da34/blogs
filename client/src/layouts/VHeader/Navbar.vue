@@ -10,21 +10,12 @@
       >
         {{ menu.name }}
       </NuxtLink>
-      <NuxtLink
-        v-for="menu in pageMenus"
-        :key="menu.id"
-        :to="`/page/${menu.path}`"
-        class="break-all lg:ml-12 ml-8 font-semibold h-full text-lg"
-        :exact="menu.exact"
-      >
-        {{ menu.name }}
-      </NuxtLink>
     </div>
     <div class="md:hidden block">
       <BaseSvgIcon v-show="!isMobileNav" icon-class="menu" @click="isMobileNav = true" />
       <BaseSvgIcon v-show="isMobileNav" icon-class="close-2" @click="isMobileNav = false" />
     </div>
-    <MobileNav :menus="defaultMenus" :pages="pageMenus" :visible="isMobileNav" @close="onClose" />
+    <MobileNav :menus="defaultMenus" :visible="isMobileNav" @close="onClose" />
   </div>
 </template>
 
@@ -41,20 +32,18 @@ export default {
         { name: '首页', url: '/', exact: true },
         { name: '归档', url: '/archive' },
         { name: '友联', url: '/link' },
-        // { name: '留言', url: '/msg', icon: 'link' },
         { name: '作品', url: '/work' },
         { name: '建站', url: '/log' }
-      ],
-      pageMenus: []
+      ]
     }
+  },
+  async fetch () {
+    await this.getPage()
   },
   watch: {
     '$route' (to) {
       this.activeName = to.path
     }
-  },
-  mounted () {
-    this.getPage()
   },
   methods: {
     onClose () {
@@ -62,7 +51,13 @@ export default {
     },
     async getPage () {
       const { data } = await this.$axios('page?status=publish')
-      this.pageMenus = data.data.list
+      data.data.list.forEach(item => {
+        const obj = {
+          name: item.name,
+          url: '/page/' + item.path
+        }
+        this.defaultMenus.push(obj)
+      })
     }
   }
 }
