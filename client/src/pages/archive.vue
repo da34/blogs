@@ -1,6 +1,6 @@
 <template>
   <div class="time-line-wrapper bg-white p-5 md:p-7 rounded">
-    <Timeline :data="list" />
+    <LazyTimeline :data="list" />
   </div>
 </template>
 

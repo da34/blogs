@@ -33,8 +33,8 @@
       </div>
     </div>
     <div>
-      <ArticleList v-if="articleList.length" :article-list="articleList" />
-      <BaseEmpty v-else class="bg-white" :image-style="{ width: '30%' }" description="博主正在努力更文中~" />
+      <LazyArticleList v-if="articleList.length" :article-list="articleList" />
+      <LazyBaseEmpty v-else class="bg-white" :image-style="{ width: '30%' }" description="博主正在努力更文中~" />
     </div>
   </div>
 </template>

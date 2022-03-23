@@ -52,7 +52,7 @@
         加载更多评论
       </div>
     </div>
-    <BaseEmpty
+    <LazyBaseEmpty
       v-else
       class="p-3"
       description="快做第一个评论的人吧"
@@ -67,7 +67,7 @@
         <h1 class="bg-white p-3">
           回复 <span class="underline decoration-red-400 decoration-4">{{ commentInfo.replyName }}</span> ：
         </h1>
-        <Edit :close="true" @onClose="onClose" />
+        <LazyEdit :close="true" @onClose="onClose" />
       </div>
     </transition>
   </div>

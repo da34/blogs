@@ -43,8 +43,9 @@ export function scrollTo (to, duration = 500, callback) {
   const start = currentTo()
   const change = to - start
 
+  // console.log(start)
   // 优化，当前top如果小于可视高度，不用滚动
-  if (start < document.documentElement.clientHeight) { return }
+  // if (start < document.documentElement.clientHeight) { return }
 
   // 增加时间量
   const increment = 20

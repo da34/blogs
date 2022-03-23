@@ -20,7 +20,7 @@
       >
     </div>
     <div class="blog-post">
-      <Markdown :value="article.content" :is-article="true" />
+      <LazyMarkdown :value="article.content" :is-article="true" />
       <div class="md:px-10 mt-5 md:mt-0">
         <div v-if="article.isShare" class="p-6 bg-gray-100 rounded-lg text-center">
           本作品采用
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <Comments v-if="article.isCommentOpen" class="md:px-10  pt-5" :postId="$route.params.id" />
+    <LazyComments v-if="article.isCommentOpen" class="md:px-10  pt-5" :post-id="$route.params.id" />
   </section>
 </template>
 

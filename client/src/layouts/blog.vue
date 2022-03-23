@@ -6,7 +6,7 @@
     <!--    <client-only placeholder="Loading...">-->
     <BaseBackTop />
     <!--    </client-only>-->
-    <canvas class="canvas" />
+    <!--    <canvas class="canvas" />-->
   </div>
 </template>
 

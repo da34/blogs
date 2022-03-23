@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white rounded p-5 md:p-0">
-    <Markdown :value="pageInfo.content" />
-    <Comments v-if="pageInfo.isCommentOpen" class="md:px-10  pt-5" :post-id="$route.params.page" />
+    <LazyMarkdown :value="pageInfo.content" />
+    <LazyComments v-if="pageInfo.isCommentOpen" class="md:px-10  pt-5" :post-id="$route.params.page" />
   </div>
 </template>
 

@@ -70,14 +70,13 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/axios',
-    // '@/plugins/components',
     '@/plugins/svg-icon',
     '@/plugins/filters',
     '@/plugins/vue-lazy-load.client.js',
     '@/plugins/click-effects.client.js',
     '@/plugins/baidu-push.client.js'
   ],
-
+  corejs: 3,
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -126,21 +125,22 @@ export default {
       if (savedPosition) {
         return savedPosition
       }
-      let position = {}
-      if (to.matched.length < 2) {
-        position = { x: 0, y: 0 }
-      } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
-        position = { x: 0, y: 0 }
-      }
-      if (to.hash) {
-        position = { selector: decodeURIComponent(to.hash) }
-        // 有hash异步返回
-        return new Promise(resolve => {
-          setTimeout(() => {
-            resolve(position)
-          }, 500)
-        })
-      }
+      const position = { x: 0, y: 0 }
+      // console.log(to.matched)
+      // if (to.matched.length < 2) {
+      //   position = { x: 0, y: 0 }
+      // } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
+      //   position = { x: 0, y: 0 }
+      // }
+      // if (to.hash) {
+      //   position = { selector: decodeURIComponent(to.hash) }
+      //   // 有hash异步返回
+      //   return new Promise(resolve => {
+      //     setTimeout(() => {
+      //       resolve(position)
+      //     }, 500)
+      //   })
+      // }
       return position
     },
     linkActiveClass: 'active-line'
@@ -150,10 +150,8 @@ export default {
   build: {
     plugins: [
       new CompressionPlugin({
-        // filename: '[path].gz',
-        test: /\.(js|css|html|svg)$/
-        // deleteOriginalAssets: true
-        // minRatio: 0.8
+        test: /\.(js|css|html)$/,
+        threshold: 1000
       })
     ],
     postcss: {
@@ -172,16 +170,38 @@ export default {
         ]
       ]
     },
-    publicPath: 'https://resource.lsyboy.cn/blog/static',
-    // extractCSS: true, // 单独提取css为文件
+    // publicPath: 'https://resource.lsyboy.cn/blog/static',
+    terser: {
+      parallel: true,
+      cache: false,
+      sourceMap: false,
+      extractComments: {
+        filename: 'LICENSES'
+      },
+      terserOptions: {
+        output: {
+          comments: /^\**!|@preserve|@license|@cc_on/
+        },
+        ecma: 2015,
+        drop_console: true // 删除console
+      }
+    },
+    extractCSS: true, // 单独提取css为文件
     optimization: { // 拆分大文件
       splitChunks: {
         cacheGroups: {
+          commons: {
+            name: 'commons',
+            test: /[\\/]src[\\/]/,
+            chunks: 'all',
+            minChunks: 2
+          },
           mdEditor: {
-            name: 'chunk-v-md-editor',
-            chunks: 'initial',
-            priority: 10,
-            test: /[\\/]node_modules[\\/]@kangc/
+            test: /[\\/]node_modules[\\/](@kangc)[\\/]/,
+            name: 'mdEditor',
+            chunks: 'all',
+            minSize: 0,
+            priority: 10
           }
         }
       }

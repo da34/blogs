@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     handleTo () {
+      // console.log('11111111111')
       scrollTo(0, 500)
     },
     handleScroll () {
