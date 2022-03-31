@@ -170,7 +170,7 @@ export default {
         ]
       ]
     },
-    // publicPath: 'https://resource.lsyboy.cn/blog/static',
+    publicPath: 'https://resource.lsyboy.cn/blog/static',
     terser: {
       parallel: true,
       cache: false,

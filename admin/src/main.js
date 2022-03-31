@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import {setupRouter} from './router'
 import {setupStore} from './stores';
-import {setupNaive} from './plugins/naive';
+// import {setupNaive} from './plugins/naive';
 import {setupMark} from './plugins/markdown';
 import AppProvider from '@/components/Application/Application.vue';
 // 导入全局样式
@@ -11,7 +11,7 @@ const appProvider = createApp(AppProvider);
 const app = createApp(App)
 
 // 注册全局naive-ui 组件
-setupNaive(app);
+// setupNaive(app);
 
 // 注册markd组件
 setupMark(app)
