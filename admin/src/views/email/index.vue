@@ -48,7 +48,7 @@
       ref="tableRef"
       :row-key="row => row.id"
       :columns="columns"
-      :pagination="pagination"
+      :pagination="true"
       :action-column="actionColumn"
       :request="getEmails"
     />
@@ -78,19 +78,6 @@ const defaultVla = () => ({
 
 const formValue = ref(defaultVla())
 const tableRef = ref(null)
-
-const pagination = reactive({
-  page: 1,
-  pageCount: 1,
-  pageSize: 10,
-  itemCount: 0,
-  prefix({itemCount}) {
-    return `共 ${itemCount} 项`
-  },
-  onChange: (page) => {
-    pagination.page = page
-  }
-})
 
 const dialog = useDialog()
 

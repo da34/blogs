@@ -45,7 +45,7 @@
       :request="getLinks"
       :row-key="row => row.id"
       :columns="createColumn"
-      :pagination="pagination"
+      :pagination="true"
       :action-column="actionColumn"
     />
 
@@ -135,19 +135,6 @@ import BasicTable from '@/components/BasicTable/index.vue'
 import {getLinks, delLink, createLink, editLink} from '@/api/link';
 import {columns, createActionColumn} from './columns'
 import {useDialog} from 'naive-ui';
-
-const pagination = reactive({
-  page: 1,
-  pageCount: 1,
-  pageSize: 10,
-  itemCount: 0,
-  prefix ({ itemCount }) {
-    return `共 ${itemCount} 项`
-  },
-  onChange: (page) => {
-    pagination.page = page
-  }
-})
 
 const formValue = ref({})
 const formRef = ref(null)

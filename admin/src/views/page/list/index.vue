@@ -58,7 +58,7 @@
     </NForm>
     <BasicTable
       ref="tableRef"
-      :pagination="pagination"
+      :pagination="true"
       :columns="column"
       :action-column="actionColumn"
       :request="getPages"
@@ -88,19 +88,6 @@ const dialog = useDialog()
 const tableRef = ref(null)
 
 const formValue = ref(defaultVla())
-const pagination = reactive({
-  page: 1,
-  pageCount: 1,
-  pageSize: 10,
-  itemCount: 0,
-  prefix({itemCount}) {
-    return `共 ${itemCount} 项`
-  },
-  onChange: (page) => {
-    pagination.page = page
-  }
-})
-
 // 表格列
 const actionColumn = createActionColumn({handleDel, handleEdit, handleReview, handleIsDown})
 const column = createColumns({updatePage})

@@ -3,7 +3,6 @@ import {cloneDeep} from 'lodash-es';
 
 export default function useColumns(propsRef) {
   let columnsRef = unref(propsRef).columns
-  // let cacheColumns = unref(propsRef).columns;
 
   const getColumnsRef = computed(() => {
     const columns = cloneDeep(columnsRef);
