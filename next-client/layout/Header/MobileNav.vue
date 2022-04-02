@@ -72,5 +72,40 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+.mobile-header
+  background-color #fff
+  position: fixed;
+  top: 52px;
+  width: 100%;
+  z-index: 100;
+  .mobile-nav
+    display flex
+    flex-direction column
+    background #fff
+    transition: height .3s ease-in-out;
+    overflow: hidden;
+    .menu-item
+      height 46px
+      display flex
+      padding 0 20px
+      align-items center
+      color $color-content
+      font-size $font-size-medium
+      &:not(:first-child)
+        border-top: 1px solid $color-line-2
+      svg
+        margin-right 15px
+        font-size 22px
+        color rgb(133, 144, 166);
+
+.mobile-header-backdrop
+  position: fixed;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background-color: rgba(18,18,18,.65);
+  transition: opacity .3s ease-in-out;
 </style>
