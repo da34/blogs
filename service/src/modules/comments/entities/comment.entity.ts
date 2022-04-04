@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-  BeforeUpdate,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 
 export enum StatusComment {
   Pass = 'pass',
@@ -14,14 +8,14 @@ export enum StatusComment {
 
 @Entity()
 export class Comment {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  coid: number;
+
+  @Column()
+  cid: number;
 
   @Column()
   ip: string;
-
-  @Column()
-  ua: string;
 
   @Column('text')
   text;
@@ -35,19 +29,7 @@ export class Comment {
   @Column({
     comment: '评论人名称',
   })
-  name: string;
-
-  @Column({
-    comment: '被评论人名称',
-    nullable: true,
-  })
-  replyName: string;
-
-  @Column({
-    comment: '被评论人邮箱',
-    nullable: true,
-  })
-  replyEmail: string;
+  authorName: string;
 
   @Column({
     type: 'enum',
@@ -56,23 +38,17 @@ export class Comment {
   })
   status: string;
 
-  @Column({
-    type: 'text',
-    comment: '相关检测结果详细信息',
-  })
-  suggestion: string;
+  // @Column({
+  //   type: 'text',
+  //   comment: '相关检测结果详细信息',
+  // })
+  // suggestion: string;
 
   @Column({
     comment: '是否置顶 false - 不置顶 , true - 置顶',
     default: false,
   })
   putTop: boolean;
-
-  @Column({
-    comment: '是否是管理员 false - 不是 , true - 是',
-    default: false,
-  })
-  isAdmin: boolean;
 
   @Column({
     comment: '锚点',
@@ -85,30 +61,25 @@ export class Comment {
   createTime: number;
 
   @Column({
-    type: 'bigint',
-  })
-  updateTime: number;
-
-  @Column({
     comment: '评论父级',
-    nullable: true,
   })
-  parentId: string;
+  parentId: number;
 
-  @Column({
-    comment: '资源id',
-  })
-  postId: string;
+  @Column()
+  authorId: number;
+
+  @Column()
+  agent: string;
+
+  @Column()
+  system: string;
+
+  // @Column()
+  // type: string;
 
   @BeforeInsert()
   createDates() {
     this.createTime = Date.now();
-    this.updateTime = Date.now();
     this.putTop = false;
-  }
-
-  @BeforeUpdate()
-  updateDates() {
-    this.updateTime = Date.now();
   }
 }

@@ -32,21 +32,21 @@ export class CommentsService {
   async create(ip, ua, token, createCommentDto: CreateCommentDto) {
     // console.log(res.render, 'res.render');
     createCommentDto.ip = ip;
-    createCommentDto.ua = ua;
-    createCommentDto.isAdmin = false; // 统一false，防止前端直接传值
-    if (token) {
-      const { role, username } = this.jwtService.decode(token) as User;
-      createCommentDto.isAdmin = role === UserRole.Admin;
-      createCommentDto.name = username;
-    }
+    // createCommentDto.ua = ua;
+    // createCommentDto.isAdmin = false; // 统一false，防止前端直接传值
+    // if (token) {
+    //   const { role, username } = this.jwtService.decode(token) as User;
+    //   // createCommentDto.isAdmin = role === UserRole.Admin;
+    //   // createCommentDto.name = username;
+    // }
 
     // xss过滤
     createCommentDto.text = filterXSS(createCommentDto.text);
-    createCommentDto.name = filterXSS(createCommentDto.name);
+    // createCommentDto.name = filterXSS(createCommentDto.name);
 
     // 判断评论所属资源是否开启评论
     const exitsContent = await this.contentRepository.findOne(
-      createCommentDto.postId,
+      createCommentDto.cid,
     );
     if (exitsContent && !exitsContent.allowComment) {
       throw new HttpException('非法评论', HttpStatus.FORBIDDEN);
@@ -57,7 +57,7 @@ export class CommentsService {
       createCommentDto.text,
     );
     createCommentDto.status = result?.suggestion;
-    createCommentDto.suggestion = JSON.stringify(result?.detail);
+    // createCommentDto.suggestion = JSON.stringify(result?.detail);
 
     // 保存到数据库
     const createComment = this.commentRepository.create(createCommentDto);
@@ -75,7 +75,7 @@ export class CommentsService {
     if (exitsComment.status === StatusComment.Pass) {
       const mailOptions = {
         from: smtpConfig.from,
-        to: exitsComment.replyEmail,
+        // to: exitsComment.replyEmail,
         subject: `「 ${siteConfig.name} 」回复通知`,
         template: '/replyTemp',
         context: {
@@ -83,14 +83,14 @@ export class CommentsService {
           text: exitsComment.text,
           siteName: siteConfig.name,
           siteUrl: siteConfig.url,
-          name: exitsComment.name,
-          replyName: exitsComment.replyName,
+          // name: exitsComment.name,
+          // replyName: exitsComment.replyName,
           reviewUrl: siteConfig.url + exitsComment.anchor,
         },
         //  多余字段。给smtp存储的
         text: exitsComment.text,
         fromEmail: exitsComment.email || smtpConfig.from, // 这里发送人邮箱
-        toEmail: exitsComment.replyEmail, // 这里收件人的邮箱
+        // toEmail: exitsComment.replyEmail, // 这里收件人的邮箱
       };
       // 回复他人，发送邮件通知
       if (exitsComment.parentId) {
@@ -99,17 +99,17 @@ export class CommentsService {
         });
       }
       // 通知站长
-      if (!exitsComment.isAdmin) {
-        const siteMailOption = Object.assign(mailOptions, {
-          to: siteConfig.email,
-          subject: `「 ${siteConfig.name} 」评论通知`,
-          template: '/noticeTemp',
-          toEmail: siteConfig.email, // 配置的站长邮箱
-        });
-        this.smtpService.create(siteMailOption).catch((_) => {
-          console.log('通知站长，评论成功，发送邮件失败');
-        });
-      }
+      // if (!exitsComment.isAdmin) {
+      //   const siteMailOption = Object.assign(mailOptions, {
+      //     to: siteConfig.email,
+      //     subject: `「 ${siteConfig.name} 」评论通知`,
+      //     template: '/noticeTemp',
+      //     toEmail: siteConfig.email, // 配置的站长邮箱
+      //   });
+      //   this.smtpService.create(siteMailOption).catch((_) => {
+      //     console.log('通知站长，评论成功，发送邮件失败');
+      //   });
+      // }
     }
     return exitsComment;
   }
@@ -174,7 +174,7 @@ export class CommentsService {
 
     for (const item of data) {
       const subComments = await subQuery
-        .setParameter('parentId', item.id)
+        .setParameter('parentId', item.coid)
         .getMany();
       Object.assign(item, { children: subComments });
     }

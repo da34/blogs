@@ -9,7 +9,7 @@ export enum TypeContent {
 @Entity()
 export class Content {
   @PrimaryGeneratedColumn()
-  id: number;
+  cid: number;
 
   title: string;
 
