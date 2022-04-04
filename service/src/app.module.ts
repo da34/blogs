@@ -20,6 +20,7 @@ import { SmtpModule } from './modules/smtp/smtp.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { resolve } from 'path';
+import { OptionsModule } from './modules/options/options.module';
 
 @Module({
   controllers: [AppController],
@@ -88,6 +89,7 @@ import { resolve } from 'path';
     SiteModule,
     PageModule,
     SmtpModule,
+    OptionsModule,
   ],
 })
 export class AppModule {}

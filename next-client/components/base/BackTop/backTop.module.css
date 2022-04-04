@@ -1,0 +1,34 @@
+.backWrapper {
+    width: 62px;
+    height: 85px;
+    background: url("/images/space-to-top.png") no-repeat -40px -44px;
+}
+
+.sky {
+    animation: move 3s infinite;
+}
+
+.frame {
+    animation: frame-animation 1s infinite steps(7);
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes frame-animation {
+    0% {
+        background-position: -40px -44px;
+    }
+    100% {
+        background-position: -1040px -44px;
+    }
+}
