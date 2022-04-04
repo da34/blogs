@@ -49,7 +49,7 @@ export class TagsService {
 
   async remove(id: string) {
     const tag = await this.tagRepository.findOne(id);
-    tag.contents = [];
+    // tag.contents = [];
     return this.tagRepository.remove(tag);
   }
 
@@ -60,8 +60,8 @@ export class TagsService {
       .select(['contents.id', 'tags.name', 'tags.id'])
       .getMany();
     return tags.map((tag) => {
-      tag['value'] = tag.contents.length;
-      delete tag['contents'];
+      // tag['value'] = tag.contents.length;
+      // delete tag['contents'];
       return tag;
     });
   }

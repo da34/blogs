@@ -9,7 +9,7 @@ import {
   In,
   Repository,
 } from 'typeorm';
-import { Content, StatusContent } from './entities/content.entity';
+import { Content, TypeContent } from './entities/content.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
@@ -29,11 +29,11 @@ export class ContentsService {
   async create(createContentDto: CreateContentDto) {
     // 查询 category
     let exitsCategory;
-    if (createContentDto.categoryId) {
-      exitsCategory = await this.categoryRepository.findOne(
-        createContentDto.categoryId,
-      );
-    }
+    // if (createContentDto.categoryId) {
+    //   exitsCategory = await this.categoryRepository.findOne(
+    //     createContentDto.categoryId,
+    //   );
+    // }
     // if (!exitsCategory) {
     //   throw new HttpException(
     //     `不存在id为${createContentDto.categoryId}的分类`,
@@ -41,13 +41,13 @@ export class ContentsService {
     //   );
     // }
     // 查询tags
-    const exitsTags = await this.tagRepository.find({
-      id: In(createContentDto.tagsId),
-    });
+    // const exitsTags = await this.tagRepository.find({
+    //   id: In(createContentDto.tagsId),
+    // });
 
     const createContent = this.contentRepository.create(createContentDto);
-    createContent.category = exitsCategory;
-    createContent.tags = exitsTags;
+    // createContent.category = exitsCategory;
+    // createContent.tags = exitsTags;
     await this.contentRepository.save(createContent);
   }
 
@@ -101,7 +101,7 @@ export class ContentsService {
   }
 
   async update(id: string, updateContentDto: UpdateContentDto) {
-    const { tagsId, categoryId } = updateContentDto;
+    // const { tagsId, categoryId } = updateContentDto;
     const exitsContent = await this.contentRepository.findOne(id);
 
     if (!exitsContent) {
@@ -117,12 +117,12 @@ export class ContentsService {
 
     // 查询 category
     // if (categoryId) {
-    updateContent.category =
-      (categoryId && (await this.categoryRepository.findOne(categoryId))) ||
-      null;
-    updateContent.tags = await this.tagRepository.find({
-      id: In(tagsId),
-    });
+    // updateContent.category =
+    //   (categoryId && (await this.categoryRepository.findOne(categoryId))) ||
+    //   null;
+    // updateContent.tags = await this.tagRepository.find({
+    //   id: In(tagsId),
+    // });
 
     return this.contentRepository.save(updateContent);
   }
@@ -145,7 +145,7 @@ export class ContentsService {
   async getArchive() {
     const query = getRepository(Content)
       .createQueryBuilder('content')
-      .where('content.status = :status', { status: StatusContent.Publish })
+      .where('content.status = :status', { status: TypeContent.Article })
       .orderBy('content.createTime', 'DESC')
       .select(['content.id', 'content.title', 'content.createTime']);
 

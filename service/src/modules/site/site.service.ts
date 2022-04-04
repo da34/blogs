@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
-import { Content, StatusContent } from '../contents/entities/content.entity';
+import { Content, TypeContent } from '../contents/entities/content.entity';
 import { Comment, StatusComment } from '../comments/entities/comment.entity';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class SiteService {
     data.tagCount = await this.tagRep.count();
     data.categoryCount = await this.categoryRep.count();
     data.contentCount = await this.contentRep.count({
-      where: { status: StatusContent.Publish },
+      where: { status: TypeContent.Article },
     });
     return data;
   }

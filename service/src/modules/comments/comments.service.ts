@@ -48,7 +48,7 @@ export class CommentsService {
     const exitsContent = await this.contentRepository.findOne(
       createCommentDto.postId,
     );
-    if (exitsContent && !exitsContent.isCommentOpen) {
+    if (exitsContent && !exitsContent.allowComment) {
       throw new HttpException('非法评论', HttpStatus.FORBIDDEN);
     }
 

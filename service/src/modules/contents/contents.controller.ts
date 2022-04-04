@@ -31,9 +31,7 @@ export class ContentsController {
     // xss
     createContentDto.title = filterXSS(createContentDto.title);
     // createContentDto.content = filterXSS(createContentDto.content);
-    createContentDto.contentOutline = filterXSS(
-      createContentDto.contentOutline,
-    );
+    createContentDto.description = filterXSS(createContentDto.description);
     return this.contentsService.create(createContentDto);
   }
 

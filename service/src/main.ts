@@ -17,6 +17,9 @@ async function bootstrap() {
 
   app.setGlobalPrefix(PREFIX);
 
+  //开启CORS
+  app.enableCors();
+
   // 添加代理，以获得正确的ip
   app.set('trust proxy', 1);
 

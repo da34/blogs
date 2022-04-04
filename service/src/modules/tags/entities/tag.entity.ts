@@ -40,6 +40,6 @@ export class Tag {
     this.updateTime = Date.now();
   }
 
-  @ManyToMany(() => Content, (content) => content.tags)
-  contents: Array<Content>;
+  // @ManyToMany(() => Content, (content) => content.tags)
+  // contents: Array<Content>;
 }

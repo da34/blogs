@@ -1,42 +1,28 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-  ManyToOne,
-  BeforeInsert,
-  BeforeUpdate,
-} from 'typeorm';
-import { Category } from '../../categories/entities/category.entity';
-import { Tag } from '../../tags/entities/tag.entity';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
-export enum StatusContent {
-  Publish = 'publish',
+export enum TypeContent {
+  Article = 'Article',
   Draft = 'draft',
+  Page = 'page',
 }
-
 @Entity()
 export class Content {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column({
-    unique: true,
-  })
   title: string;
 
   @Exclude()
   @Column({
     type: 'text',
   })
-  content: string;
+  text: string;
 
   @Column({
     comment: '内容概览',
   })
-  contentOutline: string;
+  description: string;
 
   @Column({
     comment: '头图',
@@ -46,11 +32,15 @@ export class Content {
 
   @Column({
     type: 'enum',
-    comment: '内容类型 publish - 发布 ,  draft - 草稿',
-    enum: StatusContent,
-    default: StatusContent.Publish,
+    enum: TypeContent,
+    default: TypeContent.Article,
   })
-  status: string;
+  type: string;
+
+  @Column({
+    default: true,
+  })
+  status: boolean;
 
   @Column({
     default: 0,
@@ -61,13 +51,18 @@ export class Content {
     comment: '评论开启 true - 开启 , false - 禁用',
     default: true,
   })
-  isCommentOpen: boolean;
+  allowComment: boolean;
 
   @Column({
     comment: '是否置顶 true - 置顶 , false - 不置顶',
     default: false,
   })
   isTop: boolean;
+
+  @Column({
+    default: false,
+  })
+  allowFeed: boolean;
 
   @Column({
     default: 0,
@@ -84,14 +79,14 @@ export class Content {
   })
   updateTime: number;
 
-  @ManyToOne(() => Category, (category) => category.content)
-  category: Category;
-
-  @ManyToMany(() => Tag, (tag) => tag.contents, {
-    cascade: true,
-  })
-  @JoinTable()
-  tags: Tag[];
+  // @ManyToOne(() => Category, (category) => category.content)
+  // category: Category;
+  //
+  // @ManyToMany(() => Tag, (tag) => tag.contents, {
+  //   cascade: true,
+  // })
+  // @JoinTable()
+  // tags: Tag[];
 
   @BeforeInsert()
   createDates() {

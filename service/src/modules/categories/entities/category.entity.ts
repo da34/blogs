@@ -39,6 +39,6 @@ export class Category {
     this.updateTime = Date.now();
   }
 
-  @OneToMany(() => Content, (content) => content.category)
-  content: Content;
+  // @OneToMany(() => Content, (content) => content.category)
+  // content: Content;
 }
