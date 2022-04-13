@@ -20,6 +20,11 @@ export class UsersService {
       .where('user.username = :username', { username })
       .getOne();
   }
+
+  async updateLogged(id: number) {
+    await getRepository(User).update(id, { logged: Date.now() });
+  }
+
   async create(createUserDto: CreateUserDto): Promise<User> {
     const { password, confirmPwd } = createUserDto;
     if (password !== confirmPwd) {

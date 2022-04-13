@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsUrl, ValidateIf } from "class-validator";
+import { IsNotEmpty, IsUrl, ValidateIf } from 'class-validator';
 
 export class CreateWorkDto {
   @IsUrl()

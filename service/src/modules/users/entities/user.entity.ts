@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 export enum UserRole {
@@ -7,13 +7,19 @@ export enum UserRole {
 }
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     unique: true,
   })
   username: string;
+
+  @Column({
+    unique: true,
+    comment: '用户显示的名称',
+  })
+  screenName: string;
 
   @Exclude()
   @Column()
@@ -26,9 +32,26 @@ export class User {
   })
   role: string;
 
+  @Column({
+    type: 'bigint',
+  })
+  created: number;
+
+  @Column({
+    type: 'bigint',
+  })
+  logged: number;
+
+  @Column()
+  mail: string;
+
+  @Column()
+  avatar: string;
+
   @BeforeInsert()
   createDates() {
     // 插入之前更改默认。防止直接请求
     this.role = UserRole.User;
+    this.created = Date.now();
   }
 }
