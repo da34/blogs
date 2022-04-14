@@ -15,7 +15,6 @@ import { AppController } from './app.controller';
 import { ExternalModule } from './modules/external/external.module';
 import { SiteModule } from './modules/site/site.module';
 import { ScheduleModule } from '@nestjs/schedule';
-import { PageModule } from './modules/page/page.module';
 import { SmtpModule } from './modules/smtp/smtp.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
@@ -87,7 +86,6 @@ import { resolve } from 'path';
     AuthModule,
     ExternalModule,
     SiteModule,
-    PageModule,
     SmtpModule,
     // OptionsModule,
   ],

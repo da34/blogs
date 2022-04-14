@@ -30,15 +30,6 @@
           placeholder="输入标题"
         />
       </NFormItem>
-      <NFormItem
-        label="状态"
-      >
-        <NSelect
-          v-model:value="formValue.status"
-          class="w-40"
-          :options="statusOptions"
-        />
-      </NFormItem>
       <NFormItem>
         <NButton
           attr-type="button"
@@ -58,11 +49,11 @@
     </NForm>
     <BasicTable
       ref="tableRef"
+      :pagination="true"
       :columns="column"
       :action-column="actionColumn"
       :request="getArticleList"
       :row-key="row => row.id"
-      :pagination="true"
     />
   </NCard>
 </template>
@@ -71,16 +62,15 @@
 export default { name: 'ContentList' }
 </script>
 <script setup>
-import {reactive, ref} from 'vue'
+import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
-import {delArticle, updateArticle,changeArticleState, getArticleList} from '@/api/article';
+import {delContent, updateContent, getContents} from '@/api/content';
 
 const defaultVla = () => ({
-  title: null,
-  status: null,
+  title: ''
 })
 
 const router = useRouter()
@@ -91,14 +81,7 @@ const formValue = ref(defaultVla())
 
 // 表格列
 const actionColumn = createActionColumn({handleDel, handleEdit})
-const column = createColumns({updateArticle})
-
-const statusOptions = ['publish', 'draft'].map(
-    (v) => ({
-      label: v,
-      value: v
-    })
-)
+const column = createColumns({updateContent})
 
 function handleReset() {
   formValue.value = defaultVla()
@@ -109,6 +92,11 @@ function handleSearch() {
   tableRef.value.fetchState(formValue.value)
 }
 
+async function getArticleList(opt) {
+  const data = await getContents({...opt, type: 'article'})
+  return data
+}
+
 function handleDel({id}) {
   dialog.warning({
     title: '警告',
@@ -116,7 +104,7 @@ function handleDel({id}) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      delArticle(id)
+      delContent(id)
       handleSearch()
     }
   })
@@ -124,12 +112,6 @@ function handleDel({id}) {
 
 function handleEdit({id}) {
   router.push({name: 'ContentAction', params: {id}})
-}
-
-async function stateToggle(field, id, value) {
-  value /= 1
-  await changeArticleState({field, id, value})
-  tableRef.value.reload()
 }
 
 function handleAction() {

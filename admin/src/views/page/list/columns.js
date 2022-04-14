@@ -5,8 +5,8 @@ import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const createColumns = ({updateArticle}) => {
   return [
-    {title: '名称', key: 'name',},
-    {title: '路径', key: 'path',},
+    {title: '名称', key: 'title',},
+    {title: '路径', key: 'slug',},
     {title: '排序', key: 'order',},
     {
       title: '阅读量', key: 'views', width: '150px',
@@ -21,15 +21,15 @@ export const createColumns = ({updateArticle}) => {
         return h(
           NTag,
           {
-            type: status === 'publish' ? 'success' : 'warning'
+            type: status ? 'success' : 'warning'
           },
-          {default: () => status}
+          {default: () => status ? '正常' : '下线'}
         )
       }
     },
     {
       title: '发布时间',
-      key: 'createTime',
+      key: 'created',
       render(row) {
         return h(
           'span',
@@ -63,19 +63,19 @@ function createActions(record, handleDel, handleEdit, handleReview, handleIsDown
       label: '编辑',
       onClick: () => handleEdit(record),
     },
-    {
-      label: '查看',
-      onClick: () => handleReview(record),
-    },
+    // {
+    //   label: '查看',
+    //   onClick: () => handleReview(record),
+    // },
     {
       label: '下线',
-      class: record.status !== 'publish' ? 'hidden' : 'block',
-      onClick: () => handleIsDown(record, 'draft'),
+      class: record.status ?  'block' : 'hidden',
+      onClick: () => handleIsDown(record, false),
     },
     {
       label: '发布',
-      class: record.status === 'publish' ? 'hidden' : 'block',
-      onClick: () => handleIsDown(record, 'publish'),
+      class: record.status ? 'hidden' : 'block',
+      onClick: () => handleIsDown(record, true),
     },
     {
       label: '删除',

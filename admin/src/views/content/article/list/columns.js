@@ -51,41 +51,27 @@ export const createColumns = ({updateArticle}) => {
       }},
     {
       title: '评论',
-      key: 'isCommentOpen',
+      key: 'allowComment',
       width: '150px',
       render(row) {
         return h(
           NSwitch,
           {
-            defaultValue: row.isCommentOpen,
-            'on-update:value': value => isFunction(updateArticle) && updateArticle(Object.assign(row, { isCommentOpen: value  }))
+            defaultValue: row.allowComment,
+            'on-update:value': value => isFunction(updateArticle) && updateArticle(Object.assign(row, { allowComment: value  }))
           }
         )
       }
     },
     {
-      title: '状态',
-      key: 'status',
-      width: '150px',
-      render({status}) {
-        return h(
-          NTag,
-          {
-            type: status === 'publish' ? 'success' : 'warning'
-          },
-          {default: () => status}
-        )
-      }
-    },
-    {
       title: '发布时间',
-      key: 'createTime',
+      key: 'created',
       render(row) {
         return h(
           'span',
           null,
           {
-            default: () => row.createTime && formatDate(+row.createTime)
+            default: () => row.created && formatDate(+row.created)
           }
         )
       }
@@ -113,10 +99,10 @@ function createActions(record, handleDel, handleEdit) {
       label: '编辑',
       onClick: () => handleEdit(record),
     },
-    {
-      label: '查看',
-      onClick: () => handleEdit(record),
-    },
+    // {
+    //   label: '查看',
+    //   onClick: () => handleEdit(record),
+    // },
     {
       label: '删除',
       onClick: () => handleDel(record),

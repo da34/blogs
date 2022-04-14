@@ -18,7 +18,7 @@ export default function usePagination(refProps) {
       // },
       ...unref(pagination),
       ...unref(configRef),
-      pageCount: (unref(configRef)[TOTAL_FIELD] || 0) / 10 | 1,
+      pageCount: Math.ceil((unref(configRef)[TOTAL_FIELD] || 0) / 10)
     }
   })
 

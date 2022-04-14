@@ -38,9 +38,11 @@
           :options="avatarOptions"
           @select="avatarSelect"
         >
-          <NAvatar round>
-            {{ username }}
-          </NAvatar>
+          <NAvatar
+            round
+            :src="avatar"
+            object-fit="cover"
+          />
         </NDropdown>
       </div>
     </div>
@@ -106,7 +108,7 @@ const avatarOptions = [
   },
 ];
 
-const username = computed(() => userStore.username)
+const avatar = computed(() => userStore.avatar)
 // 退出登录
 const doLogout = () => {
   dialog.info({

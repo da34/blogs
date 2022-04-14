@@ -1,9 +1,9 @@
 import http from '@/utils/http/request';
 
 /**
- * @description: 获取文章列表
+ * @description: 获取内容列表
  */
-export function getArticleList(params) {
+export function getContents(params) {
   return http.request({
     url: 'contents',
     method: 'get',
@@ -12,23 +12,9 @@ export function getArticleList(params) {
 }
 
 /**
- * @description: 更改文章各个状态
+ * @description: 创建内容
  */
-export function changeArticleState(data) {
-  return http.request({
-    url: 'content/stateToggle',
-    method: 'put',
-    data
-  },{
-    isShowSuccessMessage: true
-  });
-}
-
-/**
- * @description: 创建文章
- */
-export function createArticle(data) {
-  // console.history(data, 'data')
+export function createContent(data) {
   return http.request({
     url: 'contents',
     method: 'post',
@@ -39,9 +25,9 @@ export function createArticle(data) {
 }
 
 /**
- * @description: 更新文章
+ * @description: 更新内容
  */
-export function updateArticle(data) {
+export function updateContent(data) {
   return http.request({
     url: 'contents/' + data.id,
     method: 'patch',
@@ -52,11 +38,11 @@ export function updateArticle(data) {
 }
 
 /**
- * @description: 根据id获取文章
+ * @description: 根据id获取内容
  */
-export function getArticleById(id) {
+export function getContentById(id) {
   return http.request({
-    url: 'contents/detail/' + id,
+    url: 'contents/' + id,
     method: 'get'
   });
 }
@@ -64,7 +50,7 @@ export function getArticleById(id) {
 /**
  * @description: 删除文章
  */
-export function delArticle(id) {
+export function delContent(id) {
   return http.request({
     url: 'contents/' + id,
     method: 'delete'

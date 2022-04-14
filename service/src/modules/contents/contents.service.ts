@@ -29,30 +29,40 @@ export class ContentsService {
   async create(createContentDto: CreateContentDto) {
     // 查询 category
     let exitsCategory;
-    // if (createContentDto.categoryId) {
-    //   exitsCategory = await this.categoryRepository.findOne(
-    //     createContentDto.categoryId,
-    //   );
-    // }
+    if (createContentDto.categoryId) {
+      exitsCategory = await this.categoryRepository.findOne(
+        createContentDto.categoryId,
+      );
+    }
     // if (!exitsCategory) {
     //   throw new HttpException(
     //     `不存在id为${createContentDto.categoryId}的分类`,
     //     401,
     //   );
     // }
-    // 查询tags
-    // const exitsTags = await this.tagRepository.find({
-    //   id: In(createContentDto.tagsId),
-    // });
+    // 查询tags;
+    let exitsTags;
+    if (createContentDto.tagsId) {
+      exitsTags = await this.tagRepository.find({
+        id: In(createContentDto.tagsId),
+      });
+    }
 
     const createContent = this.contentRepository.create(createContentDto);
-    // createContent.category = exitsCategory;
-    // createContent.tags = exitsTags;
+    createContent.category = exitsCategory;
+    createContent.tags = exitsTags;
     await this.contentRepository.save(createContent);
   }
 
   async findAll(query?: QueryContentDto) {
-    const { page = 1, pageSize = 10, status, sortBy, ...otherQuery } = query;
+    const {
+      page = 1,
+      pageSize = 10,
+      status,
+      sortBy,
+      type,
+      ...otherQuery
+    } = query;
     const contentQuery = await this.contentRepository
       .createQueryBuilder('content')
       .take(pageSize)
@@ -60,8 +70,12 @@ export class ContentsService {
       .leftJoinAndSelect('content.tags', 'tags')
       .leftJoinAndSelect('content.category', 'category');
 
-    if (status) {
+    if (typeof status === 'boolean') {
       contentQuery.andWhere('content.status=:status', { status });
+    }
+
+    if (type) {
+      contentQuery.andWhere('content.type=:type', { type });
     }
 
     if (sortBy) {
@@ -69,7 +83,7 @@ export class ContentsService {
         contentQuery.orderBy(`content.${key}`, sortBy[key]),
       );
     } else {
-      contentQuery.orderBy('content.createTime', 'DESC');
+      contentQuery.orderBy('content.created', 'DESC');
     }
 
     // console.log(otherQuery)
@@ -88,7 +102,7 @@ export class ContentsService {
     };
   }
 
-  findOne(id: string, selectCond?: FindConditions<any>) {
+  findOne(id: number, selectCond?: FindConditions<any>) {
     return this.contentRepository.findOne(
       id,
       Object.assign(
@@ -100,8 +114,8 @@ export class ContentsService {
     );
   }
 
-  async update(id: string, updateContentDto: UpdateContentDto) {
-    // const { tagsId, categoryId } = updateContentDto;
+  async update(id: number, updateContentDto: UpdateContentDto) {
+    const { tagsId, categoryId } = updateContentDto;
     const exitsContent = await this.contentRepository.findOne(id);
 
     if (!exitsContent) {
@@ -111,23 +125,24 @@ export class ContentsService {
       exitsContent,
       updateContentDto,
       {
-        updateTime: Date.now(),
+        updated: Date.now(),
       },
     );
 
     // 查询 category
-    // if (categoryId) {
-    // updateContent.category =
-    //   (categoryId && (await this.categoryRepository.findOne(categoryId))) ||
-    //   null;
-    // updateContent.tags = await this.tagRepository.find({
-    //   id: In(tagsId),
-    // });
+    if (categoryId) {
+      updateContent.category =
+        (categoryId && (await this.categoryRepository.findOne(categoryId))) ||
+        null;
+      updateContent.tags = await this.tagRepository.find({
+        id: In(tagsId),
+      });
+    }
 
     return this.contentRepository.save(updateContent);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const exitsContent = await this.contentRepository.findOne(id);
     if (!exitsContent) {
       throw new HttpException(`不存在id为${id}的内容`, 401);
@@ -135,7 +150,7 @@ export class ContentsService {
     return this.contentRepository.delete(id);
   }
 
-  async updateViewsById(id: string) {
+  async updateViewsById(id: number) {
     const oldArticle = await this.contentRepository.findOne(id);
     const updatedArticle = await this.contentRepository.merge(oldArticle, {
       views: oldArticle.views + 1,
@@ -155,7 +170,7 @@ export class ContentsService {
     let yearList = [];
     const rowsLen = allContents.length;
     for (let i = 0; i < allContents.length; i++) {
-      yearList.push(dayjs(+allContents[i].createTime).format('YYYY'));
+      yearList.push(dayjs(+allContents[i].created).format('YYYY'));
     }
     yearList = [...new Set(yearList)];
     // 整理数据返回前端
@@ -167,7 +182,7 @@ export class ContentsService {
       // console.log(yearList[i]);
       for (let j = 0; j < rowsLen; j++) {
         // 年份相同放入一个对象
-        if (yearList[i] === dayjs(+allContents[j].createTime).format('YYYY')) {
+        if (yearList[i] === dayjs(+allContents[j].created).format('YYYY')) {
           obj.list.push(allContents[j]);
         }
       }

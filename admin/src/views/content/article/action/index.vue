@@ -24,7 +24,7 @@
     </NGrid>
 
     <!--markdown-->
-    <Markdown v-model:text="article.content" />
+    <Markdown v-model:text="article.text" />
 
     <!--发布NDrawer-->
     <NDrawer
@@ -43,7 +43,7 @@
             :x-gap="30"
           >
             <NFormItemGi label="文章封面">
-              <MUpload v-model:file-url="article.firstPicture">
+              <MUpload v-model:file-url="article.coverImage">
                 <NIcon size="30">
                   <Upload />
                 </NIcon>
@@ -54,7 +54,7 @@
             </NFormItemGi>
             <NFormItemGi label="编辑摘要">
               <NInput
-                v-model:value="article.contentOutline"
+                v-model:value="article.briefContent"
                 type="textarea"
                 show-count
                 :rows="5"
@@ -87,7 +87,7 @@
               <NSwitch v-model:value="article.isTop" />
             </NFormItemGi>
             <NFormItemGi label="评论">
-              <NSwitch v-model:value="article.isCommentOpen" />
+              <NSwitch v-model:value="article.allowComment" />
             </NFormItemGi>
           </NGrid>
         </NForm>
@@ -117,7 +117,7 @@ import {useMessage} from 'naive-ui'
 import {Upload} from '@icon-park/vue-next'
 import Markdown from '@/components/Markdown/index.vue'
 import {getTagList} from '@/api/tag';
-import {getArticleById} from '@/api/article';
+import {getContentById} from '@/api/content';
 import MUpload from '@/components/Upload/index.vue'
 import {usePublic} from './composables/usePubilc';
 import { getCategories } from '@/api/category';
@@ -153,7 +153,7 @@ onMounted(async () => {
 })
 
 async function getArticle(id) {
-  const data = await getArticleById(id)
+  const data = await getContentById(id)
   data.tagsId = data.tags.map(tag => tag.id)
   data.categoryId = data.category?.id
   setArticle(data)
@@ -164,7 +164,7 @@ function publicClick() {
     message.warning('标题不能为空')
     return
   }
-  if (!article.value.content) {
+  if (!article.value.text) {
     message.warning('内容不能为空')
     return
   }

@@ -1,16 +1,17 @@
 import {ref, unref} from 'vue';
 import { useRouter } from 'vue-router'
 import { useMessage } from 'naive-ui';
-import {createPage, updatePage} from '@/api/page';
+import {createContent, updateContent} from '@/api/content'
 
 export function usePublic(show) {
   const defaultVal = () => ({
-    name: '',
-    content: '',
-    isCommentOpen: true,
-    path: '',
+    title: '',
+    text: '',
+    allowComment: true,
+    slug: '',
     order: 0,
-    status: 'publish'
+    status: true,
+    type: 'page'
   })
   // 初始化页面信息
   const page = ref(defaultVal())
@@ -18,14 +19,14 @@ export function usePublic(show) {
   const message = useMessage()
 
   async function submitCallback() {
-    if (!page.value.path) {
+    if (!page.value.slug) {
       message.info('路径不能为空')
       return
     }
-    await page.value?.id ? updatePage(unref(page)) : createPage(unref(page))
+    await page.value?.id ? updateContent(unref(page)) : createContent(unref(page))
     resetData()
     show.value = false
-    await router.push({name: 'RedirectCon', params: { path: 'page', toComName: 'PageList' }})
+    await router.push({name: 'RedirectCon', params: { path: '/page', toComName: 'PageList' }})
   }
 
   function resetData() {

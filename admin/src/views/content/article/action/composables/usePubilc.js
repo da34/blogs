@@ -1,16 +1,15 @@
 import {ref, unref, watch} from 'vue';
 import { useRouter } from 'vue-router'
-import {createArticle, updateArticle} from '@/api/article';
+import {createContent, updateContent} from '@/api/content';
 
 export function usePublic(show) {
   const defaultVal = () => ({
     title: '',
-    content: '',
+    text: '',
     type: 'article',
-    isCommentOpen: true,
-    isShare: true,
-    contentOutline: '',
-    firstPicture: '',
+    allowComment: true,
+    briefContent: '',
+    coverImage: '',
     isTop: false,
     tagsId: [],
     categoryId:null,
@@ -21,17 +20,17 @@ export function usePublic(show) {
 
   // 内容变化，更改描述
   watch(
-    () => article.value.content,
+    () => article.value.text,
     () => {
-      article.value.contentOutline = article.value.content.slice(0, 80)
+      article.value.briefContent = article.value.text.slice(0, 80)
     })
 
   async function submitCallback() {
 
-    await article.value.id ? updateArticle(unref(article)) : createArticle(unref(article))
+    await article.value.id ? updateContent(unref(article)) : createContent(unref(article))
     resetData()
     show.value = false
-    await router.push({name: 'RedirectCon', params: { path: 'content/list', toComName: 'ContentList' }})
+    await router.push({name: 'RedirectCon', params: { path: '/content/list', toComName: 'ContentList' }})
   }
 
   function resetData() {

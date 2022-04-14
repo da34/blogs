@@ -20,25 +20,25 @@
         class="ml-auto"
       >
         <NInput
-          v-model:value="formValue.name"
+          v-model:value="formValue.title"
           placeholder="输入名称"
         />
       </NFormItem>
       <NFormItem label="路径">
         <NInput
-          v-model:value="formValue.path"
+          v-model:value="formValue.slug"
           placeholder="输入路径"
         />
       </NFormItem>
-      <NFormItem
-        label="状态"
-      >
-        <NSelect
-          v-model:value="formValue.status"
-          class="w-40"
-          :options="statusOptions"
-        />
-      </NFormItem>
+      <!--      <NFormItem-->
+      <!--        label="状态"-->
+      <!--      >-->
+      <!--        <NSelect-->
+      <!--          v-model:value="formValue.status"-->
+      <!--          class="w-40"-->
+      <!--          :options="statusOptions"-->
+      <!--        />-->
+      <!--      </NFormItem>-->
       <NFormItem>
         <NButton
           attr-type="button"
@@ -61,7 +61,7 @@
       :pagination="true"
       :columns="column"
       :action-column="actionColumn"
-      :request="getPages"
+      :request="getContentList"
       :row-key="row => row.id"
     />
   </NCard>
@@ -70,17 +70,17 @@
 export default { name: 'PageList' }
 </script>
 <script setup>
-import {reactive, ref} from 'vue'
+import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {createActionColumn, createColumns} from './columns';
 import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
-import {delPage, updatePage, getPages} from '@/api/page';
+import {delContent, updateContent, getContents} from '@/api/content';
 
 const defaultVla = () => ({
-  name: '',
-  path: '',
-  status: ''
+  title: '',
+  slug: '',
+  status: null
 })
 
 const router = useRouter()
@@ -90,14 +90,19 @@ const tableRef = ref(null)
 const formValue = ref(defaultVla())
 // 表格列
 const actionColumn = createActionColumn({handleDel, handleEdit, handleReview, handleIsDown})
-const column = createColumns({updatePage})
+const column = createColumns({updateContent})
 
-const statusOptions = ['publish', 'draft'].map(
-  (v) => ({
-    label: v,
-    value: v
-  })
-)
+// const statusOptions = ['正常', '下线'].map(
+//   (v) => ({
+//     label: v,
+//     value: v === '正常'
+//   })
+// )
+
+async function getContentList(opt) {
+  const data = await getContents({ ...opt, type: 'page' })
+  return data
+}
 
 function handleReset() {
   formValue.value = defaultVla()
@@ -114,7 +119,7 @@ function handleReview() {
 
 async function handleIsDown(pageInfo, status) {
   pageInfo.status = status
-  await updatePage(pageInfo)
+  await updateContent(pageInfo)
   handleReset()
 }
 
@@ -125,7 +130,7 @@ function handleDel({id}) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: async () => {
-      await delPage(id)
+      await delContent(id)
       handleSearch()
     }
   })
@@ -133,12 +138,6 @@ function handleDel({id}) {
 
 function handleEdit({id}) {
   router.push({name: 'PageAction', params: {id}})
-}
-
-async function stateToggle(field, id, value) {
-  value /= 1
-  await updatePage({field, id, value})
-  tableRef.value.reload()
 }
 
 function handleAction() {

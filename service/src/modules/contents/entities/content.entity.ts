@@ -1,16 +1,27 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Category } from '../../categories/entities/category.entity';
+import { Tag } from '../../tags/entities/tag.entity';
 
 export enum TypeContent {
-  Article = 'Article',
+  Article = 'article',
   Draft = 'draft',
   Page = 'page',
 }
 @Entity()
 export class Content {
   @PrimaryGeneratedColumn()
-  cid: number;
+  id: number;
 
+  @Column()
   title: string;
 
   @Exclude()
@@ -21,14 +32,15 @@ export class Content {
 
   @Column({
     comment: '内容概览',
+    nullable: true,
   })
-  description: string;
+  briefContent: string;
 
   @Column({
     comment: '头图',
     nullable: true,
   })
-  firstPicture: string;
+  coverImage: string;
 
   @Column({
     type: 'enum',
@@ -60,6 +72,11 @@ export class Content {
   isTop: boolean;
 
   @Column({
+    default: 0,
+  })
+  order: number;
+
+  @Column({
     default: false,
   })
   allowFeed: boolean;
@@ -70,27 +87,32 @@ export class Content {
   likeNum: number;
 
   @Column({
-    type: 'bigint',
+    nullable: true,
   })
-  createTime: number;
+  slug: string;
 
   @Column({
     type: 'bigint',
   })
-  updateTime: number;
+  created: number;
 
-  // @ManyToOne(() => Category, (category) => category.content)
-  // category: Category;
-  //
-  // @ManyToMany(() => Tag, (tag) => tag.contents, {
-  //   cascade: true,
-  // })
-  // @JoinTable()
-  // tags: Tag[];
+  @Column({
+    type: 'bigint',
+  })
+  updated: number;
+
+  @ManyToOne(() => Category)
+  category: Category;
+
+  @ManyToMany(() => Tag)
+  @JoinTable({
+    name: 'contents_tags',
+  })
+  tags: Tag[];
 
   @BeforeInsert()
   createDates() {
-    this.createTime = Date.now();
-    this.updateTime = Date.now();
+    this.created = Date.now();
+    this.updated = Date.now();
   }
 }

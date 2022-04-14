@@ -3,7 +3,7 @@
     <NGrid class="flex items-center">
       <NGi span="18">
         <NInput
-          v-model:value="page.name"
+          v-model:value="page.title"
           class="w-screen"
           size="large"
           type="text"
@@ -24,7 +24,7 @@
     </NGrid>
 
     <!--markdown-->
-    <Markdown v-model:text="page.content" />
+    <Markdown v-model:text="page.text" />
 
     <!--发布NDrawer-->
     <NDrawer
@@ -44,7 +44,7 @@
           >
             <NFormItemGi label="路径">
               <NInput
-                v-model:value="page.path"
+                v-model:value="page.slug"
                 type="text"
               />
             </NFormItemGi>
@@ -54,7 +54,7 @@
               />
             </NFormItemGi>
             <NFormItemGi label="开启评论">
-              <NSwitch v-model:value="page.isCommentOpen" />
+              <NSwitch v-model:value="page.allowComment" />
             </NFormItemGi>
           </NGrid>
         </NForm>
@@ -82,7 +82,7 @@ import {ref, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
 import {useMessage} from 'naive-ui'
 import Markdown from '@/components/Markdown/index.vue'
-import {getPage} from '@/api/page';
+import {getContentById} from '@/api/content';
 import {usePublic} from './composables/usePubilc';
 
 const message = useMessage()
@@ -101,16 +101,16 @@ onMounted(async () => {
 })
 
 async function getPageById(id) {
-  const data = await getPage(id)
+  const data = await getContentById(id)
   setArticle(data)
 }
 
 function publicClick() {
-  if (!page.value.name) {
+  if (!page.value.title) {
     message.warning('名称不能为空')
     return
   }
-  if (!page.value.content) {
+  if (!page.value.text) {
     message.warning('内容不能为空')
     return
   }

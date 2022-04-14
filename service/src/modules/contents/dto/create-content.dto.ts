@@ -1,19 +1,13 @@
 import { IsNotEmpty, IsUrl, ValidateIf } from 'class-validator';
-import { TypeContent } from '../entities/content.entity';
 
 export class CreateContentDto {
-  @IsNotEmpty()
-  title: string;
+  title?: string;
 
-  @IsNotEmpty()
-  text: string;
+  text?: string;
 
-  @IsNotEmpty()
-  description: string;
-
-  @ValidateIf((o) => o.firstPicture !== '')
+  @ValidateIf((o) => o.coverImage)
   @IsUrl()
-  firstPicture?: string;
+  coverImage?: string;
 
   status?: boolean;
   views?: number = 0;
@@ -21,4 +15,8 @@ export class CreateContentDto {
   allowComment?: boolean = true;
   isTop?: boolean = false;
   likeNum?: number = 0;
+
+  tagsId?: number[];
+
+  categoryId?: number;
 }

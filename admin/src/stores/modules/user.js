@@ -9,7 +9,7 @@ import httpEnum from '@/utils/http/httpType'
 export const useUserStore = defineStore('app-user', {
   state: () => ({
     token: storage.get(ACCESS_TOKEN, ''),
-    username: '',
+    screenName: '',
     avatar: '',
     permissions: [],
   }),
@@ -25,8 +25,8 @@ export const useUserStore = defineStore('app-user', {
     setAvatar(avatar) {
       this.avatar = avatar;
     },
-    setUsername(username) {
-      this.username = username;
+    setUsername(screenName) {
+      this.screenName = screenName;
     },
     setPermissions(permissions) {
       this.permissions = permissions;
@@ -54,15 +54,15 @@ export const useUserStore = defineStore('app-user', {
         getUserInfo()
           .then((res) => {
             const data = res;
-            const {role, username} = data
+            const {role, screenName, avatar} = data
             if (role) {
               that.setPermissions(role);
             } else {
               reject(new Error('getInfo: permissionsList must be a non-null array !'));
             }
             // console.history(permissions, avatar, username)
-            // that.setAvatar(avatar);
-            that.setUsername(username);
+            that.setAvatar(avatar);
+            that.setUsername(screenName);
             resolve(res);
           })
           .catch((error) => {

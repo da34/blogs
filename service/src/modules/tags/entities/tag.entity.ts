@@ -11,8 +11,8 @@ import { Content } from '../../contents/entities/content.entity';
 
 @Entity()
 export class Tag {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     unique: true,

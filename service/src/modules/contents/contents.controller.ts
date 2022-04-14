@@ -31,7 +31,7 @@ export class ContentsController {
     // xss
     createContentDto.title = filterXSS(createContentDto.title);
     // createContentDto.content = filterXSS(createContentDto.content);
-    createContentDto.description = filterXSS(createContentDto.description);
+    // createContentDto.description = filterXSS(createContentDto.description);
     return this.contentsService.create(createContentDto);
   }
 
@@ -41,20 +41,20 @@ export class ContentsController {
     return this.contentsService.findAll(query);
   }
 
-  @Get('detail/:id')
-  findOne(@Param('id') id: string, @DbOptions() dbOptions) {
+  @Get(':id')
+  findOne(@Param('id') id: number, @DbOptions() dbOptions) {
     return this.contentsService.findOne(id, dbOptions);
   }
 
   @Auth([UserRole.Admin])
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateContentDto: UpdateContentDto) {
+  update(@Param('id') id: number, @Body() updateContentDto: UpdateContentDto) {
     return this.contentsService.update(id, updateContentDto);
   }
 
   @Auth([UserRole.Admin])
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.contentsService.remove(id);
   }
 
