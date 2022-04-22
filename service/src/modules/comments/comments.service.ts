@@ -8,13 +8,9 @@ import { QueryCommentDto } from './dto/query-comment.dto';
 import { Content } from '../contents/entities/content.entity';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { lastValueFrom } from 'rxjs';
-import { SmtpService } from '../smtp/smtp.service';
-import { User, UserRole } from '../users/entities/user.entity';
 import { filterXSS } from 'xss';
 import { JwtService } from '@nestjs/jwt';
 import { ExternalService } from '../external/external.service';
-import { join } from 'path';
 
 @Injectable()
 export class CommentsService {
@@ -25,7 +21,6 @@ export class CommentsService {
     private contentRepository: Repository<Content>,
     private configService: ConfigService,
     private httpService: HttpService,
-    private smtpService: SmtpService,
     private jwtService: JwtService,
     private externalService: ExternalService,
   ) {}
@@ -67,49 +62,6 @@ export class CommentsService {
         '评论包含敏感信息，已屏蔽！',
         HttpStatus.PRECONDITION_FAILED,
       );
-    }
-
-    const siteConfig = this.configService.get('site');
-    const smtpConfig = this.configService.get('smtp');
-    // 评论通过
-    if (exitsComment.status === StatusComment.Pass) {
-      const mailOptions = {
-        from: smtpConfig.from,
-        // to: exitsComment.replyEmail,
-        subject: `「 ${siteConfig.name} 」回复通知`,
-        template: '/replyTemp',
-        context: {
-          // Data to be sent to template engine.
-          text: exitsComment.text,
-          siteName: siteConfig.name,
-          siteUrl: siteConfig.url,
-          // name: exitsComment.name,
-          // replyName: exitsComment.replyName,
-          reviewUrl: siteConfig.url + exitsComment.anchor,
-        },
-        //  多余字段。给smtp存储的
-        text: exitsComment.text,
-        fromEmail: exitsComment.email || smtpConfig.from, // 这里发送人邮箱
-        // toEmail: exitsComment.replyEmail, // 这里收件人的邮箱
-      };
-      // 回复他人，发送邮件通知
-      if (exitsComment.parentId) {
-        this.smtpService.create(mailOptions).catch((_) => {
-          console.log('评论成功，发送邮件失败');
-        });
-      }
-      // 通知站长
-      // if (!exitsComment.isAdmin) {
-      //   const siteMailOption = Object.assign(mailOptions, {
-      //     to: siteConfig.email,
-      //     subject: `「 ${siteConfig.name} 」评论通知`,
-      //     template: '/noticeTemp',
-      //     toEmail: siteConfig.email, // 配置的站长邮箱
-      //   });
-      //   this.smtpService.create(siteMailOption).catch((_) => {
-      //     console.log('通知站长，评论成功，发送邮件失败');
-      //   });
-      // }
     }
     return exitsComment;
   }

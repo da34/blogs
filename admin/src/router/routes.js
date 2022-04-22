@@ -212,7 +212,7 @@ const asyncRoutes = [
     path: '/links',
     name: LinkName,
     component: Layout,
-    meta: { alwaysShow: false },
+    meta: {alwaysShow: false},
     children: [
       {
         path: '',
@@ -237,23 +237,6 @@ const asyncRoutes = [
         component: () => import('@/views/project/index.vue'),
         meta: {title: '作品管理', keepAlive: true},
         icon: renderIcon(ApplicationOne)
-      },
-    ]
-  },
-  {
-    path: '/email',
-    name: EmailName,
-    component: Layout,
-    meta: {
-      alwaysShow: false
-    },
-    children: [
-      {
-        path: '',
-        name: `${EmailName}List`,
-        component: () => import('@/views/email/index.vue'),
-        meta: {title: '邮件管理', keepAlive: true},
-        icon: renderIcon(EmailSecurity)
       },
     ]
   },
