@@ -38,11 +38,11 @@ export class Comment {
   })
   status: string;
 
-  // @Column({
-  //   type: 'text',
-  //   comment: '相关检测结果详细信息',
-  // })
-  // suggestion: string;
+  @Column({
+    type: 'text',
+    comment: '相关检测结果详细信息',
+  })
+  suggestion: string;
 
   @Column({
     comment: '是否置顶 false - 不置顶 , true - 置顶',
@@ -58,7 +58,7 @@ export class Comment {
   @Column({
     type: 'bigint',
   })
-  createTime: number;
+  createdTime: number;
 
   @Column({
     comment: '评论父级',
@@ -74,12 +74,9 @@ export class Comment {
   @Column()
   system: string;
 
-  // @Column()
-  // type: string;
-
   @BeforeInsert()
   createDates() {
-    this.createTime = Date.now();
+    this.createdTime = Date.now();
     this.putTop = false;
   }
 }

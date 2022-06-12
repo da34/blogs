@@ -83,7 +83,7 @@ export class CommentsService {
         commentQuery.orderBy(`comment.${key}`, sortBy[key]),
       );
     } else {
-      commentQuery.orderBy('comment.createTime', 'DESC');
+      commentQuery.orderBy('comment.createdTime', 'DESC');
     }
 
     if (otherQuery) {

@@ -7,13 +7,13 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import {getArticleList} from '@/api/article';
+import {getContents} from '@/api/content';
 import {useECharts} from './useEcharts';
 
 const chartRef = ref(null)
 const {setOptions} = useECharts(chartRef)
 
-getArticleList({
+getContents({
   pageSize: 5,
   'sortBy[views]': 'DESC',
 }).then(res => {

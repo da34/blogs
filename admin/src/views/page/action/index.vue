@@ -44,7 +44,7 @@
           >
             <NFormItemGi label="路径">
               <NInput
-                v-model:value="page.slug"
+                v-model:value="page.path"
                 type="text"
               />
             </NFormItemGi>

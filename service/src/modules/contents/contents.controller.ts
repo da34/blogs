@@ -41,8 +41,9 @@ export class ContentsController {
     return this.contentsService.findAll(query);
   }
 
-  @Get(':id')
+  @Get('detail/:id')
   findOne(@Param('id') id: number, @DbOptions() dbOptions) {
+    // console.log(id);
     return this.contentsService.findOne(id, dbOptions);
   }
 

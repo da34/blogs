@@ -125,6 +125,7 @@
     </NGrid>
     <!--文章相关统计-->
     <VisiArticle />
+
     <!--最近文章 | 评论-->
     <LatelyInfo />
   </div>
@@ -134,7 +135,6 @@ export default { name: 'Dashboard' }
 </script>
 <script setup>
 import {ref} from 'vue'
-import CountTo from '@/components/CountTo/index.vue'
 import VisiArticle from './components/VisiArticle/index.vue'
 import LatelyInfo from './components/LatelyInfo/index.vue'
 import {getDashboardInfo} from '@/api/dashboard';

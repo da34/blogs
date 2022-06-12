@@ -89,17 +89,22 @@ export class Content {
   @Column({
     nullable: true,
   })
-  slug: string;
+  path: string; // 页面路径
+
+  @Column({ type: 'mediumtext', default: null })
+  toc: string; // 格式化内容索引，自动生成
 
   @Column({
     type: 'bigint',
+    default: 0,
   })
-  created: number;
+  createdTime: number;
 
   @Column({
     type: 'bigint',
+    default: 0,
   })
-  updated: number;
+  updatedTime: number;
 
   @ManyToOne(() => Category)
   category: Category;
@@ -112,7 +117,7 @@ export class Content {
 
   @BeforeInsert()
   createDates() {
-    this.created = Date.now();
-    this.updated = Date.now();
+    this.createdTime = Date.now();
+    this.updatedTime = Date.now();
   }
 }

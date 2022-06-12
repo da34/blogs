@@ -71,7 +71,7 @@ export const createColumns = ({updateArticle}) => {
           'span',
           null,
           {
-            default: () => row.created && formatDate(+row.created)
+            default: () => row.createdTime && formatDate(+row.createdTime)
           }
         )
       }

@@ -35,12 +35,12 @@ export class User {
   @Column({
     type: 'bigint',
   })
-  created: number;
+  createdTime: number;
 
   @Column({
     type: 'bigint',
   })
-  logged: number;
+  loggedTime: number;
 
   @Column()
   mail: string;
@@ -52,6 +52,6 @@ export class User {
   createDates() {
     // 插入之前更改默认。防止直接请求
     this.role = UserRole.User;
-    this.created = Date.now();
+    this.createdTime = Date.now();
   }
 }

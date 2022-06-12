@@ -42,7 +42,7 @@ export function updateContent(data) {
  */
 export function getContentById(id) {
   return http.request({
-    url: 'contents/' + id,
+    url: 'contents/detail/' + id,
     method: 'get'
   });
 }

@@ -7,31 +7,31 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import {getTagRelation} from '@/api/tag';
+// import {getTagRelation} from '@/api/tag';
 import {useECharts} from './useEcharts';
 
 const chartRef = ref(null)
 const {setOptions} = useECharts(chartRef)
 
-getTagRelation().then(res => {
-  console.log(res)
-  setOptions({
-    series: [
-      {
-        type: 'pie',
-        radius: '50%',
-        data: res,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  })
-})
+// getTagRelation().then(res => {
+//   console.log(res)
+//   setOptions({
+//     series: [
+//       {
+//         type: 'pie',
+//         radius: '50%',
+//         data: res,
+//         emphasis: {
+//           itemStyle: {
+//             shadowBlur: 10,
+//             shadowOffsetX: 0,
+//             shadowColor: 'rgba(0, 0, 0, 0.5)'
+//           }
+//         }
+//       }
+//     ]
+//   })
+// })
 
 onMounted(() => {
 

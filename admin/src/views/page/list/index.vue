@@ -73,7 +73,6 @@ export default { name: 'PageList' }
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {createActionColumn, createColumns} from './columns';
-import BasicTable from '@/components/BasicTable/index.vue'
 import {useDialog} from 'naive-ui'
 import {delContent, updateContent, getContents} from '@/api/content';
 

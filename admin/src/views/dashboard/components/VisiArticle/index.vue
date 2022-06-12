@@ -6,17 +6,17 @@
       :x-gap="12"
       :y-gap="8"
     >
-      <NGi :span="2">
-        <NCard
-          segmented
-          size="small"
-          :bordered="false"
-          title="标签文章数量"
-        >
-          <TagArticle />
-        </NCard>
-      </NGi>
-      <NGi :span="3">
+      <!--      <NGi :span="2">-->
+      <!--        <NCard-->
+      <!--          segmented-->
+      <!--          size="small"-->
+      <!--          :bordered="false"-->
+      <!--          title="标签文章数量"-->
+      <!--        >-->
+      <!--          <TagArticle />-->
+      <!--        </NCard>-->
+      <!--      </NGi>-->
+      <NGi :span="5">
         <NCard
           segmented
           size="small"

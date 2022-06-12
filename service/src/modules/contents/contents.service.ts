@@ -83,7 +83,7 @@ export class ContentsService {
         contentQuery.orderBy(`content.${key}`, sortBy[key]),
       );
     } else {
-      contentQuery.orderBy('content.created', 'DESC');
+      contentQuery.orderBy('content.createdTime', 'DESC');
     }
 
     // console.log(otherQuery)
@@ -125,7 +125,7 @@ export class ContentsService {
       exitsContent,
       updateContentDto,
       {
-        updated: Date.now(),
+        updatedTime: Date.now(),
       },
     );
 
@@ -170,7 +170,7 @@ export class ContentsService {
     let yearList = [];
     const rowsLen = allContents.length;
     for (let i = 0; i < allContents.length; i++) {
-      yearList.push(dayjs(+allContents[i].created).format('YYYY'));
+      yearList.push(dayjs(+allContents[i].createdTime).format('YYYY'));
     }
     yearList = [...new Set(yearList)];
     // 整理数据返回前端
@@ -182,7 +182,7 @@ export class ContentsService {
       // console.log(yearList[i]);
       for (let j = 0; j < rowsLen; j++) {
         // 年份相同放入一个对象
-        if (yearList[i] === dayjs(+allContents[j].created).format('YYYY')) {
+        if (yearList[i] === dayjs(+allContents[j].createdTime).format('YYYY')) {
           obj.list.push(allContents[j]);
         }
       }

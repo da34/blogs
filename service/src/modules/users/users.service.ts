@@ -22,7 +22,7 @@ export class UsersService {
   }
 
   async updateLogged(id: number) {
-    await getRepository(User).update(id, { logged: Date.now() });
+    await getRepository(User).update(id, { loggedTime: Date.now() });
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {

@@ -32,21 +32,21 @@ export class Link {
   @Column({
     type: 'bigint',
   })
-  createTime: number;
+  createdTime: number;
 
   @Column({
     type: 'bigint',
   })
-  updateTime: number;
+  updatedTime: number;
 
   @BeforeInsert()
   createDates() {
-    this.createTime = Date.now();
-    this.updateTime = Date.now();
+    this.createdTime = Date.now();
+    this.updatedTime = Date.now();
   }
 
   @BeforeUpdate()
   updateDates() {
-    this.updateTime = Date.now();
+    this.updatedTime = Date.now();
   }
 }

@@ -1,21 +1,17 @@
 import {h} from 'vue';
 import {formatDate} from '@/utils';
 import {NSpace, NTag} from 'naive-ui'
-import UAParser from 'ua-parser-js'
 import TableAction from '@/components/BasicTable/TableAction.vue'
 
 export const columns = [
-  {title: '评论人', key: 'name', width: 150},
-  // {title: '被评论人', key: 'targetName', width: 100,},
+  {title: '评论人', key: 'authorName', width: 150},
   {title: '评论内容', key: 'text'},
   {
     title: 'ua', key: 'ua',
-    render({ua}) {
+    render({agent, system }) {
 
-      const parser = new UAParser(ua);
-      const browser = parser.getBrowser()
-      const os = parser.getOS()
-      // console.history(parser.getResult());
+      const browser = agent ? JSON.parse(agent) : {}
+      const os = system ? JSON.parse(system) : {}
       const browserDom = h(NTag,
         {
           type: 'info',
@@ -76,7 +72,7 @@ export const columns = [
         'span',
         null,
         {
-          default: () => row.createTime && formatDate(+row.createTime)
+          default: () => row.createdTime && formatDate(+row.createdTime)
         }
       )
     }

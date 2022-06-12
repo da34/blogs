@@ -22,7 +22,7 @@
               <NThing :title="article.title">
                 <template #description>
                   <p class="text-xs text-gray-500">
-                    {{ formatDate(+article.createTime) }}
+                    {{ formatDate(+article.createdTime) }}
                   </p>
                 </template>
               </NThing>
@@ -60,11 +60,11 @@
                 />
               </template>
               <NThing
-                :title="comment.nickName"
+                :title="comment.authorName"
                 :description="comment.text"
               >
                 <p class="text-xs text-gray-500">
-                  {{ formatDate(+comment.createTime) }}
+                  {{ formatDate(+comment.createdTime) }}
                 </p>
               </NThing>
             </NListItem>
@@ -78,7 +78,7 @@
 <script setup>
 import {ref} from 'vue'
 import {formatDate} from '@/utils';
-import {getArticleList} from '@/api/article';
+import {getContents} from '@/api/content';
 import {getCommentList} from '@/api/comment';
 
 const loading = ref(true)
@@ -86,12 +86,13 @@ const comments = ref([])
 const articles = ref([])
 
 Promise.all([
-  getArticleList({pageSize: 5, 'sortBy[createTime]': 'DESC'}),
+  getContents({pageSize: 5, 'sortBy[createdTime]': 'DESC'}),
   getCommentList({
     pageSize: 5,
-    'sortBy[createTime]': 'DESC',
+    'sortBy[createdTime]': 'DESC',
     'status': 'pass',
   })]).then(res => {
+    console.log(res)
   articles.value = res[0].list
   comments.value = res[1].list
 }).finally(() => loading.value = false)

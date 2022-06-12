@@ -8,7 +8,7 @@ export function usePublic(show) {
     title: '',
     text: '',
     allowComment: true,
-    slug: '',
+    path: '',
     order: 0,
     status: true,
     type: 'page'
@@ -19,7 +19,7 @@ export function usePublic(show) {
   const message = useMessage()
 
   async function submitCallback() {
-    if (!page.value.slug) {
+    if (!page.value.path) {
       message.info('路径不能为空')
       return
     }
