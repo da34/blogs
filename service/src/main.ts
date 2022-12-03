@@ -49,7 +49,7 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('博客接口')
     .setDescription('博客接口Api文档')
-    .setVersion('1.0')
+    .setVersion('2.0')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);

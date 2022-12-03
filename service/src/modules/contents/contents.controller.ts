@@ -14,7 +14,7 @@ import { ContentsService } from './contents.service';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { UserRole } from '../users/entities/user.entity';
+// import { UserRole } from '../users/user.entity';
 import { QueryContentDto } from './dto/query-content-dto';
 import { DbOptions } from '../../decorator/dbOptions.decorator';
 import { filterXSS } from 'xss';
@@ -25,7 +25,7 @@ import { Auth } from '../../decorator/auth.decorator';
 export class ContentsController {
   constructor(private readonly contentsService: ContentsService) {}
 
-  @Auth([UserRole.Admin])
+  // @Auth([UserRole.Admin])
   @Post()
   create(@Body() createContentDto: CreateContentDto) {
     // xss
@@ -41,39 +41,39 @@ export class ContentsController {
     return this.contentsService.findAll(query);
   }
 
-  @Get('detail/:id')
-  findOne(@Param('id') id: number, @DbOptions() dbOptions) {
-    // console.log(id);
-    return this.contentsService.findOne(id, dbOptions);
-  }
-
-  @Auth([UserRole.Admin])
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateContentDto: UpdateContentDto) {
-    return this.contentsService.update(id, updateContentDto);
-  }
-
-  @Auth([UserRole.Admin])
-  @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.contentsService.remove(id);
-  }
-
-  @Post(':id/views')
-  updateViewsById(@Param('id') id) {
-    return this.contentsService.updateViewsById(id);
-  }
-
-  @UseInterceptors(ClassSerializerInterceptor)
-  @Get('/search')
-  searchArticles(@Query() query) {
-    const { keyword = '', tagName = [], categoryName = '' } = query;
-    // console.log(keyword, tagName, categoryName);
-    return this.contentsService.search(keyword, tagName, categoryName);
-  }
-
-  @Get('archive')
-  getArchive() {
-    return this.contentsService.getArchive();
-  }
+  // @Get('detail/:id')
+  // findOne(@Param('id') id: number, @DbOptions() dbOptions) {
+  //   // console.log(id);
+  //   return this.contentsService.findOne(id, dbOptions);
+  // }
+  //
+  // @Auth([UserRole.Admin])
+  // @Patch(':id')
+  // update(@Param('id') id: number, @Body() updateContentDto: UpdateContentDto) {
+  //   return this.contentsService.update(id, updateContentDto);
+  // }
+  //
+  // @Auth([UserRole.Admin])
+  // @Delete(':id')
+  // remove(@Param('id') id: number) {
+  //   return this.contentsService.remove(id);
+  // }
+  //
+  // @Post(':id/views')
+  // updateViewsById(@Param('id') id) {
+  //   return this.contentsService.updateViewsById(id);
+  // }
+  //
+  // @UseInterceptors(ClassSerializerInterceptor)
+  // @Get('/search')
+  // searchArticles(@Query() query) {
+  //   const { keyword = '', tagName = [], categoryName = '' } = query;
+  //   // console.log(keyword, tagName, categoryName);
+  //   return this.contentsService.search(keyword, tagName, categoryName);
+  // }
+  //
+  // @Get('archive')
+  // getArchive() {
+  //   return this.contentsService.getArchive();
+  // }
 }

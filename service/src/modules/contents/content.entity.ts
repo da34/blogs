@@ -1,15 +1,15 @@
 import {
   Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-  JoinTable,
+  Property,
+  PrimaryKey,
+  // JoinTable,
   ManyToMany,
   ManyToOne,
-} from 'typeorm';
+  Enum,
+} from '@mikro-orm/core';
 import { Exclude } from 'class-transformer';
-import { Category } from '../../categories/entities/category.entity';
-import { Tag } from '../../tags/entities/tag.entity';
+// import { Category } from '../categories/category.entity';
+// import { Tag } from '../tags/tag.entity';
 
 export enum TypeContent {
   Article = 'article',
@@ -18,106 +18,96 @@ export enum TypeContent {
 }
 @Entity()
 export class Content {
-  @PrimaryGeneratedColumn()
+  @PrimaryKey()
   id: number;
 
-  @Column()
+  @Property()
   title: string;
 
   @Exclude()
-  @Column({
+  @Property({
     type: 'text',
   })
   text: string;
 
-  @Column({
+  @Property({
     comment: '内容概览',
     nullable: true,
   })
   briefContent: string;
 
-  @Column({
+  @Property({
     comment: '头图',
     nullable: true,
   })
   coverImage: string;
 
-  @Column({
-    type: 'enum',
-    enum: TypeContent,
-    default: TypeContent.Article,
-  })
+  @Enum(() => TypeContent)
   type: string;
 
-  @Column({
+  @Property({
     default: true,
   })
   status: boolean;
 
-  @Column({
+  @Property({
     default: 0,
   })
   views: number;
 
-  @Column({
+  @Property({
     comment: '评论开启 true - 开启 , false - 禁用',
     default: true,
   })
   allowComment: boolean;
 
-  @Column({
+  @Property({
     comment: '是否置顶 true - 置顶 , false - 不置顶',
     default: false,
   })
   isTop: boolean;
 
-  @Column({
+  @Property({
     default: 0,
   })
   order: number;
 
-  @Column({
+  @Property({
     default: false,
   })
   allowFeed: boolean;
 
-  @Column({
+  @Property({
     default: 0,
   })
   likeNum: number;
 
-  @Column({
+  @Property({
     nullable: true,
   })
   path: string; // 页面路径
 
-  @Column({ type: 'mediumtext', default: null })
+  @Property({ type: 'mediumtext', default: null })
   toc: string; // 格式化内容索引，自动生成
 
-  @Column({
+  @Property({
     type: 'bigint',
     default: 0,
   })
-  createdTime: number;
+  createdTime: number = Date.now();
 
-  @Column({
+  @Property({
     type: 'bigint',
     default: 0,
   })
-  updatedTime: number;
+  updatedTime: number = Date.now();
 
-  @ManyToOne(() => Category)
-  category: Category;
+  // @ManyToOne(() => Category)
+  // category: Category;
 
-  @ManyToMany(() => Tag)
-  @JoinTable({
-    name: 'contents_tags',
-  })
-  tags: Tag[];
-
-  @BeforeInsert()
-  createDates() {
-    this.createdTime = Date.now();
-    this.updatedTime = Date.now();
-  }
+  // @ManyToMany(() => Tag)
+  // @JoinTable({
+  //   name: 'contents_tags',
+  // })
+  // tags: Tag[];
 }

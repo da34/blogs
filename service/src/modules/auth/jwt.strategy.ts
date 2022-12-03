@@ -2,14 +2,13 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { User } from '../users/entities/user.entity';
-import { UsersService } from '../users/users.service';
+// import { User } from '../users/user.entity';
+// import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly userService: UsersService,
+    private readonly configService: ConfigService, // private readonly userService: UsersService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -17,11 +16,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(user: User) {
-    const existUser = await this.userService.findOne(user.username);
-    if (!existUser) {
-      throw new UnauthorizedException('token被篡改');
-    }
-    return existUser;
-  }
+  // async validate(user: User) {
+  //   const existUser = await this.userService.findOne(user.username);
+  //   if (!existUser) {
+  //     throw new UnauthorizedException('token被篡改');
+  //   }
+  //   return existUser;
+  // }
 }
