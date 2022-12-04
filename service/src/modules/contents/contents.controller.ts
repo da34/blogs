@@ -20,7 +20,7 @@ import { DbOptions } from '../../decorator/dbOptions.decorator';
 import { filterXSS } from 'xss';
 import { Auth } from '../../decorator/auth.decorator';
 
-@ApiTags('内容')
+@ApiTags('Content')
 @Controller('contents')
 export class ContentsController {
   constructor(private readonly contentsService: ContentsService) {}

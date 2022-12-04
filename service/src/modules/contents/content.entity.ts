@@ -53,7 +53,7 @@ export class Content {
   @Property({
     default: 0,
   })
-  views: number;
+  viewCount: number;
 
   @Property({
     comment: '评论开启 true - 开启 , false - 禁用',
@@ -87,9 +87,6 @@ export class Content {
   })
   path: string; // 页面路径
 
-  @Property({ type: 'mediumtext', default: null })
-  toc: string; // 格式化内容索引，自动生成
-
   @Property({
     type: 'bigint',
     default: 0,
@@ -102,9 +99,13 @@ export class Content {
   })
   updatedTime: number = Date.now();
 
+  @Property()
+  permalink?: string;
   // @ManyToOne(() => Category)
   // category: Category;
 
+  @Property()
+  commentCount: number;
   // @ManyToMany(() => Tag)
   // @JoinTable({
   //   name: 'contents_tags',

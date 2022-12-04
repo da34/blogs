@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 // import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import configuration from '../config/configuration';
-// import { UsersModule } from './modules/users/users.module';
+import { UsersModule } from './modules/users/users.module';
 // import { CategoryModule } from './modules/categories/category.module';
 // import { CommentsModule } from './modules/comments/comments.module';
 import { ContentsModule } from './modules/contents/contents.module';
@@ -35,7 +35,7 @@ import { resolve } from 'path';
       entitiesTs: ['src/**/*.entity.ts'],
       dbName: 'my-db-blog',
       type: 'sqlite',
-      autoLoadEntities: true,
+      // autoLoadEntities: true,
     }),
     // MailerModule.forRootAsync({
     // imports: [ConfigModule],
@@ -66,6 +66,7 @@ import { resolve } from 'path';
     // CategoryModule,
     // CommentsModule,
     ContentsModule,
+    UsersModule,
     // LinksModule,
     // HistoryModule,
     // TagsModule,

@@ -12,12 +12,12 @@ import { Content } from './src/modules/contents/content.entity';
 
   // or you can run those queries directly, but be sure to check them first!
   // await generator.dropSchema();
-  // await generator.createSchema();
-  await generator.updateSchema();
+  await generator.createSchema();
+  // await generator.updateSchema();
 
   // in tests it can be handy to use those:
   await generator.refreshDatabase(); // ensure db exists and is fresh
-  await generator.clearDatabase(); // removes all data
+  // await generator.clearDatabase(); // removes all data
 
   await orm.close(true);
 })();
