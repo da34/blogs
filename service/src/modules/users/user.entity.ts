@@ -1,4 +1,5 @@
 import { Entity, Property, PrimaryKey, Enum } from '@mikro-orm/core';
+import { enPassword } from '../../utils';
 
 export enum UserRole {
   User = 'user',
@@ -6,8 +7,12 @@ export enum UserRole {
 }
 @Entity()
 export class User {
+  constructor(username: string, password: string, secret: string) {
+    this.username = username;
+    this.password = enPassword(password, secret);
+  }
   @PrimaryKey()
-  id: string;
+  id: number;
 
   @Property({
     unique: true,
@@ -17,12 +22,12 @@ export class User {
   @Property({ hidden: true })
   password: string;
 
-  @Property()
+  @Property({ nullable: true })
   avatar: string;
 
   @Enum(() => UserRole)
   role: string = UserRole.User;
 
   @Property()
-  gitHubId: string;
+  gitHubId = '';
 }

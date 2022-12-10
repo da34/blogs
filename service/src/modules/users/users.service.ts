@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { User } from './user.entity';
+import { EntityRepository } from '@mikro-orm/sqlite';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: EntityRepository<User>,
+    private readonly configService: ConfigService,
+  ) {}
+  async findOne(username: string): Promise<User> {
+    console.log('findOne', username);
+    console.log('findOne', await this.userRepository.findAll());
+    return this.userRepository.findOne({ username });
   }
-
-  findAll() {
-    return `This action returns all users`;
+  async create(createUserDto: CreateUserDto) {
+    const { password, confirmPwd, username } = createUserDto;
+    const exists = await this.userRepository.count({ username });
+    if (exists) {
+      throw new HttpException(
+        'Username must be unique.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    if (password !== confirmPwd) {
+      throw new HttpException('两次密码不一致', HttpStatus.BAD_REQUEST);
+    }
+    const secretKey = this.configService.get('USER_SECRET_KEY');
+    const user = new User(username, password, secretKey);
+    // console.log(user);
+    await this.userRepository.persist(user).flush();
+    return this.buildUserRO(user);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  private buildUserRO(user: User) {
+    return { user };
   }
 }

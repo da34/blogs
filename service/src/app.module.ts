@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-// import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import configuration from '../config/configuration';
 import { UsersModule } from './modules/users/users.module';
@@ -10,7 +10,7 @@ import { ContentsModule } from './modules/contents/contents.module';
 // import { HistoryModule } from './modules/histories/history.module';
 // import { TagsModule } from './modules/tags/tags.module';
 // import { WorksModule } from './modules/works/works.module';
-// import { AuthModule } from './modules/auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { AppController } from './app.controller';
 // import { ExternalModule } from './modules/external/external.module';
 // import { SiteModule } from './modules/site/site.module';
@@ -23,12 +23,12 @@ import { resolve } from 'path';
 @Module({
   controllers: [AppController],
   imports: [
-    // ConfigModule.forRoot({
-    //   isGlobal: true, // 全局导入
-    //   cache: true,
-    //   envFilePath: `${process.env.NODE_ENV}.env`,
-    //   load: [configuration],
-    // }),
+    ConfigModule.forRoot({
+      isGlobal: true, // 全局导入
+      cache: true,
+      envFilePath: `${process.env.NODE_ENV}.env`,
+      load: [configuration],
+    }),
     ScheduleModule.forRoot(),
     MikroOrmModule.forRoot({
       entities: ['dist/**/*.entity.js'],
@@ -71,7 +71,7 @@ import { resolve } from 'path';
     // HistoryModule,
     // TagsModule,
     // WorksModule,
-    // AuthModule,
+    AuthModule,
     // ExternalModule,
     // SiteModule,
     // OptionsModule,

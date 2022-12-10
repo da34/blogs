@@ -6,8 +6,6 @@ import { LoginDto } from './dto/login.dto';
 @ApiTags('鉴权')
 @Controller('auth')
 export class AuthController {
-  // constructor(private readonly authService: AuthService) {}
-
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Body() user: LoginDto, @Req() req) {
