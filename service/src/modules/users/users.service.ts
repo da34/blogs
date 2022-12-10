@@ -13,8 +13,6 @@ export class UsersService {
     private readonly configService: ConfigService,
   ) {}
   async findOne(username: string): Promise<User> {
-    console.log('findOne', username);
-    console.log('findOne', await this.userRepository.findAll());
     return this.userRepository.findOne({ username });
   }
   async create(createUserDto: CreateUserDto) {

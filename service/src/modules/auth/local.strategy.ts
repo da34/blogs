@@ -24,7 +24,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     }
 
     const secretKey = this.configService.get('USER_SECRET_KEY');
-    console.log(enPassword(123456, secretKey));
+    // console.log(enPassword(123456, secretKey));
     if (user.password !== enPassword(password, secretKey)) {
       throw new BadRequestException('密码错误');
     }
