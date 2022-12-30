@@ -2,25 +2,24 @@ import {
   Entity,
   Property,
   PrimaryKey,
-  // JoinTable,
-  ManyToMany,
-  ManyToOne,
   Enum,
+  ManyToMany,
+  Collection,
 } from '@mikro-orm/core';
 import { Exclude } from 'class-transformer';
-// import { Category } from '../categories/category.entity';
-// import { Tag } from '../tags/tag.entity';
+import { Meta } from './meta.entity';
+import { Relationship } from './relationship.entity';
+import { BaseEntity } from './baseEntity';
 
 export enum TypeContent {
-  Article = 'article',
+  Post = 'post',
   Draft = 'draft',
   Page = 'page',
+  Link = 'link',
+  Attachment = 'attachment',
 }
 @Entity()
-export class Content {
-  @PrimaryKey()
-  id: number;
-
+export class Content extends BaseEntity {
   @Property()
   title: string;
 
@@ -82,33 +81,9 @@ export class Content {
   })
   likeNum: number;
 
-  @Property({
-    nullable: true,
-  })
-  path: string; // 页面路径
-
-  @Property({
-    type: 'bigint',
-    default: 0,
-  })
-  createdTime: number = Date.now();
-
-  @Property({
-    type: 'bigint',
-    default: 0,
-  })
-  updatedTime: number = Date.now();
-
-  @Property()
-  permalink?: string;
-  // @ManyToOne(() => Category)
-  // category: Category;
-
   @Property()
   commentCount: number;
-  // @ManyToMany(() => Tag)
-  // @JoinTable({
-  //   name: 'contents_tags',
-  // })
-  // tags: Tag[];
+
+  @ManyToMany({ entity: () => Meta, pivotEntity: () => Relationship })
+  metas = new Collection<Meta>(this);
 }

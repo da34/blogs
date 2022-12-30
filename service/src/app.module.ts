@@ -1,24 +1,18 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import configuration from '../config/configuration';
 import { UsersModule } from './modules/users/users.module';
-// import { CategoryModule } from './modules/categories/category.module';
-// import { CommentsModule } from './modules/comments/comments.module';
 import { ContentsModule } from './modules/contents/contents.module';
-// import { LinksModule } from './modules/links/links.module';
-// import { HistoryModule } from './modules/histories/history.module';
-// import { TagsModule } from './modules/tags/tags.module';
-// import { WorksModule } from './modules/works/works.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AppController } from './app.controller';
-// import { ExternalModule } from './modules/external/external.module';
-// import { SiteModule } from './modules/site/site.module';
 import { ScheduleModule } from '@nestjs/schedule';
-import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { resolve } from 'path';
-// import { OptionsModule } from './modules/options/options.module';
+import { MetasModule } from './modules/metas/metas.module';
+import { CommentsModule } from './modules/comments/comments.module';
+import { RelationshipsModule } from './modules/relationships/relationships.module';
+import { User, Comment, Content, Meta, BaseEntity } from './entities';
+
+const logger = new Logger('MikroORM');
 
 @Module({
   controllers: [AppController],
@@ -31,11 +25,11 @@ import { resolve } from 'path';
     }),
     ScheduleModule.forRoot(),
     MikroOrmModule.forRoot({
-      entities: ['dist/**/*.entity.js'],
-      entitiesTs: ['src/**/*.entity.ts'],
+      entities: [User, Comment, Content, Meta, BaseEntity],
       dbName: 'my-db-blog',
       type: 'sqlite',
-      // autoLoadEntities: true,
+      debug: true,
+      logger: logger.log.bind(logger),
     }),
     // MailerModule.forRootAsync({
     // imports: [ConfigModule],
@@ -62,19 +56,12 @@ import { resolve } from 'path';
     //   };
     // },
     // }),
-    // UsersModule,
-    // CategoryModule,
-    // CommentsModule,
     ContentsModule,
     UsersModule,
-    // LinksModule,
-    // HistoryModule,
-    // TagsModule,
-    // WorksModule,
     AuthModule,
-    // ExternalModule,
-    // SiteModule,
-    // OptionsModule,
+    MetasModule,
+    CommentsModule,
+    RelationshipsModule,
   ],
 })
 export class AppModule {}

@@ -8,12 +8,16 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import * as compression from 'compression';
+import { MikroORM } from '@mikro-orm/core';
 
 const PORT = process.env.APP_PORT || 7001;
 const PREFIX = 'api';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  await app.get(MikroORM).getSchemaGenerator().ensureDatabase();
+  await app.get(MikroORM).getSchemaGenerator().updateSchema();
 
   app.setGlobalPrefix(PREFIX);
 

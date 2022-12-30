@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { User } from './user.entity';
+import { User } from '../../entities';
 import { EntityRepository } from '@mikro-orm/sqlite';
 import { ConfigService } from '@nestjs/config';
 

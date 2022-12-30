@@ -1,5 +1,5 @@
 import { Entity, Property, PrimaryKey, Enum } from '@mikro-orm/core';
-import { enPassword } from '../../utils';
+import { enPassword } from '../utils';
 
 export enum UserRole {
   User = 'user',

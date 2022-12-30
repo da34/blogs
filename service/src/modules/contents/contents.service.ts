@@ -10,7 +10,7 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 //   Repository,
 // } from '@mikro-orm/core';
 import { EntityRepository } from '@mikro-orm/sqlite';
-import { Content, TypeContent } from './content.entity';
+import { Content } from '../../entities';
 import { QueryContentDto } from './dto/query-content-dto';
 // import { Tag } from '../tags/tag.entity';
 // import { Category } from '../categories/category.entity';
